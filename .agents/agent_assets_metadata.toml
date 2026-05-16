@@ -1,0 +1,44 @@
+uploads = []
+outputs = []
+
+[[generated]]
+id = "VvQoT6aB2onhTrzB_QskV"
+uri = "file://artifacts/phuoc-lai/public/images/hero-bg.png"
+type = "image"
+title = "Hero dark cinematic beauty"
+
+[[generated]]
+id = "94-G5w4M56WwCI8t_voSz"
+uri = "file://artifacts/phuoc-lai/public/images/artist-phuoclai.png"
+type = "image"
+title = "Phuoc Lai Artist Portrait"
+
+[[generated]]
+id = "Rt2hkxxqCJfGExNkQkGqc"
+uri = "file://artifacts/phuoc-lai/public/images/artist-quynhtam.png"
+type = "image"
+title = "Quynh Tam Portrait"
+
+[[generated]]
+id = "AQfVxRupEiHn2Wh1rC30-"
+uri = "file://artifacts/phuoc-lai/public/images/portfolio-brows.png"
+type = "image"
+title = "Portfolio Sexy Brows"
+
+[[generated]]
+id = "XZynUPRMv7nNejir3fBsa"
+uri = "file://artifacts/phuoc-lai/public/images/portfolio-lips.png"
+type = "image"
+title = "Portfolio Luxury Lips"
+
+[[generated]]
+id = "oFpggXP2Q_WBW1TOc8vSp"
+uri = "file://artifacts/phuoc-lai/public/images/portfolio-eyeliner.png"
+type = "image"
+title = "Portfolio Eyeliner"
+
+[[generated]]
+id = "HkEcSj7OZa89qA0OcNewC"
+uri = "file://artifacts/phuoc-lai/public/images/training.png"
+type = "image"
+title = "PMU Training Course"

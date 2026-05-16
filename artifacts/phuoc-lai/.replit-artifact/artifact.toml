@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "Phuoc Lai Luxury"
+version = "1.0.0"
+id = "artifacts/phuoc-lai"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 19989
+
+[services.development]
+run = "pnpm --filter @workspace/phuoc-lai run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/phuoc-lai", "run", "build" ]
+publicDir = "artifacts/phuoc-lai/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "19989"
+BASE_PATH = "/"
