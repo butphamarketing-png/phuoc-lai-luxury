@@ -3,10 +3,12 @@ import { Link } from "wouter";
 import { motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useLang } from "@/context/LanguageContext";
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { lang, setLang, t } = useLang();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -17,11 +19,11 @@ export default function Navbar() {
   }, []);
 
   const navLinks = [
-    { name: "Trang Chủ", href: "#hero" },
-    { name: "Về Chúng Tôi", href: "#about" },
-    { name: "Dịch Vụ", href: "#services" },
-    { name: "Đào Tạo", href: "#training" },
-    { name: "Dự Án", href: "#portfolio" },
+    { name: t.nav.home, href: "#hero" },
+    { name: t.nav.about, href: "#about" },
+    { name: t.nav.services, href: "#services" },
+    { name: t.nav.training, href: "#training" },
+    { name: t.nav.portfolio, href: "#portfolio" },
   ];
 
   return (
@@ -40,7 +42,6 @@ export default function Navbar() {
           </div>
         </Link>
 
-        {/* Desktop Nav */}
         <nav className="hidden md:flex items-center gap-8">
           {navLinks.map((link) => (
             <a
@@ -53,13 +54,25 @@ export default function Navbar() {
           ))}
         </nav>
 
-        <div className="hidden md:block">
-          <Button variant="outline" className="border-primary text-primary hover:bg-primary hover:text-primary-foreground uppercase tracking-widest text-xs px-8">
-            Book Now
+        <div className="hidden md:flex items-center gap-3">
+          <button
+            data-testid="lang-toggle"
+            onClick={() => setLang(lang === "vi" ? "en" : "vi")}
+            className="flex items-center gap-1 border border-border/60 rounded-none px-3 py-1.5 text-xs tracking-widest uppercase text-muted-foreground hover:text-primary hover:border-primary transition-all duration-300"
+          >
+            <span className={lang === "vi" ? "text-primary font-semibold" : ""}>VI</span>
+            <span className="text-border/80 mx-0.5">|</span>
+            <span className={lang === "en" ? "text-primary font-semibold" : ""}>EN</span>
+          </button>
+          <Button
+            data-testid="book-now-btn"
+            variant="outline"
+            className="border-primary text-primary hover:bg-primary hover:text-primary-foreground uppercase tracking-widest text-xs px-8"
+          >
+            {t.nav.bookNow}
           </Button>
         </div>
 
-        {/* Mobile Toggle */}
         <button
           className="md:hidden text-foreground"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -68,7 +81,6 @@ export default function Navbar() {
         </button>
       </div>
 
-      {/* Mobile Menu */}
       {mobileMenuOpen && (
         <motion.div
           initial={{ opacity: 0, y: -20 }}
@@ -86,9 +98,19 @@ export default function Navbar() {
               {link.name}
             </a>
           ))}
-          <Button className="bg-primary text-primary-foreground w-full uppercase tracking-widest">
-            Book Now
-          </Button>
+          <div className="flex items-center gap-3">
+            <button
+              onClick={() => setLang(lang === "vi" ? "en" : "vi")}
+              className="flex items-center gap-1 border border-border/60 px-3 py-1.5 text-xs tracking-widest uppercase text-muted-foreground hover:text-primary hover:border-primary transition-all duration-300"
+            >
+              <span className={lang === "vi" ? "text-primary font-semibold" : ""}>VI</span>
+              <span className="text-border/80 mx-0.5">|</span>
+              <span className={lang === "en" ? "text-primary font-semibold" : ""}>EN</span>
+            </button>
+            <Button className="bg-primary text-primary-foreground flex-1 uppercase tracking-widest">
+              {t.nav.bookNow}
+            </Button>
+          </div>
         </motion.div>
       )}
     </header>

@@ -1,19 +1,15 @@
 import { motion } from "framer-motion";
-
-const stats = [
-  { value: "1000+", label: "Khách Hàng Hài Lòng" },
-  { value: "8+", label: "Năm Kinh Nghiệm" },
-  { value: "200+", label: "Học Viên Tốt Nghiệp" },
-  { value: "100%", label: "Cam Kết Chất Lượng" },
-];
+import { useLang } from "@/context/LanguageContext";
 
 export default function Stats() {
+  const { t } = useLang();
+
   return (
     <section className="py-20 border-y border-border/30 bg-background relative">
       <div className="container mx-auto px-6 md:px-12">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-          {stats.map((stat, idx) => (
-            <motion.div 
+          {t.stats.items.map((stat, idx) => (
+            <motion.div
               key={idx}
               initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}

@@ -1,58 +1,34 @@
 import { motion } from "framer-motion";
-
-const services = [
-  {
-    title: "Phun Mày Sexy Brows",
-    desc: "Kỹ thuật tạo sợi siêu thực, tự nhiên như lông mày thật.",
-  },
-  {
-    title: "Phun Môi Luxury",
-    desc: "Khử thâm, tạo màu môi căng mọng, quyến rũ không cần son.",
-  },
-  {
-    title: "Phun Mi Eyeliner",
-    desc: "Tạo ánh nhìn sắc nét, mí mắt to tròn, sâu thẳm tự nhiên.",
-  },
-  {
-    title: "Phun Khắc Sợi",
-    desc: "Kết hợp giữa phun shading và điêu khắc sợi tinh tế.",
-  },
-  {
-    title: "Xoá Sẹo & Xoá Xăm Hỏng",
-    desc: "Điều trị sẹo, xoá vết xăm cũ an toàn, không để lại dấu vết.",
-  },
-  {
-    title: "Chăm Sóc Hậu Phun",
-    desc: "Dịch vụ premium chăm sóc sau xăm giúp màu bền đẹp hoàn hảo.",
-  }
-];
+import { useLang } from "@/context/LanguageContext";
 
 export default function Services() {
+  const { t } = useLang();
+
   return (
     <section id="services" className="py-24 md:py-32 bg-background relative border-t border-border/30">
       <div className="container mx-auto px-6 md:px-12">
         <div className="text-center mb-20">
-          <motion.h2 
+          <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             className="text-4xl md:text-5xl font-serif text-white mb-4"
           >
-            Dịch Vụ Đẳng Cấp
+            {t.services.heading}
           </motion.h2>
-          <motion.p 
+          <motion.p
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
             className="text-primary tracking-widest uppercase text-sm"
           >
-            Bậc Thầy Kiến Tạo Nét Đẹp
+            {t.services.sub}
           </motion.p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16">
-          {services.map((service, index) => (
+          {t.services.items.map((service, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 30 }}
@@ -63,9 +39,7 @@ export default function Services() {
             >
               <div className="h-[1px] w-12 bg-primary mb-6 group-hover:w-full transition-all duration-700 ease-in-out"></div>
               <h3 className="text-2xl font-serif text-white mb-4 group-hover:text-primary transition-colors">{service.title}</h3>
-              <p className="text-muted-foreground font-light leading-relaxed">
-                {service.desc}
-              </p>
+              <p className="text-muted-foreground font-light leading-relaxed">{service.desc}</p>
             </motion.div>
           ))}
         </div>

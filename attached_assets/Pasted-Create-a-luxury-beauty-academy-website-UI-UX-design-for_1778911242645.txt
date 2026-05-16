@@ -1,0 +1,129 @@
+Create a luxury beauty academy website UI/UX design for “Amazing Brows – Phuoc Lai Permanent Makeup” with a sophisticated gray background theme. The website must have a real multi-page structure where every navigation menu item links to its own dedicated subpage, while also smoothly scrolling to the corresponding section when clicked from the homepage.
+
+Website structure:
+
+Trang chủ (Home)
+Về chúng tôi (About)
+Dịch vụ (Services)
+Bảng giá (Pricing)
+Đào tạo (Training)
+Dự án (Portfolio)
+Liên hệ (Contact)
+
+UX behavior:
+
+On Homepage:
+Each menu item smoothly scrolls to its corresponding section.
+On Separate Pages:
+Each menu item opens its own dedicated subpage with unique layout and content.
+Sticky transparent navbar with blur effect.
+Smooth scrolling animations.
+Elegant hover effects on menu and buttons.
+Premium transition animations between pages.
+
+Design style:
+
+Luxury monochrome beauty branding
+Main background color must be soft gray, silver gray, ash gray
+Avoid pure white backgrounds
+Palette:
+#d9d9d9
+#cfcfcf
+#bfbfbf
+#1f1f1f
+silver metallic accents
+High-end Korean beauty clinic aesthetic
+Dior / Chanel / Apple inspired UI
+Minimalist but cinematic
+Fashion editorial style
+Hyper realistic modern website presentation
+
+Homepage Sections:
+
+Hero Banner
+Satin gray fabric background
+Large typography “AMAZING BROWS”
+Luxury silver logo
+Female student portrait left
+Male PMU expert portrait right
+Eyebrow macro photos center
+CTA button “BOOK NOW”
+Featured Projects
+Eyebrow gallery cards
+Before/after hover effects
+Elegant carousel
+Why Choose Us
+Luxury icons
+Glassmorphism cards
+Black gradient section
+Training Courses
+Premium course cards
+Professional academy style
+Testimonials
+Minimal luxury review cards
+Instagram Gallery
+Beauty social feed aesthetic
+Footer
+Dark luxury footer
+Social icons
+Contact info
+Navigation links
+
+Subpage requirements:
+
+About Page:
+
+Luxury portrait layout
+Brand story
+Experience timeline
+Vision & mission
+Elegant typography sections
+
+Services Page:
+
+Premium beauty services cards
+Pricing preview
+Before/after showcase
+Detailed service layouts
+
+Pricing Page:
+
+Elegant pricing tables
+Minimal monochrome style
+Luxury cards with hover glow
+
+Training Page:
+
+Academy-style course overview
+Certificate section
+Training process timeline
+Student gallery
+
+Portfolio Page:
+
+Large masonry gallery
+Beauty case studies
+Eyebrow close-up photography
+Interactive filtering
+
+Contact Page:
+
+Luxury contact form
+Embedded map area
+Social links
+Booking consultation section
+
+Technical/UI details:
+
+Sticky navbar
+Smooth scrolling
+Modern rounded corners
+Soft shadows
+Blur effects
+Luxury serif + sans serif typography combination
+Spacious layouts
+Behance/Awwwards quality
+Realistic website UI presentation
+Full responsive desktop web design
+Ultra detailed
+4K website mockup style

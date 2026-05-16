@@ -1,42 +1,32 @@
 import { motion } from "framer-motion";
-
-const testimonials = [
-  {
-    quote: "Không thể tin được đôi lông mày của mình lại có thể tự nhiên và sắc sảo đến vậy. Master Phước Lài thực sự là một nghệ sĩ.",
-    author: "Lê Nguyễn",
-    role: "Khách Hàng Phun Mày"
-  },
-  {
-    quote: "Môi sau bong màu cực kỳ trong và đẹp. Không sưng, không đau. Dịch vụ chăm sóc khách hàng ở đây rất chu đáo và chuyên nghiệp.",
-    author: "Trần Mai",
-    role: "Khách Hàng Phun Môi"
-  }
-];
+import { useLang } from "@/context/LanguageContext";
 
 export default function Testimonials() {
+  const { t } = useLang();
+
   return (
     <section className="py-24 md:py-32 bg-background border-t border-border/30">
       <div className="container mx-auto px-6 md:px-12 text-center">
-        <motion.p 
+        <motion.p
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           className="text-primary tracking-widest uppercase text-sm mb-6"
         >
-          Đánh Giá Khách Hàng
+          {t.testimonials.tag}
         </motion.p>
-        <motion.h2 
+        <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           className="text-4xl md:text-5xl font-serif mb-16"
         >
-          Lời Khẳng Định Từ Sự Hài Lòng
+          {t.testimonials.heading}
         </motion.h2>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-5xl mx-auto">
-          {testimonials.map((test, idx) => (
-            <motion.div 
+          {t.testimonials.items.map((test, idx) => (
+            <motion.div
               key={idx}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
