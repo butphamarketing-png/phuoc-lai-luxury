@@ -7,8 +7,10 @@ interface Translations {
     home: string;
     about: string;
     services: string;
+    pricing: string;
     training: string;
     portfolio: string;
+    contact: string;
     bookNow: string;
   };
   hero: {
@@ -17,11 +19,14 @@ interface Translations {
     title2: string;
     desc: string;
     cta: string;
+    student: string;
+    studentRole: string;
+    expert: string;
+    expertRole: string;
   };
   services: {
-    heading: string;
-    sub: string;
-    items: { title: string; desc: string }[];
+    items: { title: string; desc: string; icon: string }[];
+    readMore: string;
   };
   about: {
     tag: string;
@@ -30,6 +35,7 @@ interface Translations {
     p2: string;
     phuocLaiRole: string;
     quynhTamRole: string;
+    cta: string;
   };
   stats: {
     items: { value: string; label: string }[];
@@ -40,30 +46,41 @@ interface Translations {
     viewAll: string;
     items: { title: string; category: string }[];
   };
-  training: {
-    tag: string;
+  whyChooseUs: {
     heading: string;
     desc: string;
-    bullets: string[];
     cta: string;
+    features: { title: string; desc: string }[];
+  };
+  training: {
+    heading: string;
+    desc: string;
+    viewAll: string;
+    courses: { title: string; subtitle: string; desc: string; duration: string }[];
   };
   testimonials: {
-    tag: string;
     heading: string;
     items: { quote: string; author: string; role: string }[];
   };
-  booking: {
+  instagram: {
     heading: string;
-    desc: string;
-    placeholder: string;
-    cta: string;
+    sub: string;
+    viewMore: string;
+  };
+  cta: {
+    heading1: string;
+    heading2: string;
+    sub: string;
+    button: string;
   };
   footer: {
     tagline: string;
-    contactTitle: string;
-    exploreTitle: string;
-    connectTitle: string;
+    quickLinks: string;
+    services: string;
+    contact: string;
+    connect: string;
     links: { label: string; href: string }[];
+    serviceLinks: { label: string; href: string }[];
     copyright: string;
     privacy: string;
     terms: string;
@@ -75,206 +92,284 @@ const vi: Translations = {
     home: "Trang Chủ",
     about: "Về Chúng Tôi",
     services: "Dịch Vụ",
+    pricing: "Bảng Giá",
     training: "Đào Tạo",
     portfolio: "Dự Án",
-    bookNow: "Đặt Lịch",
+    contact: "Liên Hệ",
+    bookNow: "BOOK NOW +",
   },
   hero: {
-    tag: "Sketch of Wings · Phun Xăm Thẩm Mỹ",
-    title1: "Nâng Tầm Thần Thái",
-    title2: "Từ Từng Sợi Mày",
-    desc: "Phuoc Lai Luxury — Nghệ thuật phun xăm đỉnh cao, kiến tạo vẻ đẹp hoàn mỹ không tì vết. Đẳng cấp làm nên thương hiệu.",
-    cta: "Khám Phá Dịch Vụ",
+    tag: "PRIVATE 1:1 COURSE",
+    title1: "AMAZING",
+    title2: "BROWS",
+    desc: "SUPERIOR TECHNIQUE",
+    cta: "BOOK NOW +",
+    student: "QUYNH TAM",
+    studentRole: "STUDENT",
+    expert: "PHUOC LAI",
+    expertRole: "PMU EXPERT"
   },
   services: {
-    heading: "Dịch Vụ Đẳng Cấp",
-    sub: "Bậc Thầy Kiến Tạo Nét Đẹp",
     items: [
-      { title: "Phun Mày Sexy Brows", desc: "Kỹ thuật tạo sợi siêu thực, tự nhiên như lông mày thật." },
-      { title: "Phun Môi Luxury", desc: "Khử thâm, tạo màu môi căng mọng, quyến rũ không cần son." },
-      { title: "Phun Mi Eyeliner", desc: "Tạo ánh nhìn sắc nét, mí mắt to tròn, sâu thẳm tự nhiên." },
-      { title: "Phun Khắc Sợi", desc: "Kết hợp giữa phun shading và điêu khắc sợi tinh tế." },
-      { title: "Xoá Sẹo & Xoá Xăm Hỏng", desc: "Điều trị sẹo, xoá vết xăm cũ an toàn, không để lại dấu vết." },
-      { title: "Chăm Sóc Hậu Phun", desc: "Dịch vụ premium chăm sóc sau xăm giúp màu bền đẹp hoàn hảo." },
+      { icon: "feather", title: "PERMANENT MAKEUP", desc: "Điêu khắc sợi, phun mày công nghệ mới, lên màu chuẩn đẹp tự nhiên." },
+      { icon: "cap", title: "TRAINING COURSE", desc: "Đào tạo học viên 1:1, giáo trình độc quyền, thực hành chuyên sâu." },
+      { icon: "face", title: "BEAUTY CONSULTATION", desc: "Tư vấn dáng mày phù hợp khuôn mặt, phong cách và thần thái cá nhân." },
+      { icon: "leaf", title: "AFTERCARE PREMIUM", desc: "Chăm sóc hậu phun chuẩn quy trình, đảm bảo kết quả bền đẹp." },
     ],
+    readMore: "XEM THÊM →"
   },
   about: {
-    tag: "Về Chúng Tôi",
-    heading: "Sự Kết Hợp Của Kỹ Thuật Đỉnh Cao & Tâm Hồn Nghệ Sĩ",
+    tag: "OUR STORY",
+    heading: "NÂNG TẦM THẦN THÁI / TỪ TỪNG SỢI MÀY",
     p1: "Tại Phuoc Lai Luxury, chúng tôi không chỉ làm đẹp, chúng tôi kiến tạo lại sự tự tin. Master Phuoc Lai với hơn 8 năm tu nghiệp và thực hành, mang đến tiêu chuẩn thẩm mỹ quốc tế cho phụ nữ Việt.",
     p2: "Cùng với Quỳnh Tâm, chúng tôi xây dựng một thương hiệu dựa trên sự hoàn hảo, tinh tế và chuyên nghiệp tuyệt đối. Mỗi đường nét, mỗi màu sắc đều được tính toán với độ chính xác đến từng milimet.",
-    phuocLaiRole: "Master Artist",
-    quynhTamRole: "Đại Sứ Thương Hiệu",
+    phuocLaiRole: "PMU EXPERT",
+    quynhTamRole: "STUDENT",
+    cta: "VỀ CHÚNG TÔI +"
   },
   stats: {
     items: [
-      { value: "1000+", label: "Khách Hàng Hài Lòng" },
-      { value: "8+", label: "Năm Kinh Nghiệm" },
-      { value: "200+", label: "Học Viên Tốt Nghiệp" },
-      { value: "100%", label: "Cam Kết Chất Lượng" },
+      { value: "1000+", label: "KHÁCH HÀNG HÀI LÒNG" },
+      { value: "8+", label: "NĂM KINH NGHIỆM" },
+      { value: "200+", label: "HỌC VIÊN TỐT NGHIỆP" },
+      { value: "100%", label: "CAM KẾT CHẤT LƯỢNG" },
     ],
   },
   portfolio: {
-    heading: "Dự Án Nổi Bật",
-    sub: "Nghệ Thuật Khắc Hoạ Vẻ Đẹp",
-    viewAll: "Xem Tất Cả",
+    heading: "DỰ ÁN NỔI BẬT",
+    sub: "Bộ sưu tập những kết quả thực tế từ khách hàng & học viên.",
+    viewAll: "XEM THÊM DỰ ÁN +",
     items: [
-      { title: "Sexy Brows", category: "Phun Mày" },
-      { title: "Luxury Lips", category: "Phun Môi" },
-      { title: "Classic Eyeliner", category: "Phun Mi" },
+      { title: "Sợi Tự Nhiên", category: "Hair Stroke" },
+      { title: "Phun Shadow", category: "Soft Powder Brows" },
+      { title: "Ombre Brows", category: "Ombre Brows" },
+      { title: "Combo Brows", category: "Combo Brows" },
+      { title: "Dáng Mày Tự Nhiên", category: "Natural Shape" }
     ],
+  },
+  whyChooseUs: {
+    heading: "VÌ SAO CHỌN AMAZING BROWS?",
+    desc: "Chúng tôi mang đến những giải pháp thẩm mỹ hàng đầu, giúp bạn sở hữu vẻ đẹp tự nhiên và hoàn hảo nhất.",
+    cta: "TÌM HIỂU THÊM +",
+    features: [
+      { title: "KỸ THUẬT ĐỘC QUYỀN", desc: "Sử dụng công nghệ điêu khắc sợi mới nhất." },
+      { title: "MỰC PHUN ORGANIC", desc: "100% mực hữu cơ an toàn cho da." },
+      { title: "AN TOÀN TUYỆT ĐỐI", desc: "Quy trình chuẩn y khoa, không sưng đau." },
+      { title: "CHUYÊN GIA HÀNG ĐẦU", desc: "Thực hiện bởi Master nhiều năm kinh nghiệm." },
+      { title: "BẢO HÀNH DÀI HẠN", desc: "Chính sách bảo hành rõ ràng, uy tín." }
+    ]
   },
   training: {
-    tag: "Học Viện Phuoc Lai",
-    heading: "Truyền Lửa Đam Mê & Khởi Nghiệp Cùng PMU",
-    desc: "Khóa học Permanent Makeup chuyên nghiệp từ cơ bản đến nâng cao. Đào tạo 1 kèm 1 hoặc nhóm nhỏ, đảm bảo chất lượng đầu ra.",
-    bullets: [
-      "Kỹ thuật phun mày, môi, mí chuẩn Châu Âu",
-      "Hỗ trợ setup studio và chiến lược Marketing",
-      "Cấp chứng chỉ hành nghề chuẩn quốc gia",
-    ],
-    cta: "Tìm Hiểu Khóa Học",
+    heading: "KHÓA HỌC ĐÀO TẠO",
+    desc: "Chương trình đào tạo chuyên nghiệp từ cơ bản đến nâng cao, giúp làm chủ kỹ thuật và tự tin hành nghề.",
+    viewAll: "XEM TẤT CẢ KHÓA HỌC →",
+    courses: [
+      { title: "KHÓA CƠ BẢN", subtitle: "BROWS MASTER", desc: "Dành cho người bắt đầu muốn học nghề, nắm vững nền tảng kỹ thuật phun xăm", duration: "THỜI GIAN: 3 NGÀY" },
+      { title: "KHÓA NÂNG CAO", subtitle: "BROWS EXPERT", desc: "Nâng cao kỹ năng để chinh phục kỹ thuật shading, combo và tạo dáng phức tạp", duration: "THỜI GIAN: 7 NGÀY" },
+      { title: "KHÓA CHUYÊN SÂU", subtitle: "MASTER ADVANCED", desc: "Chuyên sâu, thi thực hành trực tiếp trên model, nâng cao thao tác chuyên nghiệp", duration: "THỜI GIAN: 10 NGÀY" },
+      { title: "KHÓA BUSINESS", subtitle: "BROWS & BEYOND", desc: "Kỹ năng kinh doanh, mở studio, vận hành và phát triển thương hiệu cá nhân", duration: "THỜI GIAN: 3 NGÀY" }
+    ]
   },
   testimonials: {
-    tag: "Đánh Giá Khách Hàng",
-    heading: "Lời Khẳng Định Từ Sự Hài Lòng",
+    heading: "KHÁCH HÀNG NÓI GÌ VỀ CHÚNG TÔI",
     items: [
       {
         quote: "Không thể tin được đôi lông mày của mình lại có thể tự nhiên và sắc sảo đến vậy. Master Phước Lài thực sự là một nghệ sĩ.",
-        author: "Lê Nguyễn",
+        author: "Thùy Linh",
         role: "Khách Hàng Phun Mày",
       },
       {
         quote: "Môi sau bong màu cực kỳ trong và đẹp. Không sưng, không đau. Dịch vụ chăm sóc khách hàng ở đây rất chu đáo và chuyên nghiệp.",
-        author: "Trần Mai",
+        author: "Minh Anh",
         role: "Khách Hàng Phun Môi",
       },
+      {
+        quote: "Đã từng làm hỏng mày ở nơi khác, đến đây được sửa lại dáng cực chuẩn, màu lên siêu tự nhiên. Rất hài lòng!",
+        author: "Hoàng Yến",
+        role: "Khách Hàng Sửa Mày",
+      }
     ],
   },
-  booking: {
-    heading: "Sẵn Sàng Cho Sự Thay Đổi?",
-    desc: "Đặt lịch tư vấn miễn phí ngay hôm nay để chuyên gia của chúng tôi kiến tạo vẻ đẹp dành riêng cho bạn.",
-    placeholder: "Số điện thoại của bạn",
-    cta: "Gọi Lại Cho Tôi",
+  instagram: {
+    heading: "FOLLOW US ON INSTAGRAM",
+    sub: "@amazingbrows.vn",
+    viewMore: "XEM THÊM →"
+  },
+  cta: {
+    heading1: "SẴN SÀNG ĐỂ SỞ HỮU",
+    heading2: "DÁNG MÀY HOÀN HẢO?",
+    sub: "Đặt lịch tư vấn ngay hôm nay để được chuyên gia AMAZING BROWS tư vấn miễn phí.",
+    button: "ĐẶT LỊCH NGAY +"
   },
   footer: {
-    tagline: "Phuoc Lai Luxury - Nơi tôn vinh vẻ đẹp hoàn mỹ. Chúng tôi tự hào mang đến dịch vụ phun xăm thẩm mỹ đẳng cấp quốc tế tại Vũng Tàu.",
-    contactTitle: "Liên Hệ",
-    exploreTitle: "Khám Phá",
-    connectTitle: "Kết Nối",
+    tagline: "Sketch of Wings Phuoc Lai Permanent Makeup",
+    quickLinks: "LIÊN KẾT NHANH",
+    services: "DỊCH VỤ",
+    contact: "THÔNG TIN LIÊN HỆ",
+    connect: "KẾT NỐI VỚI CHÚNG TÔI",
     links: [
-      { label: "Về Chúng Tôi", href: "#about" },
-      { label: "Dịch Vụ", href: "#services" },
-      { label: "Đào Tạo", href: "#training" },
-      { label: "Dự Án", href: "#portfolio" },
+      { label: "Trang chủ", href: "#hero" },
+      { label: "Về chúng tôi", href: "#about" },
+      { label: "Dịch vụ", href: "#services" },
+      { label: "Bảng giá", href: "#pricing" },
+      { label: "Đào tạo", href: "#training" },
+      { label: "Dự án", href: "#portfolio" },
+      { label: "Liên hệ", href: "#contact" },
     ],
-    copyright: "© 2024 Phuoc Lai Luxury. All Rights Reserved.",
-    privacy: "Chính Sách Bảo Mật",
-    terms: "Điều Khoản Dịch Vụ",
+    serviceLinks: [
+      { label: "Phun mày", href: "#" },
+      { label: "Phun khắc sợi", href: "#" },
+      { label: "Phun mi", href: "#" },
+      { label: "Phun môi", href: "#" },
+      { label: "Xoá sẹo", href: "#" },
+      { label: "Chăm sóc hậu phun", href: "#" },
+    ],
+    copyright: "© 2024 AMAZING BROWS. All rights reserved.",
+    privacy: "Chính sách bảo mật",
+    terms: "Điều khoản sử dụng",
   },
 };
 
 const en: Translations = {
   nav: {
     home: "Home",
-    about: "About Us",
+    about: "About",
     services: "Services",
+    pricing: "Pricing",
     training: "Training",
     portfolio: "Portfolio",
-    bookNow: "Book Now",
+    contact: "Contact",
+    bookNow: "BOOK NOW +",
   },
   hero: {
-    tag: "Sketch of Wings · Permanent Makeup",
-    title1: "Elevate Your Presence",
-    title2: "One Stroke at a Time",
-    desc: "Phuoc Lai Luxury — The pinnacle of permanent makeup artistry. Flawless beauty crafted with surgical precision. Excellence defines our brand.",
-    cta: "Explore Services",
+    tag: "PRIVATE 1:1 COURSE",
+    title1: "AMAZING",
+    title2: "BROWS",
+    desc: "SUPERIOR TECHNIQUE",
+    cta: "BOOK NOW +",
+    student: "QUYNH TAM",
+    studentRole: "STUDENT",
+    expert: "PHUOC LAI",
+    expertRole: "PMU EXPERT"
   },
   services: {
-    heading: "Premium Services",
-    sub: "Masters of Beauty Craftsmanship",
     items: [
-      { title: "Sexy Brows PMU", desc: "Ultra-realistic hair-stroke technique — indistinguishable from natural brows." },
-      { title: "Luxury Lip Blush", desc: "Neutralise dark pigmentation, achieve plump natural colour without lipstick." },
-      { title: "Eyeliner PMU", desc: "Sharp, defined eyes with a deep, naturally wide-open look." },
-      { title: "Microblading & Shading", desc: "A fusion of shading and fine hair-stroke sculpting for dimensional brows." },
-      { title: "Scar & Tattoo Removal", desc: "Safe, trace-free treatment to correct scars and unwanted old tattoos." },
-      { title: "Premium Aftercare", desc: "Post-procedure care program to preserve colour vibrancy and lasting results." },
+      { icon: "feather", title: "PERMANENT MAKEUP", desc: "Advanced hair stroke and shading techniques for flawless natural brows." },
+      { icon: "cap", title: "TRAINING COURSE", desc: "Private 1:1 academy, exclusive curriculum, deep practical training." },
+      { icon: "face", title: "BEAUTY CONSULTATION", desc: "Personalised brow shaping tailored to your unique facial structure." },
+      { icon: "leaf", title: "AFTERCARE PREMIUM", desc: "Medical-grade aftercare protocol ensuring lasting, beautiful results." },
     ],
+    readMore: "READ MORE →"
   },
   about: {
-    tag: "About Us",
-    heading: "Where Master Technique Meets the Soul of an Artist",
-    p1: "At Phuoc Lai Luxury, we don't just beautify — we rebuild confidence. Master Phuoc Lai brings over 8 years of refined practice and international aesthetic standards to Vietnamese women.",
+    tag: "OUR STORY",
+    heading: "ELEVATING ELEGANCE / ONE STROKE AT A TIME",
+    p1: "At Phuoc Lai Luxury, we don't just beautify — we rebuild confidence. Master Phuoc Lai brings over 8 years of refined practice and international aesthetic standards to our clients.",
     p2: "Together with Quynh Tam, we have built a brand rooted in absolute perfection, refinement, and professionalism. Every stroke, every shade is calculated to the millimetre.",
-    phuocLaiRole: "Master Artist",
-    quynhTamRole: "Brand Ambassador",
+    phuocLaiRole: "PMU EXPERT",
+    quynhTamRole: "STUDENT",
+    cta: "ABOUT US +"
   },
   stats: {
     items: [
-      { value: "1000+", label: "Satisfied Clients" },
-      { value: "8+", label: "Years of Experience" },
-      { value: "200+", label: "Graduates" },
-      { value: "100%", label: "Quality Commitment" },
+      { value: "1000+", label: "HAPPY CLIENTS" },
+      { value: "8+", label: "YEARS EXPERIENCE" },
+      { value: "200+", label: "GRADUATES" },
+      { value: "100%", label: "QUALITY ASSURANCE" },
     ],
   },
   portfolio: {
-    heading: "Featured Projects",
-    sub: "The Art of Beauty Sculpting",
-    viewAll: "View All",
+    heading: "FEATURED PROJECTS",
+    sub: "A collection of real results from our clients & students.",
+    viewAll: "VIEW MORE PROJECTS +",
     items: [
-      { title: "Sexy Brows", category: "Brow PMU" },
-      { title: "Luxury Lips", category: "Lip Blush" },
-      { title: "Classic Eyeliner", category: "Eyeliner PMU" },
+      { title: "Natural Strokes", category: "Hair Stroke" },
+      { title: "Soft Shading", category: "Soft Powder Brows" },
+      { title: "Ombre Brows", category: "Ombre Brows" },
+      { title: "Combo Brows", category: "Combo Brows" },
+      { title: "Natural Shape", category: "Natural Shape" }
     ],
+  },
+  whyChooseUs: {
+    heading: "WHY CHOOSE AMAZING BROWS?",
+    desc: "We provide top-tier aesthetic solutions, helping you achieve the most natural and perfect beauty.",
+    cta: "DISCOVER MORE +",
+    features: [
+      { title: "EXCLUSIVE TECHNIQUE", desc: "Using the latest hair stroke sculpting technology." },
+      { title: "ORGANIC PIGMENTS", desc: "100% skin-safe organic pigments." },
+      { title: "ABSOLUTE SAFETY", desc: "Medical-standard procedure, painless experience." },
+      { title: "TOP EXPERTS", desc: "Performed by Masters with years of experience." },
+      { title: "LONG-TERM WARRANTY", desc: "Clear and reliable warranty policy." }
+    ]
   },
   training: {
-    tag: "Phuoc Lai Academy",
-    heading: "Ignite Your Passion & Launch Your PMU Career",
-    desc: "Professional Permanent Makeup courses from beginner to advanced. Private 1-on-1 or small group training — quality outcomes guaranteed.",
-    bullets: [
-      "European-standard brow, lip & eyeliner techniques",
-      "Studio setup support & marketing strategy",
-      "Nationally accredited professional certification",
-    ],
-    cta: "Explore Courses",
+    heading: "TRAINING ACADEMY",
+    desc: "Professional training programs from basic to advanced, helping you master techniques and start your career.",
+    viewAll: "VIEW ALL COURSES →",
+    courses: [
+      { title: "BASIC COURSE", subtitle: "BROWS MASTER", desc: "For beginners looking to build a strong foundation in PMU techniques", duration: "DURATION: 3 DAYS" },
+      { title: "ADVANCED COURSE", subtitle: "BROWS EXPERT", desc: "Elevate your skills in complex shading, combo, and shaping", duration: "DURATION: 7 DAYS" },
+      { title: "MASTERCLASS", subtitle: "MASTER ADVANCED", desc: "Intensive hands-on practice on models, advanced professional operations", duration: "DURATION: 10 DAYS" },
+      { title: "BUSINESS COURSE", subtitle: "BROWS & BEYOND", desc: "Business strategy, studio setup, and personal branding development", duration: "DURATION: 3 DAYS" }
+    ]
   },
   testimonials: {
-    tag: "Client Reviews",
-    heading: "Testimonials of Excellence",
+    heading: "WHAT OUR CLIENTS SAY",
     items: [
       {
         quote: "I can't believe how natural and defined my brows look now. Master Phuoc Lai is truly an artist beyond compare.",
-        author: "Le Nguyen",
+        author: "Thuy Linh",
         role: "Brow PMU Client",
       },
       {
         quote: "The colour after healing is incredibly vivid and natural. No swelling, no pain. The aftercare service here is thorough and professional.",
-        author: "Tran Mai",
+        author: "Minh Anh",
         role: "Lip Blush Client",
       },
+      {
+        quote: "Had a bad experience elsewhere, but they fixed my brow shape perfectly here. The colour is super natural. Highly recommended!",
+        author: "Hoang Yen",
+        role: "Correction Client",
+      }
     ],
   },
-  booking: {
-    heading: "Ready for Your Transformation?",
-    desc: "Book a free consultation today and let our experts craft a look made uniquely for you.",
-    placeholder: "Your phone number",
-    cta: "Call Me Back",
+  instagram: {
+    heading: "FOLLOW US ON INSTAGRAM",
+    sub: "@amazingbrows.vn",
+    viewMore: "VIEW MORE →"
+  },
+  cta: {
+    heading1: "READY TO OWN",
+    heading2: "THE PERFECT BROWS?",
+    sub: "Book a free consultation today and let our AMAZING BROWS experts craft a look made uniquely for you.",
+    button: "BOOK APPOINTMENT +"
   },
   footer: {
-    tagline: "Phuoc Lai Luxury — Celebrating flawless beauty. We proudly deliver world-class permanent makeup services in Vung Tau.",
-    contactTitle: "Contact",
-    exploreTitle: "Explore",
-    connectTitle: "Connect",
+    tagline: "Sketch of Wings Phuoc Lai Permanent Makeup",
+    quickLinks: "QUICK LINKS",
+    services: "SERVICES",
+    contact: "CONTACT INFO",
+    connect: "CONNECT WITH US",
     links: [
-      { label: "About Us", href: "#about" },
+      { label: "Home", href: "#hero" },
+      { label: "About", href: "#about" },
       { label: "Services", href: "#services" },
+      { label: "Pricing", href: "#pricing" },
       { label: "Training", href: "#training" },
       { label: "Portfolio", href: "#portfolio" },
+      { label: "Contact", href: "#contact" },
     ],
-    copyright: "© 2024 Phuoc Lai Luxury. All Rights Reserved.",
+    serviceLinks: [
+      { label: "Brow PMU", href: "#" },
+      { label: "Hair Strokes", href: "#" },
+      { label: "Eyeliner", href: "#" },
+      { label: "Lip Blush", href: "#" },
+      { label: "Scar Camouflage", href: "#" },
+      { label: "Premium Aftercare", href: "#" },
+    ],
+    copyright: "© 2024 AMAZING BROWS. All rights reserved.",
     privacy: "Privacy Policy",
-    terms: "Terms of Service",
+    terms: "Terms of Use",
   },
 };
 

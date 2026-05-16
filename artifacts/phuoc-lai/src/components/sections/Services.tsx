@@ -1,45 +1,41 @@
 import { motion } from "framer-motion";
 import { useLang } from "@/context/LanguageContext";
+import { Feather, GraduationCap, UserCircle2, Leaf } from "lucide-react";
 
 export default function Services() {
   const { t } = useLang();
 
-  return (
-    <section id="services" className="py-24 md:py-32 bg-background relative border-t border-border/30">
-      <div className="container mx-auto px-6 md:px-12">
-        <div className="text-center mb-20">
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-4xl md:text-5xl font-serif text-white mb-4"
-          >
-            {t.services.heading}
-          </motion.h2>
-          <motion.p
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-            className="text-primary tracking-widest uppercase text-sm"
-          >
-            {t.services.sub}
-          </motion.p>
-        </div>
+  const getIcon = (iconName: string) => {
+    switch (iconName) {
+      case "feather": return <Feather size={32} strokeWidth={1} className="mb-6 text-foreground" />;
+      case "cap": return <GraduationCap size={32} strokeWidth={1} className="mb-6 text-foreground" />;
+      case "face": return <UserCircle2 size={32} strokeWidth={1} className="mb-6 text-foreground" />;
+      case "leaf": return <Leaf size={32} strokeWidth={1} className="mb-6 text-foreground" />;
+      default: return <Feather size={32} strokeWidth={1} className="mb-6 text-foreground" />;
+    }
+  };
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16">
+  return (
+    <section id="services" className="py-20 bg-white border-y border-border/50 relative z-20">
+      <div className="container mx-auto px-6 xl:px-24">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 divide-y md:divide-y-0 md:divide-x divide-border/50">
           {t.services.items.map((service, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: true, margin: "-100px" }}
               transition={{ delay: index * 0.1, duration: 0.6 }}
-              className="group cursor-pointer"
+              className="p-8 xl:p-12 flex flex-col items-center text-center group cursor-pointer hover:bg-gray-50/50 transition-colors"
             >
-              <div className="h-[1px] w-12 bg-primary mb-6 group-hover:w-full transition-all duration-700 ease-in-out"></div>
-              <h3 className="text-2xl font-serif text-white mb-4 group-hover:text-primary transition-colors">{service.title}</h3>
-              <p className="text-muted-foreground font-light leading-relaxed">{service.desc}</p>
+              <div className="transform group-hover:-translate-y-2 transition-transform duration-500">
+                {getIcon(service.icon)}
+              </div>
+              <h3 className="text-sm font-semibold tracking-[0.2em] uppercase text-foreground mb-4">{service.title}</h3>
+              <p className="text-muted-foreground font-light text-sm leading-relaxed mb-8 flex-grow">{service.desc}</p>
+              <a href="#" className="text-[10px] font-bold tracking-[0.2em] uppercase text-foreground group-hover:text-primary transition-colors inline-flex items-center gap-1">
+                {t.services.readMore}
+              </a>
             </motion.div>
           ))}
         </div>
