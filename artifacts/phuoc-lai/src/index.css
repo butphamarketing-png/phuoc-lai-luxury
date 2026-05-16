@@ -71,23 +71,23 @@
   --popover-foreground: 0 0% 100%;
   --popover-border: 0 0% 15%;
 
-  --primary: 40 61% 58%; /* Champagne Gold #d4a853 */
-  --primary-foreground: 0 0% 0%; 
+  --primary: 220 10% 62%; /* Guardian Grey #94989f */
+  --primary-foreground: 0 0% 5%; 
 
-  --secondary: 0 0% 75%; /* Silver #c0c0c0 */
-  --secondary-foreground: 0 0% 0%;
+  --secondary: 220 8% 78%; /* Light Guardian Grey #c3c5ca */
+  --secondary-foreground: 0 0% 5%;
 
   --muted: 0 0% 10%; 
-  --muted-foreground: 0 0% 60%;
+  --muted-foreground: 220 5% 55%;
 
-  --accent: 40 61% 58%;
-  --accent-foreground: 0 0% 0%;
+  --accent: 220 10% 62%;
+  --accent-foreground: 0 0% 5%;
 
   --destructive: 0 84% 60%;
   --destructive-foreground: 0 0% 100%;
 
   --input: 0 0% 15%;
-  --ring: 40 61% 58%;
+  --ring: 220 10% 62%;
   
   --app-font-sans: 'Plus Jakarta Sans', sans-serif;
   --app-font-serif: 'Playfair Display', serif;
