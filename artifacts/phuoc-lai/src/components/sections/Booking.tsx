@@ -17,7 +17,7 @@ export default function Booking() {
           viewport={{ once: true }}
           className="text-4xl md:text-6xl font-serif text-black mb-6"
         >
-          {t.booking.heading}
+          {t.cta?.heading1}
         </motion.h2>
         <motion.p
           initial={{ opacity: 0 }}
@@ -26,7 +26,7 @@ export default function Booking() {
           transition={{ delay: 0.2 }}
           className="text-black/80 font-medium text-lg mb-10"
         >
-          {t.booking.desc}
+          {t.cta?.sub}
         </motion.p>
 
         <motion.form
@@ -37,11 +37,11 @@ export default function Booking() {
           className="flex flex-col sm:flex-row gap-4 justify-center max-w-xl mx-auto"
         >
           <Input
-            placeholder={t.booking.placeholder}
+            placeholder="Số điện thoại của bạn"
             className="bg-black/10 border-black/20 text-black placeholder:text-black/50 h-14 rounded-none focus-visible:ring-black"
           />
           <Button className="bg-black hover:bg-black/80 text-primary uppercase tracking-widest h-14 rounded-none px-8">
-            {t.booking.cta}
+            {t.cta?.button}
           </Button>
         </motion.form>
       </div>
