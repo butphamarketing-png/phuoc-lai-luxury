@@ -8,11 +8,13 @@ import Training from "@/components/sections/Training";
 import Testimonials from "@/components/sections/Testimonials";
 import Booking from "@/components/sections/Booking";
 import Footer from "@/components/sections/Footer";
+import LangToggle from "@/components/LangToggle";
 
 export default function Home() {
   return (
     <main className="min-h-screen bg-background w-full overflow-x-hidden">
       <Navbar />
+      <LangToggle />
       <Hero />
       <Services />
       <About />

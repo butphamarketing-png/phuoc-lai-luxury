@@ -55,15 +55,6 @@ export default function Navbar() {
         </nav>
 
         <div className="hidden md:flex items-center gap-3">
-          <button
-            data-testid="lang-toggle"
-            onClick={() => setLang(lang === "vi" ? "en" : "vi")}
-            className="flex items-center gap-1 border border-border/60 rounded-none px-3 py-1.5 text-xs tracking-widest uppercase text-muted-foreground hover:text-primary hover:border-primary transition-all duration-300"
-          >
-            <span className={lang === "vi" ? "text-primary font-semibold" : ""}>VI</span>
-            <span className="text-border/80 mx-0.5">|</span>
-            <span className={lang === "en" ? "text-primary font-semibold" : ""}>EN</span>
-          </button>
           <Button
             data-testid="book-now-btn"
             variant="outline"
@@ -98,19 +89,9 @@ export default function Navbar() {
               {link.name}
             </a>
           ))}
-          <div className="flex items-center gap-3">
-            <button
-              onClick={() => setLang(lang === "vi" ? "en" : "vi")}
-              className="flex items-center gap-1 border border-border/60 px-3 py-1.5 text-xs tracking-widest uppercase text-muted-foreground hover:text-primary hover:border-primary transition-all duration-300"
-            >
-              <span className={lang === "vi" ? "text-primary font-semibold" : ""}>VI</span>
-              <span className="text-border/80 mx-0.5">|</span>
-              <span className={lang === "en" ? "text-primary font-semibold" : ""}>EN</span>
-            </button>
-            <Button className="bg-primary text-primary-foreground flex-1 uppercase tracking-widest">
-              {t.nav.bookNow}
-            </Button>
-          </div>
+          <Button className="bg-primary text-primary-foreground w-full uppercase tracking-widest">
+            {t.nav.bookNow}
+          </Button>
         </motion.div>
       )}
     </header>
