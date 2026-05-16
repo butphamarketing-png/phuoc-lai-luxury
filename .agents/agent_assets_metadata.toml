@@ -102,3 +102,63 @@ id = "8mk10ySAtgUvwge12cYHL"
 uri = "file://artifacts/phuoc-lai/public/images/avatar-3.png"
 type = "image"
 title = "Avatar 3"
+
+[[generated]]
+id = "ODyApeZ0rN4s384YfLYdh"
+uri = "file://artifacts/phuoc-lai/public/hero-1.png"
+type = "image"
+title = "hero slide 1"
+
+[[generated]]
+id = "guWVST1NT6dqmE_f95FAD"
+uri = "file://artifacts/phuoc-lai/public/hero-2.png"
+type = "image"
+title = "hero slide 2"
+
+[[generated]]
+id = "YlauMFIruq70WxV_oJzEi"
+uri = "file://artifacts/phuoc-lai/public/hero-3.png"
+type = "image"
+title = "hero slide 3"
+
+[[generated]]
+id = "qtgUWjWbm6qz1Jo3OUsel"
+uri = "file://artifacts/phuoc-lai/public/hero-4.png"
+type = "image"
+title = "hero slide 4"
+
+[[generated]]
+id = "tFFwgf4rNu7pLuoEwyG2Q"
+uri = "file://artifacts/phuoc-lai/public/intro-interior.png"
+type = "image"
+title = "intro interior"
+
+[[generated]]
+id = "_0Y8JY2bS8N6g0DmUlsQx"
+uri = "file://artifacts/phuoc-lai/public/service-1.png"
+type = "image"
+title = "service 1"
+
+[[generated]]
+id = "3VJc_9c3cYgZ92iIWrQby"
+uri = "file://artifacts/phuoc-lai/public/service-2.png"
+type = "image"
+title = "service 2"
+
+[[generated]]
+id = "GDtsv4OYs7faQ-ysdxw2M"
+uri = "file://artifacts/phuoc-lai/public/service-3.png"
+type = "image"
+title = "service 3"
+
+[[generated]]
+id = "gGnP3X4duM5MVCWmIEvuH"
+uri = "file://artifacts/phuoc-lai/public/service-4.png"
+type = "image"
+title = "service 4"
+
+[[generated]]
+id = "MlROR-SfVFhczvlN6zdMS"
+uri = "file://artifacts/phuoc-lai/public/instructor.png"
+type = "image"
+title = "instructor"
