@@ -91,8 +91,15 @@ export default function Home() {
       <section
         className="relative w-full overflow-hidden bg-black md:bg-[#1A1A1A] pt-24 md:pt-0"
         data-testid="section-hero"
+        onMouseMove={(e) => {
+          const { clientX, clientY } = e;
+          const x = (clientX / window.innerWidth - 0.5) * 30;
+          const y = (clientY / window.innerHeight - 0.5) * 30;
+          const hero = document.getElementById('hero-masters-container');
+          if (hero) hero.style.transform = `translate(${x}px, ${y}px)`;
+        }}
       >
-        <div className="relative w-full flex flex-row h-[45vh] sm:h-[60vh] md:h-screen">
+        <div id="hero-masters-container" className="relative w-full flex flex-row h-[45vh] sm:h-[60vh] md:h-screen transition-transform duration-500 ease-out">
           {masters.map((master, idx) => (
             <motion.div
               key={idx}
@@ -102,7 +109,7 @@ export default function Home() {
                 src={master.img}
                 animate={{ 
                   filter: activeMasterIndex === idx ? "grayscale(0%)" : "grayscale(100%)",
-                  scale: activeMasterIndex === idx ? 1.05 : 1
+                  scale: activeMasterIndex === idx ? 1.08 : 1.02
                 }}
                 transition={{ duration: 1.5, ease: "easeInOut" }}
                 className="w-full h-full object-cover"
@@ -118,10 +125,10 @@ export default function Home() {
                   }}
                   transition={{ duration: 0.8 }}
                 >
-                  <p className="text-white text-[9px] sm:text-[10px] md:text-sm uppercase tracking-[0.3em] font-light mb-1 md:mb-2">
-                    Expert
+                  <p className="text-gold text-[9px] sm:text-[10px] md:text-sm uppercase tracking-[0.3em] font-bold mb-1 md:mb-2">
+                    Expert Master
                   </p>
-                  <h2 className="text-white text-[10px] sm:text-[12px] md:text-xl font-serif tracking-widest whitespace-nowrap">
+                  <h2 className="text-white text-[10px] sm:text-[12px] md:text-2xl font-serif tracking-widest whitespace-nowrap">
                     {master.name}
                   </h2>
                 </motion.div>
@@ -133,7 +140,7 @@ export default function Home() {
                   scaleX: activeMasterIndex === idx ? 1 : 0,
                   opacity: activeMasterIndex === idx ? 1 : 0
                 }}
-                className="absolute bottom-0 left-0 w-full h-[2px] md:h-1 bg-white origin-left"
+                className="absolute bottom-0 left-0 w-full h-[3px] md:h-1.5 bg-gold origin-left z-20"
               />
             </motion.div>
           ))}
@@ -142,68 +149,82 @@ export default function Home() {
         {/* Brand signature overlay - Minimal and Elegant */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none z-10 w-full px-6">
           <motion.div 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 1, duration: 1.5 }}
             className="text-center"
           >
-            <h1 className="text-white/20 text-[12px] sm:text-[16px] md:text-[24px] uppercase tracking-[1.5em] font-light drop-shadow-2xl">
+            <h1 className="text-white/10 text-[14px] sm:text-[20px] md:text-[32px] uppercase tracking-[1.8em] font-light drop-shadow-2xl">
               PHUOC LAI
             </h1>
+            <div className="w-24 h-px bg-gold/30 mx-auto mt-4" />
           </motion.div>
         </div>
       </section>
 
       {/* Giới thiệu */}
-      <section className="py-20 md:py-24 px-6 container mx-auto bg-[#FFFFFF]" data-testid="section-about">
+      <section className="py-24 md:py-32 px-6 container mx-auto bg-[#FFFFFF]" data-testid="section-about">
         <div className="flex flex-col md:flex-row gap-10 lg:gap-32 items-center max-w-7xl mx-auto">
           <motion.div
-            initial={{ opacity: 0, x: -30 }}
+            initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 1, ease: "circOut" }}
             className="w-full md:w-1/2 text-center md:text-left order-2 md:order-1"
           >
-            <span className="text-[10px] uppercase tracking-[0.5em] text-black/40 mb-4 md:mb-6 block font-medium">ABOUT PHUOC LAI</span>
+            <span className="text-[10px] uppercase tracking-[0.5em] text-gold mb-4 md:mb-6 block font-bold">ABOUT PHUOC LAI</span>
             <h2
-              className="text-3xl sm:text-4xl md:text-6xl font-serif font-bold mb-6 md:mb-10 leading-[1.2] md:leading-[1.1] text-[#1A1A1A]"
+              className="text-4xl md:text-6xl lg:text-7xl font-serif font-bold mb-6 md:mb-10 leading-[1.2] md:leading-[1.1] text-[#1A1A1A]"
               data-testid="text-about-title"
             >
               Nâng tầm thần thái
               <br />
-              <span className="italic font-light">từ từng sợi mày</span>
+              <span className="italic font-light text-black/40">từ từng sợi mày</span>
             </h2>
             <p
-              className="text-[#1A1A1A]/70 font-light text-sm md:text-lg leading-relaxed mb-8 md:mb-12 max-w-lg mx-auto md:mx-0 border-l-0 md:border-l-2 border-black/5 md:pl-8"
+              className="text-[#1A1A1A]/70 font-light text-sm md:text-lg leading-relaxed mb-8 md:mb-12 max-w-lg mx-auto md:mx-0 border-l-0 md:border-l-2 border-gold/20 md:pl-8"
               data-testid="text-about-desc"
             >
               Chúng tôi tin rằng mỗi đôi mày đều mang một vẻ đẹp riêng. Với kỹ thuật chuyên sâu và sự tinh tế trong từng đường nét, Amazing Brows cam kết mang đến cho bạn sự tự tin và thần thái tự nhiên nhất.
             </p>
-            <Button asChild className={`${btnPrimary} luxury-shadow w-full sm:w-auto`}>
+            <Button asChild className={`${btnPrimary} luxury-shadow w-full sm:w-auto px-12 py-8`}>
               <Link href="/ve-chung-toi">KHÁM PHÁ CÂU CHUYỆN &rarr;</Link>
             </Button>
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
+            initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 1.2, ease: "circOut" }}
-            className="w-full md:w-[42%] relative aspect-[4/5] overflow-hidden rounded-xl order-1 md:order-2"
+            className="w-full md:w-[42%] relative aspect-[4/5] overflow-hidden rounded-3xl order-1 md:order-2 luxury-shadow"
           >
-            <div className="absolute -inset-4 border border-black/5 rounded-2xl -z-10 translate-x-4 translate-y-4 hidden md:block" />
+            <div className="absolute -inset-4 border border-gold/10 rounded-3xl -z-10 translate-x-4 translate-y-4 hidden md:block" />
             <AnimatePresence mode="wait">
               <motion.img
                 key={currentAboutSlide}
                 src={aboutSlides[currentAboutSlide]}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
+                initial={{ opacity: 0, scale: 1.1 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.95 }}
                 transition={{ duration: 1 }}
                 alt={`About Slide ${currentAboutSlide + 1}`}
-                className="w-full h-full object-cover shadow-2xl"
+                className="w-full h-full object-cover"
               />
             </AnimatePresence>
+            <div className="absolute bottom-6 right-6 flex gap-3">
+              {aboutSlides.map((_, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => setCurrentAboutSlide(idx)}
+                  className={`h-12 w-12 rounded-full border border-white/20 backdrop-blur-md transition-all flex items-center justify-center text-xs font-bold ${
+                    currentAboutSlide === idx ? "bg-gold text-white border-gold" : "bg-black/40 text-white hover:bg-black/60"
+                  }`}
+                >
+                  0{idx + 1}
+                </button>
+              ))}
+            </div>
           </motion.div>
         </div>
       </section>
@@ -223,47 +244,49 @@ export default function Home() {
 
           <div className="mb-24 text-center flex flex-col items-center relative z-10">
             <span
-              className="text-[10px] uppercase tracking-[0.5em] font-medium text-white/40 mb-8 block"
+              className="text-[10px] uppercase tracking-[0.5em] font-bold text-gold mb-8 block"
               data-testid="text-services-eyebrow"
             >
               DỊCH VỤ CỦA CHÚNG TÔI
             </span>
             <h2
-              className="text-4xl md:text-6xl font-serif tracking-wide text-white leading-tight"
+              className="text-4xl md:text-6xl lg:text-7xl font-serif tracking-wide text-white leading-tight mb-8"
               data-testid="text-services-title"
             >
               Đẹp tự nhiên <br className="md:hidden" />
-              <span className="italic font-light text-white/60">– Chuẩn từng chi tiết</span>
+              <span className="italic font-light text-white/40">– Chuẩn từng chi tiết</span>
             </h2>
+            <div className="w-24 h-1 bg-gold/50 rounded-full" />
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-20 relative z-10">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-24 relative z-10">
             {serviceCategories.map((cat, idx) => (
               <motion.div
                 key={cat.id}
-                initial={{ opacity: 0, y: 40 }}
+                initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: idx * 0.2, duration: 0.8, ease: "circOut" }}
+                transition={{ delay: idx * 0.2, duration: 1, ease: "circOut" }}
                 className="group flex flex-col"
               >
                 <Link href={`/dich-vu/${cat.slug}`} className="block relative">
                   <motion.div
-                    whileHover={{ scale: 1.01 }}
+                    whileHover={{ scale: 1.02 }}
                     transition={{ duration: 0.6, ease: "circOut" }}
-                    className="aspect-[16/10] overflow-hidden relative w-full bg-white/5 rounded-2xl shadow-2xl"
+                    className="aspect-[16/10] overflow-hidden relative w-full bg-white/5 rounded-3xl shadow-2xl"
                   >
                     <img
                       src={cat.img}
                       alt={cat.title}
                       className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105 grayscale group-hover:grayscale-0"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent group-hover:from-black/60 transition-all duration-500" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent group-hover:from-black/70 transition-all duration-500" />
                     <div className="absolute inset-0 flex flex-col items-center justify-end pb-12">
-                      <h3 className="font-serif text-3xl md:text-4xl text-white tracking-widest uppercase mb-4">
+                      <span className="text-gold text-[9px] uppercase tracking-[0.4em] mb-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500 font-bold">Discover More</span>
+                      <h3 className="font-serif text-3xl md:text-5xl text-white tracking-widest uppercase mb-4">
                         {cat.title}
                       </h3>
-                      <div className="w-12 h-[1px] bg-white/30 group-hover:w-24 transition-all duration-500" />
+                      <div className="w-12 h-[2px] bg-gold group-hover:w-32 transition-all duration-700" />
                     </div>
                   </motion.div>
                 </Link>
@@ -272,32 +295,42 @@ export default function Home() {
           </div>
 
           <div className="text-center relative z-10">
-            <Button asChild variant="outline" className={`${btnOutline} border-white/10 hover:border-white/40`} data-testid="btn-services-cta">
+            <Button asChild variant="outline" className="rounded-full border-gold/20 text-gold hover:bg-gold hover:text-white hover:border-gold px-12 py-8 text-[11px] uppercase tracking-[0.3em] transition-all" data-testid="btn-services-cta">
               <Link href="/dich-vu">XEM TẤT CẢ DỊCH VỤ &rarr;</Link>
             </Button>
           </div>
         </motion.div>
       </section>
 
-      <section id="training-section" className="bg-[#FFFFFF] section-padding" data-testid="section-home-training">
+      <section id="training-section" className="bg-[#FFFFFF] section-padding py-24 md:py-32" data-testid="section-home-training">
         <div className="container mx-auto max-w-7xl px-6">
-          <div className="mb-20 flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
-            <div className="max-w-2xl">
-              <span className="mb-6 block text-[10px] uppercase tracking-[0.5em] text-black/40 font-medium">CHƯƠNG TRÌNH ĐÀO TẠO</span>
+          <div className="mb-24 flex flex-col gap-10 md:flex-row md:items-end md:justify-between">
+            <motion.div 
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="max-w-2xl"
+            >
+              <span className="mb-6 block text-[10px] uppercase tracking-[0.5em] text-gold font-bold">ACADEMY PROGRAM</span>
               <h2 className="font-serif text-4xl leading-[1.1] md:text-6xl mb-8">
                 Học thật – Làm thật
                 <br />
-                <span className="italic font-light text-black/50">Thành công thật</span>
+                <span className="italic font-light text-black/30">Thành công thật</span>
               </h2>
-              <p className="max-w-xl text-base md:text-lg font-light leading-relaxed text-black/60 border-l-2 border-black/5 pl-8">
+              <p className="max-w-xl text-base md:text-lg font-light leading-relaxed text-black/60 border-l-2 border-gold/20 pl-8">
                 Chương trình đào tạo chuyên sâu, bài bản từ cơ bản đến nâng cao, cam kết tay nghề vững và lộ trình thực chiến rõ ràng.
               </p>
-            </div>
+            </motion.div>
             
-            <div className="flex p-1.5 bg-black/5 rounded-full self-start md:self-end luxury-shadow">
+            <motion.div 
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="flex p-2 bg-black/5 rounded-full self-start md:self-end luxury-shadow"
+            >
               <button
                 onClick={() => setActiveTab("phun-xam")}
-                className={`px-10 py-3.5 rounded-full text-[11px] uppercase tracking-[0.25em] font-semibold transition-all duration-500 ${
+                className={`px-10 py-4 rounded-full text-[11px] uppercase tracking-[0.25em] font-bold transition-all duration-500 ${
                   activeTab === "phun-xam" 
                     ? "bg-[#1A1A1A] text-white shadow-xl scale-105" 
                     : "text-black/40 hover:text-black/60"
@@ -307,7 +340,7 @@ export default function Home() {
               </button>
               <button
                 onClick={() => setActiveTab("spa")}
-                className={`px-10 py-3.5 rounded-full text-[11px] uppercase tracking-[0.25em] font-semibold transition-all duration-500 ${
+                className={`px-10 py-4 rounded-full text-[11px] uppercase tracking-[0.25em] font-bold transition-all duration-500 ${
                   activeTab === "spa" 
                     ? "bg-[#1A1A1A] text-white shadow-xl scale-105" 
                     : "text-black/40 hover:text-black/60"
@@ -315,34 +348,35 @@ export default function Home() {
               >
                 Spa
               </button>
-            </div>
+            </motion.div>
           </div>
 
-          <div className={`grid grid-cols-1 gap-10 md:grid-cols-2 ${activeTab === "phun-xam" ? "lg:grid-cols-3 max-w-6xl mx-auto" : "lg:grid-cols-4"} mb-24`}>
+          <div className={`grid grid-cols-1 gap-12 md:grid-cols-2 ${activeTab === "phun-xam" ? "lg:grid-cols-3 max-w-6xl mx-auto" : "lg:grid-cols-4"} mb-24`}>
             {trainingCourses[activeTab].map((course, idx) => (
               <motion.article
                 key={course.title}
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: idx * 0.1, duration: 0.8, ease: "circOut" }}
-                className="group flex flex-col bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-700 border border-black/[0.03]"
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: idx * 0.15, duration: 0.8 }}
+                className="group flex flex-col bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-700 border border-black/[0.03]"
               >
                 <div className="aspect-[4/3] overflow-hidden relative">
                   <img src={course.img} alt={course.title} className="h-full w-full object-cover grayscale transition duration-1000 group-hover:scale-110 group-hover:grayscale-0" />
                 </div>
-                <div className="p-8 flex flex-col flex-grow">
-                  <span className="mb-4 block text-[9px] uppercase tracking-[0.3em] text-black/40 font-bold">{course.level}</span>
-                  <h3 className="mb-4 font-serif text-2xl leading-tight group-hover:text-black transition-colors">{course.title}</h3>
+                <div className="p-10 flex flex-col flex-grow">
+                  <span className="mb-4 block text-[9px] uppercase tracking-[0.3em] text-gold font-black">{course.level}</span>
+                  <h3 className="mb-4 font-serif text-2xl leading-tight group-hover:text-gold transition-colors duration-500">{course.title}</h3>
                   <p className="mb-8 text-sm font-light leading-relaxed text-black/50 flex-grow">{course.desc}</p>
                   <Link
                     href={`/dao-tao/${course.slug}`}
-                    className="flex items-center justify-between border-t border-black/[0.06] pt-6 group/btn"
+                    className="flex items-center justify-between border-t border-black/[0.06] pt-8 group/btn"
                   >
-                    <span className="text-[10px] uppercase tracking-[0.25em] text-black/40 group-hover/btn:text-black font-bold transition-colors">
+                    <span className="text-[10px] uppercase tracking-[0.25em] text-black/40 group-hover/btn:text-gold font-bold transition-colors">
                       XEM CHI TIẾT
                     </span>
-                    <span className="flex h-10 w-10 items-center justify-center rounded-full border border-black/10 group-hover/btn:bg-[#1A1A1A] group-hover/btn:text-white transition-all duration-500 luxury-shadow">
-                      <Plus size={16} />
+                    <span className="flex h-12 w-12 items-center justify-center rounded-full border border-black/10 group-hover/btn:bg-gold group-hover/btn:text-white group-hover/btn:border-gold transition-all duration-500 luxury-shadow">
+                      <Plus size={18} />
                     </span>
                   </Link>
                 </div>
@@ -351,80 +385,95 @@ export default function Home() {
           </div>
 
           <div className="text-center">
-            <Button asChild className={`${btnPrimary} luxury-shadow px-14`}>
+            <Button asChild className={`${btnPrimary} luxury-shadow px-14 py-8`}>
               <Link href="/dao-tao">XEM TẤT CẢ KHÓA HỌC &rarr;</Link>
             </Button>
           </div>
         </div>
       </section>
 
-      <section className="bg-[#1A1A1A] py-24 text-white" data-testid="section-home-feedback">
+      <section className="bg-[#1A1A1A] py-24 md:py-32 text-white" data-testid="section-home-feedback">
         <div className="container mx-auto max-w-7xl px-6">
-          <div className="mb-14 flex items-end justify-between gap-6">
-            <div>
-              <span className="mb-4 block text-[10px] uppercase tracking-[0.4em] text-white/45">FEEDBACK HỌC VIÊN</span>
-              <h2 className="font-serif text-3xl leading-tight md:text-5xl">
+          <div className="mb-20 flex flex-col md:flex-row items-end justify-between gap-10">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+            >
+              <span className="mb-6 block text-[10px] uppercase tracking-[0.5em] text-gold font-bold">TESTIMONIALS</span>
+              <h2 className="font-serif text-4xl leading-tight md:text-6xl">
                 Những lời yêu thương
                 <br />
-                là động lực của chúng tôi
+                <span className="italic font-light text-white/40">là động lực phát triển</span>
               </h2>
-            </div>
-            <Link href="/feedback" className="hidden rounded-full border border-white/20 px-6 py-3 text-[10px] uppercase tracking-[0.2em] text-white/70 transition hover:bg-white hover:text-black md:inline-flex">
-              Xem thêm
-            </Link>
+            </motion.div>
+            <Button asChild variant="outline" className="rounded-full border-gold/20 text-gold hover:bg-gold hover:text-white px-10 py-6 text-[10px] uppercase tracking-[0.2em]">
+              <Link href="/feedback">Xem tất cả đánh giá</Link>
+            </Button>
           </div>
 
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4 items-stretch">
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4 items-stretch">
             {feedbackItems.map((item, idx) => (
               <motion.article
                 key={item.name}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: idx * 0.08 }}
-                className="rounded-lg border border-white/5 bg-white/5 p-7 flex flex-col h-full backdrop-blur-sm"
+                transition={{ delay: idx * 0.1 }}
+                className="rounded-3xl border border-white/5 bg-white/[0.03] p-10 flex flex-col h-full backdrop-blur-md hover:bg-white/[0.06] transition-all duration-500 luxury-shadow"
               >
-                <div className="mb-5 flex items-center gap-4">
-                  <div className="h-12 w-12 rounded-full bg-white/10 flex items-center justify-center text-[10px] text-white/40 border border-white/5">
+                <div className="mb-8 flex items-center gap-5">
+                  <div className="h-14 w-14 rounded-full bg-gold/10 flex items-center justify-center text-[10px] text-gold border border-gold/20 font-bold">
                     PL
                   </div>
                   <div>
-                    <h4 className="text-sm font-medium">{item.name}</h4>
-                    <p className="text-xs text-white/45">{item.course}</p>
+                    <h4 className="text-sm font-bold tracking-widest">{item.name}</h4>
+                    <p className="text-[10px] text-white/30 uppercase tracking-widest">{item.course}</p>
                   </div>
                 </div>
-                <div className="mb-4 flex gap-1">
+                <div className="mb-6 flex gap-1 text-gold">
                   {[1, 2, 3, 4, 5].map((star) => (
-                    <Star key={star} size={12} className="fill-white text-white opacity-80" />
+                    <Star key={star} size={12} className="fill-current" />
                   ))}
                 </div>
-                <p className="font-serif text-sm italic leading-relaxed text-white/70 flex-grow">&ldquo;{item.quote}&rdquo;</p>
+                <p className="font-serif text-lg italic leading-relaxed text-white/70 flex-grow">&ldquo;{item.quote}&rdquo;</p>
               </motion.article>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="bg-[#FFFFFF] py-20" data-testid="section-home-why">
+      <section className="bg-[#FFFFFF] py-24 md:py-32" data-testid="section-home-why">
         <div className="container mx-auto max-w-7xl px-6">
-          <h2 className="mb-12 text-center font-serif text-3xl leading-tight md:text-5xl">
-            VÌ SAO CHỌN
-            <br />
-            PHUOC LAI LUXURY?
-          </h2>
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-5">
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-20"
+          >
+            <span className="mb-6 block text-[10px] uppercase tracking-[0.5em] text-gold font-bold">WHY CHOOSE US</span>
+            <h2 className="font-serif text-4xl leading-tight md:text-6xl">
+              Vì sao chọn
+              <br />
+              <span className="italic font-light text-black/40">Phuoc Lai Luxury?</span>
+            </h2>
+          </motion.div>
+          
+          <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-5">
             {trustItems.map((item, idx) => (
               <motion.div
                 key={item.title}
-                initial={{ opacity: 0, y: 18 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
-                transition={{ delay: idx * 0.06 }}
-                className="rounded-xl border border-black/5 bg-white shadow-sm hover:shadow-md transition-shadow p-8 text-center"
+                transition={{ delay: idx * 0.1 }}
+                className="rounded-3xl border border-black/[0.03] bg-white shadow-sm hover:shadow-2xl transition-all duration-700 p-10 text-center group"
               >
-                <item.icon size={32} strokeWidth={1} className="mx-auto mb-5 text-black/80" />
-                <h4 className="mb-3 text-[10px] font-bold uppercase tracking-widest">{item.title}</h4>
-                <p className="text-sm font-light leading-relaxed text-black/55">{item.desc}</p>
+                <div className="h-16 w-14 mx-auto mb-8 flex items-center justify-center text-black/80 group-hover:text-gold transition-colors">
+                  <item.icon size={48} strokeWidth={1} />
+                </div>
+                <h4 className="mb-4 text-[11px] font-black uppercase tracking-[0.2em]">{item.title}</h4>
+                <p className="text-sm font-light leading-relaxed text-black/50">{item.desc}</p>
               </motion.div>
             ))}
           </div>
