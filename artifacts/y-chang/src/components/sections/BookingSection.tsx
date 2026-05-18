@@ -32,11 +32,11 @@ export default function BookingSection() {
           >
             <div className="relative logo-shine overflow-hidden rounded-full p-2">
               <img
-                src={logoImg}
-                alt="LP Logo"
-                className="w-24 md:w-32 lg:w-40 max-w-full opacity-80"
-                data-testid="img-booking-logo"
-              />
+                 src={logoImg}
+                 alt="LP Logo"
+                 className="w-24 md:w-32 lg:w-40 max-w-full opacity-80 invert"
+                 data-testid="img-booking-logo"
+               />
             </div>
             <div className="flex flex-col items-center leading-none mb-4">
               <span className="text-base md:text-lg lg:text-xl font-serif tracking-[0.3em] uppercase text-white/90 text-center">

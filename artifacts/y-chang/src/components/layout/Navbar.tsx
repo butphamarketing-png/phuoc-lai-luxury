@@ -124,7 +124,7 @@ export default function Navbar() {
                   <img
                     src={logoImg}
                     alt="LP Logo"
-                    className={`h-6 md:h-10 w-auto object-contain transition-all duration-500 ${isOverlay ? "invert" : "invert-0"}`}
+                    className="h-6 md:h-10 w-auto object-contain transition-all duration-500 invert"
                   />
                 </div>
                 <div className="flex flex-col leading-none">
