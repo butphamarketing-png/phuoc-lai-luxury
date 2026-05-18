@@ -51,22 +51,22 @@ export default function PromotionModal() {
             </button>
 
             <div className="flex flex-col md:flex-row h-full">
-              {/* Image 1 - Left */}
+              {/* Image 3 - Left (pop-up-3) */}
               <div className="hidden md:block w-1/3 aspect-[4/5] overflow-hidden">
                 <img
-                  src="/Gioi-thieu-1.png"
-                  alt="Promotion 1"
-                  className="w-full h-full object-cover grayscale"
+                  src="/pop-up-3.jpg"
+                  alt="Promotion Left"
+                  className="w-full h-full object-cover"
                 />
               </div>
 
-              {/* Image 2 - Center (Man) */}
+              {/* Image 1 - Center (pop-up-1) */}
               <div className="w-full md:w-1/3 flex flex-col bg-white">
                 <div className="relative aspect-[4/5] overflow-hidden">
                   <img
-                    src="/hero-man.png"
+                    src="/pop-up-1.jpg"
                     alt="Promotion Center"
-                    className="w-full h-full object-cover grayscale"
+                    className="w-full h-full object-cover"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none" />
                 </div>
@@ -89,12 +89,12 @@ export default function PromotionModal() {
                 </div>
               </div>
 
-              {/* Image 3 - Right */}
+              {/* Image 2 - Right (pop-up-2) */}
               <div className="hidden md:block w-1/3 aspect-[4/5] overflow-hidden">
                 <img
-                  src="/Gioi-thieu-3.png"
-                  alt="Promotion 3"
-                  className="w-full h-full object-cover grayscale"
+                  src="/pop-up-2.jpg"
+                  alt="Promotion Right"
+                  className="w-full h-full object-cover"
                 />
               </div>
             </div>
@@ -102,10 +102,10 @@ export default function PromotionModal() {
             {/* Mobile bottom images hint */}
             <div className="flex md:hidden h-20 border-t border-black/5">
                <div className="w-1/2 overflow-hidden">
-                 <img src="/Gioi-thieu-1.png" className="w-full h-full object-cover grayscale" />
+                 <img src="/pop-up-3.jpg" className="w-full h-full object-cover" />
                </div>
                <div className="w-1/2 overflow-hidden border-l border-black/5">
-                 <img src="/Gioi-thieu-3.png" className="w-full h-full object-cover grayscale" />
+                 <img src="/pop-up-2.jpg" className="w-full h-full object-cover" />
                </div>
             </div>
           </motion.div>
