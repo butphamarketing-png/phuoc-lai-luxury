@@ -85,41 +85,43 @@ export default function Home() {
     >
       {/* Hero — Pure image slideshow */}
       <section
-        className="relative h-[100dvh] w-full overflow-hidden bg-[#1A1A1A]"
+        className="relative w-full overflow-hidden bg-[#1A1A1A]"
         data-testid="section-hero"
       >
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={currentSlide}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 1.2, ease: "easeOut" }}
-            className="absolute inset-0"
-          >
-            <img
-              src={heroSlides[currentSlide]}
-              className="h-full w-full object-cover object-center"
-              alt={`Hero Slide ${currentSlide + 1}`}
-            />
-            {/* Premium Mobile Overlay */}
-            <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black/80 md:from-black/20 md:to-black/40" />
-          </motion.div>
-        </AnimatePresence>
+        <div className="relative w-full h-auto md:h-screen aspect-[4/5] sm:aspect-[3/2] md:aspect-none">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={currentSlide}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 1.2, ease: "easeOut" }}
+              className="absolute inset-0"
+            >
+              <img
+                src={heroSlides[currentSlide]}
+                className="h-full w-full object-contain md:object-cover md:object-center bg-black"
+                alt={`Hero Slide ${currentSlide + 1}`}
+              />
+              {/* Premium Mobile Overlay */}
+              <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/60 md:from-black/20 md:to-black/40 pointer-events-none" />
+            </motion.div>
+          </AnimatePresence>
 
-        {/* Brand signature on hero - Centered and Elegant */}
-        <div className="absolute inset-0 flex flex-col items-center justify-end pb-32 md:justify-center md:pb-0 pointer-events-none px-6">
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5, duration: 1 }}
-            className="text-center"
-          >
-            <h1 className="text-white text-[13px] md:text-[16px] uppercase tracking-[0.8em] md:tracking-[1em] font-light mb-4 md:mb-6 opacity-95 drop-shadow-[0_4px_12px_rgba(0,0,0,0.6)]">
-              Phuoc Lai Luxury
-            </h1>
-            <div className="w-12 md:w-16 h-px bg-white/40 mx-auto shadow-2xl" />
-          </motion.div>
+          {/* Brand signature on hero - Centered and Elegant */}
+          <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none px-6">
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5, duration: 1 }}
+              className="text-center"
+            >
+              <h1 className="text-white text-[11px] md:text-[16px] uppercase tracking-[0.6em] md:tracking-[1em] font-light mb-4 md:mb-6 opacity-90 drop-shadow-[0_2px_10px_rgba(0,0,0,0.5)]">
+                Phuoc Lai Luxury
+              </h1>
+              <div className="w-10 md:w-16 h-px bg-white/30 mx-auto shadow-2xl" />
+            </motion.div>
+          </div>
         </div>
 
         {/* Scroll Indicator for mobile */}
@@ -127,25 +129,10 @@ export default function Home() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.5, duration: 1 }}
-          className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 md:hidden pointer-events-none"
+          className="absolute bottom-4 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 md:hidden pointer-events-none"
         >
-          <div className="w-[1px] h-10 bg-gradient-to-b from-white/60 to-transparent" />
+          <div className="w-[1px] h-6 bg-gradient-to-b from-white/40 to-transparent" />
         </motion.div>
-
-        {/* Navigation Dots - Only show if more than 1 slide */}
-        {heroSlides.length > 1 && (
-          <div className="absolute bottom-10 left-1/2 z-20 flex -translate-x-1/2 gap-3">
-            {heroSlides.map((_, idx) => (
-              <button
-                key={idx}
-                onClick={() => setCurrentSlide(idx)}
-                className={`h-1.5 transition-all duration-500 ${
-                  currentSlide === idx ? "w-8 bg-white" : "w-2 bg-white/30 hover:bg-white/50"
-                }`}
-              />
-            ))}
-          </div>
-        )}
       </section>
 
       {/* Giới thiệu */}
