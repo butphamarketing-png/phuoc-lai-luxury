@@ -1,0 +1,167 @@
+hông tin hiện tại mình biết về brand của bạn
+Tên thương hiệu
+
+Phuoc Lai Luxury Phun Xăm Thẩm Mỹ
+hoặc:
+Phuoc Lai Permanent Makeup
+
+Định vị thương hiệu
+Phong cách:
+Luxury
+Monochrome
+High-end beauty
+Fashion editorial
+Korean aesthetic
+Premium PMU Academy
+Dịch vụ chính
+Phun xăm thẩm mỹ:
+Điêu khắc sợi
+Ombre Brows
+Combo Brows
+Phun môi
+Xử lý chân mày cũ
+Chăm sóc sau phun
+Đào tạo
+Có academy riêng:
+Khóa cơ bản
+Khóa nâng cao
+Khóa chuyên sâu
+Khóa business
+Hình thức:
+Private 1:1
+Thực hành thực tế
+Chuyên sâu PMU
+Style website bạn muốn
+Không phải:
+Website spa truyền thống
+Website local phổ thông
+Landing page giá rẻ
+Mà là:
+Luxury campaign website
+Fashion editorial website
+Awwwards style
+Dior / Chanel inspired
+Cinematic UI
+Tone màu
+Chủ đạo:
+Xám satin
+Silver metallic
+Đen gradient
+Trắng khói
+Tránh:
+Màu sặc sỡ
+Pink spa
+UI nhiều màu
+Header / Navbar structure
+Menu:
+Trang chủ
+Về chúng tôi
+Dịch vụ
+Đào tạo
+Feedback
+Liên hệ
+Booking
+Song ngữ VN / EN
+Hành vi menu
+Trang chủ
+
+→ scroll top
+
+Về chúng tôi
+
+→ trang bài viết dài + chèn hình
+
+Dịch vụ
+
+→ mega menu xổ dịch vụ con
+
+Đào tạo
+
+→ mega menu xổ khóa học con
+
+Feedback
+
+→ gallery feedback 4 cột
+
+Liên hệ
+
+→ form liên hệ
+
+Booking
+
+→ popup đặt lịch
+
+Hero section
+Có:
+Slideshow full hình
+Không chèn text lên ảnh
+Fullscreen
+Cinematic transition
+Trang chủ sections
+1. Giới thiệu
+text trái
+hình phải
+nút xem thêm
+2. Dịch vụ
+grid 4 ô
+3. Đào tạo
+course cards
+grayscale luxury
+4. Feedback
+testimonial cards
+avatar thật
+dark gradient
+5. Vì sao chọn
+icon luxury
+background đen/xám
+6. Form đặt lịch
+booking form
+luxury UI
+bo góc mềm
+7. Theo dõi & liên hệ
+Facebook
+Zalo
+Instagram
+Messenger
+Hiệu ứng bạn thích
+Header logo:
+hiệu ứng tráng gương sau 5s
+Navbar:
+blur khi scroll
+sticky top
+Hover:
+glow nhẹ
+underline animation
+UI:
+cinematic
+smooth
+luxury minimal
+Typography
+Style:
+Serif luxury lớn
+Sans-serif tối giản
+Giống:
+Dior
+Vogue
+Chanel Beauty
+UX mục tiêu
+
+Bạn đang muốn khách cảm giác:
+
+Sang
+Đẳng cấp
+Chuyên nghiệp
+Academy thật
+Có đầu tư branding
+Không phải tiệm local thông thường
+Điều đặc biệt nhất
+
+Website của bạn đang đi theo hướng:
+
+“Luxury beauty brand experience”
+
+chứ không phải:
+
+“Website dịch vụ thông thường”
+
+Đây là điểm khác biệt lớn nhất.

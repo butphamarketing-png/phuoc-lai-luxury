@@ -1,0 +1,104 @@
+uploads = []
+outputs = []
+
+[[generated]]
+id = "OiVzDDT3oYytcrtDJ3AqF"
+uri = "file://artifacts/y-chang/public/hero-portrait.png"
+type = "image"
+title = "Portrait for beauty hero"
+
+[[generated]]
+id = "RWJd1ptenhhj3E7jBWYWq"
+uri = "file://artifacts/y-chang/public/service-brows.png"
+type = "image"
+title = "Extreme close-up sculpted eyebrows"
+
+[[generated]]
+id = "uYC-tHOdU-0QKA6yEVHTY"
+uri = "file://artifacts/y-chang/public/service-lips.png"
+type = "image"
+title = "lips service detail"
+
+[[generated]]
+id = "3kUIj--m-6ZUqHtUE6-t2"
+uri = "file://artifacts/y-chang/public/studio-interior.png"
+type = "image"
+title = "Luxury PMU studio interior"
+
+[[generated]]
+id = "dnZMFl4U6NjM7AS92-G5d"
+uri = "file://artifacts/y-chang/public/training-session.png"
+type = "image"
+title = "Beauty training session"
+
+[[generated]]
+id = "-OSTvZ4nOMjPm2vRgIVFZ"
+uri = "file://artifacts/y-chang/public/hero-1.png"
+type = "image"
+title = "hero portrait slide 1"
+
+[[generated]]
+id = "M-YTPmBUGrhqZrVQrAPuD"
+uri = "file://artifacts/y-chang/public/hero-2.png"
+type = "image"
+title = "Editorial portrait of Vietnamese woman"
+
+[[generated]]
+id = "Yx1mUDFJb7R5o-T2DJrYl"
+uri = "file://artifacts/y-chang/public/hero-3.png"
+type = "image"
+title = "High fashion PMU beauty portrait"
+
+[[generated]]
+id = "wHAri31GlNkOMRV9GPKT6"
+uri = "file://artifacts/y-chang/public/studio.png"
+type = "image"
+title = "luxury studio interior"
+
+[[generated]]
+id = "K7Czd_RmqXX1ktfqiVNQc"
+uri = "file://artifacts/y-chang/public/service-ombre.png"
+type = "image"
+title = "Ombre gradient eyebrow effect"
+
+[[generated]]
+id = "E15b378ImN-HW1eQ6gdO8"
+uri = "file://artifacts/y-chang/public/service-correction.png"
+type = "image"
+title = "Elegant brow correction"
+
+[[generated]]
+id = "n_fGjK7Zz40ezA9RUp8GA"
+uri = "file://artifacts/y-chang/public/training-1.png"
+type = "image"
+title = "PMU instructor teaching hands-on"
+
+[[generated]]
+id = "y6LPEaagIYF5n5yIJicpj"
+uri = "file://artifacts/y-chang/public/training-2.png"
+type = "image"
+title = "Student practicing brow technique"
+
+[[generated]]
+id = "03jPp2-sQHiNG05tclq2G"
+uri = "file://artifacts/y-chang/public/service-combo.png"
+type = "image"
+title = "Combo technique eyebrow"
+
+[[generated]]
+id = "I_xkQkjuuuHotIBcjhjuu"
+uri = "file://artifacts/y-chang/public/training-3.png"
+type = "image"
+title = "Master class elegant studio"
+
+[[generated]]
+id = "P6XGnv7wss0eT2eeNpBPu"
+uri = "file://artifacts/y-chang/public/training-4.png"
+type = "image"
+title = "Graduation certification moment"
+
+[[generated]]
+id = "EswfPteDzZX4FQWAMuLgE"
+uri = "file://artifacts/y-chang/public/hero-viet-1.png"
+type = "image"
+title = "Beauty editorial Vietnamese woman"
