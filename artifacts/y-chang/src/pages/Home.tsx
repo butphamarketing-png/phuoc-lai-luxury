@@ -20,7 +20,7 @@ export default function Home() {
   ];
 
   const [currentAboutSlide, setCurrentAboutSlide] = useState(0);
-  const aboutSlides = ["/Gioi-thieu-1.png", "/Gioi-thieu-2.png", "/Gioi-thieu-3.png"];
+  const aboutSlides = ["/pop-up-1.jpg", "/pop-up-2.jpg", "/pop-up-3.jpg"];
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -201,7 +201,7 @@ export default function Home() {
                 exit={{ opacity: 0 }}
                 transition={{ duration: 1 }}
                 alt={`About Slide ${currentAboutSlide + 1}`}
-                className="w-full h-full object-cover grayscale shadow-2xl"
+                className="w-full h-full object-cover shadow-2xl"
               />
             </AnimatePresence>
           </motion.div>
