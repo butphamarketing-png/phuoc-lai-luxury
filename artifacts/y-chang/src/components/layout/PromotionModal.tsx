@@ -73,7 +73,7 @@ export default function PromotionModal() {
                 
                 {/* Center Content & Button */}
                 <div className="p-5 md:p-6 flex flex-col items-center text-center">
-                  <span className="text-[9px] uppercase tracking-[0.4em] text-black/40 mb-2">LUXURY ACADEMY</span>
+                  <span className="text-[9px] uppercase tracking-[0.4em] text-black/40 mb-2">PERMANENT MAKEUP</span>
                   <h3 className="font-serif text-xl md:text-2xl mb-5 text-[#1A1A1A]">
                     Nâng Tầm <span className="italic">Bản Lĩnh</span>
                   </h3>
@@ -83,7 +83,7 @@ export default function PromotionModal() {
                     className="w-full rounded-full bg-[#1A1A1A] text-white hover:bg-black py-5 text-[10px] uppercase tracking-[0.2em] luxury-shadow group"
                   >
                     <a href="/lien-he" onClick={closeModal}>
-                      ĐĂNG KÝ NGAY <span className="ml-2 group-hover:translate-x-1 transition-transform">→</span>
+                      ĐẶT LỊCH NGAY <span className="ml-2 group-hover:translate-x-1 transition-transform">→</span>
                     </a>
                   </Button>
                 </div>
