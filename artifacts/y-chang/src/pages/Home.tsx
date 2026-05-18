@@ -12,18 +12,22 @@ const btnOutline =
   "rounded-full border-white/20 text-white hover:bg-white hover:text-black px-10 py-6 text-[11px] uppercase tracking-[0.25em]";
 
 export default function Home() {
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const heroSlides = ["/Slideshow-1.png"];
+  const [activeMasterIndex, setActiveMasterIndex] = useState(0);
+  const masters = [
+    { img: "/pop-up-3.jpg", name: "Master Nhung Lai" },
+    { img: "/pop-up-1.jpg", name: "Master Phuoc Lai" },
+    { img: "/pop-up-2.jpg", name: "Master Cam Lai" },
+  ];
 
   const [currentAboutSlide, setCurrentAboutSlide] = useState(0);
   const aboutSlides = ["/Gioi-thieu-1.png", "/Gioi-thieu-2.png", "/Gioi-thieu-3.png"];
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
-    }, 5000);
+      setActiveMasterIndex((prev) => (prev + 1) % masters.length);
+    }, 4000);
     return () => clearInterval(timer);
-  }, [heroSlides.length]);
+  }, [masters.length]);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -83,56 +87,71 @@ export default function Home() {
       className="w-full bg-[#FFFFFF] text-[#1A1A1A]"
       data-testid="page-home"
     >
-      {/* Hero — Pure image slideshow */}
+      {/* Hero — Masters Section */}
       <section
-        className="relative w-full overflow-hidden bg-black md:bg-[#1A1A1A]"
+        className="relative w-full overflow-hidden bg-black md:bg-[#1A1A1A] pt-24 md:pt-0"
         data-testid="section-hero"
       >
-        <div className="relative w-full h-auto md:h-screen">
-          <AnimatePresence mode="wait">
+        <div className="relative w-full flex flex-row h-[45vh] sm:h-[60vh] md:h-screen">
+          {masters.map((master, idx) => (
             <motion.div
-              key={currentSlide}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 1.2, ease: "easeOut" }}
-              className="relative w-full"
+              key={idx}
+              className="relative flex-1 h-full overflow-hidden group"
             >
-              <img
-                src={heroSlides[currentSlide]}
-                className="w-full h-auto md:h-full md:object-cover md:object-center block"
-                alt={`Hero Slide ${currentSlide + 1}`}
+              <motion.img
+                src={master.img}
+                animate={{ 
+                  filter: activeMasterIndex === idx ? "grayscale(0%)" : "grayscale(100%)",
+                  scale: activeMasterIndex === idx ? 1.05 : 1
+                }}
+                transition={{ duration: 1.5, ease: "easeInOut" }}
+                className="w-full h-full object-cover"
+                alt={master.name}
               />
-              {/* Premium Mobile Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black/80 md:from-black/20 md:to-black/40 pointer-events-none" />
-            </motion.div>
-          </AnimatePresence>
+              
+              {/* Overlay for Name */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex flex-col justify-end items-center pb-6 md:pb-12 px-2 text-center">
+                <motion.div
+                  animate={{ 
+                    opacity: activeMasterIndex === idx ? 1 : 0.4,
+                    y: activeMasterIndex === idx ? 0 : 10
+                  }}
+                  transition={{ duration: 0.8 }}
+                >
+                  <p className="text-white text-[9px] sm:text-[10px] md:text-sm uppercase tracking-[0.3em] font-light mb-1 md:mb-2">
+                    Expert
+                  </p>
+                  <h2 className="text-white text-[10px] sm:text-[12px] md:text-xl font-serif tracking-widest whitespace-nowrap">
+                    {master.name}
+                  </h2>
+                </motion.div>
+              </div>
 
-          {/* Brand signature on hero - Centered and Elegant */}
-          <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none px-6">
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5, duration: 1 }}
-              className="text-center"
-            >
-              <h1 className="text-white text-[10px] sm:text-[12px] md:text-[16px] uppercase tracking-[0.6em] sm:tracking-[0.8em] md:tracking-[1em] font-light mb-4 md:mb-6 opacity-90 drop-shadow-[0_2px_10px_rgba(0,0,0,0.5)]">
-                Phuoc Lai Luxury
-              </h1>
-              <div className="w-10 md:w-16 h-px bg-white/30 mx-auto shadow-2xl" />
+              {/* Active indicator line */}
+              <motion.div 
+                animate={{ 
+                  scaleX: activeMasterIndex === idx ? 1 : 0,
+                  opacity: activeMasterIndex === idx ? 1 : 0
+                }}
+                className="absolute bottom-0 left-0 w-full h-[2px] md:h-1 bg-white origin-left"
+              />
             </motion.div>
-          </div>
+          ))}
         </div>
 
-        {/* Scroll Indicator for mobile */}
-        <motion.div 
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.5, duration: 1 }}
-          className="absolute bottom-4 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 md:hidden pointer-events-none"
-        >
-          <div className="w-[1px] h-6 bg-gradient-to-b from-white/40 to-transparent" />
-        </motion.div>
+        {/* Brand signature overlay - Minimal and Elegant */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none z-10 w-full px-6">
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1, duration: 1.5 }}
+            className="text-center"
+          >
+            <h1 className="text-white/20 text-[12px] sm:text-[16px] md:text-[24px] uppercase tracking-[1.5em] font-light drop-shadow-2xl">
+              PHUOC LAI
+            </h1>
+          </motion.div>
+        </div>
       </section>
 
       {/* Giới thiệu */}
