@@ -106,7 +106,7 @@ export default function Services() {
                 <img
                   src={service.image}
                   alt={service.title}
-                  className="h-full w-full object-cover opacity-90 transition duration-700 group-hover:scale-105 group-hover:opacity-60 grayscale group-hover:grayscale-0"
+                  className="h-full w-full object-cover opacity-90 transition duration-700 group-hover:scale-105 grayscale group-hover:grayscale-0"
                 />
                 <div className="absolute inset-x-0 bottom-0 translate-y-full bg-black/80 p-6 backdrop-blur-md transition-transform duration-500 group-hover:translate-y-0 z-20">
                   <p className="mb-4 text-[10px] uppercase tracking-[0.24em] text-white/45 font-bold">Chi tiết dịch vụ</p>

@@ -256,7 +256,7 @@ export default function Home() {
                     <img
                       src={cat.img}
                       alt={cat.title}
-                      className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105 grayscale group-hover:grayscale-0 opacity-70 group-hover:opacity-100"
+                      className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105 grayscale group-hover:grayscale-0"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent group-hover:from-black/60 transition-all duration-500" />
                     <div className="absolute inset-0 flex flex-col items-center justify-end pb-12">
@@ -329,7 +329,6 @@ export default function Home() {
               >
                 <div className="aspect-[4/3] overflow-hidden relative">
                   <img src={course.img} alt={course.title} className="h-full w-full object-cover grayscale transition duration-1000 group-hover:scale-110 group-hover:grayscale-0" />
-                  <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-all duration-700" />
                 </div>
                 <div className="p-8 flex flex-col flex-grow">
                   <span className="mb-4 block text-[9px] uppercase tracking-[0.3em] text-black/40 font-bold">{course.level}</span>
