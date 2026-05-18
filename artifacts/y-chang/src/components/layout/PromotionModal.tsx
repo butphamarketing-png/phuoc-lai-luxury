@@ -7,14 +7,10 @@ export default function PromotionModal() {
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
-    // Show modal after 3 seconds
+    // Show modal after 5 seconds
     const timer = setTimeout(() => {
-      const hasShown = sessionStorage.getItem("promotion_shown");
-      if (!hasShown) {
-        setIsOpen(true);
-        sessionStorage.setItem("promotion_shown", "true");
-      }
-    }, 3000);
+      setIsOpen(true);
+    }, 5000);
 
     return () => clearTimeout(timer);
   }, []);

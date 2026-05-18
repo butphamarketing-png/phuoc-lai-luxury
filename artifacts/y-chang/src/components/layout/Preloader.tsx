@@ -9,7 +9,7 @@ export default function Preloader() {
     // Simulate initial loading or wait for window load
     const timer = setTimeout(() => {
       setLoading(false);
-    }, 2000);
+    }, 4000);
 
     return () => clearTimeout(timer);
   }, []);
@@ -100,7 +100,7 @@ export default function Preloader() {
                 animate={{ 
                   x: "100%",
                   transition: { 
-                    duration: 2, 
+                    duration: 4, 
                     repeat: Infinity, 
                     ease: "linear" 
                   }
