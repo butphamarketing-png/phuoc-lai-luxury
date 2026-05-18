@@ -27,11 +27,13 @@ export default function Footer() {
         >
           <div>
             <Link href="/" className="inline-flex items-center gap-4 mb-8 group" data-testid="link-footer-home">
-              <img
-                src={logoImg}
-                alt="LP Logo"
-                className="h-14 md:h-16 w-auto object-contain transition-transform duration-500 group-hover:scale-105"
-              />
+              <div className="relative logo-shine overflow-hidden rounded-full p-1 bg-white/5">
+                <img
+                  src={logoImg}
+                  alt="LP Logo"
+                  className="h-14 md:h-16 w-auto object-contain transition-transform duration-500 group-hover:scale-105"
+                />
+              </div>
               <div className="flex flex-col leading-none">
                 <span className="text-sm md:text-base font-serif tracking-[0.25em] uppercase whitespace-nowrap text-white">
                   Phuoc Lai

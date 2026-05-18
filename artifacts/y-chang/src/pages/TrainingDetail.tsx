@@ -1,4 +1,4 @@
-import { useRoute } from "wouter";
+import { useRoute, useLocation } from "wouter";
 import { motion } from "framer-motion";
 import { Link } from "wouter";
 import { ChevronLeft, Clock, User, Calendar, Share2, MessageSquare, BookOpen, Award, CheckCircle } from "lucide-react";
@@ -78,7 +78,7 @@ export default function TrainingDetail() {
 
   if (!data) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-[#DCDCDC] pt-20">
+      <div className="flex min-h-screen items-center justify-center bg-[#FFFFFF] pt-20">
         <div className="text-center">
           <h1 className="font-serif text-3xl">Không tìm thấy khóa học</h1>
           <Link href="/dao-tao" className="mt-4 block text-black/60 hover:text-black">Quay lại danh sách</Link>
@@ -88,14 +88,14 @@ export default function TrainingDetail() {
   }
 
   return (
-    <div className="bg-[#DCDCDC] text-[#1A1A1A]">
+    <div className="bg-[#FFFFFF] text-[#1A1A1A]">
       <section className="relative h-[60vh] w-full overflow-hidden">
         <img
           src={data.image}
           alt={data.title}
           className="h-full w-full object-cover grayscale"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#DCDCDC] via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#FFFFFF] via-transparent to-transparent" />
         <div className="absolute bottom-10 left-0 w-full px-6">
           <div className="container mx-auto max-w-4xl">
             <motion.div

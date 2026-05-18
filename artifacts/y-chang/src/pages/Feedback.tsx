@@ -171,7 +171,7 @@ export default function Feedback() {
       </section>
 
       {/* CTA strip */}
-      <section className="border-t border-black/10 bg-[#F5F5F5] px-8 md:px-20 py-16">
+      <section className="border-t border-black/10 bg-[#FFFFFF] px-8 md:px-20 py-16">
         <div className="max-w-2xl mx-auto text-center">
           <motion.p
             initial={{ opacity: 0 }}

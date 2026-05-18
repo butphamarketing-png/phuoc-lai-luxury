@@ -10,7 +10,7 @@ const socials = [
 
 export default function SocialSection() {
   return (
-    <section className="py-20 md:py-24 bg-[#FAFAFA]" data-testid="section-social">
+    <section className="py-20 md:py-24 bg-[#FFFFFF]" data-testid="section-social">
       <div className="container mx-auto px-6 max-w-7xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

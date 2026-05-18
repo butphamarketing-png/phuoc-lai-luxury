@@ -69,7 +69,7 @@ export default function Services() {
       : "Dịch vụ làm đẹp được thiết kế riêng";
 
   return (
-    <div className="bg-[#FAFAFA] pt-28 pb-24 text-[#1A1A1A]">
+    <div className="bg-[#FFFFFF] pt-28 pb-24 text-[#1A1A1A]">
       <section className="px-6 text-center">
         <motion.span
           initial={{ opacity: 0, y: 10 }}

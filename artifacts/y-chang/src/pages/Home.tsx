@@ -80,7 +80,7 @@ export default function Home() {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.4 }}
-      className="w-full bg-[#FAFAFA] text-[#1A1A1A]"
+      className="w-full bg-[#FFFFFF] text-[#1A1A1A]"
       data-testid="page-home"
     >
       {/* Hero — Pure image slideshow */}
@@ -136,7 +136,7 @@ export default function Home() {
       </section>
 
       {/* Giới thiệu */}
-      <section className="py-20 md:py-24 px-6 container mx-auto bg-[#FAFAFA]" data-testid="section-about">
+      <section className="py-20 md:py-24 px-6 container mx-auto bg-[#FFFFFF]" data-testid="section-about">
         <div className="flex flex-col md:flex-row gap-10 lg:gap-32 items-center max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, x: -30 }}
@@ -260,7 +260,7 @@ export default function Home() {
         </motion.div>
       </section>
 
-      <section id="training-section" className="bg-[#FAFAFA] section-padding" data-testid="section-home-training">
+      <section id="training-section" className="bg-[#FFFFFF] section-padding" data-testid="section-home-training">
         <div className="container mx-auto max-w-7xl px-6">
           <div className="mb-20 flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
             <div className="max-w-2xl">
@@ -387,7 +387,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="bg-[#FAFAFA] py-20" data-testid="section-home-why">
+      <section className="bg-[#FFFFFF] py-20" data-testid="section-home-why">
         <div className="container mx-auto max-w-7xl px-6">
           <h2 className="mb-12 text-center font-serif text-3xl leading-tight md:text-5xl">
             VÌ SAO CHỌN

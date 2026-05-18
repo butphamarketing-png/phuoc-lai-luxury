@@ -104,7 +104,7 @@ export default function Navbar() {
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         isOverlay
           ? "bg-transparent border-transparent py-6"
-          : "bg-[#FAFAFA]/90 backdrop-blur-xl border-b border-black/[0.03] py-2 shadow-[0_10px_40px_rgba(0,0,0,0.02)]"
+          : "bg-[#FFFFFF]/90 backdrop-blur-xl border-b border-black/[0.03] py-2 shadow-[0_10px_40px_rgba(0,0,0,0.02)]"
       }`}
     >
       <div className="w-full px-4 md:px-8 lg:px-12 flex items-center h-16 md:h-20 relative max-w-screen-2xl mx-auto">
@@ -120,7 +120,7 @@ export default function Navbar() {
               data-testid="link-logo"
             >
               <div className="relative flex items-center gap-2 md:gap-4 overflow-hidden">
-                <div className={`relative flex h-10 w-10 md:h-14 md:w-14 items-center justify-center rounded-full transition-all duration-500 ${isOverlay ? "bg-white/10 backdrop-blur-md border border-white/20" : "bg-black luxury-shadow"}`}>
+                <div className={`relative flex h-10 w-10 md:h-14 md:w-14 items-center justify-center rounded-full transition-all duration-500 logo-shine overflow-hidden ${isOverlay ? "bg-white/10 backdrop-blur-md border border-white/20" : "bg-black luxury-shadow"}`}>
                   <img
                     src={logoImg}
                     alt="LP Logo"
@@ -236,7 +236,7 @@ export default function Navbar() {
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-              className="md:hidden bg-[#FAFAFA] border-t border-black/10 px-6 py-10 flex flex-col gap-8 overflow-hidden"
+              className="md:hidden bg-[#FFFFFF] border-t border-black/10 px-6 py-10 flex flex-col gap-8 overflow-hidden"
             >
               {navLinks.map((link) => (
                 <div key={link.href} className="space-y-4">

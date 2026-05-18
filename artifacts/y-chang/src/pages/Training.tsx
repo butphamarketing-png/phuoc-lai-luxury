@@ -101,11 +101,11 @@ export default function Training() {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.4 }}
-      className="w-full bg-[#FAFAFA] text-[#1A1A1A] pt-32 pb-24"
+      className="w-full bg-[#FFFFFF] text-[#1A1A1A] pt-32 pb-24"
       data-testid="page-training"
     >
       {/* Khóa học */}
-      <section className="bg-[#FAFAFA]" data-testid="section-courses">
+      <section className="bg-[#FFFFFF]" data-testid="section-courses">
         <div className="container mx-auto px-6 max-w-7xl">
           <div className="mb-16">
             <span className="text-[10px] uppercase tracking-[0.4em] font-medium text-black/50 mb-4 block">

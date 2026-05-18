@@ -4,7 +4,7 @@ import logoImg from "@/assets/logo.png";
 
 export default function BookingSection() {
   return (
-    <section className="bg-[#FAFAFA] border-t border-black/5" data-testid="section-booking">
+    <section className="bg-[#FFFFFF] border-t border-black/5" data-testid="section-booking">
       <motion.div
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
@@ -30,12 +30,14 @@ export default function BookingSection() {
             transition={{ delay: 0.2 }}
             className="relative z-10 flex flex-col items-center justify-center lg:justify-end h-full p-8 md:p-16 gap-3"
           >
-            <img
-              src={logoImg}
-              alt="LP Logo"
-              className="w-24 md:w-32 lg:w-40 max-w-full opacity-80"
-              data-testid="img-booking-logo"
-            />
+            <div className="relative logo-shine overflow-hidden rounded-full p-2">
+              <img
+                src={logoImg}
+                alt="LP Logo"
+                className="w-24 md:w-32 lg:w-40 max-w-full opacity-80"
+                data-testid="img-booking-logo"
+              />
+            </div>
             <div className="flex flex-col items-center leading-none mb-4">
               <span className="text-base md:text-lg lg:text-xl font-serif tracking-[0.3em] uppercase text-white/90 text-center">
                 Phuoc Lai
@@ -51,7 +53,7 @@ export default function BookingSection() {
           initial={{ opacity: 0, x: 20 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
-          className="p-8 md:p-14 lg:p-20 flex flex-col justify-center bg-[#FAFAFA]"
+          className="p-8 md:p-14 lg:p-20 flex flex-col justify-center bg-[#FFFFFF]"
           data-testid="container-booking-form"
         >
           <div className="max-w-xl mx-auto w-full rounded-2xl bg-white p-6 md:p-8 shadow-lg ring-1 ring-black/5">

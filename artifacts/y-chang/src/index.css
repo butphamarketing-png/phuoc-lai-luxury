@@ -6,28 +6,28 @@
 .logo-shine::after {
   content: "";
   position: absolute;
-  inset: -40% -80%;
+  inset: -50% -100%;
   background: linear-gradient(
     110deg,
-    transparent 35%,
-    rgba(255, 255, 255, 0.12) 45%,
-    rgba(255, 255, 255, 0.85) 50%,
-    rgba(255, 255, 255, 0.12) 55%,
-    transparent 65%
+    transparent 30%,
+    rgba(255, 255, 255, 0.05) 40%,
+    rgba(255, 255, 255, 0.9) 50%,
+    rgba(255, 255, 255, 0.05) 60%,
+    transparent 70%
   );
-  transform: translateX(-130%) skewX(-18deg);
-  animation: logoMirrorShine 5s ease-in-out infinite;
+  transform: translateX(-150%) skewX(-20deg);
+  animation: logoMirrorShine 4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
   pointer-events: none;
 }
 
 @keyframes logoMirrorShine {
   0%,
-  72% {
-    transform: translateX(-130%) skewX(-18deg);
+  60% {
+    transform: translateX(-150%) skewX(-20deg);
   }
-  88%,
+  85%,
   100% {
-    transform: translateX(130%) skewX(-18deg);
+    transform: translateX(150%) skewX(-20deg);
   }
 }
 
@@ -88,7 +88,7 @@
   --elevate-2: rgba(0,0,0, .08);
 
   /* Ultra-Bright Satin Silver Theme */
-  --background: 0 0% 98%; /* #FAFAFA - Almost white silver */
+  --background: 0 0% 100%; /* Pure White */
   --foreground: 0 0% 10%; /* #1A1A1A */
   --border: 0 0% 92%; /* Subtle border */
   
