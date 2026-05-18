@@ -133,7 +133,6 @@ export default function Home() {
         >
           <div className="w-[1px] h-8 bg-gradient-to-b from-white/60 to-transparent" />
         </motion.div>
-      </section>
 
         {/* Navigation Dots - Only show if more than 1 slide */}
         {heroSlides.length > 1 && (
