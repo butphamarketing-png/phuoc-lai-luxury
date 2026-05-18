@@ -85,7 +85,7 @@ export default function Home() {
     >
       {/* Hero — Pure image slideshow */}
       <section
-        className="relative h-[75vh] sm:h-[85vh] md:h-screen w-full overflow-hidden bg-[#1A1A1A]"
+        className="relative h-[60vh] sm:h-[80vh] md:h-screen w-full overflow-hidden bg-[#1A1A1A]"
         data-testid="section-hero"
       >
         <AnimatePresence mode="wait">
@@ -103,22 +103,22 @@ export default function Home() {
               alt={`Hero Slide ${currentSlide + 1}`}
             />
             {/* Professional Overlay */}
-            <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black/80 md:from-black/20 md:to-black/40" />
+            <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-transparent to-black/90 md:from-black/20 md:to-black/40" />
           </motion.div>
         </AnimatePresence>
 
         {/* Brand signature on hero */}
-        <div className="absolute inset-x-0 bottom-20 md:inset-0 flex items-center justify-center pointer-events-none">
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none pt-24 md:pt-0">
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5, duration: 1 }}
             className="text-center px-4"
           >
-            <h1 className="text-white text-[12px] sm:text-[14px] md:text-[16px] uppercase tracking-[0.5em] sm:tracking-[0.8em] md:tracking-[1em] font-light mb-4 opacity-90 drop-shadow-lg">
+            <h1 className="text-white text-[11px] sm:text-[14px] md:text-[16px] uppercase tracking-[0.6em] sm:tracking-[0.8em] md:tracking-[1em] font-light mb-4 opacity-95 drop-shadow-[0_2px_10px_rgba(0,0,0,0.5)]">
               Phuoc Lai Luxury
             </h1>
-            <div className="w-16 h-px bg-white/40 mx-auto shadow-xl" />
+            <div className="w-12 h-px bg-white/40 mx-auto shadow-2xl" />
           </motion.div>
         </div>
 
@@ -139,7 +139,7 @@ export default function Home() {
       </section>
 
       {/* Giới thiệu */}
-      <section className="py-16 md:py-24 px-6 container mx-auto bg-[#FAFAFA]" data-testid="section-about">
+      <section className="py-12 md:py-24 px-6 container mx-auto bg-[#FAFAFA]" data-testid="section-about">
         <div className="flex flex-col md:flex-row gap-10 lg:gap-32 items-center max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, x: -30 }}
@@ -150,7 +150,7 @@ export default function Home() {
           >
             <span className="text-[10px] uppercase tracking-[0.5em] text-black/40 mb-4 md:mb-6 block font-medium">ABOUT PHUOC LAI</span>
             <h2
-              className="text-2xl sm:text-4xl md:text-6xl font-serif font-bold mb-6 md:mb-10 leading-[1.2] md:leading-[1.1] text-[#1A1A1A]"
+              className="text-3xl sm:text-4xl md:text-6xl font-serif font-bold mb-6 md:mb-10 leading-[1.2] md:leading-[1.1] text-[#1A1A1A]"
               data-testid="text-about-title"
             >
               Nâng tầm thần thái
