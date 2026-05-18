@@ -85,7 +85,7 @@ export default function Home() {
     >
       {/* Hero — Pure image slideshow */}
       <section
-        className="relative h-[60vh] sm:h-[80vh] md:h-screen w-full overflow-hidden bg-[#1A1A1A]"
+        className="relative h-screen md:h-screen w-full overflow-hidden bg-[#1A1A1A]"
         data-testid="section-hero"
       >
         <AnimatePresence mode="wait">
@@ -102,25 +102,35 @@ export default function Home() {
               className="h-full w-full object-cover object-center"
               alt={`Hero Slide ${currentSlide + 1}`}
             />
-            {/* Professional Overlay */}
-            <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-transparent to-black/90 md:from-black/20 md:to-black/40" />
+            {/* Premium Mobile Overlay */}
+            <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/20 to-black/80 md:from-black/20 md:to-black/40" />
           </motion.div>
         </AnimatePresence>
 
-        {/* Brand signature on hero */}
-        <div className="absolute inset-0 flex items-center justify-center pointer-events-none pt-24 md:pt-0">
+        {/* Brand signature on hero - Centered and Elegant */}
+        <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none px-6">
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5, duration: 1 }}
-            className="text-center px-4"
+            className="text-center"
           >
-            <h1 className="text-white text-[11px] sm:text-[14px] md:text-[16px] uppercase tracking-[0.6em] sm:tracking-[0.8em] md:tracking-[1em] font-light mb-4 opacity-95 drop-shadow-[0_2px_10px_rgba(0,0,0,0.5)]">
+            <h1 className="text-white text-[13px] md:text-[16px] uppercase tracking-[0.8em] md:tracking-[1em] font-light mb-6 opacity-95 drop-shadow-[0_4px_12px_rgba(0,0,0,0.6)]">
               Phuoc Lai Luxury
             </h1>
-            <div className="w-12 h-px bg-white/40 mx-auto shadow-2xl" />
+            <div className="w-16 h-px bg-white/40 mx-auto shadow-2xl" />
           </motion.div>
         </div>
+
+        {/* Scroll Indicator for mobile */}
+        <motion.div 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.5, duration: 1 }}
+          className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 md:hidden"
+        >
+          <div className="w-[1px] h-12 bg-gradient-to-b from-white/60 to-transparent" />
+        </motion.div>
 
         {/* Navigation Dots - Only show if more than 1 slide */}
         {heroSlides.length > 1 && (
@@ -139,7 +149,7 @@ export default function Home() {
       </section>
 
       {/* Giới thiệu */}
-      <section className="py-12 md:py-24 px-6 container mx-auto bg-[#FAFAFA]" data-testid="section-about">
+      <section className="py-20 md:py-24 px-6 container mx-auto bg-[#FAFAFA]" data-testid="section-about">
         <div className="flex flex-col md:flex-row gap-10 lg:gap-32 items-center max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, x: -30 }}
