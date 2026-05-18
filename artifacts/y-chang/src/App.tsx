@@ -15,6 +15,7 @@ import TrainingDetail from "@/pages/TrainingDetail";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import Preloader from "@/components/layout/Preloader";
+import PromotionModal from "@/components/layout/PromotionModal";
 
 const queryClient = new QueryClient();
 
@@ -64,6 +65,7 @@ function App() {
       <LanguageProvider>
         <TooltipProvider>
           <Preloader />
+          <PromotionModal />
           <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
             <Router />
           </WouterRouter>
