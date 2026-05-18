@@ -85,7 +85,7 @@ export default function Home() {
     >
       {/* Hero — Pure image slideshow */}
       <section
-        className="relative h-[85vh] sm:h-[90vh] md:h-screen w-full overflow-hidden bg-[#1A1A1A]"
+        className="relative h-[75vh] sm:h-[85vh] md:h-screen w-full overflow-hidden bg-[#1A1A1A]"
         data-testid="section-hero"
       >
         <AnimatePresence mode="wait">
@@ -99,26 +99,26 @@ export default function Home() {
           >
             <img
               src={heroSlides[currentSlide]}
-              className="h-full w-full object-cover object-[center_top] sm:object-center"
+              className="h-full w-full object-cover object-center"
               alt={`Hero Slide ${currentSlide + 1}`}
             />
             {/* Professional Overlay */}
-            <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-black/70 md:from-black/20 md:to-black/40" />
+            <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black/80 md:from-black/20 md:to-black/40" />
           </motion.div>
         </AnimatePresence>
 
         {/* Brand signature on hero */}
-        <div className="absolute inset-0 flex items-center justify-center pointer-events-none pt-10 sm:pt-20 md:pt-0">
+        <div className="absolute inset-x-0 bottom-20 md:inset-0 flex items-center justify-center pointer-events-none">
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5, duration: 1 }}
             className="text-center px-4"
           >
-            <h1 className="text-white text-[10px] sm:text-[12px] md:text-[14px] uppercase tracking-[0.6em] sm:tracking-[0.8em] md:tracking-[1em] font-light mb-4 opacity-80">
+            <h1 className="text-white text-[12px] sm:text-[14px] md:text-[16px] uppercase tracking-[0.5em] sm:tracking-[0.8em] md:tracking-[1em] font-light mb-4 opacity-90 drop-shadow-lg">
               Phuoc Lai Luxury
             </h1>
-            <div className="w-12 h-px bg-white/30 mx-auto" />
+            <div className="w-16 h-px bg-white/40 mx-auto shadow-xl" />
           </motion.div>
         </div>
 
@@ -139,18 +139,18 @@ export default function Home() {
       </section>
 
       {/* Giới thiệu */}
-      <section className="section-padding px-6 container mx-auto bg-[#FAFAFA]" data-testid="section-about">
-        <div className="flex flex-col md:flex-row gap-12 lg:gap-32 items-center max-w-7xl mx-auto">
+      <section className="py-16 md:py-24 px-6 container mx-auto bg-[#FAFAFA]" data-testid="section-about">
+        <div className="flex flex-col md:flex-row gap-10 lg:gap-32 items-center max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 1, ease: "circOut" }}
-            className="w-full md:w-1/2 text-center md:text-left"
+            className="w-full md:w-1/2 text-center md:text-left order-2 md:order-1"
           >
-            <span className="text-[10px] uppercase tracking-[0.5em] text-black/40 mb-6 block font-medium">ABOUT PHUOC LAI</span>
+            <span className="text-[10px] uppercase tracking-[0.5em] text-black/40 mb-4 md:mb-6 block font-medium">ABOUT PHUOC LAI</span>
             <h2
-              className="text-3xl sm:text-4xl md:text-6xl font-serif font-bold mb-8 md:mb-10 leading-[1.1] text-[#1A1A1A]"
+              className="text-2xl sm:text-4xl md:text-6xl font-serif font-bold mb-6 md:mb-10 leading-[1.2] md:leading-[1.1] text-[#1A1A1A]"
               data-testid="text-about-title"
             >
               Nâng tầm thần thái
@@ -158,7 +158,7 @@ export default function Home() {
               <span className="italic font-light">từ từng sợi mày</span>
             </h2>
             <p
-              className="text-[#1A1A1A]/70 font-light text-base md:text-lg leading-relaxed mb-10 md:mb-12 max-w-lg mx-auto md:mx-0 border-l-0 md:border-l-2 border-black/5 md:pl-8"
+              className="text-[#1A1A1A]/70 font-light text-sm md:text-lg leading-relaxed mb-8 md:mb-12 max-w-lg mx-auto md:mx-0 border-l-0 md:border-l-2 border-black/5 md:pl-8"
               data-testid="text-about-desc"
             >
               Chúng tôi tin rằng mỗi đôi mày đều mang một vẻ đẹp riêng. Với kỹ thuật chuyên sâu và sự tinh tế trong từng đường nét, Amazing Brows cam kết mang đến cho bạn sự tự tin và thần thái tự nhiên nhất.
@@ -173,9 +173,9 @@ export default function Home() {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 1.2, ease: "circOut" }}
-            className="md:w-[42%] w-full relative aspect-[4/5] overflow-hidden rounded-xl"
+            className="w-full md:w-[42%] relative aspect-[4/5] overflow-hidden rounded-xl order-1 md:order-2"
           >
-            <div className="absolute -inset-4 border border-black/5 rounded-2xl -z-10 translate-x-4 translate-y-4" />
+            <div className="absolute -inset-4 border border-black/5 rounded-2xl -z-10 translate-x-4 translate-y-4 hidden md:block" />
             <AnimatePresence mode="wait">
               <motion.img
                 key={currentAboutSlide}

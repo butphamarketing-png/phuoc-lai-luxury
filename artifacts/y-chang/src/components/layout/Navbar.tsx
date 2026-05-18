@@ -107,7 +107,7 @@ export default function Navbar() {
           : "bg-[#FAFAFA]/90 backdrop-blur-xl border-b border-black/[0.03] py-2 shadow-[0_10px_40px_rgba(0,0,0,0.02)]"
       }`}
     >
-      <div className="w-full px-8 md:px-12 flex items-center h-16 md:h-20 relative max-w-screen-2xl mx-auto">
+      <div className="w-full px-4 md:px-8 lg:px-12 flex items-center h-16 md:h-20 relative max-w-screen-2xl mx-auto">
           <div className="flex-1 flex items-center min-w-0">
             <Link
               href="/"
@@ -119,22 +119,22 @@ export default function Navbar() {
               className="flex items-center z-50 group flex-shrink-0"
               data-testid="link-logo"
             >
-              <div className="relative flex items-center gap-4 overflow-hidden">
-                <div className={`relative flex h-12 w-12 md:h-14 md:w-14 items-center justify-center rounded-full transition-all duration-500 ${isOverlay ? "bg-white/10 backdrop-blur-md border border-white/20" : "bg-black luxury-shadow"}`}>
+              <div className="relative flex items-center gap-2 md:gap-4 overflow-hidden">
+                <div className={`relative flex h-10 w-10 md:h-14 md:w-14 items-center justify-center rounded-full transition-all duration-500 ${isOverlay ? "bg-white/10 backdrop-blur-md border border-white/20" : "bg-black luxury-shadow"}`}>
                   <img
                     src={logoImg}
                     alt="LP Logo"
-                    className={`h-8 md:h-10 w-auto object-contain transition-all duration-500 ${isOverlay ? "invert" : "invert-0"}`}
+                    className={`h-6 md:h-10 w-auto object-contain transition-all duration-500 ${isOverlay ? "invert" : "invert-0"}`}
                   />
                 </div>
                 <div className="flex flex-col leading-none">
                   <span 
-                    className={`text-[13px] md:text-[15px] font-serif tracking-[0.2em] font-bold uppercase whitespace-nowrap notranslate transition-colors duration-500 ${isOverlay ? 'text-white' : 'text-black'}`}
+                    className={`text-[11px] md:text-[15px] font-serif tracking-[0.2em] font-bold uppercase whitespace-nowrap notranslate transition-colors duration-500 ${isOverlay ? 'text-white' : 'text-black'}`}
                   >
                     Phuoc Lai
                   </span>
                   <span 
-                    className={`text-[8px] md:text-[9px] font-light tracking-[0.45em] uppercase whitespace-nowrap mt-1 notranslate transition-colors duration-500 ${isOverlay ? 'text-white/70' : 'text-black/40'}`}
+                    className={`text-[7px] md:text-[9px] font-light tracking-[0.45em] uppercase whitespace-nowrap mt-1 notranslate transition-colors duration-500 ${isOverlay ? 'text-white/70' : 'text-black/40'}`}
                   >
                     Luxury
                   </span>
