@@ -101,13 +101,13 @@ export default function Navbar() {
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          isOverlay
-            ? "bg-transparent border-transparent py-4"
-            : "bg-[#FAFAFA]/90 backdrop-blur-xl border-b border-black/[0.03] py-2 shadow-[0_10px_40px_rgba(0,0,0,0.02)]"
-        }`}
-      >
-        <div className="w-full px-6 md:px-12 flex items-center h-16 md:h-20 relative max-w-screen-2xl mx-auto">
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+        isOverlay
+          ? "bg-transparent border-transparent py-6"
+          : "bg-[#FAFAFA]/90 backdrop-blur-xl border-b border-black/[0.03] py-2 shadow-[0_10px_40px_rgba(0,0,0,0.02)]"
+      }`}
+    >
+      <div className="w-full px-8 md:px-12 flex items-center h-16 md:h-20 relative max-w-screen-2xl mx-auto">
           <div className="flex-1 flex items-center min-w-0">
             <Link
               href="/"
@@ -143,7 +143,7 @@ export default function Navbar() {
             </Link>
           </div>
 
-          <nav className="hidden xl:flex items-center justify-center gap-12 flex-[2] min-w-0">
+          <nav className="hidden lg:flex items-center justify-center gap-6 xl:gap-12 flex-[2] min-w-0">
             {navLinks.map((link) => (
               <div key={link.href} className="group relative">
                 <Link
@@ -219,8 +219,9 @@ export default function Navbar() {
 
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className={`flex h-10 w-10 items-center justify-center rounded-full transition-colors lg:hidden ml-6 ${
-                isOverlay ? "bg-white/10 text-white backdrop-blur-md" : "bg-black/5 text-black"
+              data-testid="mobile-menu-toggle"
+              className={`flex h-10 w-10 items-center justify-center rounded-full transition-colors lg:hidden ml-6 z-50 ${
+                isOverlay && !isOpen ? "bg-white/10 text-white backdrop-blur-md" : "bg-black/5 text-black"
               }`}
             >
               {isOpen ? <X size={20} /> : <Menu size={20} />}

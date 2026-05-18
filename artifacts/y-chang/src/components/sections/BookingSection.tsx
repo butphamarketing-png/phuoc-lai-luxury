@@ -28,19 +28,19 @@ export default function BookingSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="relative z-10 flex flex-col items-center justify-end h-full p-12 md:p-16 gap-3"
+            className="relative z-10 flex flex-col items-center justify-center lg:justify-end h-full p-8 md:p-16 gap-3"
           >
             <img
               src={logoImg}
               alt="LP Logo"
-              className="w-32 md:w-40 max-w-full opacity-80"
+              className="w-24 md:w-32 lg:w-40 max-w-full opacity-80"
               data-testid="img-booking-logo"
             />
             <div className="flex flex-col items-center leading-none mb-4">
-              <span className="text-lg md:text-xl font-serif tracking-[0.3em] uppercase text-white/90 text-center">
+              <span className="text-base md:text-lg lg:text-xl font-serif tracking-[0.3em] uppercase text-white/90 text-center">
                 Phuoc Lai
               </span>
-              <span className="text-[10px] md:text-xs font-light tracking-[0.6em] uppercase text-white/50 text-center mt-2">
+              <span className="text-[9px] md:text-[10px] lg:text-xs font-light tracking-[0.6em] uppercase text-white/50 text-center mt-2">
                 Luxury
               </span>
             </div>
