@@ -89,7 +89,7 @@ export default function PromotionModal() {
                   asChild
                   className="flex-1 rounded-full bg-[#1A1A1A] text-white hover:bg-black py-6 md:py-8 text-[10px] md:text-[11px] uppercase tracking-[0.2em] luxury-shadow group"
                 >
-                  <a href="/dich-vu" onClick={closeModal}>
+                  <a href="/dich-vu/phun-xam" onClick={closeModal}>
                     PERMANENT MAKEUP <span className="ml-2 group-hover:translate-x-1 transition-transform">→</span>
                   </a>
                 </Button>
@@ -97,7 +97,7 @@ export default function PromotionModal() {
                   asChild
                   className="flex-1 rounded-full bg-[#1A1A1A] text-white hover:bg-black py-6 md:py-8 text-[10px] md:text-[11px] uppercase tracking-[0.2em] luxury-shadow group"
                 >
-                  <a href="/dich-vu" onClick={closeModal}>
+                  <a href="/dich-vu/spa" onClick={closeModal}>
                     SPA <span className="ml-2 group-hover:translate-x-1 transition-transform">→</span>
                   </a>
                 </Button>
