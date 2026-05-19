@@ -29,9 +29,18 @@ function Router() {
   const isAdminPage = location.startsWith("/admin");
 
   return (
-    <div className="flex flex-col min-h-[100dvh] overflow-x-hidden">
-      {!isAdminPage && <Navbar />}
-      <main className="flex-1">
+    <div className="flex flex-col min-h-[100dvh] overflow-x-hidden bg-white">
+      {/* Chỉ hiện Preloader và các thành phần khác ở trang khách hàng */}
+      {!isAdminPage && (
+        <>
+          <Preloader />
+          <PromotionModal />
+          <FloatingContact />
+          <Navbar />
+        </>
+      )}
+      
+      <main className="flex-1 flex flex-col">
         <Switch>
           <Route path="/" component={Home} />
           <Route path="/ve-chung-toi" component={About} />
@@ -71,6 +80,7 @@ function Router() {
           <Route component={NotFound} />
         </Switch>
       </main>
+      
       {!isAdminPage && <Footer />}
     </div>
   );
@@ -81,9 +91,6 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <LanguageProvider>
         <TooltipProvider>
-          <Preloader />
-          <PromotionModal />
-          <FloatingContact />
           <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
             <Router />
           </WouterRouter>
