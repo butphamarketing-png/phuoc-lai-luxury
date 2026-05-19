@@ -104,6 +104,102 @@ const trainingData: Record<string, TrainingContent> = {
       }
     ],
   },
+  "spa-expert": {
+    title: "Khóa Đào Tạo Spa & Skincare Chuyên Nghiệp",
+    level: "Professional Course",
+    image: "/studio-interior.png",
+    date: "28 Tháng 5, 2026",
+    instructor: "Skin Master Nhung Lai",
+    duration: "10 Ngày Chuyên Sâu",
+    intro: "Trở thành chuyên viên chăm sóc da chuyên nghiệp với kiến thức vững chắc về cấu trúc da, hoạt chất mỹ phẩm và kỹ thuật vận hành máy móc công nghệ cao.",
+    curriculum: [
+      "Kiến thức nền tảng về giải phẫu da và các loại da.",
+      "Kỹ thuật massage mặt chuẩn Thụy Điển và bấm huyệt thư giãn.",
+      "Phác đồ điều trị mụn, nám, tàn nhang chuẩn Y khoa.",
+      "Cách sử dụng máy Hifu, Laser, CO2 Fractional trong điều trị.",
+      "Kiến thức về các thành phần mỹ phẩm (AHA, BHA, Retinol, Vitamin C...).",
+      "Kỹ năng tư vấn và xây dựng liệu trình cá nhân hóa cho khách hàng."
+    ],
+    sections: [
+      {
+        heading: "Cơ hội nghề nghiệp rộng mở",
+        content: "Ngành Spa đang khát nhân lực chất lượng cao. Sau khóa học, bạn hoàn toàn tự tin để làm việc tại các Clinic lớn hoặc tự mở cơ sở kinh doanh riêng.",
+        list: [
+          "Bằng cấp uy tín: Chứng chỉ nghề có giá trị pháp lý.",
+          "Thực hành 80%: Được trực tiếp thực hiện trên mẫu thật.",
+          "Hỗ trợ nhập mỹ phẩm: Kết nối với các nguồn dược mỹ phẩm chính hãng giá tốt."
+        ]
+      }
+    ],
+  },
+  "spa-basic": {
+    title: "Khóa Học Chăm Sóc Da Cơ Bản",
+    level: "Basic Course",
+    image: "/studio-interior.png",
+    date: "26 Tháng 5, 2026",
+    instructor: "Nhung Lai Master",
+    duration: "7 Ngày Học",
+    intro: "Nắm vững những kiến thức cốt lõi nhất về làn da và các bước chăm sóc da chuẩn salon để bắt đầu sự nghiệp trong ngành làm đẹp.",
+    curriculum: [
+      "Tổng quan về ngành Spa và đạo đức nghề nghiệp.",
+      "Phân loại da và cách lựa chọn mỹ phẩm phù hợp.",
+      "Kỹ thuật tẩy trang, rửa mặt và tẩy tế bào chết chuyên nghiệp.",
+      "Kỹ thuật xông hơi và hút dầu thừa.",
+      "Massage mặt cơ bản giúp thư giãn và lưu thông máu.",
+      "Quy trình đắp mặt nạ và thoa kem dưỡng."
+    ],
+    sections: [
+      {
+        heading: "Khởi đầu vững chắc",
+        content: "Khóa học này được thiết kế dành cho người mới bắt đầu, giúp bạn có cái nhìn tổng quan và tay nghề cơ bản để làm việc tại các Spa.",
+      }
+    ],
+  },
+  "spa-advanced": {
+    title: "Khóa Học Spa Nâng Cao & Trị Liệu",
+    level: "Advanced Course",
+    image: "/studio.png",
+    date: "27 Tháng 5, 2026",
+    instructor: "Nhung Lai Master",
+    duration: "10 Ngày Học",
+    intro: "Nâng cao tay nghề với các kỹ thuật trị liệu da liễu và ứng dụng công nghệ cao trong làm đẹp.",
+    curriculum: [
+      "Kỹ thuật lấy nhân mụn chuẩn y khoa không để lại sẹo.",
+      "Peel da sinh học và phục hồi da sau peel.",
+      "Ứng dụng công nghệ Laser trong điều trị sắc tố.",
+      "Kỹ thuật Hifu nâng cơ và trẻ hóa da.",
+      "Lăn kim và phi kim trong điều trị sẹo rỗ, lỗ chân lông to.",
+      "Cách xử lý các biến chứng thường gặp trong Spa."
+    ],
+    sections: [
+      {
+        heading: "Làm chủ công nghệ",
+        content: "Học viên sẽ được thực hành trên các dòng máy hiện đại nhất hiện nay, giúp nâng tầm giá trị dịch vụ của bản thân.",
+      }
+    ],
+  },
+  "spa-therapy": {
+    title: "Khóa Học Trị Liệu Da Chuyên Sâu (Therapy)",
+    level: "Expert Course",
+    image: "/studio.png",
+    date: "29 Tháng 5, 2026",
+    instructor: "Nhung Lai Master",
+    duration: "5 Ngày Thực Chiến",
+    intro: "Chương trình đào tạo chuyên biệt về các liệu pháp trị liệu xâm lấn tối thiểu và phục hồi cấu trúc da hư tổn.",
+    curriculum: [
+      "Kỹ thuật Mesotherapy (cấy tinh chất) không sưng, không bầm.",
+      "Phác đồ phục hồi da nhiễm corticoid, da mỏng yếu.",
+      "Kết hợp hoạt chất (Mix & Match) trong điều trị da liễu.",
+      "Kỹ thuật xử lý thâm, nám tầng sâu bằng công nghệ ánh sáng.",
+      "Tư vấn phác đồ chăm sóc da tại nhà (Homecare) hiệu quả."
+    ],
+    sections: [
+      {
+        heading: "Đẳng cấp chuyên gia",
+        content: "Khóa học giúp bạn giải quyết những ca da khó nhất, khẳng định vị thế chuyên gia trong lòng khách hàng.",
+      }
+    ],
+  },
 };
 
 export default function TrainingDetail() {

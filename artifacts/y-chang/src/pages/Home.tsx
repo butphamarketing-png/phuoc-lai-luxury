@@ -65,10 +65,10 @@ export default function Home() {
       { img: "/training-3.png", level: "KHÓA TỔNG HỢP", slug: "master-advanced", title: "KHÓA HỌC TỔNG HỢP CHUYÊN SÂU", desc: "Trọn bộ kiến thức từ sợi, mày, môi và mí phượng hoàng chuyên sâu." },
     ],
     "spa": [
-      { img: "/training-1.png", level: "KHÓA CƠ BẢN", slug: "spa-basic", title: "SPA BASIC", desc: "Kiến thức nền tảng về chăm sóc da và các quy trình spa cơ bản." },
-      { img: "/training-2.png", level: "KHÓA NÂNG CAO", slug: "spa-advanced", title: "SPA ADVANCED", desc: "Kỹ thuật chăm sóc da chuyên sâu và sử dụng công nghệ cao." },
-      { img: "/training-3.png", level: "KHÓA CHUYÊN GIA", slug: "spa-expert", title: "SPA EXPERT", desc: "Đào tạo quản lý và vận hành hệ thống spa chuyên nghiệp." },
-      { img: "/training-4.png", level: "KHÓA TRỊ LIỆU", slug: "spa-therapy", title: "SPA THERAPY", desc: "Các liệu pháp trị liệu đặc biệt và phục hồi da chuyên sâu." },
+      { img: "/training-1.png", level: "KHÓA CƠ BẢN", slug: "spa-basic", title: "KHÓA HỌC SPA BASIC", desc: "Kiến thức nền tảng về chăm sóc da và các quy trình spa cơ bản." },
+      { img: "/training-2.png", level: "KHÓA NÂNG CAO", slug: "spa-advanced", title: "KHÓA HỌC SPA ADVANCED", desc: "Kỹ thuật chăm sóc da chuyên sâu và sử dụng công nghệ cao." },
+      { img: "/training-3.png", level: "KHÓA CHUYÊN GIA", slug: "spa-expert", title: "KHÓA HỌC SPA EXPERT", desc: "Đào tạo quản lý và vận hành hệ thống spa chuyên nghiệp." },
+      { img: "/training-4.png", level: "KHÓA TRỊ LIỆU", slug: "spa-therapy", title: "KHÓA HỌC SPA THERAPY", desc: "Các liệu pháp trị liệu đặc biệt và phục hồi da chuyên sâu." },
     ]
   };
 
@@ -108,7 +108,6 @@ export default function Home() {
               <motion.img
                 src={master.img}
                 animate={{ 
-                  filter: activeMasterIndex === idx ? "grayscale(0%)" : "grayscale(100%)",
                   scale: activeMasterIndex === idx ? 1.08 : 1.02
                 }}
                 transition={{ duration: 1.5, ease: "easeInOut" }}

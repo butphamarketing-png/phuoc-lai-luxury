@@ -48,6 +48,20 @@ const allServices = [
     image: "/studio.png",
     children: ["Nâng cơ xóa nhăn", "Điều trị sắc tố", "Se khít lỗ chân lông", "Phục hồi da"],
   },
+  {
+    title: "Trị Mụn Chuyên Sâu",
+    slug: "spa-acne-treatment",
+    category: "spa",
+    image: "/studio-interior.png",
+    children: ["Chuẩn y khoa", "Tiêu viêm tức thì", "Không để lại sẹo", "Ngừa thâm mụn"],
+  },
+  {
+    title: "Trẻ Hóa Exosome",
+    slug: "spa-skin-rejuvenation",
+    category: "spa",
+    image: "/studio.png",
+    children: ["Tái tạo tế bào", "Căng bóng tức thì", "Xóa mờ nếp nhăn", "Phục hồi da yếu"],
+  },
 ];
 
 export default function Services() {

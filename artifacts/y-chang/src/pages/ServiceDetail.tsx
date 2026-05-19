@@ -130,6 +130,124 @@ const serviceData: Record<string, ServiceContent> = {
       }
     ],
   },
+  "spa-basic": {
+    title: "Chăm Sóc Da Chuyên Sâu: Hồi Sinh Làn Da Tươi Trẻ",
+    category: "Spa & Trị Liệu",
+    image: "/studio-interior.png",
+    date: "18 Tháng 5, 2026",
+    author: "Phuoc Lai Skin Expert",
+    readTime: "7 phút đọc",
+    intro: "Liệu trình chăm sóc da chuyên sâu tại Phuoc Lai Luxury được thiết kế riêng biệt cho từng loại da, giúp loại bỏ độc tố, cung cấp dưỡng chất và mang lại làn da sáng mịn, khỏe khoắn từ bên trong.",
+    sections: [
+      {
+        heading: "Tầm quan trọng của việc chăm sóc da chuyên sâu",
+        content: "Môi trường ô nhiễm và áp lực cuộc sống khiến làn da dễ bị tổn thương, xỉn màu và lão hóa sớm. Chăm sóc da chuyên sâu không chỉ là làm sạch bề mặt mà còn là quá trình phục hồi và tái tạo các tế bào da ở tầng sâu.",
+      },
+      {
+        heading: "Quy trình liệu trình 12 bước chuẩn Y khoa",
+        content: "Chúng tôi áp dụng quy trình nghiêm ngặt để đảm bảo hiệu quả tối ưu:",
+        list: [
+          "Tẩy trang và làm sạch sâu bằng sản phẩm dược mỹ phẩm cao cấp.",
+          "Tẩy tế bào chết vật lý và hóa học nhẹ nhàng.",
+          "Xông hơi thảo dược giúp giãn nở lỗ chân lông.",
+          "Hút mụn cám và bã nhờn bằng công nghệ chân không.",
+          "Sát khuẩn da và lấy nhân mụn chuẩn y khoa (nếu có).",
+          "Massage mặt thư giãn, kích thích lưu thông tuần hoàn máu.",
+          "Điện di tinh chất vitamin C/HA giúp da trắng sáng, căng bóng.",
+          "Đắp mặt nạ phục hồi chuyên sâu phù hợp với tình trạng da.",
+          "Chiếu ánh sáng sinh học Biolight tăng sinh collagen.",
+          "Thoa kem dưỡng khóa ẩm và bảo vệ da.",
+          "Thoa kem chống nắng phổ rộng.",
+          "Massage đầu, cổ, vai gáy thư giãn kết thúc liệu trình."
+        ]
+      }
+    ],
+  },
+  "spa-advanced": {
+    title: "Liệu Trình Công Nghệ Cao: Đỉnh Cao Trẻ Hóa & Điều Trị",
+    category: "Spa & Trị Liệu",
+    image: "/studio.png",
+    date: "18 Tháng 5, 2026",
+    author: "Phuoc Lai Director",
+    readTime: "10 phút đọc",
+    intro: "Ứng dụng các công nghệ thẩm mỹ tiên tiến nhất thế giới, chúng tôi mang đến giải pháp điều trị triệt để các vấn đề về sắc tố, nếp nhăn và lỗ chân lông, trả lại vẻ đẹp thanh xuân không tì vết.",
+    sections: [
+      {
+        heading: "Công nghệ đột phá tại Phuoc Lai Luxury",
+        content: "Chúng tôi đầu tư hệ thống máy móc hiện đại được FDA chứng nhận về an toàn và hiệu quả, giúp giải quyết các khuyết điểm trên da một cách nhanh chóng và bền vững.",
+      },
+      {
+        heading: "Các giải pháp điều trị tiêu biểu",
+        list: [
+          "Trị nám, tàn nhang Laser Picosure: Đánh bay các sắc tố đen sâu dưới da mà không gây bỏng rát hay để lại sẹo.",
+          "Nâng cơ trẻ hóa Hifu Therapy: Kích thích tăng sinh collagen và elastin tự nhiên, giúp da săn chắc, xóa mờ nếp nhăn và thon gọn gương mặt.",
+          "Se khít lỗ chân lông CO2 Fractional: Tái tạo bề mặt da, xử lý sẹo rỗ và thu nhỏ lỗ chân lông hiệu quả đến 90%.",
+          "Căng bóng da Meso Therapy: Đưa dưỡng chất trực tiếp vào lớp trung bì, giúp da căng mướt, ngậm nước ngay tức thì."
+        ]
+      },
+      {
+        heading: "Cam kết chất lượng",
+        content: "Mọi liệu trình công nghệ cao đều được thực hiện bởi đội ngũ kỹ thuật viên giàu kinh nghiệm, dưới sự giám sát chặt chẽ của chuyên gia da liễu.",
+      }
+    ],
+  },
+  "spa-acne-treatment": {
+    title: "Trị Mụn Chuyên Sâu: Giải Pháp Dứt Điểm & Phục Hồi Da",
+    category: "Spa & Trị Liệu",
+    image: "/studio-interior.png",
+    date: "19 Tháng 5, 2026",
+    author: "Phuoc Lai Skin Expert",
+    readTime: "8 phút đọc",
+    intro: "Phác đồ điều trị mụn cá nhân hóa tại Phuoc Lai Luxury giúp loại bỏ tận gốc các loại mụn cứng đầu, đồng thời phục hồi nền da tổn thương, ngăn ngừa sẹo và thâm mụn hiệu quả.",
+    sections: [
+      {
+        heading: "Tại sao nên điều trị mụn tại Phuoc Lai Luxury?",
+        content: "Chúng tôi không chỉ lấy nhân mụn mà còn tập trung vào việc điều tiết tuyến bã nhờn và tiêu diệt vi khuẩn P.acnes gây mụn.",
+        list: [
+          "Kỹ thuật lấy nhân mụn chuẩn y khoa: Không sưng, không đau, không để lại sẹo lõm.",
+          "Công nghệ ánh sáng đa tầng: Tiêu viêm cực nhanh, làm dịu da tức thì.",
+          "Sử dụng dược mỹ phẩm đặc trị: Các sản phẩm nhập khẩu giúp gom cồi mụn nhanh chóng."
+        ]
+      },
+      {
+        heading: "Quy trình trị mụn chuyên sâu",
+        list: [
+          "Bước 1: Thăm khám và soi da để xác định cấp độ mụn.",
+          "Bước 2: Vệ sinh da và xông hơi mở lỗ chân lông.",
+          "Bước 3: Hút sạch dầu thừa và mụn cám.",
+          "Bước 4: Sát khuẩn và tiến hành lấy nhân mụn bằng dụng cụ riêng biệt.",
+          "Bước 5: Đi điện tím diệt khuẩn.",
+          "Bước 6: Đắp mặt nạ giảm sưng, kiềm dầu.",
+          "Bước 7: Chiếu ánh sáng xanh Blue Light tiêu diệt vi khuẩn."
+        ]
+      }
+    ],
+  },
+  "spa-skin-rejuvenation": {
+    title: "Trẻ Hóa Exosome: Công Nghệ Tái Tạo Da Tế Bào Gốc",
+    category: "Spa & Trị Liệu",
+    image: "/studio.png",
+    date: "19 Tháng 5, 2026",
+    author: "Phuoc Lai Director",
+    readTime: "9 phút đọc",
+    intro: "Exosome là bước đột phá trong y học tái tạo, giúp truyền tải hàng tỷ tín hiệu tăng trưởng trực tiếp vào tế bào da, mang lại hiệu quả trẻ hóa gấp nhiều lần so với các phương pháp thông thường.",
+    sections: [
+      {
+        heading: "Sức mạnh của Exosome",
+        content: "Exosome không phải là tế bào, mà là các túi ngoại bào chứa các yếu tố tăng trưởng, protein và vật chất di truyền giúp 'đánh thức' khả năng tự phục hồi của làn da.",
+        list: [
+          "Cấp ẩm sâu: Giúp da căng mọng, ngậm nước ngay sau liệu trình.",
+          "Xóa mờ nếp nhăn: Kích thích tăng sinh Collagen và Elastin tự nhiên.",
+          "Làm sáng da: Cải thiện tình trạng da xỉn màu, thiếu sức sống.",
+          "Thu nhỏ lỗ chân lông: Tái cấu trúc bề mặt da mịn màng."
+        ]
+      },
+      {
+        heading: "Đối tượng phù hợp",
+        content: "Liệu trình này đặc biệt hiệu quả cho làn da bắt đầu xuất hiện dấu hiệu lão hóa, da mỏng yếu do sử dụng kem trộn hoặc da sau điều trị xâm lấn cần phục hồi nhanh.",
+      }
+    ],
+  },
 };
 
 export default function ServiceDetail() {
