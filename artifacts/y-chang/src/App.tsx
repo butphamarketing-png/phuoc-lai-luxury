@@ -12,6 +12,10 @@ import Feedback from "@/pages/Feedback";
 import Contact from "@/pages/Contact";
 import ServiceDetail from "@/pages/ServiceDetail";
 import TrainingDetail from "@/pages/TrainingDetail";
+import AdminLogin from "@/pages/admin/Login";
+import AdminDashboard from "@/pages/admin/Dashboard";
+import AdminServices from "@/pages/admin/Services";
+import AdminTraining from "@/pages/admin/Training";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import Preloader from "@/components/layout/Preloader";
@@ -21,9 +25,12 @@ import FloatingContact from "@/components/layout/FloatingContact";
 const queryClient = new QueryClient();
 
 function Router() {
+  const [location] = useLocation();
+  const isAdminPage = location.startsWith("/admin");
+
   return (
     <div className="flex flex-col min-h-[100dvh] overflow-x-hidden">
-      <Navbar />
+      {!isAdminPage && <Navbar />}
       <main className="flex-1">
         <Switch>
           <Route path="/" component={Home} />
@@ -49,13 +56,22 @@ function Router() {
           </Route>
           <Route path="/dao-tao/:slug" component={TrainingDetail} />
 
+          {/* Admin Routes */}
+          <Route path="/admin/login" component={AdminLogin} />
+          <Route path="/admin/dashboard" component={AdminDashboard} />
+          <Route path="/admin/services" component={AdminServices} />
+          <Route path="/admin/training" component={AdminTraining} />
+          <Route path="/admin/customers" component={AdminDashboard} />
+          <Route path="/admin/feedback" component={AdminDashboard} />
+          <Route path="/admin/settings" component={AdminDashboard} />
+
           <Route path="/feedback" component={Feedback} />
           <Route path="/lien-he" component={Contact} />
           <Route path="/booking" component={Home} />
           <Route component={NotFound} />
         </Switch>
       </main>
-      <Footer />
+      {!isAdminPage && <Footer />}
     </div>
   );
 }
