@@ -25,12 +25,12 @@ import FloatingContact from "@/components/layout/FloatingContact";
 const queryClient = new QueryClient();
 
 function Router() {
-  const [location] = useLocation();
-  const isAdminPage = location.startsWith("/admin");
+  // Sử dụng window.location.pathname để kiểm tra trang Admin chính xác nhất ngay từ lúc load trang
+  const isAdminPage = window.location.pathname.startsWith("/admin");
 
   return (
     <div className="flex flex-col min-h-[100dvh] overflow-x-hidden bg-white">
-      {/* Chỉ hiện Preloader và các thành phần khác ở trang khách hàng */}
+      {/* Chỉ hiện các thành phần khách hàng nếu không phải trang Admin */}
       {!isAdminPage && (
         <>
           <Preloader />
@@ -66,13 +66,23 @@ function Router() {
           <Route path="/dao-tao/:slug" component={TrainingDetail} />
 
           {/* Admin Routes */}
-          <Route path="/admin/login" component={AdminLogin} />
-          <Route path="/admin/dashboard" component={AdminDashboard} />
-          <Route path="/admin/services" component={AdminServices} />
-          <Route path="/admin/training" component={AdminTraining} />
-          <Route path="/admin/customers" component={AdminDashboard} />
-          <Route path="/admin/feedback" component={AdminDashboard} />
-          <Route path="/admin/settings" component={AdminDashboard} />
+          <Route path="/admin/login">
+            <AdminLogin />
+          </Route>
+          <Route path="/admin/dashboard">
+            <AdminDashboard />
+          </Route>
+          <Route path="/admin/services">
+            <AdminServices />
+          </Route>
+          <Route path="/admin/training">
+            <AdminTraining />
+          </Route>
+          
+          {/* Fallback cho các trang admin khác chưa tạo */}
+          <Route path="/admin/:rest*">
+            <AdminDashboard />
+          </Route>
 
           <Route path="/feedback" component={Feedback} />
           <Route path="/lien-he" component={Contact} />
