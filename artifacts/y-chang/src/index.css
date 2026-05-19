@@ -90,9 +90,9 @@
   /* Ultra-Bright Satin Silver Theme */
   --background: 0 0% 100%; /* Pure White */
   --foreground: 0 0% 10%; /* #1A1A1A */
-  --primary: 45 65% 53%; /* #D4AF37 - Champagne Gold */
+  --primary: 35 25% 65%; /* #BFA37E - Muted Champagne Gold */
   --primary-foreground: 0 0% 100%;
-  --accent-gold: 45 65% 53%;
+  --accent-gold: 35 25% 65%;
   --border: 0 0% 92%; /* Subtle border */
   
   --card: 0 0% 100%; /* Pure White cards for contrast */
@@ -215,20 +215,20 @@
   }
 
   .gold-gradient {
-    background: linear-gradient(135deg, #D4AF37 0%, #F5E6AD 50%, #C5A059 100%);
-  }
+  background: linear-gradient(135deg, #BFA37E 0%, #D9C5B2 50%, #A68B5B 100%);
+}
 
-  .text-gold {
-    color: #D4AF37;
-  }
+.text-gold {
+  color: #BFA37E;
+}
 
-  .bg-gold {
-    background-color: #D4AF37;
-  }
+.bg-gold {
+  background-color: #BFA37E;
+}
 
-  .border-gold {
-    border-color: #D4AF37;
-  }
+.border-gold {
+  border-color: #BFA37E;
+}
   .section-padding {
     @apply py-24 md:py-40;
   }

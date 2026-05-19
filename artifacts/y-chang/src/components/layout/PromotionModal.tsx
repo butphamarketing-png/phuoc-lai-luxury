@@ -79,19 +79,29 @@ export default function PromotionModal() {
 
             {/* Content & Button Area */}
             <div className="p-6 md:p-10 flex flex-col items-center text-center bg-white">
-              <span className="text-[9px] md:text-[10px] uppercase tracking-[0.4em] text-black/40 mb-2 md:mb-3 font-bold">PERMANENT MAKEUP</span>
+              <span className="text-[9px] md:text-[10px] uppercase tracking-[0.4em] text-black/40 mb-2 md:mb-3 font-bold">PERMANENT MAKEUP AND SPA</span>
               <h3 className="font-serif text-xl md:text-3xl mb-6 md:mb-8 text-[#1A1A1A] leading-tight">
-                Nâng Tầm <span className="italic">Bản Lĩnh</span>
+                Dịch vụ bạn <span className="italic">quan tâm</span>
               </h3>
               
-              <Button 
-                asChild
-                className="w-full max-w-sm rounded-full bg-[#1A1A1A] text-white hover:bg-black py-6 md:py-8 text-[11px] md:text-[12px] uppercase tracking-[0.2em] luxury-shadow group"
-              >
-                <a href="/lien-he" onClick={closeModal}>
-                  ĐẶT LỊCH NGAY <span className="ml-2 group-hover:translate-x-1 transition-transform">→</span>
-                </a>
-              </Button>
+              <div className="flex flex-col sm:flex-row gap-4 w-full max-w-xl">
+                <Button 
+                  asChild
+                  className="flex-1 rounded-full bg-[#1A1A1A] text-white hover:bg-black py-6 md:py-8 text-[10px] md:text-[11px] uppercase tracking-[0.2em] luxury-shadow group"
+                >
+                  <a href="/dich-vu" onClick={closeModal}>
+                    PERMANENT MAKEUP <span className="ml-2 group-hover:translate-x-1 transition-transform">→</span>
+                  </a>
+                </Button>
+                <Button 
+                  asChild
+                  className="flex-1 rounded-full border border-black/10 bg-white text-black hover:bg-black hover:text-white py-6 md:py-8 text-[10px] md:text-[11px] uppercase tracking-[0.2em] transition-all group"
+                >
+                  <a href="/dich-vu" onClick={closeModal}>
+                    SPA <span className="ml-2 group-hover:translate-x-1 transition-transform">→</span>
+                  </a>
+                </Button>
+              </div>
             </div>
           </motion.div>
         </div>

@@ -282,11 +282,11 @@ export default function Home() {
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent group-hover:from-black/70 transition-all duration-500" />
                     <div className="absolute inset-0 flex flex-col items-center justify-end pb-12">
-                      <span className="text-gold text-[9px] uppercase tracking-[0.4em] mb-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500 font-bold">Discover More</span>
-                      <h3 className="font-serif text-3xl md:text-5xl text-white tracking-widest uppercase mb-4">
-                        {cat.title}
-                      </h3>
-                      <div className="w-12 h-[2px] bg-gold group-hover:w-32 transition-all duration-700" />
+            <span className="text-gold text-[9px] uppercase tracking-[0.4em] mb-4 opacity-0 group-hover:opacity-60 transition-opacity duration-500 font-bold">Discover More</span>
+            <h3 className="font-serif text-3xl md:text-5xl text-white tracking-widest uppercase mb-4">
+              {cat.title}
+            </h3>
+            <div className="w-12 h-[1px] bg-gold/40 group-hover:w-32 transition-all duration-700" />
                     </div>
                   </motion.div>
                 </Link>
