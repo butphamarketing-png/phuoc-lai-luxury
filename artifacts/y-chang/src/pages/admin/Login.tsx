@@ -5,39 +5,57 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
-import { ShieldCheck, Lock, User } from "lucide-react";
+import { ShieldCheck, Lock, Mail } from "lucide-react";
+import { getSupabaseClient, isSupabaseConfigured } from "@/lib/supabase";
 
 export default function AdminLogin() {
   const [, setLocation] = useLocation();
   const { toast } = useToast();
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
-    username: "",
+    email: "",
     password: "",
   });
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (!isSupabaseConfigured()) {
+      toast({
+        variant: "destructive",
+        title: "Chưa cấu hình Supabase",
+        description:
+          "Thêm VITE_SUPABASE_URL và VITE_SUPABASE_ANON_KEY trên Vercel, rồi deploy lại.",
+      });
+      return;
+    }
+
     setIsLoading(true);
 
-    // Giả lập đăng nhập (Sẽ thay thế bằng API thật sau này)
-    setTimeout(() => {
-      if (formData.username === "admin" && formData.password === "phuoclai2026") {
-        localStorage.setItem("isAdminAuthenticated", "true");
-        toast({
-          title: "Đăng nhập thành công",
-          description: "Chào mừng Master trở lại hệ thống quản trị.",
-        });
-        setLocation("/admin/dashboard");
-      } else {
-        toast({
-          variant: "destructive",
-          title: "Lỗi đăng nhập",
-          description: "Tài khoản hoặc mật khẩu không chính xác.",
-        });
-      }
-      setIsLoading(false);
-    }, 1500);
+    const supabase = getSupabaseClient();
+    const { error } = await supabase.auth.signInWithPassword({
+      email: formData.email.trim(),
+      password: formData.password,
+    });
+
+    setIsLoading(false);
+
+    if (error) {
+      toast({
+        variant: "destructive",
+        title: "Lỗi đăng nhập",
+        description: error.message.includes("Invalid login credentials")
+          ? "Email hoặc mật khẩu không chính xác."
+          : error.message,
+      });
+      return;
+    }
+
+    toast({
+      title: "Đăng nhập thành công",
+      description: "Chào mừng trở lại hệ thống quản trị.",
+    });
+    setLocation("/admin/dashboard");
   };
 
   return (
@@ -49,7 +67,7 @@ export default function AdminLogin() {
       >
         <div className="bg-white rounded-[2rem] shadow-2xl overflow-hidden border border-black/[0.03]">
           <div className="bg-[#1A1A1A] p-10 text-center relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full -mr-16 -mt-16" />
+            <motion.div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full -mr-16 -mt-16" />
             <div className="relative z-10">
               <div className="w-16 h-16 bg-white/10 rounded-2xl flex items-center justify-center mx-auto mb-6 border border-white/10">
                 <ShieldCheck className="text-white" size={32} strokeWidth={1.5} />
@@ -61,34 +79,36 @@ export default function AdminLogin() {
 
           <form onSubmit={handleLogin} className="p-10 space-y-6">
             <div className="space-y-2">
-              <Label className="text-[10px] uppercase tracking-[0.2em] text-black/40 font-bold ml-1">Tài khoản</Label>
+              <Label className="text-[10px] uppercase tracking-[0.2em] text-black/40 font-bold ml-1">Email</Label>
               <div className="relative">
-                <User className="absolute left-4 top-1/2 -translate-y-1/2 text-black/20" size={18} />
+                <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-black/20" size={18} />
                 <Input
                   required
-                  type="text"
-                  placeholder="Nhập tên đăng nhập"
+                  type="email"
+                  autoComplete="email"
+                  placeholder="admin@phuoclai.com"
                   className="pl-12 rounded-xl border-black/5 bg-[#FAFAFA] focus:bg-white transition-all py-6"
-                  value={formData.username}
-                  onChange={(e) => setFormData({ ...formData, username: e.target.value })}
+                  value={formData.email}
+                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                 />
               </div>
             </div>
 
-            <div className="space-y-2">
+            <motion.div className="space-y-2">
               <Label className="text-[10px] uppercase tracking-[0.2em] text-black/40 font-bold ml-1">Mật khẩu</Label>
               <div className="relative">
                 <Lock className="absolute left-4 top-1/2 -translate-y-1/2 text-black/20" size={18} />
                 <Input
                   required
                   type="password"
+                  autoComplete="current-password"
                   placeholder="Nhập mật khẩu"
                   className="pl-12 rounded-xl border-black/5 bg-[#FAFAFA] focus:bg-white transition-all py-6"
                   value={formData.password}
                   onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                 />
               </div>
-            </div>
+            </motion.div>
 
             <Button
               type="submit"
@@ -99,7 +119,7 @@ export default function AdminLogin() {
             </Button>
 
             <p className="text-center text-[10px] text-black/30 uppercase tracking-[0.1em]">
-              Bảo mật bởi hệ thống Phuoc Lai Luxury &copy; 2026
+              Bảo mật bởi Supabase Auth &copy; 2026
             </p>
           </form>
         </div>

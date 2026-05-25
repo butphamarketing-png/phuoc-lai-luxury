@@ -1,6 +1,7 @@
 import { ReactNode, useEffect, useState } from "react";
 import { useLocation, Link } from "wouter";
 import { motion, AnimatePresence } from "framer-motion";
+import { useAdminAuth } from "@/hooks/use-admin-auth";
 import { 
   LayoutDashboard, 
   Settings, 
@@ -34,18 +35,35 @@ const menuItems = [
 export default function AdminLayout({ children, title }: AdminLayoutProps) {
   const [location, setLocation] = useLocation();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { user, isLoading, isAuthenticated, isConfigured, displayName, signOut } =
+    useAdminAuth();
 
   useEffect(() => {
-    const isAuthenticated = localStorage.getItem("isAdminAuthenticated");
-    if (!isAuthenticated) {
+    if (!isLoading && (!isConfigured || !isAuthenticated)) {
       setLocation("/admin/login");
     }
-  }, [setLocation]);
+  }, [isLoading, isConfigured, isAuthenticated, setLocation]);
 
-  const handleLogout = () => {
-    localStorage.removeItem("isAdminAuthenticated");
+  const handleLogout = async () => {
+    await signOut();
     setLocation("/admin/login");
   };
+
+  if (isLoading) {
+    return (
+      <motion.div className="min-h-screen bg-[#F8F9FA] flex items-center justify-center">
+        <p className="text-[11px] uppercase tracking-[0.3em] text-black/40">Đang xác thực...</p>
+      </motion.div>
+    );
+  }
+
+  if (!isAuthenticated || !user) {
+    return (
+      <div className="min-h-screen bg-[#F8F9FA] flex items-center justify-center">
+        <p className="text-[11px] uppercase tracking-[0.3em] text-black/40">Đang chuyển hướng...</p>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-[#F8F9FA] flex">
@@ -126,8 +144,8 @@ export default function AdminLayout({ children, title }: AdminLayoutProps) {
 
             <div className="flex items-center gap-3">
               <div className="text-right hidden sm:block">
-                <p className="text-[10px] font-bold uppercase tracking-widest">Master Phuoc Lai</p>
-                <p className="text-[9px] text-black/30 uppercase tracking-widest">Super Admin</p>
+                <p className="text-[10px] font-bold uppercase tracking-widest">{displayName}</p>
+                <p className="text-[9px] text-black/30 uppercase tracking-widest">{user.email}</p>
               </div>
               <Avatar className="h-10 w-10 border border-black/5 p-0.5">
                 <AvatarImage src="/pop-up-1.jpg" className="object-cover rounded-full" />
