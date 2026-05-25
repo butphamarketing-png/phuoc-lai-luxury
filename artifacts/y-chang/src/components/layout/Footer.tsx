@@ -1,6 +1,8 @@
 import { Link } from "wouter";
 import { MapPin, Phone, Mail } from "lucide-react";
 import { useLanguage } from "@/hooks/use-language";
+import { useSiteSettings } from "@/hooks/use-site-settings";
+import { DEFAULT_SITE_SETTINGS } from "@/lib/site-settings";
 import { motion } from "framer-motion";
 import logoImg from "@/assets/logo.png";
 
@@ -15,6 +17,8 @@ const galleryImages = [
 
 export default function Footer() {
   const { t } = useLanguage();
+  const { data: settings = DEFAULT_SITE_SETTINGS } = useSiteSettings();
+  const telHref = `tel:${settings.phone.replace(/\s/g, "")}`;
 
   return (
     <footer className="bg-[#1C1C1C] text-white pt-24 pb-8 border-t border-white/10" data-testid="footer">
@@ -144,15 +148,22 @@ export default function Footer() {
             <ul className="space-y-4 text-sm font-light text-white/60 mb-6">
               <li className="flex items-start gap-3">
                 <MapPin size={16} className="shrink-0 mt-1 text-white/50" />
-                <span>42a Bà Triệu, Phường 1, TP Vũng Tàu</span>
+                <span>{settings.address}</span>
               </li>
               <li className="flex items-center gap-3">
                 <Phone size={16} className="shrink-0 text-white/50" />
-                <span>0909 203 108</span>
+                <a href={telHref} className="hover:text-white transition-colors">
+                  {settings.phoneDisplay}
+                </a>
               </li>
               <li className="flex items-center gap-3">
                 <Mail size={16} className="shrink-0 text-white/50" />
-                <span>hello@phuoclai.com</span>
+                <a
+                  href={`mailto:${settings.email}`}
+                  className="hover:text-white transition-colors"
+                >
+                  {settings.email}
+                </a>
               </li>
             </ul>
             <motion.div

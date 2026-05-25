@@ -11,6 +11,9 @@ export const ADMIN_LOGIN = ADMIN_BASE;
 export const ADMIN_DASHBOARD = adminPath("dashboard");
 export const ADMIN_SERVICES = adminPath("services");
 export const ADMIN_TRAINING = adminPath("training");
+export const ADMIN_REVIEWS = adminPath("feedback");
+export const ADMIN_CUSTOMERS = adminPath("customers");
+export const ADMIN_SETTINGS = adminPath("settings");
 
 export function isAdminPath(pathname: string): boolean {
   return pathname === ADMIN_BASE || pathname.startsWith(`${ADMIN_BASE}/`);

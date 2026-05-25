@@ -4,19 +4,21 @@
 
 1. Tạo project tại [supabase.com](https://supabase.com)
 2. Mở **SQL Editor** → dán toàn bộ nội dung file **`setup.sql`** → **Run**
-3. **Authentication** → **Users** → **Add user** (email + mật khẩu admin)
-4. **Settings** → **API** → copy vào Vercel:
+3. Chạy tiếp **`cms-extensions.sql`** (đánh giá, khách hàng liên hệ, cài đặt)
+4. **Authentication** → **Users** → **Add user** (email + mật khẩu admin)
+5. **Settings** → **API** → copy vào Vercel:
    - `VITE_SUPABASE_URL`
    - `VITE_SUPABASE_ANON_KEY`
    - `VITE_SITE_URL` = `https://phunxamvungtau.com`
-5. **Redeploy** website trên Vercel
-6. Vào **https://phunxamvungtau.com/adminbp** → đăng nhập → **Đồng bộ Supabase**
+6. **Redeploy** website trên Vercel
+7. Vào **https://phunxamvungtau.com/adminbp** → đăng nhập → quản lý Dịch vụ, Đào tạo, Đánh giá, Khách hàng, Cài đặt
 
 ## Các file SQL
 
 | File | Mục đích |
 |------|----------|
 | **`setup.sql`** | Chạy **một lần** — đủ bảng, RLS, storage, index |
+| **`cms-extensions.sql`** | Đánh giá, form khách hàng, cài đặt website |
 | `schema.sql` | Chỉ bảng + RLS (legacy, dùng `setup.sql` thay thế) |
 | `storage.sql` | Chỉ bucket ảnh (đã gộp trong `setup.sql`) |
 

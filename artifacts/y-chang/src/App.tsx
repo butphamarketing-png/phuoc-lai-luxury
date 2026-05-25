@@ -16,6 +16,9 @@ import AdminLogin from "@/pages/admin/Login";
 import AdminDashboard from "@/pages/admin/Dashboard";
 import AdminServices from "@/pages/admin/Services";
 import AdminTraining from "@/pages/admin/Training";
+import AdminReviews from "@/pages/admin/Reviews";
+import AdminCustomers from "@/pages/admin/Customers";
+import AdminSettings from "@/pages/admin/Settings";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import Preloader from "@/components/layout/Preloader";
@@ -24,6 +27,7 @@ import FloatingContact from "@/components/layout/FloatingContact";
 import SiteSeo from "@/components/seo/SiteSeo";
 import AdminLegacyRedirect from "@/components/admin/AdminLegacyRedirect";
 import { isAdminPath, isLegacyAdminPath } from "@/lib/admin-paths";
+import { useFavicon } from "@/hooks/use-favicon";
 
 const queryClient = new QueryClient();
 
@@ -83,6 +87,15 @@ function Router() {
           <Route path="/adminbp/training">
             <AdminTraining />
           </Route>
+          <Route path="/adminbp/feedback">
+            <AdminReviews />
+          </Route>
+          <Route path="/adminbp/customers">
+            <AdminCustomers />
+          </Route>
+          <Route path="/adminbp/settings">
+            <AdminSettings />
+          </Route>
           <Route path="/adminbp/:rest*">
             <AdminDashboard />
           </Route>
@@ -120,6 +133,7 @@ function Router() {
 }
 
 function App() {
+  useFavicon();
   return (
     <QueryClientProvider client={queryClient}>
       <LanguageProvider>

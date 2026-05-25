@@ -13,7 +13,6 @@ import {
   Menu, 
   X,
   Bell,
-  Search,
   ExternalLink,
   Globe,
 } from "lucide-react";
@@ -24,9 +23,13 @@ import {
   ADMIN_LOGIN,
   ADMIN_SERVICES,
   ADMIN_TRAINING,
-  adminPath,
+  ADMIN_REVIEWS,
+  ADMIN_CUSTOMERS,
+  ADMIN_SETTINGS,
 } from "@/lib/admin-paths";
 import logoImg from "@/assets/logo.png";
+import AdminGlobalSearch from "@/components/admin/AdminGlobalSearch";
+import { useAdminCustomers } from "@/hooks/use-site-customers";
 
 interface AdminLayoutProps {
   children: ReactNode;
@@ -37,9 +40,9 @@ const menuItems = [
   { icon: LayoutDashboard, label: "Dashboard", href: ADMIN_DASHBOARD, hint: "Tổng quan" },
   { icon: Sparkles, label: "Dịch vụ", href: ADMIN_SERVICES, hint: "Trang /dich-vu" },
   { icon: BookOpen, label: "Đào tạo", href: ADMIN_TRAINING, hint: "Trang /dao-tao" },
-  { icon: Users, label: "Khách hàng", href: adminPath("customers"), hint: "Sắp ra mắt" },
-  { icon: MessageSquare, label: "Đánh giá", href: adminPath("feedback"), hint: "Sắp ra mắt" },
-  { icon: Settings, label: "Cài đặt", href: adminPath("settings"), hint: "Sắp ra mắt" },
+  { icon: Users, label: "Khách hàng", href: ADMIN_CUSTOMERS, hint: "Form liên hệ" },
+  { icon: MessageSquare, label: "Đánh giá", href: ADMIN_REVIEWS, hint: "Trang /feedback" },
+  { icon: Settings, label: "Cài đặt", href: ADMIN_SETTINGS, hint: "Hotline & MXH" },
 ];
 
 export default function AdminLayout({ children, title }: AdminLayoutProps) {
@@ -47,6 +50,8 @@ export default function AdminLayout({ children, title }: AdminLayoutProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { user, isLoading, isAuthenticated, isConfigured, displayName, signOut } =
     useAdminAuth();
+  const { data: customers = [] } = useAdminCustomers();
+  const newCustomerCount = customers.filter((c) => c.status === "new").length;
 
   useEffect(() => {
     if (!isLoading && (!isConfigured || !isAuthenticated)) {
@@ -172,19 +177,22 @@ export default function AdminLayout({ children, title }: AdminLayoutProps) {
               <ExternalLink size={14} />
               Trang ngoài
             </a>
-            <div className="hidden md:flex relative">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-black/20" size={16} />
-              <input 
-                type="text" 
-                placeholder="Tìm kiếm..." 
-                className="bg-[#FAFAFA] border-none rounded-full pl-10 pr-6 py-2 text-xs focus:ring-1 focus:ring-black/5 w-64 transition-all"
-              />
-            </div>
-            
-            <button className="relative p-2 text-black/30 hover:text-black transition-colors">
-              <Bell size={20} strokeWidth={1.5} />
-              <span className="absolute top-2 right-2 w-2 h-2 bg-red-500 rounded-full border-2 border-white" />
-            </button>
+            <AdminGlobalSearch />
+
+            <Link href={ADMIN_CUSTOMERS}>
+              <button
+                type="button"
+                className="relative p-2 text-black/30 hover:text-black transition-colors"
+                title="Khách hàng mới"
+              >
+                <Bell size={20} strokeWidth={1.5} />
+                {newCustomerCount > 0 && (
+                  <span className="absolute top-1 right-1 min-w-[18px] h-[18px] px-1 bg-red-500 rounded-full border-2 border-white text-[9px] font-bold text-white flex items-center justify-center">
+                    {newCustomerCount > 9 ? "9+" : newCustomerCount}
+                  </span>
+                )}
+              </button>
+            </Link>
 
             <div className="h-8 w-px bg-black/[0.05]" />
 

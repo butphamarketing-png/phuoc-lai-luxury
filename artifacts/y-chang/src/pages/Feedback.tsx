@@ -1,95 +1,40 @@
 import { motion } from "framer-motion";
 import { useLanguage } from "@/hooks/use-language";
 import { Star } from "lucide-react";
+import { usePublicReviews } from "@/hooks/use-site-reviews";
+import { useSiteSettings } from "@/hooks/use-site-settings";
+import { DEFAULT_SITE_SETTINGS } from "@/lib/site-settings";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
   visible: (i: number) => ({
     opacity: 1,
     y: 0,
-    transition: { duration: 0.7, delay: i * 0.1, ease: [0.22, 1, 0.36, 1] as const }
-  })
+    transition: { duration: 0.7, delay: i * 0.1, ease: [0.22, 1, 0.36, 1] as const },
+  }),
 };
-
-const testimonials = [
-  {
-    name: "Nguyễn Thị Lan",
-    service: "Điêu Khắc Chân Mày",
-    rating: 5,
-    text: "Mình đã đắn đo rất lâu trước khi quyết định làm mày. Nhưng sau khi đến Phuoc Lai, mình thật sự không hối hận. Chân mày ra đúng như kỳ vọng — tự nhiên, không giả tạo, và phù hợp hoàn toàn với khuôn mặt mình.",
-    date: "Tháng 3, 2024",
-    img: "/hero-portrait.png"
-  },
-  {
-    name: "Trần Minh Châu",
-    service: "Phun Môi Cấy Tế Bào",
-    rating: 5,
-    text: "Kỹ thuật cực kỳ tốt. Không đau, không sưng. Màu ra tự nhiên hơn mình nghĩ nhiều. Chị thợ tư vấn rất tận tâm, giải thích rõ từng bước. Mình sẽ quay lại làm eyeliner.",
-    date: "Tháng 2, 2024",
-    img: "/hero-portrait.png"
-  },
-  {
-    name: "Phạm Hồng Nhung",
-    service: "Ombre Brows",
-    rating: 5,
-    text: "Studio sạch sẽ, không khí sang trọng và chuyên nghiệp. Được tư vấn shape phù hợp với từng nét mặt. Kết quả đẹp hơn cả mong đợi. Đây là lần thứ 2 mình quay lại rồi.",
-    date: "Tháng 1, 2024",
-    img: "/hero-portrait.png"
-  },
-  {
-    name: "Vũ Thị Mai",
-    service: "Xử Lý Chân Mày Cũ",
-    rating: 5,
-    text: "Chân mày cũ của mình bị lỗi từ nơi khác làm. Sau khi đến Phuoc Lai xử lý, mình hoàn toàn hài lòng. Quá trình nhẹ nhàng, không đau như lo lắng. Cảm ơn team rất nhiều.",
-    date: "Tháng 12, 2023",
-    img: "/hero-portrait.png"
-  },
-  {
-    name: "Lê Thị Bảo Châu",
-    service: "Điêu Khắc Chân Mày",
-    rating: 5,
-    text: "Đã từng làm ở nhiều chỗ nhưng Phuoc Lai là nơi cho ra kết quả tự nhiên nhất. Sợi lông mày siêu mỏng, không phân biệt được với lông thật. Mình recommend tất cả mọi người.",
-    date: "Tháng 11, 2023",
-    img: "/hero-portrait.png"
-  },
-  {
-    name: "Ngô Thị Huyền",
-    service: "Phun Môi Vi Chạm",
-    rating: 5,
-    text: "Dịch vụ 5 sao từ lúc đặt lịch đến khi ra về. Staff thân thiện, chu đáo. Sau 1 tháng lành hoàn toàn, màu giữ rất đẹp và đều. Chắc chắn sẽ quay lại.",
-    date: "Tháng 10, 2023",
-    img: "/hero-portrait.png"
-  },
-  {
-    name: "Đinh Phương Anh",
-    service: "Combo Brows",
-    rating: 5,
-    text: "Combo brows là lựa chọn đúng đắn nhất mình từng làm. Vừa có sợi tự nhiên vừa có độ sắc nét khi ra ngoài. Hoàn hảo cho mình — không cần kẻ mày nữa.",
-    date: "Tháng 9, 2023",
-    img: "/hero-portrait.png"
-  },
-  {
-    name: "Bùi Thị Hà",
-    service: "Ombre Brows",
-    rating: 5,
-    text: "Lần đầu làm mày ombre mà mình không lo lắng tí nào vì được tư vấn và demo trước. Sau khi lành, màu nhạt tự nhiên đúng như ý muốn. Cực kỳ ưng.",
-    date: "Tháng 8, 2023",
-    img: "/hero-portrait.png"
-  },
-];
 
 export default function Feedback() {
   const { language } = useLanguage();
+  const { data: testimonials = [], isLoading } = usePublicReviews();
+  const { data: settings = DEFAULT_SITE_SETTINGS } = useSiteSettings();
 
   const heading = language === "vn" ? "Lời Chứng Thực" : "Client Testimonials";
-  const subheading = language === "vn"
-    ? "Những trải nghiệm thực từ khách hàng của Phuoc Lai"
-    : "Real experiences from Phuoc Lai clients";
-  const reviewCount = language === "vn" ? "500+ đánh giá 5 sao" : "500+ five-star reviews";
+  const subheading =
+    language === "vn"
+      ? "Những trải nghiệm thực từ khách hàng của Phuoc Lai"
+      : "Real experiences from Phuoc Lai clients";
+  const reviewCount =
+    testimonials.length > 0
+      ? language === "vn"
+        ? `${testimonials.length}+ đánh giá 5 sao`
+        : `${testimonials.length}+ five-star reviews`
+      : language === "vn"
+        ? "Đánh giá từ khách hàng"
+        : "Client reviews";
 
   return (
     <div className="bg-background text-foreground min-h-screen">
-      {/* Header */}
       <section className="px-8 md:px-20 pt-32 pb-20">
         <motion.span
           initial={{ opacity: 0, y: 10 }}
@@ -124,53 +69,62 @@ export default function Feedback() {
         </motion.div>
       </section>
 
-      {/* 4-column grid with uniform heights */}
       <section className="px-8 md:px-20 pb-28">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-          {testimonials.map((item, i) => (
-            <motion.div
-              key={i}
-              custom={i}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: "-50px" }}
-              variants={fadeUp}
-              data-testid={`testimonial-card-${i}`}
-              className="flex flex-col h-full bg-card rounded-2xl border border-black/5 p-6 shadow-sm group hover:shadow-md transition-all duration-500"
-            >
-              {/* Stars */}
-              <div className="flex gap-0.5 mb-4">
-                {[...Array(item.rating)].map((_, s) => (
-                  <Star key={s} size={10} className="fill-[#1A1A1A]/80 text-[#1A1A1A]/80" />
-                ))}
-              </div>
-
-              {/* Quote - flex-grow to make cards uniform */}
-              <p className="text-foreground/80 font-light text-sm leading-relaxed mb-6 flex-grow">
-                "{item.text}"
-              </p>
-
-              {/* Author - pushed to bottom by flex-grow */}
-              <div className="flex items-center gap-3 pt-4 border-t border-border mt-auto">
-                <div className="w-8 h-8 rounded-full overflow-hidden bg-muted flex-shrink-0">
-                  <img
-                    src={item.img}
-                    alt={item.name}
-                    className="w-full h-full object-cover object-top grayscale opacity-80"
-                  />
+        {isLoading ? (
+          <p className="text-center text-black/40 py-20">Đang tải đánh giá...</p>
+        ) : testimonials.length === 0 ? (
+          <p className="text-center text-black/40 py-20 max-w-md mx-auto">
+            Chưa có đánh giá công khai. Vui lòng quay lại sau.
+          </p>
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            {testimonials.map((item, i) => (
+              <motion.div
+                key={item.id}
+                custom={i}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-50px" }}
+                variants={fadeUp}
+                data-testid={`testimonial-card-${i}`}
+                className="flex flex-col h-full bg-card rounded-2xl border border-black/5 p-6 shadow-sm group hover:shadow-md transition-all duration-500"
+              >
+                <div className="flex gap-0.5 mb-4">
+                  {[...Array(item.rating)].map((_, s) => (
+                    <Star
+                      key={s}
+                      size={10}
+                      className="fill-[#1A1A1A]/80 text-[#1A1A1A]/80"
+                    />
+                  ))}
                 </div>
-                <div>
-                  <p className="text-foreground text-xs font-medium">{item.name}</p>
-                  <p className="text-foreground/50 text-[11px] font-light">{item.service}</p>
+                <p className="text-foreground/80 font-light text-sm leading-relaxed mb-6 flex-grow">
+                  &ldquo;{item.content}&rdquo;
+                </p>
+                <div className="flex items-center gap-3 pt-4 border-t border-border mt-auto">
+                  <div className="w-8 h-8 rounded-full overflow-hidden bg-muted flex-shrink-0">
+                    <img
+                      src={item.imageUrl}
+                      alt={item.authorName}
+                      className="w-full h-full object-cover object-top grayscale opacity-80"
+                    />
+                  </div>
+                  <div>
+                    <p className="text-foreground text-xs font-medium">{item.authorName}</p>
+                    <p className="text-foreground/50 text-[11px] font-light">
+                      {item.serviceLabel}
+                    </p>
+                  </div>
+                  <span className="ml-auto text-foreground/30 text-[10px] font-light">
+                    {item.reviewDate}
+                  </span>
                 </div>
-                <span className="ml-auto text-foreground/30 text-[10px] font-light">{item.date}</span>
-              </div>
-            </motion.div>
-          ))}
-        </div>
+              </motion.div>
+            ))}
+          </div>
+        )}
       </section>
 
-      {/* CTA strip */}
       <section className="border-t border-black/10 bg-[#FFFFFF] px-8 md:px-20 py-16">
         <div className="max-w-2xl mx-auto text-center">
           <motion.p
@@ -185,7 +139,7 @@ export default function Feedback() {
               : "Ready to create your own story?"}
           </motion.p>
           <motion.a
-            href="tel:0909203108"
+            href={`tel:${settings.phone.replace(/\s/g, "")}`}
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}

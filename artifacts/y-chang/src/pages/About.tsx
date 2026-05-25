@@ -1,6 +1,8 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useLanguage } from "@/hooks/use-language";
-import { useState, useEffect } from "react";
+import { useSiteSettings } from "@/hooks/use-site-settings";
+import { DEFAULT_SITE_SETTINGS } from "@/lib/site-settings";
+import { useState, useEffect, useMemo } from "react";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 40 },
@@ -13,8 +15,9 @@ const fadeUp = {
 
 export default function About() {
   const { language } = useLanguage();
+  const { data: settings = DEFAULT_SITE_SETTINGS } = useSiteSettings();
   const [currentSlide, setCurrentSlide] = useState(0);
-  const slides = ["/slideshow-1.png", "/slideshow-2.png", "/slideshow-3.png"];
+  const slides = ["/pop-up-1.jpg", "/pop-up-2.jpg", "/pop-up-3.jpg"];
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -23,7 +26,7 @@ export default function About() {
     return () => clearInterval(timer);
   }, [slides.length]);
 
-  const content = {
+  const content = useMemo(() => ({
     vn: {
       eyebrow: "VỀ CHÚNG TÔI",
       title: "Câu Chuyện Của Phước Lai Luxury",
@@ -40,9 +43,9 @@ export default function About() {
       ],
       studioTitle: "Studio Của Chúng Tôi",
       studioDesc: "Không gian làm việc được thiết kế riêng để mang lại cảm giác thư thái và tin tưởng tuyệt đối. Mỗi góc nhỏ đều được chăm chút — từ ánh sáng, mùi hương đến âm nhạc — để bạn có trải nghiệm hoàn toàn thư giãn trong suốt quá trình.",
-      address: "42a Bà Triệu, Phường 1, TP Vũng Tàu",
-      hours: "9:00 – 19:00 hàng ngày",
-      hotline: "0909 203 108",
+      address: settings.address,
+      hours: settings.hours,
+      hotline: settings.phoneDisplay,
     },
     en: {
       eyebrow: "ABOUT US",
@@ -60,11 +63,11 @@ export default function About() {
       ],
       studioTitle: "Our Studio",
       studioDesc: "The workspace is custom-designed to provide complete relaxation and absolute trust. Every corner is carefully curated — from lighting and fragrance to music — so you have a fully relaxing experience throughout the process.",
-      address: "42a Ba Trieu, Ward 1, Vung Tau City",
-      hours: "9:00 AM – 7:00 PM daily",
-      hotline: "0909 203 108",
-    }
-  };
+      address: settings.address,
+      hours: settings.hours,
+      hotline: settings.phoneDisplay,
+    },
+  }), [settings.phoneDisplay, settings.address, settings.hours]);
 
   const c = content[language];
 
