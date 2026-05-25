@@ -13,11 +13,15 @@ import {
   Database,
   FileText,
 } from "lucide-react";
-import ArticleContentEditor from "@/components/admin/ArticleContentEditor";
-import { SERVICE_DETAIL_DATA, type ServiceDetailContent } from "@/data/content-details";
+import type { ServiceDetailContent } from "@/data/content-details";
+import { buildServiceDetailDraft } from "@/components/admin/service-detail-defaults";
+import RichTextEditor from "@/components/admin/RichTextEditor";
+import SeoFields from "@/components/admin/SeoFields";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import ImageUploadField from "@/components/admin/ImageUploadField";
 import {
   Table,
@@ -71,10 +75,14 @@ export default function AdminServices() {
     useServiceMutations();
   const [search, setSearch] = useState("");
   const [editing, setEditing] = useState<SiteService | null>(null);
-  const [detailEditing, setDetailEditing] = useState<{
-    service: SiteService;
-    detail: ServiceDetailContent;
-  } | null>(null);
+  const [detailDraft, setDetailDraft] = useState<ServiceDetailContent | null>(null);
+  const [editTab, setEditTab] = useState("info");
+
+  const openServiceEditor = (service: SiteService, tab = "info") => {
+    setEditing({ ...service });
+    setDetailDraft(buildServiceDetailDraft(service));
+    setEditTab(tab);
+  };
 
   const filtered = useMemo(() => {
     const q = search.trim().toLowerCase();
@@ -97,7 +105,7 @@ export default function AdminServices() {
   );
 
   const handleSave = async () => {
-    if (!editing?.title.trim() || !editing.slug.trim()) {
+    if (!editing?.title.trim() || !editing.slug.trim() || !detailDraft) {
       toast({
         variant: "destructive",
         title: "Thiếu thông tin",
@@ -106,10 +114,26 @@ export default function AdminServices() {
       return;
     }
 
+    const serviceToSave: SiteService = {
+      ...editing,
+      image: detailDraft.image || editing.image,
+    };
+    const detailToSave: ServiceDetailContent = {
+      ...detailDraft,
+      title: detailDraft.title || editing.title,
+      category: detailDraft.category || editing.categoryLabel,
+      image: detailDraft.image || editing.image,
+    };
+
     try {
-      await saveService.mutateAsync(editing);
-      toast({ title: "Đã lưu", description: "Dịch vụ đã cập nhật lên website." });
+      await saveService.mutateAsync(serviceToSave);
+      await saveDetail.mutateAsync({ id: editing.id, detail: detailToSave });
+      toast({
+        title: "Đã lưu",
+        description: "Dịch vụ và nội dung bài viết đã cập nhật lên website.",
+      });
       setEditing(null);
+      setDetailDraft(null);
     } catch {
       toast({
         variant: "destructive",
@@ -168,7 +192,7 @@ export default function AdminServices() {
               )}
               <Button
                 className="rounded-2xl bg-[#1A1A1A] text-[10px] uppercase tracking-widest font-bold"
-                onClick={() => setEditing(emptyService())}
+                onClick={() => openServiceEditor(emptyService())}
               >
                 <Plus size={16} className="mr-2" />
                 Thêm dịch vụ
@@ -286,31 +310,15 @@ export default function AdminServices() {
                             <ExternalLink size={14} className="mr-2" />
                             Xem trên web
                           </DropdownMenuItem>
-                          <DropdownMenuItem onClick={() => setEditing({ ...service })}>
+                          <DropdownMenuItem onClick={() => openServiceEditor(service)}>
                             <Edit2 size={14} className="mr-2" />
                             Chỉnh sửa
                           </DropdownMenuItem>
                           <DropdownMenuItem
-                            onClick={() => {
-                              const fallback = SERVICE_DETAIL_DATA[service.slug];
-                              setDetailEditing({
-                                service,
-                                detail: service.detail ??
-                                  fallback ?? {
-                                    title: service.title,
-                                    category: service.categoryLabel,
-                                    image: service.image,
-                                    date: "—",
-                                    author: service.author,
-                                    readTime: "5 phút đọc",
-                                    intro: service.bullets.join(". ") || service.title,
-                                    sections: [],
-                                  },
-                              });
-                            }}
+                            onClick={() => openServiceEditor(service, "content")}
                           >
                             <FileText size={14} className="mr-2" />
-                            Soạn bài viết & SEO
+                            Soạn nội dung bài viết
                           </DropdownMenuItem>
                           <DropdownMenuItem onClick={() => handleToggle(service)}>
                             {service.status === "published" ? (
@@ -336,111 +344,201 @@ export default function AdminServices() {
         </div>
       </div>
 
-      <Dialog open={!!editing} onOpenChange={(open) => !open && setEditing(null)}>
-        <DialogContent className="rounded-[2rem] max-w-lg max-h-[min(92dvh,92vh)] overflow-y-auto">
-          <DialogHeader>
+      <Dialog
+        open={!!editing}
+        onOpenChange={(open) => {
+          if (!open) {
+            setEditing(null);
+            setDetailDraft(null);
+          }
+        }}
+      >
+        <DialogContent className="rounded-[2rem] max-w-4xl max-h-[calc(100dvh-2rem)] overflow-hidden flex flex-col p-0 gap-0">
+          <DialogHeader className="px-6 pt-6 pb-2 shrink-0">
             <DialogTitle className="font-serif">
               {editing?.title ? "Chỉnh sửa dịch vụ" : "Thêm dịch vụ"}
             </DialogTitle>
+            <p className="text-xs text-black/45 pt-1">
+              Chọn tab <strong className="text-black/70">Nội dung bài viết</strong> để
+              soạn nội dung hiển thị trên trang chi tiết.
+            </p>
           </DialogHeader>
-          {editing && (
-            <div className="space-y-4">
-              <div className="space-y-2">
-                <Label>Tên dịch vụ</Label>
-                <Input
-                  value={editing.title}
-                  onChange={(e) => setEditing({ ...editing, title: e.target.value })}
-                />
-              </div>
-              <div className="space-y-2">
-                <Label>Slug (URL)</Label>
-                <Input
-                  value={editing.slug}
-                  onChange={(e) => setEditing({ ...editing, slug: e.target.value })}
-                  placeholder="amazing-brows-fiber"
-                />
-              </div>
-              <div className="grid grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <Label>Danh mục</Label>
-                  <select
-                    className="w-full h-10 rounded-md border px-3 text-sm"
-                    value={editing.category}
-                    onChange={(e) => {
-                      const category = e.target.value as ServiceCategory;
-                      setEditing({
-                        ...editing,
-                        category,
-                        categoryLabel: category === "spa" ? "Spa" : "Phun Xăm",
+
+          {editing && detailDraft && (
+            <Tabs
+              value={editTab}
+              onValueChange={setEditTab}
+              className="flex flex-col flex-1 min-h-0"
+            >
+              <TabsList className="mx-6 mb-0 w-auto justify-start rounded-xl bg-black/[0.04] p-1 shrink-0">
+                <TabsTrigger value="info" className="rounded-lg text-xs">
+                  Thông tin
+                </TabsTrigger>
+                <TabsTrigger value="content" className="rounded-lg text-xs">
+                  Nội dung bài viết
+                </TabsTrigger>
+                <TabsTrigger value="seo" className="rounded-lg text-xs">
+                  SEO
+                </TabsTrigger>
+              </TabsList>
+
+              <div className="flex-1 overflow-y-auto px-6 py-4 min-h-0">
+                <TabsContent value="info" className="mt-0 space-y-4">
+                  <div className="space-y-2">
+                    <Label>Tên dịch vụ</Label>
+                    <Input
+                      value={editing.title}
+                      onChange={(e) => {
+                        const title = e.target.value;
+                        setEditing({ ...editing, title });
+                        setDetailDraft({ ...detailDraft, title });
+                      }}
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label>Slug (URL)</Label>
+                    <Input
+                      value={editing.slug}
+                      onChange={(e) => setEditing({ ...editing, slug: e.target.value })}
+                      placeholder="amazing-brows-fiber"
+                    />
+                  </div>
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                      <Label>Danh mục</Label>
+                      <select
+                        className="w-full h-10 rounded-md border px-3 text-sm"
+                        value={editing.category}
+                        onChange={(e) => {
+                          const category = e.target.value as ServiceCategory;
+                          const categoryLabel =
+                            category === "spa" ? "Spa" : "Phun Xăm";
+                          setEditing({ ...editing, category, categoryLabel });
+                          setDetailDraft({ ...detailDraft, category: categoryLabel });
+                        }}
+                      >
+                        <option value="phun-xam">Phun Xăm</option>
+                        <option value="spa">Spa</option>
+                      </select>
+                    </div>
+                    <div className="space-y-2">
+                      <Label>Giá hiển thị</Label>
+                      <Input
+                        value={editing.price}
+                        onChange={(e) =>
+                          setEditing({ ...editing, price: e.target.value })
+                        }
+                      />
+                    </div>
+                  </div>
+                  <ImageUploadField
+                    label="Ảnh đại diện dịch vụ"
+                    value={editing.image}
+                    onChange={(image) => {
+                      setEditing({ ...editing, image });
+                      setDetailDraft({ ...detailDraft, image });
+                    }}
+                    folder="services"
+                    hint="Hiển thị trên danh sách & trang chi tiết"
+                  />
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                      <Label>Ngày đăng (trang chi tiết)</Label>
+                      <Input
+                        value={detailDraft.date}
+                        onChange={(e) =>
+                          setDetailDraft({ ...detailDraft, date: e.target.value })
+                        }
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <Label>Thời gian đọc</Label>
+                      <Input
+                        value={detailDraft.readTime}
+                        onChange={(e) =>
+                          setDetailDraft({ ...detailDraft, readTime: e.target.value })
+                        }
+                      />
+                    </div>
+                  </div>
+                </TabsContent>
+
+                <TabsContent value="content" className="mt-0 space-y-4">
+                  <div className="space-y-2">
+                    <Label>Mô tả ngắn</Label>
+                    <Textarea
+                      rows={3}
+                      value={detailDraft.metaDescription ?? ""}
+                      onChange={(e) =>
+                        setDetailDraft({
+                          ...detailDraft,
+                          metaDescription: e.target.value,
+                        })
+                      }
+                      placeholder="Tóm tắt 1–2 câu cho SEO và danh sách"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label>Đoạn mở đầu</Label>
+                    <Textarea
+                      rows={4}
+                      value={detailDraft.intro}
+                      onChange={(e) =>
+                        setDetailDraft({ ...detailDraft, intro: e.target.value })
+                      }
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label>Nội dung bài viết</Label>
+                    <RichTextEditor
+                      value={detailDraft.bodyHtml ?? ""}
+                      onChange={(bodyHtml) =>
+                        setDetailDraft({ ...detailDraft, bodyHtml })
+                      }
+                      uploadFolder="articles"
+                    />
+                  </div>
+                </TabsContent>
+
+                <TabsContent value="seo" className="mt-0">
+                  <SeoFields
+                    value={detailDraft.seo ?? {}}
+                    onChange={(seo) => setDetailDraft({ ...detailDraft, seo })}
+                    onGenerate={() => {
+                      const meta = detailDraft.metaDescription || detailDraft.intro;
+                      setDetailDraft({
+                        ...detailDraft,
+                        seo: {
+                          title: (detailDraft.seo?.title || detailDraft.title).slice(
+                            0,
+                            70,
+                          ),
+                          description: (detailDraft.seo?.description || meta).slice(
+                            0,
+                            160,
+                          ),
+                          keywords:
+                            detailDraft.seo?.keywords || editing.title,
+                        },
                       });
                     }}
-                  >
-                    <option value="phun-xam">Phun Xăm</option>
-                    <option value="spa">Spa</option>
-                  </select>
-                </div>
-                <div className="space-y-2">
-                  <Label>Giá hiển thị</Label>
-                  <Input
-                    value={editing.price}
-                    onChange={(e) => setEditing({ ...editing, price: e.target.value })}
                   />
-                </div>
+                </TabsContent>
               </div>
-              <ImageUploadField
-                label="Ảnh đại diện dịch vụ"
-                value={editing.image}
-                onChange={(image) => setEditing({ ...editing, image })}
-                folder="services"
-                hint="Hiển thị trên danh sách & trang chi tiết"
-              />
-              <Button
-                className="w-full rounded-xl bg-[#1A1A1A]"
-                onClick={handleSave}
-                disabled={saveService.isPending}
-              >
-                Lưu & đăng lên website
-              </Button>
-            </div>
+            </Tabs>
           )}
+
+          <div className="shrink-0 border-t border-black/5 px-6 py-4">
+            <Button
+              className="w-full rounded-xl bg-[#1A1A1A]"
+              onClick={handleSave}
+              disabled={saveService.isPending || saveDetail.isPending}
+            >
+              Lưu & đăng lên website
+            </Button>
+          </div>
         </DialogContent>
       </Dialog>
-
-      <ArticleContentEditor
-        open={!!detailEditing}
-        onOpenChange={(open) => !open && setDetailEditing(null)}
-        title={`Soạn nội dung: ${detailEditing?.service.title ?? ""}`}
-        slug={detailEditing?.service.slug}
-        publicPathPrefix="/dich-vu/"
-        initial={detailEditing?.detail ?? null}
-        saving={saveDetail.isPending}
-        infoFields={[
-          { key: "category", label: "Nhãn danh mục" },
-          { key: "date", label: "Ngày đăng" },
-          { key: "author", label: "Tác giả" },
-          { key: "readTime", label: "Thời gian đọc" },
-        ]}
-        onSave={async (detail) => {
-          if (!detailEditing) return;
-          try {
-            await saveDetail.mutateAsync({
-              id: detailEditing.service.id,
-              detail: { ...detailEditing.detail, ...detail },
-            });
-            toast({
-              title: "Đã lưu nội dung",
-              description: "Trang chi tiết dịch vụ đã cập nhật.",
-            });
-            setDetailEditing(null);
-          } catch {
-            toast({
-              variant: "destructive",
-              title: "Lỗi lưu",
-              description: "Thêm cột detail_json trong Supabase hoặc đồng bộ lại.",
-            });
-          }
-        }}
-      />
     </AdminLayout>
   );
 }
