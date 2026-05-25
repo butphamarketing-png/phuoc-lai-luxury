@@ -71,7 +71,7 @@ const STATIC_ROUTES: Record<string, SeoMeta> = {
     description:
       "Câu chuyện Phuoc Lai Luxury — studio phun xăm và spa đẳng cấp tại Vũng Tàu với đội ngũ Master giàu kinh nghiệm.",
     path: "/ve-chung-toi",
-    image: "/Gioi-thieu-1.png",
+    image: "/slideshow-1.png",
   },
   "/dich-vu": {
     title: formatTitle("Dịch vụ phun xăm & spa"),

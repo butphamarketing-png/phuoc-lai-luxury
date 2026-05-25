@@ -14,7 +14,7 @@ const fadeUp = {
 export default function About() {
   const { language } = useLanguage();
   const [currentSlide, setCurrentSlide] = useState(0);
-  const slides = ["/Gioi-thieu-1.png", "/Gioi-thieu-2.png", "/Gioi-thieu-3.png"];
+  const slides = ["/slideshow-1.png", "/slideshow-2.png", "/slideshow-3.png"];
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -128,20 +128,35 @@ export default function About() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 1 }}
-            className="relative aspect-[3/4] overflow-hidden rounded-2xl shadow-lg border border-black/5"
+            className="relative aspect-[3/4] overflow-hidden rounded-2xl shadow-lg border border-black/5 group"
           >
             <AnimatePresence mode="wait">
               <motion.img
                 key={currentSlide}
                 src={slides[currentSlide]}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 1 }}
-                alt="Phuoc Lai Studio"
-                className="w-full h-full object-cover grayscale"
+                initial={{ opacity: 0, scale: 1.02 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.98 }}
+                transition={{ duration: 0.8 }}
+                alt={`Phuoc Lai Luxury ${currentSlide + 1}`}
+                className="w-full h-full object-cover"
               />
             </AnimatePresence>
+            <div className="absolute bottom-4 left-0 right-0 flex justify-center gap-2 z-10">
+              {slides.map((_, i) => (
+                <button
+                  key={i}
+                  type="button"
+                  aria-label={`Ảnh ${i + 1}`}
+                  onClick={() => setCurrentSlide(i)}
+                  className={`h-1.5 rounded-full transition-all ${
+                    i === currentSlide
+                      ? "w-8 bg-white"
+                      : "w-1.5 bg-white/40 hover:bg-white/70"
+                  }`}
+                />
+              ))}
+            </div>
             <div className="absolute -bottom-6 -left-6 w-2/3 aspect-square border border-foreground/10 rounded-2xl -z-10" />
           </motion.div>
         </div>
