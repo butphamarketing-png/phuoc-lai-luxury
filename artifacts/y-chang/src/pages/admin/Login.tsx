@@ -5,7 +5,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
-import { ShieldCheck, Lock, Mail } from "lucide-react";
+import { Lock, Mail } from "lucide-react";
+import logoImg from "@/assets/logo.png";
 import { getSupabaseClient, isSupabaseConfigured } from "@/lib/supabase";
 import { ADMIN_DASHBOARD } from "@/lib/admin-paths";
 
@@ -70,11 +71,15 @@ export default function AdminLogin() {
           <div className="bg-[#1A1A1A] p-10 text-center relative overflow-hidden">
             <motion.div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full -mr-16 -mt-16" />
             <div className="relative z-10">
-              <div className="w-16 h-16 bg-white/10 rounded-2xl flex items-center justify-center mx-auto mb-6 border border-white/10">
-                <ShieldCheck className="text-white" size={32} strokeWidth={1.5} />
+              <div className="w-20 h-20 rounded-2xl overflow-hidden mx-auto mb-6 ring-2 ring-white/15 bg-black">
+                <img
+                  src={logoImg}
+                  alt="Phuoc Lai Luxury"
+                  className="w-full h-full object-cover"
+                />
               </div>
-              <h1 className="text-2xl font-serif text-white tracking-widest uppercase">Admin Portal</h1>
-              <p className="text-white/40 text-[10px] uppercase tracking-[0.3em] mt-2">Phuoc Lai Luxury Academy</p>
+              <h1 className="text-2xl font-serif text-white tracking-widest uppercase">Phuoc Lai</h1>
+              <p className="text-white/40 text-[10px] uppercase tracking-[0.3em] mt-2">Luxury — Quản trị</p>
             </div>
           </div>
 

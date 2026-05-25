@@ -26,6 +26,7 @@ import {
   ADMIN_TRAINING,
   adminPath,
 } from "@/lib/admin-paths";
+import logoImg from "@/assets/logo.png";
 
 interface AdminLayoutProps {
   children: ReactNode;
@@ -80,12 +81,16 @@ export default function AdminLayout({ children, title }: AdminLayoutProps) {
       <aside className="hidden lg:flex w-72 bg-[#1A1A1A] text-white flex-col fixed inset-y-0 z-50">
         <div className="p-8 border-b border-white/5">
           <Link href={ADMIN_DASHBOARD} className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-white rounded-xl flex items-center justify-center">
-              <span className="text-black font-serif font-bold text-xl">PL</span>
+            <div className="w-10 h-10 rounded-xl overflow-hidden bg-black flex-shrink-0 ring-1 ring-white/10">
+              <img
+                src={logoImg}
+                alt="Phuoc Lai Luxury"
+                className="w-full h-full object-cover"
+              />
             </div>
             <div>
-              <h2 className="text-sm font-serif font-bold tracking-widest uppercase">Admin</h2>
-              <p className="text-[9px] text-white/40 uppercase tracking-[0.2em]">Luxury Academy</p>
+              <h2 className="text-sm font-serif font-bold tracking-widest uppercase">Phuoc Lai</h2>
+              <p className="text-[9px] text-white/40 uppercase tracking-[0.2em]">Luxury</p>
             </div>
           </Link>
         </div>
@@ -189,8 +194,10 @@ export default function AdminLayout({ children, title }: AdminLayoutProps) {
                 <p className="text-[9px] text-black/30 uppercase tracking-widest">{user.email}</p>
               </div>
               <Avatar className="h-10 w-10 border border-black/5 p-0.5">
-                <AvatarImage src="/pop-up-1.jpg" className="object-cover rounded-full" />
-                <AvatarFallback>PL</AvatarFallback>
+                <AvatarImage src={logoImg} className="object-cover rounded-full" />
+                <AvatarFallback className="bg-black text-white text-[10px] font-bold">
+                  PL
+                </AvatarFallback>
               </Avatar>
             </div>
           </div>
@@ -222,10 +229,16 @@ export default function AdminLayout({ children, title }: AdminLayoutProps) {
             >
               <div className="p-8 flex items-center justify-between border-b border-white/5">
                 <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center">
-                    <span className="text-black font-serif font-bold text-sm">PL</span>
+                  <div className="w-8 h-8 rounded-lg overflow-hidden bg-black flex-shrink-0 ring-1 ring-white/10">
+                    <img
+                      src={logoImg}
+                      alt="Phuoc Lai Luxury"
+                      className="w-full h-full object-cover"
+                    />
                   </div>
-                  <h2 className="text-xs font-serif font-bold tracking-widest uppercase text-white">Admin</h2>
+                  <h2 className="text-xs font-serif font-bold tracking-widest uppercase text-white">
+                    Phuoc Lai
+                  </h2>
                 </div>
                 <button onClick={() => setIsMobileMenuOpen(false)} className="text-white/40 hover:text-white transition-colors">
                   <X size={20} />
