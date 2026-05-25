@@ -1,3 +1,4 @@
+-- LEGACY: đã gộp trong supabase/setup.sql
 -- Chạy trong Supabase → SQL Editor (sau schema.sql)
 -- Bucket ảnh cho CMS admin
 

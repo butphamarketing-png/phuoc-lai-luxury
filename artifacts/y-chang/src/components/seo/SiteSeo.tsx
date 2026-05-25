@@ -9,11 +9,12 @@ import {
   isServiceDetailPath,
   isTrainingDetailPath,
 } from "@/lib/seo";
+import { isAdminPath, isLegacyAdminPath } from "@/lib/admin-paths";
 
 export default function SiteSeo() {
   const [pathname] = useLocation();
 
-  const isAdmin = pathname.startsWith("/admin");
+  const isAdmin = isAdminPath(pathname) || isLegacyAdminPath(pathname);
   const serviceSlug = isServiceDetailPath(pathname);
   const trainingSlug = isTrainingDetailPath(pathname);
   const isDetailPage = Boolean(serviceSlug || trainingSlug);

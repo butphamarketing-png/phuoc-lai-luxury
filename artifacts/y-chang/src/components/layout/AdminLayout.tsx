@@ -19,6 +19,13 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import {
+  ADMIN_DASHBOARD,
+  ADMIN_LOGIN,
+  ADMIN_SERVICES,
+  ADMIN_TRAINING,
+  adminPath,
+} from "@/lib/admin-paths";
 
 interface AdminLayoutProps {
   children: ReactNode;
@@ -26,12 +33,12 @@ interface AdminLayoutProps {
 }
 
 const menuItems = [
-  { icon: LayoutDashboard, label: "Dashboard", href: "/admin/dashboard", hint: "Tổng quan" },
-  { icon: Sparkles, label: "Dịch vụ", href: "/admin/services", hint: "Trang /dich-vu" },
-  { icon: BookOpen, label: "Đào tạo", href: "/admin/training", hint: "Trang /dao-tao" },
-  { icon: Users, label: "Khách hàng", href: "/admin/customers", hint: "Sắp ra mắt" },
-  { icon: MessageSquare, label: "Đánh giá", href: "/admin/feedback", hint: "Sắp ra mắt" },
-  { icon: Settings, label: "Cài đặt", href: "/admin/settings", hint: "Sắp ra mắt" },
+  { icon: LayoutDashboard, label: "Dashboard", href: ADMIN_DASHBOARD, hint: "Tổng quan" },
+  { icon: Sparkles, label: "Dịch vụ", href: ADMIN_SERVICES, hint: "Trang /dich-vu" },
+  { icon: BookOpen, label: "Đào tạo", href: ADMIN_TRAINING, hint: "Trang /dao-tao" },
+  { icon: Users, label: "Khách hàng", href: adminPath("customers"), hint: "Sắp ra mắt" },
+  { icon: MessageSquare, label: "Đánh giá", href: adminPath("feedback"), hint: "Sắp ra mắt" },
+  { icon: Settings, label: "Cài đặt", href: adminPath("settings"), hint: "Sắp ra mắt" },
 ];
 
 export default function AdminLayout({ children, title }: AdminLayoutProps) {
@@ -42,13 +49,13 @@ export default function AdminLayout({ children, title }: AdminLayoutProps) {
 
   useEffect(() => {
     if (!isLoading && (!isConfigured || !isAuthenticated)) {
-      setLocation("/admin/login");
+      setLocation(ADMIN_LOGIN);
     }
   }, [isLoading, isConfigured, isAuthenticated, setLocation]);
 
   const handleLogout = async () => {
     await signOut();
-    setLocation("/admin/login");
+    setLocation(ADMIN_LOGIN);
   };
 
   if (isLoading) {
@@ -72,7 +79,7 @@ export default function AdminLayout({ children, title }: AdminLayoutProps) {
       {/* Sidebar Desktop */}
       <aside className="hidden lg:flex w-72 bg-[#1A1A1A] text-white flex-col fixed inset-y-0 z-50">
         <div className="p-8 border-b border-white/5">
-          <Link href="/admin/dashboard" className="flex items-center gap-3">
+          <Link href={ADMIN_DASHBOARD} className="flex items-center gap-3">
             <div className="w-10 h-10 bg-white rounded-xl flex items-center justify-center">
               <span className="text-black font-serif font-bold text-xl">PL</span>
             </div>

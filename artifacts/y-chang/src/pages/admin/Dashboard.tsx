@@ -13,6 +13,7 @@ import {
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useAdminServices, useAdminTraining } from "@/hooks/use-site-content";
+import { ADMIN_SERVICES, ADMIN_TRAINING } from "@/lib/admin-paths";
 
 export default function AdminDashboard() {
   const { data: services = [] } = useAdminServices();
@@ -51,12 +52,12 @@ export default function AdminDashboard() {
               Chỉnh dịch vụ & khóa học tại admin — thay đổi hiển thị ngay trên website công khai.
             </p>
             <div className="flex flex-wrap gap-4">
-              <Link href="/admin/services">
+              <Link href={ADMIN_SERVICES}>
                 <a className="bg-white text-black px-8 py-3 rounded-full text-[10px] font-bold uppercase tracking-[0.2em] hover:bg-white/90 transition-all inline-block">
                   Quản lý dịch vụ
                 </a>
               </Link>
-              <Link href="/admin/training">
+              <Link href={ADMIN_TRAINING}>
                 <a className="bg-white/10 text-white border border-white/10 px-8 py-3 rounded-full text-[10px] font-bold uppercase tracking-[0.2em] hover:bg-white/20 transition-all inline-block">
                   Quản lý đào tạo
                 </a>

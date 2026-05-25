@@ -172,7 +172,7 @@ export function getAdminSeo(): SeoMeta {
   return {
     title: "Admin | Phuoc Lai Luxury",
     description: "Hệ thống quản trị nội dung website Phuoc Lai Luxury.",
-    path: "/admin",
+    path: "/adminbp",
     noindex: true,
   };
 }

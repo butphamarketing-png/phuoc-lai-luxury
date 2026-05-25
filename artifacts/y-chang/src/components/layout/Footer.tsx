@@ -177,7 +177,19 @@ export default function Footer() {
 
         <div className="border-t border-white/10 pt-8 text-center">
           <p className="text-xs font-light text-white/40 uppercase tracking-widest">
-            &copy; {new Date().getFullYear()} PHUOC LAI PERMANENT MAKEUP. ALL RIGHTS RESERVED.
+            &copy; {new Date().getFullYear()} PHUOC LAI LUXURY.{" "}
+            <span className="normal-case tracking-normal">
+              DESIGN BY{" "}
+              <a
+                href="https://butphamarketing.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-white/70 transition-colors underline underline-offset-2"
+              >
+                BUTPHAMARKETING.COM
+              </a>
+              .
+            </span>
           </p>
         </div>
       </div>

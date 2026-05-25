@@ -22,12 +22,15 @@ import Preloader from "@/components/layout/Preloader";
 import PromotionModal from "@/components/layout/PromotionModal";
 import FloatingContact from "@/components/layout/FloatingContact";
 import SiteSeo from "@/components/seo/SiteSeo";
+import AdminLegacyRedirect from "@/components/admin/AdminLegacyRedirect";
+import { isAdminPath, isLegacyAdminPath } from "@/lib/admin-paths";
 
 const queryClient = new QueryClient();
 
 function Router() {
   // Sử dụng window.location.pathname để kiểm tra trang Admin chính xác nhất ngay từ lúc load trang
-  const isAdminPage = window.location.pathname.startsWith("/admin");
+  const pathname = window.location.pathname;
+  const isAdminPage = isAdminPath(pathname) || isLegacyAdminPath(pathname);
 
   return (
     <div className="flex flex-col min-h-[100dvh] overflow-x-hidden bg-white">
@@ -67,23 +70,41 @@ function Router() {
           </Route>
           <Route path="/dao-tao/:slug" component={TrainingDetail} />
 
-          {/* Admin Routes */}
-          <Route path="/admin/login">
+          {/* Admin CMS — đăng nhập: /adminbp */}
+          <Route path="/adminbp">
             <AdminLogin />
           </Route>
-          <Route path="/admin/dashboard">
+          <Route path="/adminbp/dashboard">
             <AdminDashboard />
           </Route>
-          <Route path="/admin/services">
+          <Route path="/adminbp/services">
             <AdminServices />
           </Route>
-          <Route path="/admin/training">
+          <Route path="/adminbp/training">
             <AdminTraining />
           </Route>
-          
-          {/* Fallback cho các trang admin khác chưa tạo */}
-          <Route path="/admin/:rest*">
+          <Route path="/adminbp/:rest*">
             <AdminDashboard />
+          </Route>
+
+          {/* Chuyển hướng đường dẫn cũ /admin */}
+          <Route path="/admin/login">
+            <AdminLegacyRedirect />
+          </Route>
+          <Route path="/admin/dashboard">
+            <AdminLegacyRedirect />
+          </Route>
+          <Route path="/admin/services">
+            <AdminLegacyRedirect />
+          </Route>
+          <Route path="/admin/training">
+            <AdminLegacyRedirect />
+          </Route>
+          <Route path="/admin/:rest*">
+            <AdminLegacyRedirect />
+          </Route>
+          <Route path="/admin">
+            <AdminLegacyRedirect />
           </Route>
 
           <Route path="/feedback" component={Feedback} />

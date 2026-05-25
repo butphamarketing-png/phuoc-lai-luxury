@@ -7,6 +7,7 @@ import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
 import { ShieldCheck, Lock, Mail } from "lucide-react";
 import { getSupabaseClient, isSupabaseConfigured } from "@/lib/supabase";
+import { ADMIN_DASHBOARD } from "@/lib/admin-paths";
 
 export default function AdminLogin() {
   const [, setLocation] = useLocation();
@@ -55,7 +56,7 @@ export default function AdminLogin() {
       title: "Đăng nhập thành công",
       description: "Chào mừng trở lại hệ thống quản trị.",
     });
-    setLocation("/admin/dashboard");
+    setLocation(ADMIN_DASHBOARD);
   };
 
   return (

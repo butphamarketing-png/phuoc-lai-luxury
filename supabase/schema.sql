@@ -1,3 +1,4 @@
+-- LEGACY: dùng supabase/setup.sql thay file này (đầy đủ hơn)
 -- Chạy trong Supabase → SQL Editor (một lần)
 -- Liên kết admin với trang công khai
 -- Sau đó chạy thêm: supabase/storage.sql (upload ảnh CMS)
