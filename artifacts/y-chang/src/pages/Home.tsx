@@ -1,10 +1,11 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { ChevronLeft, ChevronRight, Diamond, Leaf, Shield, User, ShieldCheck, Plus, Star } from "lucide-react";
 import BookingSection from "@/components/sections/BookingSection";
 import SocialSection from "@/components/sections/SocialSection";
+import { usePublicTraining } from "@/hooks/use-site-content";
 
 const btnPrimary =
   "rounded-full bg-[#1A1A1A] text-white hover:bg-black px-10 py-6 text-[11px] uppercase tracking-[0.25em] border-none";
@@ -36,12 +37,8 @@ export default function Home() {
     return () => clearInterval(timer);
   }, [aboutSlides.length]);
 
-  const services = [
-    { id: "brows", slug: "dieu-khac-hairstroke", img: "/service-brows.png", title: "ĐIÊU KHẮC SỢI", desc: "Kỹ thuật tạo sợi siêu thực." },
-    { id: "ombre", slug: "phun-may-ombre", img: "/service-ombre.png", title: "PHUN MÀY OMBRE", desc: "Hiệu ứng rải hạt vi điểm." },
-    { id: "combo", slug: "combo-brows", img: "/service-combo.png", title: "COMBO BROWS", desc: "Kết hợp điêu khắc và phun ombre." },
-    { id: "correction", slug: "xu-ly-may-hong", img: "/service-correction.png", title: "XỬ LÝ MÀY HỎNG", desc: "Chỉnh sửa, hút dung dịch, xóa xăm." },
-  ];
+  const { data: publicTrainingPhunXam = [] } = usePublicTraining("phun-xam");
+  const { data: publicTrainingSpa = [] } = usePublicTraining("spa");
 
   const trustItems = [
     { icon: Diamond, title: "KỸ THUẬT ĐỘC QUYỀN", desc: "Dịch vụ đẳng cấp 5 sao" },
@@ -58,19 +55,25 @@ export default function Home() {
     { id: "spa", title: "Spa", img: "/studio-interior.png", slug: "spa" },
   ];
 
-  const trainingCourses = {
-    "phun-xam": [
-      { img: "/training-1.png", level: "KHÓA NÂNG CAO", slug: "amazing-brows", title: "KHÓA HỌC SỢI AMAZINGBROWS NÂNG CAO", desc: "Kỹ thuật tạo sợi siêu thực AMAZINGBROWS đỉnh cao dành cho thợ lành nghề." },
-      { img: "/training-2.png", level: "KHÓA CHUYÊN SÂU", slug: "lip-master", title: "KHÓA HỌC MÔI CHUYÊN SÂU", desc: "Kỹ thuật phun môi SEXYLIPS không sưng, bám màu nhanh và tự nhiên." },
-      { img: "/training-3.png", level: "KHÓA TỔNG HỢP", slug: "master-advanced", title: "KHÓA HỌC TỔNG HỢP CHUYÊN SÂU", desc: "Trọn bộ kiến thức từ sợi, mày, môi và mí phượng hoàng chuyên sâu." },
-    ],
-    "spa": [
-      { img: "/training-1.png", level: "KHÓA CƠ BẢN", slug: "spa-basic", title: "KHÓA HỌC SPA BASIC", desc: "Kiến thức nền tảng về chăm sóc da và các quy trình spa cơ bản." },
-      { img: "/training-2.png", level: "KHÓA NÂNG CAO", slug: "spa-advanced", title: "KHÓA HỌC SPA ADVANCED", desc: "Kỹ thuật chăm sóc da chuyên sâu và sử dụng công nghệ cao." },
-      { img: "/training-3.png", level: "KHÓA CHUYÊN GIA", slug: "spa-expert", title: "KHÓA HỌC SPA EXPERT", desc: "Đào tạo quản lý và vận hành hệ thống spa chuyên nghiệp." },
-      { img: "/training-4.png", level: "KHÓA TRỊ LIỆU", slug: "spa-therapy", title: "KHÓA HỌC SPA THERAPY", desc: "Các liệu pháp trị liệu đặc biệt và phục hồi da chuyên sâu." },
-    ]
-  };
+  const trainingCourses = useMemo(
+    () => ({
+      "phun-xam": publicTrainingPhunXam.slice(0, 4).map((c) => ({
+        img: c.image,
+        level: c.level.toUpperCase(),
+        slug: c.slug,
+        title: c.title.toUpperCase(),
+        desc: c.description,
+      })),
+      spa: publicTrainingSpa.slice(0, 4).map((c) => ({
+        img: c.image,
+        level: c.level.toUpperCase(),
+        slug: c.slug,
+        title: c.title.toUpperCase(),
+        desc: c.description,
+      })),
+    }),
+    [publicTrainingPhunXam, publicTrainingSpa],
+  );
 
   const feedbackItems = [
     { name: "THÙY LINH", course: "Học viên khóa Master", quote: "Khóa học rất bài bản, giảng dạy dễ hiểu, thực hành nhiều." },
@@ -145,16 +148,19 @@ export default function Home() {
           ))}
         </div>
 
-        {/* Brand signature overlay - Minimal and Elegant */}
+        {/* Brand signature overlay */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none z-10 w-full px-6">
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 1, duration: 1.5 }}
             className="text-center"
           >
-            <h1 className="text-white/10 text-[14px] sm:text-[20px] md:text-[32px] uppercase tracking-[1.8em] font-light drop-shadow-2xl">
-              PHUOC LAI
+            <h1 className="font-serif text-white text-lg sm:text-2xl md:text-4xl uppercase tracking-[0.35em] md:tracking-[0.5em] font-light drop-shadow-2xl max-w-4xl mx-auto leading-snug">
+              Phuoc Lai Luxury
+              <span className="block text-[10px] sm:text-xs md:text-sm tracking-[0.4em] text-gold/90 mt-3 md:mt-4 font-sans normal-case">
+                Phun xăm thẩm mỹ &amp; đào tạo nghề Vũng Tàu
+              </span>
             </h1>
             <div className="w-24 h-px bg-gold/30 mx-auto mt-4" />
           </motion.div>

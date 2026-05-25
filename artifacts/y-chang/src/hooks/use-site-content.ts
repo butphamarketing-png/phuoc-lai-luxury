@@ -5,12 +5,20 @@ import {
   loadTrainingCourses,
   loadPublishedServices,
   loadPublicTraining,
+  loadServiceDetail,
+  loadTrainingDetail,
   updateServiceStatus,
   updateTrainingStatus,
+  updateServiceDetail,
+  updateTrainingDetail,
   upsertService,
   upsertTrainingCourse,
   seedCatalogToSupabase,
 } from "@/lib/site-content";
+import type {
+  ServiceDetailContent,
+  TrainingDetailContent,
+} from "@/data/content-details";
 
 export const servicesQueryKey = ["site-services"] as const;
 export const trainingQueryKey = ["site-training"] as const;
@@ -43,6 +51,22 @@ export function usePublicTraining(category?: SiteTrainingCourse["category"]) {
   });
 }
 
+export function useServiceDetail(slug: string) {
+  return useQuery({
+    queryKey: [...servicesQueryKey, "detail", slug],
+    queryFn: () => loadServiceDetail(slug),
+    enabled: !!slug,
+  });
+}
+
+export function useTrainingDetail(slug: string) {
+  return useQuery({
+    queryKey: [...trainingQueryKey, "detail", slug],
+    queryFn: () => loadTrainingDetail(slug),
+    enabled: !!slug,
+  });
+}
+
 export function useServiceMutations() {
   const queryClient = useQueryClient();
 
@@ -66,7 +90,18 @@ export function useServiceMutations() {
     onSuccess: invalidate,
   });
 
-  return { toggleStatus, saveService, seedCatalog };
+  const saveDetail = useMutation({
+    mutationFn: ({
+      id,
+      detail,
+    }: {
+      id: string;
+      detail: ServiceDetailContent;
+    }) => updateServiceDetail(id, detail),
+    onSuccess: invalidate,
+  });
+
+  return { toggleStatus, saveService, saveDetail, seedCatalog };
 }
 
 export function useTrainingMutations() {
@@ -92,5 +127,16 @@ export function useTrainingMutations() {
     onSuccess: invalidate,
   });
 
-  return { toggleStatus, saveCourse, seedCatalog };
+  const saveDetail = useMutation({
+    mutationFn: ({
+      id,
+      detail,
+    }: {
+      id: string;
+      detail: TrainingDetailContent;
+    }) => updateTrainingDetail(id, detail),
+    onSuccess: invalidate,
+  });
+
+  return { toggleStatus, saveCourse, saveDetail, seedCatalog };
 }

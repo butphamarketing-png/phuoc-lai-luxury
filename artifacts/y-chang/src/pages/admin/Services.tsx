@@ -11,10 +11,14 @@ import {
   EyeOff,
   ExternalLink,
   Database,
+  FileText,
 } from "lucide-react";
+import ArticleContentEditor from "@/components/admin/ArticleContentEditor";
+import { SERVICE_DETAIL_DATA, type ServiceDetailContent } from "@/data/content-details";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import ImageUploadField from "@/components/admin/ImageUploadField";
 import {
   Table,
   TableBody,
@@ -63,9 +67,14 @@ const emptyService = (): SiteService => ({
 export default function AdminServices() {
   const { toast } = useToast();
   const { data: services = [], isLoading, isError } = useAdminServices();
-  const { toggleStatus, saveService, seedCatalog } = useServiceMutations();
+  const { toggleStatus, saveService, saveDetail, seedCatalog } =
+    useServiceMutations();
   const [search, setSearch] = useState("");
   const [editing, setEditing] = useState<SiteService | null>(null);
+  const [detailEditing, setDetailEditing] = useState<{
+    service: SiteService;
+    detail: ServiceDetailContent;
+  } | null>(null);
 
   const filtered = useMemo(() => {
     const q = search.trim().toLowerCase();
@@ -281,6 +290,28 @@ export default function AdminServices() {
                             <Edit2 size={14} className="mr-2" />
                             Chỉnh sửa
                           </DropdownMenuItem>
+                          <DropdownMenuItem
+                            onClick={() => {
+                              const fallback = SERVICE_DETAIL_DATA[service.slug];
+                              setDetailEditing({
+                                service,
+                                detail: service.detail ??
+                                  fallback ?? {
+                                    title: service.title,
+                                    category: service.categoryLabel,
+                                    image: service.image,
+                                    date: "—",
+                                    author: service.author,
+                                    readTime: "5 phút đọc",
+                                    intro: service.bullets.join(". ") || service.title,
+                                    sections: [],
+                                  },
+                              });
+                            }}
+                          >
+                            <FileText size={14} className="mr-2" />
+                            Soạn bài viết & SEO
+                          </DropdownMenuItem>
                           <DropdownMenuItem onClick={() => handleToggle(service)}>
                             {service.status === "published" ? (
                               <>
@@ -356,13 +387,13 @@ export default function AdminServices() {
                   />
                 </div>
               </div>
-              <div className="space-y-2">
-                <Label>Ảnh (đường dẫn)</Label>
-                <Input
-                  value={editing.image}
-                  onChange={(e) => setEditing({ ...editing, image: e.target.value })}
-                />
-              </div>
+              <ImageUploadField
+                label="Ảnh đại diện dịch vụ"
+                value={editing.image}
+                onChange={(image) => setEditing({ ...editing, image })}
+                folder="services"
+                hint="Hiển thị trên danh sách & trang chi tiết"
+              />
               <Button
                 className="w-full rounded-xl bg-[#1A1A1A]"
                 onClick={handleSave}
@@ -374,6 +405,42 @@ export default function AdminServices() {
           )}
         </DialogContent>
       </Dialog>
+
+      <ArticleContentEditor
+        open={!!detailEditing}
+        onOpenChange={(open) => !open && setDetailEditing(null)}
+        title={`Soạn nội dung: ${detailEditing?.service.title ?? ""}`}
+        slug={detailEditing?.service.slug}
+        publicPathPrefix="/dich-vu/"
+        initial={detailEditing?.detail ?? null}
+        saving={saveDetail.isPending}
+        infoFields={[
+          { key: "category", label: "Nhãn danh mục" },
+          { key: "date", label: "Ngày đăng" },
+          { key: "author", label: "Tác giả" },
+          { key: "readTime", label: "Thời gian đọc" },
+        ]}
+        onSave={async (detail) => {
+          if (!detailEditing) return;
+          try {
+            await saveDetail.mutateAsync({
+              id: detailEditing.service.id,
+              detail: { ...detailEditing.detail, ...detail },
+            });
+            toast({
+              title: "Đã lưu nội dung",
+              description: "Trang chi tiết dịch vụ đã cập nhật.",
+            });
+            setDetailEditing(null);
+          } catch {
+            toast({
+              variant: "destructive",
+              title: "Lỗi lưu",
+              description: "Thêm cột detail_json trong Supabase hoặc đồng bộ lại.",
+            });
+          }
+        }}
+      />
     </AdminLayout>
   );
 }

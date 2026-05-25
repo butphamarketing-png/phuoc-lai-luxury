@@ -1,3 +1,8 @@
+import type {
+  ServiceDetailContent,
+  TrainingDetailContent,
+} from "@/data/content-details";
+
 export type ServiceCategory = "phun-xam" | "spa";
 export type ServiceStatus = "published" | "hidden";
 export type TrainingStatus = "open" | "coming_soon" | "hidden";
@@ -15,6 +20,7 @@ export interface SiteService {
   status: ServiceStatus;
   bullets: string[];
   sortOrder: number;
+  detail?: ServiceDetailContent;
 }
 
 export interface SiteTrainingCourse {
@@ -30,6 +36,7 @@ export interface SiteTrainingCourse {
   students: number;
   bullets: string[];
   sortOrder: number;
+  detail?: TrainingDetailContent;
 }
 
 /** Nguồn dữ liệu mặc định — đồng bộ với trang công khai */

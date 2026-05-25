@@ -10,10 +10,17 @@ import {
   Eye,
   ExternalLink,
   Database,
+  FileText,
 } from "lucide-react";
+import ArticleContentEditor from "@/components/admin/ArticleContentEditor";
+import {
+  TRAINING_DETAIL_DATA,
+  type TrainingDetailContent,
+} from "@/data/content-details";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import ImageUploadField from "@/components/admin/ImageUploadField";
 import {
   Table,
   TableBody,
@@ -69,9 +76,14 @@ const statusLabel: Record<TrainingStatus, string> = {
 export default function AdminTraining() {
   const { toast } = useToast();
   const { data: courses = [], isLoading } = useAdminTraining();
-  const { toggleStatus, saveCourse, seedCatalog } = useTrainingMutations();
+  const { toggleStatus, saveCourse, saveDetail, seedCatalog } =
+    useTrainingMutations();
   const [search, setSearch] = useState("");
   const [editing, setEditing] = useState<SiteTrainingCourse | null>(null);
+  const [detailEditing, setDetailEditing] = useState<{
+    course: SiteTrainingCourse;
+    detail: TrainingDetailContent;
+  } | null>(null);
 
   const filtered = useMemo(() => {
     const q = search.trim().toLowerCase();
@@ -222,6 +234,29 @@ export default function AdminTraining() {
                             <Edit2 size={14} className="mr-2" />
                             Chỉnh sửa
                           </DropdownMenuItem>
+                          <DropdownMenuItem
+                            onClick={() => {
+                              const fallback = TRAINING_DETAIL_DATA[course.slug];
+                              setDetailEditing({
+                                course,
+                                detail: course.detail ??
+                                  fallback ?? {
+                                    title: course.title,
+                                    level: course.level,
+                                    image: course.image,
+                                    date: "—",
+                                    instructor: "Phuoc Lai Master",
+                                    duration: course.duration,
+                                    intro: course.description,
+                                    curriculum: course.bullets,
+                                    sections: [],
+                                  },
+                              });
+                            }}
+                          >
+                            <FileText size={14} className="mr-2" />
+                            Soạn bài viết & SEO
+                          </DropdownMenuItem>
                           <DropdownMenuItem onClick={() => cycleStatus(course)}>
                             <Eye size={14} className="mr-2" />
                             Đổi trạng thái
@@ -293,6 +328,12 @@ export default function AdminTraining() {
                   </select>
                 </div>
               </div>
+              <ImageUploadField
+                label="Ảnh đại diện khóa học"
+                value={editing.image}
+                onChange={(image) => setEditing({ ...editing, image })}
+                folder="training"
+              />
               <Button
                 className="w-full rounded-xl bg-[#1A1A1A]"
                 onClick={handleSave}
@@ -304,6 +345,42 @@ export default function AdminTraining() {
           )}
         </DialogContent>
       </Dialog>
+
+      <ArticleContentEditor
+        open={!!detailEditing}
+        onOpenChange={(open) => !open && setDetailEditing(null)}
+        title={`Soạn nội dung: ${detailEditing?.course.title ?? ""}`}
+        slug={detailEditing?.course.slug}
+        publicPathPrefix="/dao-tao/"
+        initial={detailEditing?.detail ?? null}
+        saving={saveDetail.isPending}
+        infoFields={[
+          { key: "level", label: "Cấp độ / nhãn" },
+          { key: "date", label: "Ngày khai giảng" },
+          { key: "instructor", label: "Giảng viên" },
+          { key: "duration", label: "Thời lượng" },
+        ]}
+        onSave={async (detail) => {
+          if (!detailEditing) return;
+          try {
+            await saveDetail.mutateAsync({
+              id: detailEditing.course.id,
+              detail: { ...detailEditing.detail, ...detail },
+            });
+            toast({
+              title: "Đã lưu nội dung",
+              description: "Trang chi tiết khóa học đã cập nhật.",
+            });
+            setDetailEditing(null);
+          } catch {
+            toast({
+              variant: "destructive",
+              title: "Lỗi lưu",
+              description: "Thêm cột detail_json trong Supabase hoặc đồng bộ lại.",
+            });
+          }
+        }}
+      />
     </AdminLayout>
   );
 }

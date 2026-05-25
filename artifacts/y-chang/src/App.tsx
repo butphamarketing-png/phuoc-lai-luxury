@@ -21,6 +21,7 @@ import Footer from "@/components/layout/Footer";
 import Preloader from "@/components/layout/Preloader";
 import PromotionModal from "@/components/layout/PromotionModal";
 import FloatingContact from "@/components/layout/FloatingContact";
+import SiteSeo from "@/components/seo/SiteSeo";
 
 const queryClient = new QueryClient();
 
@@ -30,6 +31,7 @@ function Router() {
 
   return (
     <div className="flex flex-col min-h-[100dvh] overflow-x-hidden bg-white">
+      <SiteSeo />
       {/* Chỉ hiện các thành phần khách hàng nếu không phải trang Admin */}
       {!isAdminPage && (
         <>

@@ -1,5 +1,6 @@
 -- Chạy trong Supabase → SQL Editor (một lần)
 -- Liên kết admin với trang công khai
+-- Sau đó chạy thêm: supabase/storage.sql (upload ảnh CMS)
 
 create table if not exists public.site_services (
   id text primary key,
@@ -12,6 +13,7 @@ create table if not exists public.site_services (
   author_name text not null default 'Phuoc Lai',
   status text not null default 'published' check (status in ('published', 'hidden')),
   bullets jsonb not null default '[]'::jsonb,
+  detail_json jsonb,
   sort_order int not null default 0,
   updated_at timestamptz not null default now()
 );
@@ -28,9 +30,14 @@ create table if not exists public.site_training_courses (
   status text not null default 'open' check (status in ('open', 'coming_soon', 'hidden')),
   students_count int not null default 0,
   bullets jsonb not null default '[]'::jsonb,
+  detail_json jsonb,
   sort_order int not null default 0,
   updated_at timestamptz not null default now()
 );
+
+-- Nếu đã chạy schema cũ, chạy thêm:
+-- alter table public.site_services add column if not exists detail_json jsonb;
+-- alter table public.site_training_courses add column if not exists detail_json jsonb;
 
 alter table public.site_services enable row level security;
 alter table public.site_training_courses enable row level security;
