@@ -337,7 +337,7 @@ export default function AdminServices() {
       </div>
 
       <Dialog open={!!editing} onOpenChange={(open) => !open && setEditing(null)}>
-        <DialogContent className="rounded-[2rem] max-w-lg">
+        <DialogContent className="rounded-[2rem] max-w-lg max-h-[min(92dvh,92vh)] overflow-y-auto">
           <DialogHeader>
             <DialogTitle className="font-serif">
               {editing?.title ? "Chỉnh sửa dịch vụ" : "Thêm dịch vụ"}

@@ -101,7 +101,7 @@ export default function ArticleContentEditor<T extends BaseDetail>({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="rounded-[2rem] max-w-4xl max-h-[92vh] overflow-hidden flex flex-col p-0 gap-0">
+      <DialogContent className="rounded-[2rem] max-w-4xl max-h-[calc(100dvh-2rem)] overflow-hidden flex flex-col p-0 gap-0">
         <DialogHeader className="px-6 pt-6 pb-2 shrink-0">
           <DialogTitle className="font-serif text-xl pr-8">{title}</DialogTitle>
           {publicUrl && (

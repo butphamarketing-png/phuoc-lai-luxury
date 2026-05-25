@@ -273,7 +273,7 @@ export default function AdminTraining() {
       </div>
 
       <Dialog open={!!editing} onOpenChange={(open) => !open && setEditing(null)}>
-        <DialogContent className="rounded-[2rem] max-w-lg">
+        <DialogContent className="rounded-[2rem] max-w-lg max-h-[min(92dvh,92vh)] overflow-y-auto">
           <DialogHeader>
             <DialogTitle className="font-serif">Chỉnh sửa khóa học</DialogTitle>
           </DialogHeader>
