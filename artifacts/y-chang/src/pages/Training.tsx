@@ -7,88 +7,20 @@ const btnPrimary =
   "rounded-full bg-[#1A1A1A] text-white hover:bg-black px-10 py-6 text-[11px] uppercase tracking-[0.25em] border-none";
 
 import { useLocation } from "wouter";
-
-const allCourses = {
-  "phun-xam": [
-    {
-      img: "/training-1.png",
-      level: "KHÓA NÂNG CAO",
-      slug: "amazing-brows",
-      title: "KHÓA HỌC SỢI AMAZINGBROWS NÂNG CAO",
-      desc: "Kỹ thuật tạo sợi siêu thực AMAZINGBROWS đỉnh cao dành cho thợ lành nghề.",
-      duration: "THỜI GIAN: 5 NGÀY",
-      children: ["Kỹ thuật sợi siêu thực", "Dáng mày phong thủy", "Xử lý nền cũ", "Chụp ảnh sản phẩm"],
-    },
-    {
-      img: "/training-2.png",
-      level: "KHÓA CHUYÊN SÂU",
-      slug: "lip-master",
-      title: "KHÓA HỌC MÔI CHUYÊN SÂU",
-      desc: "Bí quyết phun môi SEXYLIPS không sưng, bám màu nhanh.",
-      duration: "THỜI GIAN: 4 NGÀY",
-      children: ["Kỹ thuật môi không sưng", "Công thức pha màu", "Khử thâm chuyên sâu", "Chăm sóc sau làm"],
-    },
-    {
-      img: "/training-3.png",
-      level: "KHÓA TỔNG HỢP",
-      slug: "master-advanced",
-      title: "KHÓA HỌC TỔNG HỢP CHUYÊN SÂU",
-      desc: "Trọn bộ kiến thức từ sợi, mày, môi và mí phượng hoàng.",
-      duration: "THỜI GIAN: 15 NGÀY",
-      children: ["Tổng hợp kỹ thuật PMU", "Quy trình Master", "Quản lý Studio", "Đào tạo học viên"],
-    },
-  ],
-  "spa": [
-    {
-      img: "/training-1.png",
-      level: "KHÓA CƠ BẢN",
-      slug: "spa-basic",
-      title: "KHÓA HỌC SPA BASIC",
-      desc: "Kiến thức nền tảng về chăm sóc da cơ bản.",
-      duration: "THỜI GIAN: 7 NGÀY",
-      children: ["Cấu trúc da", "Quy trình chăm sóc", "Sử dụng máy cơ bản", "Vệ sinh vô trùng"],
-    },
-    {
-      img: "/training-2.png",
-      level: "KHÓA NÂNG CAO",
-      slug: "spa-advanced",
-      title: "KHÓA HỌC SPA ADVANCED",
-      desc: "Kỹ thuật chăm sóc da chuyên sâu và công nghệ cao.",
-      duration: "THỜI GIAN: 10 NGÀY",
-      children: ["Trị liệu da liễu", "Công nghệ Laser/Hifu", "Peel da chuyên sâu", "Kỹ thuật massage"],
-    },
-    {
-      img: "/training-3.png",
-      level: "KHÓA CHUYÊN GIA",
-      slug: "spa-expert",
-      title: "KHÓA HỌC SPA EXPERT",
-      desc: "Đào tạo quản lý và vận hành hệ thống spa chuyên nghiệp.",
-      duration: "THỜI GIAN: 15 NGÀY",
-      children: ["Quản trị nhân sự", "Marketing Spa", "Xây dựng menu", "Tư vấn khách hàng"],
-    },
-    {
-      img: "/training-4.png",
-      level: "KHÓA TRỊ LIỆU",
-      slug: "spa-therapy",
-      title: "KHÓA HỌC SPA THERAPY",
-      desc: "Các liệu pháp trị liệu đặc biệt và phục hồi da.",
-      duration: "THỜI GIAN: 5 NGÀY",
-      children: ["Phục hồi da tổn thương", "Trị liệu Mesotherapy", "Lăn kim/Phi kim", "Chăm sóc sau trị liệu"],
-    },
-  ]
-};
+import { usePublicTraining } from "@/hooks/use-site-content";
+import type { TrainingCategory } from "@/data/catalog";
 
 export default function Training() {
   const [location] = useLocation();
-  const category = location.includes("/phun-xam") 
-    ? "phun-xam" 
-    : location.includes("/spa") 
-      ? "spa" 
+  const category: TrainingCategory | null = location.includes("/phun-xam")
+    ? "phun-xam"
+    : location.includes("/spa")
+      ? "spa"
       : null;
 
-  const filteredCourses = category 
-    ? allCourses[category as keyof typeof allCourses]
-    : [...allCourses["phun-xam"], ...allCourses["spa"]];
+  const { data: filteredCourses = [], isLoading } = usePublicTraining(
+    category ?? undefined,
+  );
 
   const displayTitle = category === "phun-xam" 
     ? "Khóa Học Phun Xăm Thẩm Mỹ" 
@@ -115,6 +47,9 @@ export default function Training() {
               {displayTitle}
             </h1>
           </div>
+          {isLoading && (
+            <p className="text-center text-black/40 text-sm py-16">Đang tải khóa học...</p>
+          )}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -123,7 +58,7 @@ export default function Training() {
           >
             {filteredCourses.map((course, idx) => (
               <motion.div
-                key={course.title}
+                key={course.id}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -134,14 +69,14 @@ export default function Training() {
               >
                 <div className="relative aspect-[4/3] w-full overflow-hidden shrink-0">
                   <img
-                    src={course.img}
+                    src={course.image}
                     alt={course.title}
                     className="w-full h-full object-cover grayscale transition-all duration-700 group-hover:scale-105 group-hover:grayscale-0"
                   />
                   <div className="absolute inset-x-0 bottom-0 translate-y-full bg-black/80 p-5 backdrop-blur-md transition-transform duration-500 group-hover:translate-y-0 z-20">
                     <p className="mb-3 text-[10px] uppercase tracking-[0.24em] text-white/45 font-bold">Nội dung khóa</p>
                     <ul className="space-y-2">
-                      {course.children.map((item) => (
+                      {course.bullets.map((item) => (
                         <li key={item} className="flex items-center gap-2 text-xs font-light uppercase tracking-[0.12em] text-white/75">
                           <span className="h-px w-4 bg-white/30" />
                           {item}
@@ -155,7 +90,7 @@ export default function Training() {
                     {course.level}
                   </span>
                   <h3 className="font-serif text-2xl leading-tight mb-4">{course.title}</h3>
-                  <p className="text-sm text-black/50 font-light mb-8 flex-grow">{course.desc}</p>
+                  <p className="text-sm text-black/50 font-light mb-8 flex-grow">{course.description}</p>
                   <Link href={`/dao-tao/${course.slug}`} className="flex items-center justify-between pt-6 border-t border-black/5 cursor-pointer group/btn mt-auto">
                     <span className="text-[10px] text-black/40 font-bold uppercase tracking-[0.25em] group-hover/btn:text-black transition-colors">Xem chi tiết</span>
                     <span className="flex h-10 w-10 items-center justify-center rounded-full border border-black/10 transition-all duration-500 group-hover/btn:bg-black group-hover/btn:text-white luxury-shadow">

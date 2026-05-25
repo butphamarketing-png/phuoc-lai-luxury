@@ -1,10 +1,10 @@
 import AdminLayout from "@/components/layout/AdminLayout";
 import { motion } from "framer-motion";
+import { Link } from "wouter";
 import { 
-  Users, 
   Sparkles, 
   BookOpen, 
-  TrendingUp, 
+  Eye,
   Calendar, 
   ArrowUpRight,
   Clock,
@@ -12,13 +12,20 @@ import {
 } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { useAdminServices, useAdminTraining } from "@/hooks/use-site-content";
 
 export default function AdminDashboard() {
+  const { data: services = [] } = useAdminServices();
+  const { data: courses = [] } = useAdminTraining();
+
+  const publishedServices = services.filter((s) => s.status === "published").length;
+  const openCourses = courses.filter((c) => c.status !== "hidden").length;
+
   const stats = [
-    { label: "Tổng lượt truy cập", value: "2,845", icon: Users, change: "+12.5%", color: "blue" },
-    { label: "Dịch vụ đã làm", value: "156", icon: Sparkles, change: "+8.2%", color: "gold" },
-    { label: "Học viên đăng ký", value: "42", icon: BookOpen, change: "+15.3%", color: "green" },
-    { label: "Tỉ lệ chuyển đổi", value: "4.2%", icon: TrendingUp, change: "+2.1%", color: "purple" },
+    { label: "Dịch vụ trên web", value: String(publishedServices), icon: Sparkles, change: `${services.length} tổng`, color: "gold" },
+    { label: "Khóa học đang mở", value: String(openCourses), icon: BookOpen, change: `${courses.length} tổng`, color: "green" },
+    { label: "Dịch vụ đang ẩn", value: String(services.length - publishedServices), icon: Eye, change: "Quản lý nhanh", color: "blue" },
+    { label: "Học viên (ước tính)", value: String(courses.reduce((n, c) => n + c.students, 0)), icon: Calendar, change: "Tổng đăng ký", color: "purple" },
   ];
 
   const recentActivities = [
@@ -41,15 +48,19 @@ export default function AdminDashboard() {
           <div className="relative z-10 max-w-2xl">
             <h2 className="text-3xl md:text-4xl font-serif mb-4">Chào mừng trở lại, Master Phuoc Lai!</h2>
             <p className="text-white/50 text-sm font-light leading-relaxed mb-8 uppercase tracking-[0.1em]">
-              Hệ thống của bạn đang hoạt động ổn định. Có 3 yêu cầu tư vấn mới và 2 học viên đang chờ xác nhận.
+              Chỉnh dịch vụ & khóa học tại admin — thay đổi hiển thị ngay trên website công khai.
             </p>
-            <div className="flex gap-4">
-              <button className="bg-white text-black px-8 py-3 rounded-full text-[10px] font-bold uppercase tracking-[0.2em] hover:bg-white/90 transition-all">
-                Xem lịch hẹn
-              </button>
-              <button className="bg-white/10 text-white border border-white/10 px-8 py-3 rounded-full text-[10px] font-bold uppercase tracking-[0.2em] hover:bg-white/20 transition-all">
-                Báo cáo tháng
-              </button>
+            <div className="flex flex-wrap gap-4">
+              <Link href="/admin/services">
+                <a className="bg-white text-black px-8 py-3 rounded-full text-[10px] font-bold uppercase tracking-[0.2em] hover:bg-white/90 transition-all inline-block">
+                  Quản lý dịch vụ
+                </a>
+              </Link>
+              <Link href="/admin/training">
+                <a className="bg-white/10 text-white border border-white/10 px-8 py-3 rounded-full text-[10px] font-bold uppercase tracking-[0.2em] hover:bg-white/20 transition-all inline-block">
+                  Quản lý đào tạo
+                </a>
+              </Link>
             </div>
           </div>
         </motion.div>

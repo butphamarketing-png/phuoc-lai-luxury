@@ -4,77 +4,20 @@ import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
 
 import { useLocation } from "wouter";
-
-const allServices = [
-  {
-    title: "Điêu Khắc Sợi AMAZINGBROWS",
-    slug: "amazing-brows-fiber",
-    category: "phun-xam",
-    image: "/service-brows.png",
-    children: ["Tạo sợi siêu thực", "Dáng mày phong thủy", "Mực organic Châu Âu", "Không sưng đau"],
-  },
-  {
-    title: "Phun Mày SANDBROWS",
-    slug: "sandbrows",
-    category: "phun-xam",
-    image: "/service-ombre.png",
-    children: ["Hiệu ứng rải hạt", "Màu sắc trong trẻo", "Bền màu tự nhiên", "Phù hợp mọi loại da"],
-  },
-  {
-    title: "Phun Môi SEXYLIPS",
-    slug: "sexylips",
-    category: "phun-xam",
-    image: "/service-lips.png",
-    children: ["Khử thâm chuyên sâu", "Màu môi quyến rũ", "Cấy tế bào gốc", "Phục hồi nhanh"],
-  },
-  {
-    title: "Phun Mí Phượng Hoàng",
-    slug: "phoenix-eyeliner",
-    category: "phun-xam",
-    image: "/hero-portrait.png",
-    children: ["Viền mí sắc sảo", "Đôi mắt có hồn", "Không lem không trôi", "An toàn tuyệt đối"],
-  },
-  {
-    title: "Chăm Sóc Da Chuyên Sâu",
-    slug: "spa-basic",
-    category: "spa",
-    image: "/studio-interior.png",
-    children: ["Làm sạch sâu", "Cấp ẩm tầng sâu", "Massage thư giãn", "Trẻ hóa làn da"],
-  },
-  {
-    title: "Liệu Trình Công Nghệ Cao",
-    slug: "spa-advanced",
-    category: "spa",
-    image: "/studio.png",
-    children: ["Nâng cơ xóa nhăn", "Điều trị sắc tố", "Se khít lỗ chân lông", "Phục hồi da"],
-  },
-  {
-    title: "Trị Mụn Chuyên Sâu",
-    slug: "spa-acne-treatment",
-    category: "spa",
-    image: "/studio-interior.png",
-    children: ["Chuẩn y khoa", "Tiêu viêm tức thì", "Không để lại sẹo", "Ngừa thâm mụn"],
-  },
-  {
-    title: "Trẻ Hóa Exosome",
-    slug: "spa-skin-rejuvenation",
-    category: "spa",
-    image: "/studio.png",
-    children: ["Tái tạo tế bào", "Căng bóng tức thì", "Xóa mờ nếp nhăn", "Phục hồi da yếu"],
-  },
-];
+import { usePublicServices } from "@/hooks/use-site-content";
+import type { ServiceCategory } from "@/data/catalog";
 
 export default function Services() {
   const [location] = useLocation();
-  const category = location.includes("/phun-xam") 
-    ? "phun-xam" 
-    : location.includes("/spa") 
-      ? "spa" 
+  const category: ServiceCategory | null = location.includes("/phun-xam")
+    ? "phun-xam"
+    : location.includes("/spa")
+      ? "spa"
       : null;
 
-  const filteredServices = category 
-    ? allServices.filter(s => s.category === category)
-    : allServices;
+  const { data: filteredServices = [], isLoading } = usePublicServices(
+    category ?? undefined,
+  );
 
   const displayTitle = category === "phun-xam" 
     ? "Dịch vụ Phun Xăm Thẩm Mỹ" 
@@ -106,10 +49,13 @@ export default function Services() {
       </section>
 
       <section className="container mx-auto mt-20 max-w-7xl px-6">
+        {isLoading && (
+          <p className="text-center text-black/40 text-sm py-20">Đang tải dịch vụ...</p>
+        )}
         <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-3 max-w-6xl mx-auto">
           {filteredServices.map((service, index) => (
             <motion.article
-              key={service.title}
+              key={service.id}
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-80px" }}
@@ -125,7 +71,7 @@ export default function Services() {
                 <div className="absolute inset-x-0 bottom-0 translate-y-full bg-black/80 p-6 backdrop-blur-md transition-transform duration-500 group-hover:translate-y-0 z-20">
                   <p className="mb-4 text-[10px] uppercase tracking-[0.24em] text-white/45 font-bold">Chi tiết dịch vụ</p>
                   <ul className="space-y-3">
-                    {service.children.map((item) => (
+                    {service.bullets.map((item) => (
                       <li key={item} className="flex items-center gap-2 text-xs font-light uppercase tracking-[0.12em] text-white/75">
                         <span className="h-px w-4 bg-white/30" />
                         {item}

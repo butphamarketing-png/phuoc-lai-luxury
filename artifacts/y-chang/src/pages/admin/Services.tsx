@@ -1,149 +1,379 @@
+import { useMemo, useState } from "react";
 import AdminLayout from "@/components/layout/AdminLayout";
+import AdminPageHeader from "@/components/admin/AdminPageHeader";
 import { motion } from "framer-motion";
-import { 
-  Plus, 
-  Search, 
-  MoreVertical, 
-  Edit2, 
-  Trash2, 
+import {
+  Plus,
+  Search,
+  MoreVertical,
+  Edit2,
   Eye,
-  Filter,
-  ArrowUpDown
+  EyeOff,
+  ExternalLink,
+  Database,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { 
-  Table, 
-  TableBody, 
-  TableCell, 
-  TableHead, 
-  TableHeader, 
-  TableRow 
+import { Label } from "@/components/ui/label";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
 } from "@/components/ui/table";
-import { 
-  DropdownMenu, 
-  DropdownMenuContent, 
-  DropdownMenuItem, 
-  DropdownMenuTrigger 
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import { Badge } from "@/components/ui/badge";
+import { useToast } from "@/hooks/use-toast";
+import { useAdminServices, useServiceMutations } from "@/hooks/use-site-content";
+import {
+  getPublicServicePath,
+  type SiteService,
+  type ServiceCategory,
+  type ServiceStatus,
+} from "@/data/catalog";
+import { isSupabaseConfigured } from "@/lib/supabase";
 
-const services = [
-  { id: 1, name: "Điêu Khắc Sợi AMAZINGBROWS", category: "Phun Xăm", price: "8,500,000đ", status: "Hiển thị", author: "Phuoc Lai" },
-  { id: 2, name: "Phun Mày SANDBROWS", category: "Phun Xăm", price: "5,000,000đ", status: "Hiển thị", author: "Phuoc Lai" },
-  { id: 3, name: "Phun Môi SEXYLIPS", category: "Phun Xăm", price: "6,000,000đ", status: "Hiển thị", author: "Phuoc Lai" },
-  { id: 4, name: "Chăm Sóc Da Chuyên Sâu", category: "Spa", price: "1,500,000đ", status: "Hiển thị", author: "Nhung Lai" },
-  { id: 5, name: "Trẻ Hóa Exosome", category: "Spa", price: "12,000,000đ", status: "Ẩn", author: "Cam Lai" },
-];
+const emptyService = (): SiteService => ({
+  id: `svc-${Date.now()}`,
+  slug: "",
+  title: "",
+  category: "phun-xam",
+  categoryLabel: "Phun Xăm",
+  image: "/service-brows.png",
+  price: "",
+  author: "Phuoc Lai",
+  status: "published",
+  bullets: [],
+  sortOrder: 99,
+});
 
 export default function AdminServices() {
+  const { toast } = useToast();
+  const { data: services = [], isLoading, isError } = useAdminServices();
+  const { toggleStatus, saveService, seedCatalog } = useServiceMutations();
+  const [search, setSearch] = useState("");
+  const [editing, setEditing] = useState<SiteService | null>(null);
+
+  const filtered = useMemo(() => {
+    const q = search.trim().toLowerCase();
+    if (!q) return services;
+    return services.filter(
+      (s) =>
+        s.title.toLowerCase().includes(q) ||
+        s.slug.toLowerCase().includes(q) ||
+        s.categoryLabel.toLowerCase().includes(q),
+    );
+  }, [services, search]);
+
+  const stats = useMemo(
+    () => ({
+      total: services.length,
+      published: services.filter((s) => s.status === "published").length,
+      hidden: services.filter((s) => s.status === "hidden").length,
+    }),
+    [services],
+  );
+
+  const handleSave = async () => {
+    if (!editing?.title.trim() || !editing.slug.trim()) {
+      toast({
+        variant: "destructive",
+        title: "Thiếu thông tin",
+        description: "Vui lòng nhập tên và slug dịch vụ.",
+      });
+      return;
+    }
+
+    try {
+      await saveService.mutateAsync(editing);
+      toast({ title: "Đã lưu", description: "Dịch vụ đã cập nhật lên website." });
+      setEditing(null);
+    } catch {
+      toast({
+        variant: "destructive",
+        title: "Lỗi lưu",
+        description: "Kiểm tra Supabase schema hoặc quyền đăng nhập admin.",
+      });
+    }
+  };
+
+  const handleToggle = async (service: SiteService) => {
+    const next: ServiceStatus =
+      service.status === "published" ? "hidden" : "published";
+    try {
+      await toggleStatus.mutateAsync({ id: service.id, status: next });
+      toast({
+        title: next === "published" ? "Đã hiển thị" : "Đã ẩn",
+        description: service.title,
+      });
+    } catch {
+      toast({ variant: "destructive", title: "Không thể cập nhật trạng thái" });
+    }
+  };
+
   return (
     <AdminLayout title="Quản lý dịch vụ">
       <div className="space-y-8">
-        {/* Header Actions */}
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
-          <div className="relative w-full md:w-96 group">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-black/20 group-focus-within:text-black transition-colors" size={18} />
-            <Input 
-              placeholder="Tìm kiếm dịch vụ..." 
-              className="pl-12 py-6 rounded-2xl border-black/[0.03] bg-white shadow-sm focus:shadow-xl transition-all"
-            />
-          </div>
-          <div className="flex items-center gap-4 w-full md:w-auto">
-            <Button variant="outline" className="rounded-2xl py-6 px-6 border-black/[0.03] bg-white shadow-sm hover:bg-[#FAFAFA] flex items-center gap-2 text-[10px] uppercase tracking-widest font-bold">
-              <Filter size={16} /> Lọc
-            </Button>
-            <Button className="flex-1 md:flex-none rounded-2xl py-6 px-8 bg-[#1A1A1A] hover:bg-black text-white shadow-xl flex items-center gap-2 text-[10px] uppercase tracking-widest font-bold">
-              <Plus size={18} /> Thêm dịch vụ
-            </Button>
-          </div>
+        <AdminPageHeader
+          title="Dịch vụ trên website"
+          description="Chỉnh sửa tại đây sẽ hiển thị ngay trên trang Dịch vụ công khai. Dịch vụ ẩn sẽ không xuất hiện cho khách."
+          actions={
+            <>
+              {isSupabaseConfigured() && (
+                <Button
+                  variant="outline"
+                  className="rounded-2xl text-[10px] uppercase tracking-widest font-bold"
+                  disabled={seedCatalog.isPending}
+                  onClick={() =>
+                    seedCatalog.mutate(undefined, {
+                      onSuccess: () =>
+                        toast({
+                          title: "Đồng bộ thành công",
+                          description: "Dữ liệu mẫu đã đưa lên Supabase.",
+                        }),
+                      onError: () =>
+                        toast({
+                          variant: "destructive",
+                          title: "Lỗi đồng bộ",
+                          description: "Chạy supabase/schema.sql trong SQL Editor trước.",
+                        }),
+                    })
+                  }
+                >
+                  <Database size={14} className="mr-2" />
+                  Đồng bộ Supabase
+                </Button>
+              )}
+              <Button
+                className="rounded-2xl bg-[#1A1A1A] text-[10px] uppercase tracking-widest font-bold"
+                onClick={() => setEditing(emptyService())}
+              >
+                <Plus size={16} className="mr-2" />
+                Thêm dịch vụ
+              </Button>
+            </>
+          }
+        />
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          {[
+            { label: "Tổng dịch vụ", value: stats.total },
+            { label: "Đang hiển thị", value: stats.published },
+            { label: "Đang ẩn", value: stats.hidden },
+          ].map((item) => (
+            <motion.div
+              key={item.label}
+              className="bg-white rounded-2xl border border-black/[0.03] p-6 shadow-sm"
+            >
+              <p className="text-[10px] uppercase tracking-[0.25em] text-black/35 font-bold">
+                {item.label}
+              </p>
+              <p className="text-3xl font-serif mt-2">{item.value}</p>
+            </motion.div>
+          ))}
         </div>
 
-        {/* Services Table */}
-        <div className="bg-white rounded-[2.5rem] border border-black/[0.03] shadow-sm overflow-hidden">
-          <Table>
-            <TableHeader className="bg-[#FAFAFA]/50">
-              <TableRow className="hover:bg-transparent border-black/[0.03]">
-                <TableHead className="w-12 px-8"></TableHead>
-                <TableHead className="py-6 text-[10px] uppercase tracking-[0.2em] font-black text-black/40">Tên dịch vụ <ArrowUpDown size={12} className="inline ml-1" /></TableHead>
-                <TableHead className="py-6 text-[10px] uppercase tracking-[0.2em] font-black text-black/40">Danh mục</TableHead>
-                <TableHead className="py-6 text-[10px] uppercase tracking-[0.2em] font-black text-black/40">Giá dịch vụ</TableHead>
-                <TableHead className="py-6 text-[10px] uppercase tracking-[0.2em] font-black text-black/40">Người phụ trách</TableHead>
-                <TableHead className="py-6 text-[10px] uppercase tracking-[0.2em] font-black text-black/40">Trạng thái</TableHead>
-                <TableHead className="py-6 px-8 text-right text-[10px] uppercase tracking-[0.2em] font-black text-black/40">Thao tác</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {services.map((service) => (
-                <TableRow key={service.id} className="hover:bg-[#FAFAFA]/80 transition-all group border-black/[0.03]">
-                  <TableCell className="px-8 font-medium text-black/20 text-xs">#{service.id}</TableCell>
-                  <TableCell className="py-6">
-                    <div className="flex items-center gap-4">
-                      <div className="h-10 w-10 rounded-xl bg-black/5 flex items-center justify-center overflow-hidden">
-                        <span className="text-[10px] font-bold text-black/20 uppercase tracking-tighter">IMG</span>
-                      </div>
-                      <span className="text-sm font-bold tracking-tight">{service.name}</span>
-                    </div>
-                  </TableCell>
-                  <TableCell>
-                    <Badge variant="outline" className="rounded-lg bg-white border-black/[0.05] text-[9px] uppercase tracking-widest font-bold px-3 py-1">
-                      {service.category}
-                    </Badge>
-                  </TableCell>
-                  <TableCell className="text-sm font-serif font-bold text-black/60">{service.price}</TableCell>
-                  <TableCell>
-                    <div className="flex items-center gap-2">
-                      <div className="h-6 w-6 rounded-full bg-gold/10 flex items-center justify-center text-[8px] text-gold border border-gold/20 font-bold">PL</div>
-                      <span className="text-xs font-medium text-black/60">{service.author}</span>
-                    </div>
-                  </TableCell>
-                  <TableCell>
-                    <div className="flex items-center gap-2">
-                      <div className={`h-1.5 w-1.5 rounded-full ${service.status === 'Hiển thị' ? 'bg-green-500' : 'bg-red-400'}`} />
-                      <span className={`text-[10px] font-bold uppercase tracking-widest ${service.status === 'Hiển thị' ? 'text-green-600' : 'text-red-400'}`}>
-                        {service.status}
-                      </span>
-                    </div>
-                  </TableCell>
-                  <TableCell className="px-8 text-right">
-                    <DropdownMenu>
-                      <DropdownMenuTrigger asChild>
-                        <Button variant="ghost" className="h-10 w-10 p-0 rounded-full hover:bg-black hover:text-white transition-all">
-                          <MoreVertical size={18} />
-                        </Button>
-                      </DropdownMenuTrigger>
-                      <DropdownMenuContent align="end" className="rounded-2xl border-black/[0.05] shadow-2xl p-2 min-w-[160px]">
-                        <DropdownMenuItem className="rounded-xl py-3 flex items-center gap-3 cursor-pointer group">
-                          <Eye size={16} className="text-black/20 group-hover:text-black" />
-                          <span className="text-[10px] uppercase tracking-widest font-bold">Xem trên web</span>
-                        </DropdownMenuItem>
-                        <DropdownMenuItem className="rounded-xl py-3 flex items-center gap-3 cursor-pointer group">
-                          <Edit2 size={16} className="text-black/20 group-hover:text-blue-500" />
-                          <span className="text-[10px] uppercase tracking-widest font-bold">Chỉnh sửa</span>
-                        </DropdownMenuItem>
-                        <div className="h-px bg-black/[0.03] my-1" />
-                        <DropdownMenuItem className="rounded-xl py-3 flex items-center gap-3 cursor-pointer group text-red-500 hover:bg-red-50">
-                          <Trash2 size={16} className="text-red-300 group-hover:text-red-500" />
-                          <span className="text-[10px] uppercase tracking-widest font-bold">Xóa dịch vụ</span>
-                        </DropdownMenuItem>
-                      </DropdownMenuContent>
-                    </DropdownMenu>
-                  </TableCell>
+        <div className="relative max-w-md">
+          <Search
+            className="absolute left-4 top-1/2 -translate-y-1/2 text-black/20"
+            size={18}
+          />
+          <Input
+            placeholder="Tìm kiếm dịch vụ..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            className="pl-12 py-6 rounded-2xl border-black/[0.03] bg-white"
+          />
+        </div>
+
+        <div className="bg-white rounded-[2rem] border border-black/[0.03] shadow-sm overflow-hidden">
+          {isLoading && (
+            <p className="p-12 text-center text-black/40 text-sm">Đang tải...</p>
+          )}
+          {isError && (
+            <p className="p-12 text-center text-red-500 text-sm">
+              Không tải được dữ liệu. Đang dùng bản mẫu cục bộ.
+            </p>
+          )}
+          {!isLoading && (
+            <Table>
+              <TableHeader className="bg-[#FAFAFA]">
+                <TableRow className="border-black/[0.03]">
+                  <TableHead className="text-[10px] uppercase tracking-widest font-bold text-black/40">
+                    Dịch vụ
+                  </TableHead>
+                  <TableHead className="text-[10px] uppercase tracking-widest font-bold text-black/40">
+                    Danh mục
+                  </TableHead>
+                  <TableHead className="text-[10px] uppercase tracking-widest font-bold text-black/40">
+                    Giá
+                  </TableHead>
+                  <TableHead className="text-[10px] uppercase tracking-widest font-bold text-black/40">
+                    Trạng thái
+                  </TableHead>
+                  <TableHead className="text-right text-[10px] uppercase tracking-widest font-bold text-black/40">
+                    Thao tác
+                  </TableHead>
                 </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-          <div className="p-8 bg-[#FAFAFA]/30 border-t border-black/[0.03] flex items-center justify-between">
-            <p className="text-[10px] text-black/30 uppercase tracking-widest font-bold">Hiển thị 5 trên 12 dịch vụ</p>
-            <div className="flex items-center gap-2">
-              <Button disabled variant="outline" className="rounded-xl h-10 w-10 p-0 border-black/[0.05] bg-white">&lt;</Button>
-              <Button className="rounded-xl h-10 w-10 p-0 bg-black text-white shadow-lg">1</Button>
-              <Button variant="outline" className="rounded-xl h-10 w-10 p-0 border-black/[0.05] bg-white">2</Button>
-              <Button variant="outline" className="rounded-xl h-10 w-10 p-0 border-black/[0.05] bg-white">&gt;</Button>
-            </div>
-          </div>
+              </TableHeader>
+              <TableBody>
+                {filtered.map((service) => (
+                  <TableRow key={service.id} className="border-black/[0.03]">
+                    <TableCell>
+                      <div className="flex items-center gap-4">
+                        <img
+                          src={service.image}
+                          alt=""
+                          className="w-12 h-12 rounded-xl object-cover bg-[#FAFAFA]"
+                        />
+                        <div>
+                          <p className="font-bold text-sm">{service.title}</p>
+                          <p className="text-[10px] text-black/35 uppercase tracking-wider">
+                            /dich-vu/{service.slug}
+                          </p>
+                        </div>
+                      </div>
+                    </TableCell>
+                    <TableCell className="text-sm">{service.categoryLabel}</TableCell>
+                    <TableCell className="text-sm font-medium">{service.price}</TableCell>
+                    <TableCell>
+                      <Badge
+                        variant="secondary"
+                        className={
+                          service.status === "published"
+                            ? "bg-green-50 text-green-700"
+                            : "bg-black/5 text-black/50"
+                        }
+                      >
+                        {service.status === "published" ? "Hiển thị" : "Ẩn"}
+                      </Badge>
+                    </TableCell>
+                    <TableCell className="text-right">
+                      <DropdownMenu>
+                        <DropdownMenuTrigger asChild>
+                          <Button variant="ghost" size="icon" className="rounded-full">
+                            <MoreVertical size={18} />
+                          </Button>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent align="end" className="rounded-xl">
+                          <DropdownMenuItem
+                            onClick={() =>
+                              window.open(getPublicServicePath(service.slug), "_blank")
+                            }
+                          >
+                            <ExternalLink size={14} className="mr-2" />
+                            Xem trên web
+                          </DropdownMenuItem>
+                          <DropdownMenuItem onClick={() => setEditing({ ...service })}>
+                            <Edit2 size={14} className="mr-2" />
+                            Chỉnh sửa
+                          </DropdownMenuItem>
+                          <DropdownMenuItem onClick={() => handleToggle(service)}>
+                            {service.status === "published" ? (
+                              <>
+                                <EyeOff size={14} className="mr-2" />
+                                Ẩn dịch vụ
+                              </>
+                            ) : (
+                              <>
+                                <Eye size={14} className="mr-2" />
+                                Hiển thị
+                              </>
+                            )}
+                          </DropdownMenuItem>
+                        </DropdownMenuContent>
+                      </DropdownMenu>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          )}
         </div>
       </div>
+
+      <Dialog open={!!editing} onOpenChange={(open) => !open && setEditing(null)}>
+        <DialogContent className="rounded-[2rem] max-w-lg">
+          <DialogHeader>
+            <DialogTitle className="font-serif">
+              {editing?.title ? "Chỉnh sửa dịch vụ" : "Thêm dịch vụ"}
+            </DialogTitle>
+          </DialogHeader>
+          {editing && (
+            <div className="space-y-4">
+              <div className="space-y-2">
+                <Label>Tên dịch vụ</Label>
+                <Input
+                  value={editing.title}
+                  onChange={(e) => setEditing({ ...editing, title: e.target.value })}
+                />
+              </div>
+              <div className="space-y-2">
+                <Label>Slug (URL)</Label>
+                <Input
+                  value={editing.slug}
+                  onChange={(e) => setEditing({ ...editing, slug: e.target.value })}
+                  placeholder="amazing-brows-fiber"
+                />
+              </div>
+              <div className="grid grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <Label>Danh mục</Label>
+                  <select
+                    className="w-full h-10 rounded-md border px-3 text-sm"
+                    value={editing.category}
+                    onChange={(e) => {
+                      const category = e.target.value as ServiceCategory;
+                      setEditing({
+                        ...editing,
+                        category,
+                        categoryLabel: category === "spa" ? "Spa" : "Phun Xăm",
+                      });
+                    }}
+                  >
+                    <option value="phun-xam">Phun Xăm</option>
+                    <option value="spa">Spa</option>
+                  </select>
+                </div>
+                <div className="space-y-2">
+                  <Label>Giá hiển thị</Label>
+                  <Input
+                    value={editing.price}
+                    onChange={(e) => setEditing({ ...editing, price: e.target.value })}
+                  />
+                </div>
+              </div>
+              <div className="space-y-2">
+                <Label>Ảnh (đường dẫn)</Label>
+                <Input
+                  value={editing.image}
+                  onChange={(e) => setEditing({ ...editing, image: e.target.value })}
+                />
+              </div>
+              <Button
+                className="w-full rounded-xl bg-[#1A1A1A]"
+                onClick={handleSave}
+                disabled={saveService.isPending}
+              >
+                Lưu & đăng lên website
+              </Button>
+            </div>
+          )}
+        </DialogContent>
+      </Dialog>
     </AdminLayout>
   );
 }

@@ -13,7 +13,9 @@ import {
   Menu, 
   X,
   Bell,
-  Search
+  Search,
+  ExternalLink,
+  Globe,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -24,12 +26,12 @@ interface AdminLayoutProps {
 }
 
 const menuItems = [
-  { icon: LayoutDashboard, label: "Dashboard", href: "/admin/dashboard" },
-  { icon: Sparkles, label: "Dịch vụ", href: "/admin/services" },
-  { icon: BookOpen, label: "Đào tạo", href: "/admin/training" },
-  { icon: Users, label: "Khách hàng", href: "/admin/customers" },
-  { icon: MessageSquare, label: "Đánh giá", href: "/admin/feedback" },
-  { icon: Settings, label: "Cài đặt", href: "/admin/settings" },
+  { icon: LayoutDashboard, label: "Dashboard", href: "/admin/dashboard", hint: "Tổng quan" },
+  { icon: Sparkles, label: "Dịch vụ", href: "/admin/services", hint: "Trang /dich-vu" },
+  { icon: BookOpen, label: "Đào tạo", href: "/admin/training", hint: "Trang /dao-tao" },
+  { icon: Users, label: "Khách hàng", href: "/admin/customers", hint: "Sắp ra mắt" },
+  { icon: MessageSquare, label: "Đánh giá", href: "/admin/feedback", hint: "Sắp ra mắt" },
+  { icon: Settings, label: "Cài đặt", href: "/admin/settings", hint: "Sắp ra mắt" },
 ];
 
 export default function AdminLayout({ children, title }: AdminLayoutProps) {
@@ -92,12 +94,30 @@ export default function AdminLayout({ children, title }: AdminLayoutProps) {
                     : "text-white/50 hover:text-white hover:bg-white/5"
                 }`}>
                   <item.icon size={20} strokeWidth={isActive ? 2 : 1.5} />
-                  <span className="text-[11px] uppercase tracking-[0.2em] font-bold">{item.label}</span>
+                  <div>
+                    <span className="text-[11px] uppercase tracking-[0.2em] font-bold block">{item.label}</span>
+                    <span className={`text-[9px] uppercase tracking-wider ${isActive ? "text-black/40" : "text-white/25"}`}>
+                      {item.hint}
+                    </span>
+                  </div>
                 </a>
               </Link>
             );
           })}
         </nav>
+
+        <div className="px-6 pb-4">
+          <a
+            href="/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-3 px-4 py-3 rounded-xl border border-white/10 text-white/60 hover:text-white hover:bg-white/5 transition-all text-[10px] uppercase tracking-[0.2em] font-bold"
+          >
+            <Globe size={16} />
+            Xem website
+            <ExternalLink size={12} className="ml-auto opacity-50" />
+          </a>
+        </div>
 
         <div className="p-6 border-t border-white/5">
           <Button 
@@ -122,10 +142,24 @@ export default function AdminLayout({ children, title }: AdminLayoutProps) {
             >
               <Menu size={24} />
             </button>
-            <h1 className="text-sm font-serif font-bold uppercase tracking-[0.3em] text-black/80">{title}</h1>
+            <div>
+              <p className="text-[9px] uppercase tracking-[0.35em] text-black/30 font-bold mb-1">
+                Phuoc Lai CMS
+              </p>
+              <h1 className="text-sm font-serif font-bold uppercase tracking-[0.3em] text-black/80">{title}</h1>
+            </div>
           </div>
 
           <div className="flex items-center gap-6">
+            <a
+              href="/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hidden md:flex items-center gap-2 text-[10px] uppercase tracking-[0.2em] text-black/40 hover:text-black font-bold transition-colors"
+            >
+              <ExternalLink size={14} />
+              Trang ngoài
+            </a>
             <div className="hidden md:flex relative">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-black/20" size={16} />
               <input 
