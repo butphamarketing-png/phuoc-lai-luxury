@@ -1,10 +1,4 @@
-import {
-  CATALOG_SERVICES,
-  CATALOG_TRAINING,
-  getPublicServicePath,
-  getPublicTrainingPath,
-} from "@/data/catalog";
-import { SERVICE_DETAIL_DATA, TRAINING_DETAIL_DATA } from "@/data/content-details";
+import { getPublicServicePath, getPublicTrainingPath } from "@/data/catalog";
 
 export const SITE_NAME = "Phuoc Lai Luxury";
 export const SITE_TAGLINE = "Phun xăm thẩm mỹ & đào tạo nghề Vũng Tàu";
@@ -177,24 +171,24 @@ export function getAdminSeo(): SeoMeta {
   };
 }
 
-/** URL công khai cho sitemap (chỉ dịch vụ/khóa published hoặc có trang chi tiết) */
+/** URL công khai cho sitemap (trang tĩnh; bài dịch vụ/đào tạo thêm khi build từ Supabase hoặc sau deploy) */
 export function getSitemapPaths(): string[] {
   const staticPaths = Object.keys(STATIC_ROUTES);
-  const servicePaths = CATALOG_SERVICES.filter((s) => s.status === "published").map(
-    (s) => getPublicServicePath(s.slug),
-  );
-  const trainingSlugs = new Set([
-    ...CATALOG_TRAINING.filter((c) => c.status !== "hidden").map((c) => c.slug),
-    ...Object.keys(TRAINING_DETAIL_DATA),
-  ]);
-  const trainingPaths = [...trainingSlugs].map((slug) =>
-    getPublicTrainingPath(slug),
-  );
-  const detailOnlyServices = Object.keys(SERVICE_DETAIL_DATA)
-    .filter((slug) => !CATALOG_SERVICES.some((s) => s.slug === slug))
-    .map((slug) => getPublicServicePath(slug));
+  return staticPaths;
+}
 
-  return [...new Set([...staticPaths, ...servicePaths, ...detailOnlyServices, ...trainingPaths])];
+export function getPublicContentPaths(
+  services: { slug: string; status: string }[],
+  training: { slug: string; status: string }[],
+): string[] {
+  const staticPaths = Object.keys(STATIC_ROUTES);
+  const servicePaths = services
+    .filter((s) => s.status === "published")
+    .map((s) => getPublicServicePath(s.slug));
+  const trainingPaths = training
+    .filter((c) => c.status !== "hidden")
+    .map((c) => getPublicTrainingPath(c.slug));
+  return [...new Set([...staticPaths, ...servicePaths, ...trainingPaths])];
 }
 
 export function buildLocalBusinessJsonLd() {

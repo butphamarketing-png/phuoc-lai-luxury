@@ -1,14 +1,10 @@
 import {
-  CATALOG_SERVICES,
-  CATALOG_TRAINING,
   type SiteService,
   type SiteTrainingCourse,
   type ServiceStatus,
   type TrainingStatus,
 } from "@/data/catalog";
 import {
-  SERVICE_DETAIL_DATA,
-  TRAINING_DETAIL_DATA,
   type ServiceDetailContent,
   type TrainingDetailContent,
 } from "@/data/content-details";
@@ -49,36 +45,30 @@ type TrainingRow = {
 };
 
 function mergeServiceDetail(
-  slug: string,
   row: Partial<ServiceRow>,
 ): ServiceDetailContent | undefined {
   const fromDb = row.detail_json as ServiceDetailContent | null | undefined;
-  const fallback = SERVICE_DETAIL_DATA[slug];
-  if (fromDb && typeof fromDb === "object" && fromDb.intro) return fromDb;
-  if (!fallback) return undefined;
+  if (!fromDb || typeof fromDb !== "object" || !fromDb.intro) return undefined;
   return {
-    ...fallback,
-    title: row.title ?? fallback.title,
-    category: row.category_label ?? fallback.category,
-    image: row.image_url ?? fallback.image,
-    author: row.author_name ?? fallback.author,
+    ...fromDb,
+    title: row.title ?? fromDb.title,
+    category: row.category_label ?? fromDb.category,
+    image: row.image_url ?? fromDb.image,
+    author: row.author_name ?? fromDb.author,
   };
 }
 
 function mergeTrainingDetail(
-  slug: string,
   row: Partial<TrainingRow>,
 ): TrainingDetailContent | undefined {
   const fromDb = row.detail_json as TrainingDetailContent | null | undefined;
-  const fallback = TRAINING_DETAIL_DATA[slug];
-  if (fromDb && typeof fromDb === "object" && fromDb.intro) return fromDb;
-  if (!fallback) return undefined;
+  if (!fromDb || typeof fromDb !== "object" || !fromDb.intro) return undefined;
   return {
-    ...fallback,
-    title: row.title ?? fallback.title,
-    image: row.image_url ?? fallback.image,
-    level: row.level_label ?? fallback.level,
-    duration: row.duration_display ?? fallback.duration,
+    ...fromDb,
+    title: row.title ?? fromDb.title,
+    image: row.image_url ?? fromDb.image,
+    level: row.level_label ?? fromDb.level,
+    duration: row.duration_display ?? fromDb.duration,
   };
 }
 
@@ -95,7 +85,7 @@ function mapServiceRow(row: ServiceRow): SiteService {
     status: row.status as ServiceStatus,
     bullets: Array.isArray(row.bullets) ? row.bullets : [],
     sortOrder: row.sort_order,
-    detail: mergeServiceDetail(row.slug, row),
+    detail: mergeServiceDetail(row),
   };
 }
 
@@ -113,7 +103,7 @@ function mapTrainingRow(row: TrainingRow): SiteTrainingCourse {
     students: row.students_count,
     bullets: Array.isArray(row.bullets) ? row.bullets : [],
     sortOrder: row.sort_order,
-    detail: mergeTrainingDetail(row.slug, row),
+    detail: mergeTrainingDetail(row),
   };
 }
 
@@ -129,8 +119,7 @@ function serviceToRow(service: SiteService): ServiceRow {
     author_name: service.author,
     status: service.status,
     bullets: service.bullets,
-    detail_json:
-      service.detail ?? SERVICE_DETAIL_DATA[service.slug] ?? null,
+    detail_json: service.detail ?? null,
     sort_order: service.sortOrder,
   };
 }
@@ -148,8 +137,7 @@ function trainingToRow(course: SiteTrainingCourse): TrainingRow {
     status: course.status,
     students_count: course.students,
     bullets: course.bullets,
-    detail_json:
-      course.detail ?? TRAINING_DETAIL_DATA[course.slug] ?? null,
+    detail_json: course.detail ?? null,
     sort_order: course.sortOrder,
   };
 }
@@ -159,8 +147,7 @@ export async function loadServiceDetail(
 ): Promise<ServiceDetailContent | null> {
   const services = await loadServices();
   const item = services.find((s) => s.slug === slug);
-  if (item?.detail) return item.detail;
-  return SERVICE_DETAIL_DATA[slug] ?? null;
+  return item?.detail ?? null;
 }
 
 export async function loadTrainingDetail(
@@ -168,8 +155,7 @@ export async function loadTrainingDetail(
 ): Promise<TrainingDetailContent | null> {
   const courses = await loadTrainingCourses();
   const item = courses.find((c) => c.slug === slug);
-  if (item?.detail) return item.detail;
-  return TRAINING_DETAIL_DATA[slug] ?? null;
+  return item?.detail ?? null;
 }
 
 export async function updateServiceDetail(
@@ -177,7 +163,7 @@ export async function updateServiceDetail(
   detail: ServiceDetailContent,
 ): Promise<void> {
   if (!isSupabaseConfigured()) {
-    const base = servicesCache ?? CATALOG_SERVICES;
+    const base = servicesCache ?? [];
     servicesCache = base.map((s) => (s.id === id ? { ...s, detail } : s));
     return;
   }
@@ -199,7 +185,7 @@ export async function updateTrainingDetail(
   detail: TrainingDetailContent,
 ): Promise<void> {
   if (!isSupabaseConfigured()) {
-    const base = trainingCache ?? CATALOG_TRAINING;
+    const base = trainingCache ?? [];
     trainingCache = base.map((c) => (c.id === id ? { ...c, detail } : c));
     return;
   }
@@ -225,7 +211,6 @@ async function fetchServicesFromDb(): Promise<SiteService[] | null> {
     .order("sort_order", { ascending: true });
 
   if (error) return null;
-  if (!data?.length) return null;
   return (data as ServiceRow[]).map(mapServiceRow);
 }
 
@@ -237,26 +222,26 @@ async function fetchTrainingFromDb(): Promise<SiteTrainingCourse[] | null> {
     .select("*")
     .order("sort_order", { ascending: true });
 
-  if (error || !data?.length) return null;
+  if (error) return null;
   return (data as TrainingRow[]).map(mapTrainingRow);
 }
 
 export async function loadServices(): Promise<SiteService[]> {
   const fromDb = await fetchServicesFromDb();
-  if (fromDb) {
+  if (fromDb !== null) {
     servicesCache = fromDb;
     return fromDb;
   }
-  return servicesCache ?? [...CATALOG_SERVICES];
+  return servicesCache ?? [];
 }
 
 export async function loadTrainingCourses(): Promise<SiteTrainingCourse[]> {
   const fromDb = await fetchTrainingFromDb();
-  if (fromDb) {
+  if (fromDb !== null) {
     trainingCache = fromDb;
     return fromDb;
   }
-  return trainingCache ?? [...CATALOG_TRAINING];
+  return trainingCache ?? [];
 }
 
 export async function loadPublishedServices(
@@ -279,12 +264,94 @@ export async function loadPublicTraining(
     .sort((a, b) => a.sortOrder - b.sortOrder);
 }
 
+export async function deleteService(id: string): Promise<SiteService[]> {
+  if (!isSupabaseConfigured()) {
+    servicesCache = (servicesCache ?? []).filter((s) => s.id !== id);
+    return servicesCache;
+  }
+
+  const { error } = await getSupabaseClient()
+    .from("site_services")
+    .delete()
+    .eq("id", id);
+
+  if (error) throw error;
+  return loadServices();
+}
+
+export async function deleteTrainingCourse(
+  id: string,
+): Promise<SiteTrainingCourse[]> {
+  if (!isSupabaseConfigured()) {
+    trainingCache = (trainingCache ?? []).filter((c) => c.id !== id);
+    return trainingCache;
+  }
+
+  const { error } = await getSupabaseClient()
+    .from("site_training_courses")
+    .delete()
+    .eq("id", id);
+
+  if (error) throw error;
+  return loadTrainingCourses();
+}
+
+export async function clearAllServices(): Promise<void> {
+  if (!isSupabaseConfigured()) {
+    servicesCache = [];
+    return;
+  }
+
+  const supabase = getSupabaseClient();
+  const { data: rows, error: selectError } = await supabase
+    .from("site_services")
+    .select("id");
+
+  if (selectError) throw selectError;
+  if (rows?.length) {
+    const { error } = await supabase
+      .from("site_services")
+      .delete()
+      .in(
+        "id",
+        rows.map((r) => r.id),
+      );
+    if (error) throw error;
+  }
+  servicesCache = [];
+}
+
+export async function clearAllTrainingCourses(): Promise<void> {
+  if (!isSupabaseConfigured()) {
+    trainingCache = [];
+    return;
+  }
+
+  const supabase = getSupabaseClient();
+  const { data: rows, error: selectError } = await supabase
+    .from("site_training_courses")
+    .select("id");
+
+  if (selectError) throw selectError;
+  if (rows?.length) {
+    const { error } = await supabase
+      .from("site_training_courses")
+      .delete()
+      .in(
+        "id",
+        rows.map((r) => r.id),
+      );
+    if (error) throw error;
+  }
+  trainingCache = [];
+}
+
 export async function updateServiceStatus(
   id: string,
   status: ServiceStatus,
 ): Promise<SiteService[]> {
   if (!isSupabaseConfigured()) {
-    const next = (servicesCache ?? CATALOG_SERVICES).map((s) =>
+    const next = (servicesCache ?? []).map((s) =>
       s.id === id ? { ...s, status } : s,
     );
     servicesCache = next;
@@ -305,7 +372,7 @@ export async function updateTrainingStatus(
   status: TrainingStatus,
 ): Promise<SiteTrainingCourse[]> {
   if (!isSupabaseConfigured()) {
-    const next = (trainingCache ?? CATALOG_TRAINING).map((c) =>
+    const next = (trainingCache ?? []).map((c) =>
       c.id === id ? { ...c, status } : c,
     );
     trainingCache = next;
@@ -333,7 +400,7 @@ export async function upsertService(service: SiteService): Promise<SiteService[]
   }
 
   if (!isSupabaseConfigured()) {
-    const base = servicesCache ?? CATALOG_SERVICES;
+    const base = servicesCache ?? [];
     const exists = base.some((s) => s.id === service.id);
     const next = exists
       ? base.map((s) => (s.id === service.id ? service : s))
@@ -364,7 +431,7 @@ export async function upsertTrainingCourse(
   }
 
   if (!isSupabaseConfigured()) {
-    const base = trainingCache ?? CATALOG_TRAINING;
+    const base = trainingCache ?? [];
     const exists = base.some((c) => c.id === course.id);
     const next = exists
       ? base.map((c) => (c.id === course.id ? course : c))
@@ -379,23 +446,4 @@ export async function upsertTrainingCourse(
 
   if (error) throw error;
   return loadTrainingCourses();
-}
-
-export async function seedCatalogToSupabase(): Promise<void> {
-  if (!isSupabaseConfigured()) {
-    throw new Error("Chưa cấu hình Supabase");
-  }
-
-  const supabase = getSupabaseClient();
-  const { error: servicesError } = await supabase
-    .from("site_services")
-    .upsert(CATALOG_SERVICES.map(serviceToRow));
-
-  if (servicesError) throw servicesError;
-
-  const { error: trainingError } = await supabase
-    .from("site_training_courses")
-    .upsert(CATALOG_TRAINING.map(trainingToRow));
-
-  if (trainingError) throw trainingError;
 }

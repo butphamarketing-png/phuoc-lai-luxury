@@ -10,8 +10,8 @@ import {
   Eye,
   EyeOff,
   ExternalLink,
-  Database,
   FileText,
+  Trash2,
 } from "lucide-react";
 import type { ServiceDetailContent } from "@/data/content-details";
 import { buildServiceDetailDraft } from "@/components/admin/service-detail-defaults";
@@ -52,8 +52,6 @@ import {
   type ServiceCategory,
   type ServiceStatus,
 } from "@/data/catalog";
-import { isSupabaseConfigured } from "@/lib/supabase";
-
 const emptyService = (): SiteService => ({
   id: `svc-${Date.now()}`,
   slug: "",
@@ -71,7 +69,7 @@ const emptyService = (): SiteService => ({
 export default function AdminServices() {
   const { toast } = useToast();
   const { data: services = [], isLoading, isError } = useAdminServices();
-  const { toggleStatus, saveService, saveDetail, seedCatalog } =
+  const { toggleStatus, saveService, saveDetail, removeService, clearAll } =
     useServiceMutations();
   const [search, setSearch] = useState("");
   const [editing, setEditing] = useState<SiteService | null>(null);
@@ -165,29 +163,36 @@ export default function AdminServices() {
           description="Chỉnh sửa tại đây sẽ hiển thị ngay trên trang Dịch vụ công khai. Dịch vụ ẩn sẽ không xuất hiện cho khách."
           actions={
             <>
-              {isSupabaseConfigured() && (
+              {services.length > 0 && (
                 <Button
                   variant="outline"
-                  className="rounded-2xl text-[10px] uppercase tracking-widest font-bold"
-                  disabled={seedCatalog.isPending}
-                  onClick={() =>
-                    seedCatalog.mutate(undefined, {
+                  className="rounded-2xl text-[10px] uppercase tracking-widest font-bold text-red-600 border-red-200 hover:bg-red-50"
+                  disabled={clearAll.isPending}
+                  onClick={() => {
+                    if (
+                      !window.confirm(
+                        "Xóa toàn bộ dịch vụ? Hành động này không hoàn tác.",
+                      )
+                    ) {
+                      return;
+                    }
+                    clearAll.mutate(undefined, {
                       onSuccess: () =>
                         toast({
-                          title: "Đồng bộ thành công",
-                          description: "Dữ liệu mẫu đã đưa lên Supabase.",
+                          title: "Đã xóa tất cả dịch vụ",
+                          description: "Trang web chỉ hiển thị bài mới khi bạn thêm.",
                         }),
                       onError: () =>
                         toast({
                           variant: "destructive",
-                          title: "Lỗi đồng bộ",
-                          description: "Chạy supabase/schema.sql trong SQL Editor trước.",
+                          title: "Không xóa được",
+                          description: "Kiểm tra quyền Supabase hoặc chạy supabase/clear-content.sql.",
                         }),
-                    })
-                  }
+                    });
+                  }}
                 >
-                  <Database size={14} className="mr-2" />
-                  Đồng bộ Supabase
+                  <Trash2 size={14} className="mr-2" />
+                  Xóa tất cả
                 </Button>
               )}
               <Button
@@ -238,7 +243,7 @@ export default function AdminServices() {
           )}
           {isError && (
             <p className="p-12 text-center text-red-500 text-sm">
-              Không tải được dữ liệu. Đang dùng bản mẫu cục bộ.
+              Không tải được dữ liệu. Kiểm tra kết nối Supabase.
             </p>
           )}
           {!isLoading && (
@@ -332,6 +337,31 @@ export default function AdminServices() {
                                 Hiển thị
                               </>
                             )}
+                          </DropdownMenuItem>
+                          <DropdownMenuItem
+                            className="text-red-600 focus:text-red-600"
+                            onClick={() => {
+                              if (
+                                !window.confirm(`Xóa dịch vụ "${service.title}"?`)
+                              ) {
+                                return;
+                              }
+                              removeService.mutate(service.id, {
+                                onSuccess: () =>
+                                  toast({
+                                    title: "Đã xóa",
+                                    description: service.title,
+                                  }),
+                                onError: () =>
+                                  toast({
+                                    variant: "destructive",
+                                    title: "Không xóa được",
+                                  }),
+                              });
+                            }}
+                          >
+                            <Trash2 size={14} className="mr-2" />
+                            Xóa
                           </DropdownMenuItem>
                         </DropdownMenuContent>
                       </DropdownMenu>

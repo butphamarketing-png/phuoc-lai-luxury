@@ -1,11 +1,10 @@
-import { SERVICE_DETAIL_DATA, type ServiceDetailContent } from "@/data/content-details";
+import type { ServiceDetailContent } from "@/data/content-details";
 import type { SiteService } from "@/data/catalog";
 
 export function buildServiceDetailDraft(
   service: SiteService,
 ): ServiceDetailContent {
-  const fallback = SERVICE_DETAIL_DATA[service.slug];
-  const existing = service.detail ?? fallback;
+  const existing = service.detail;
   return {
     title: existing?.title ?? service.title,
     category: existing?.category ?? service.categoryLabel,

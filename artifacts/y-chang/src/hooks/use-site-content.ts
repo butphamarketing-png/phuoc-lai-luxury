@@ -13,7 +13,10 @@ import {
   updateTrainingDetail,
   upsertService,
   upsertTrainingCourse,
-  seedCatalogToSupabase,
+  deleteService,
+  deleteTrainingCourse,
+  clearAllServices,
+  clearAllTrainingCourses,
 } from "@/lib/site-content";
 import type {
   ServiceDetailContent,
@@ -85,11 +88,6 @@ export function useServiceMutations() {
     onSuccess: invalidate,
   });
 
-  const seedCatalog = useMutation({
-    mutationFn: seedCatalogToSupabase,
-    onSuccess: invalidate,
-  });
-
   const saveDetail = useMutation({
     mutationFn: ({
       id,
@@ -101,7 +99,17 @@ export function useServiceMutations() {
     onSuccess: invalidate,
   });
 
-  return { toggleStatus, saveService, saveDetail, seedCatalog };
+  const removeService = useMutation({
+    mutationFn: (id: string) => deleteService(id),
+    onSuccess: invalidate,
+  });
+
+  const clearAll = useMutation({
+    mutationFn: clearAllServices,
+    onSuccess: invalidate,
+  });
+
+  return { toggleStatus, saveService, saveDetail, removeService, clearAll };
 }
 
 export function useTrainingMutations() {
@@ -122,11 +130,6 @@ export function useTrainingMutations() {
     onSuccess: invalidate,
   });
 
-  const seedCatalog = useMutation({
-    mutationFn: seedCatalogToSupabase,
-    onSuccess: invalidate,
-  });
-
   const saveDetail = useMutation({
     mutationFn: ({
       id,
@@ -138,5 +141,15 @@ export function useTrainingMutations() {
     onSuccess: invalidate,
   });
 
-  return { toggleStatus, saveCourse, saveDetail, seedCatalog };
+  const removeCourse = useMutation({
+    mutationFn: (id: string) => deleteTrainingCourse(id),
+    onSuccess: invalidate,
+  });
+
+  const clearAll = useMutation({
+    mutationFn: clearAllTrainingCourses,
+    onSuccess: invalidate,
+  });
+
+  return { toggleStatus, saveCourse, saveDetail, removeCourse, clearAll };
 }

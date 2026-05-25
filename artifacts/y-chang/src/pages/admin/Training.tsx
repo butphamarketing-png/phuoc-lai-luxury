@@ -9,8 +9,8 @@ import {
   Edit2,
   Eye,
   ExternalLink,
-  Database,
   FileText,
+  Trash2,
 } from "lucide-react";
 import type { TrainingDetailContent } from "@/data/content-details";
 import { buildTrainingDetailDraft } from "@/components/admin/training-detail-defaults";
@@ -51,8 +51,6 @@ import {
   type TrainingCategory,
   type TrainingStatus,
 } from "@/data/catalog";
-import { isSupabaseConfigured } from "@/lib/supabase";
-
 const emptyCourse = (): SiteTrainingCourse => ({
   id: `tr-${Date.now()}`,
   slug: "",
@@ -77,7 +75,7 @@ const statusLabel: Record<TrainingStatus, string> = {
 export default function AdminTraining() {
   const { toast } = useToast();
   const { data: courses = [], isLoading } = useAdminTraining();
-  const { toggleStatus, saveCourse, saveDetail, seedCatalog } =
+  const { toggleStatus, saveCourse, saveDetail, removeCourse, clearAll } =
     useTrainingMutations();
   const [search, setSearch] = useState("");
   const [editing, setEditing] = useState<SiteTrainingCourse | null>(null);
@@ -150,24 +148,36 @@ export default function AdminTraining() {
           description="Quản lý chương trình đào tạo hiển thị tại trang Đào tạo. Khóa ẩn sẽ không xuất hiện cho học viên."
           actions={
             <>
-              {isSupabaseConfigured() && (
+              {courses.length > 0 && (
                 <Button
                   variant="outline"
-                  className="rounded-2xl text-[10px] uppercase tracking-widest font-bold"
-                  disabled={seedCatalog.isPending}
-                  onClick={() =>
-                    seedCatalog.mutate(undefined, {
-                      onSuccess: () => toast({ title: "Đồng bộ Supabase thành công" }),
+                  className="rounded-2xl text-[10px] uppercase tracking-widest font-bold text-red-600 border-red-200 hover:bg-red-50"
+                  disabled={clearAll.isPending}
+                  onClick={() => {
+                    if (
+                      !window.confirm(
+                        "Xóa toàn bộ khóa học? Hành động này không hoàn tác.",
+                      )
+                    ) {
+                      return;
+                    }
+                    clearAll.mutate(undefined, {
+                      onSuccess: () =>
+                        toast({
+                          title: "Đã xóa tất cả khóa học",
+                          description: "Trang web chỉ hiển thị bài mới khi bạn thêm.",
+                        }),
                       onError: () =>
                         toast({
                           variant: "destructive",
-                          title: "Chạy supabase/schema.sql trước",
+                          title: "Không xóa được",
+                          description: "Kiểm tra quyền Supabase hoặc chạy supabase/clear-content.sql.",
                         }),
-                    })
-                  }
+                    });
+                  }}
                 >
-                  <Database size={14} className="mr-2" />
-                  Đồng bộ Supabase
+                  <Trash2 size={14} className="mr-2" />
+                  Xóa tất cả
                 </Button>
               )}
               <Button
@@ -263,6 +273,31 @@ export default function AdminTraining() {
                           <DropdownMenuItem onClick={() => cycleStatus(course)}>
                             <Eye size={14} className="mr-2" />
                             Đổi trạng thái
+                          </DropdownMenuItem>
+                          <DropdownMenuItem
+                            className="text-red-600 focus:text-red-600"
+                            onClick={() => {
+                              if (
+                                !window.confirm(`Xóa khóa học "${course.title}"?`)
+                              ) {
+                                return;
+                              }
+                              removeCourse.mutate(course.id, {
+                                onSuccess: () =>
+                                  toast({
+                                    title: "Đã xóa",
+                                    description: course.title,
+                                  }),
+                                onError: () =>
+                                  toast({
+                                    variant: "destructive",
+                                    title: "Không xóa được",
+                                  }),
+                              });
+                            }}
+                          >
+                            <Trash2 size={14} className="mr-2" />
+                            Xóa
                           </DropdownMenuItem>
                         </DropdownMenuContent>
                       </DropdownMenu>

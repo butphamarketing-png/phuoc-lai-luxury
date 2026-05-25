@@ -1,7 +1,14 @@
 import { Link, useLocation } from "wouter";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { ChevronDown, Menu, X, Plus } from "lucide-react";
 import { useLanguage } from "@/hooks/use-language";
+import { usePublicServices, usePublicTraining } from "@/hooks/use-site-content";
+import {
+  getPublicServicePath,
+  getPublicTrainingPath,
+  type ServiceCategory,
+  type TrainingCategory,
+} from "@/data/catalog";
 import BookingModal from "./BookingModal";
 import { motion, AnimatePresence } from "framer-motion";
 import logoImg from "@/assets/logo.png";
@@ -49,29 +56,58 @@ export default function Navbar() {
     }
   };
 
-  const serviceItems = [
-    { label: "Phun Xăm", href: "/dich-vu/phun-xam", id: "services-section", subItems: [
-      { label: "Điêu khắc sợi AMAZINGBROWS", href: "/dich-vu/amazing-brows-fiber" },
-      { label: "Phun mày SANDBROWS", href: "/dich-vu/sandbrows" },
-      { label: "Phun môi SEXYLIPS", href: "/dich-vu/sexylips" },
-      { label: "Phun mí phượng hoàng", href: "/dich-vu/phoenix-eyeliner" }
-    ]},
-    { label: "Spa", href: "/dich-vu/spa", id: "services-section" },
-  ];
+  const { data: publicServices = [] } = usePublicServices();
+  const { data: publicTraining = [] } = usePublicTraining();
 
-  const trainingItems = [
-    { label: "Phun Xăm", href: "/dao-tao/phun-xam", id: "training-section", subItems: [
-      { label: "Khóa học Sợi AMAZINGBROWS nâng cao", href: "/dao-tao/amazing-brows" },
-      { label: "Khóa học Môi chuyên sâu", href: "/dao-tao/lip-master" },
-      { label: "Khóa học Tổng hợp chuyên sâu", href: "/dao-tao/master-advanced" }
-    ]},
-    { label: "Spa", href: "/dao-tao/spa", id: "training-section", subItems: [
-      { label: "SPA BASIC", href: "/dao-tao/spa-basic" },
-      { label: "SPA ADVANCED", href: "/dao-tao/spa-advanced" },
-      { label: "SPA EXPERT", href: "/dao-tao/spa-expert" },
-      { label: "SPA THERAPY", href: "/dao-tao/spa-therapy" }
-    ]},
-  ];
+  const serviceItems = useMemo(() => {
+    const byCategory = (cat: ServiceCategory) =>
+      publicServices
+        .filter((s) => s.category === cat)
+        .map((s) => ({
+          label: s.title,
+          href: getPublicServicePath(s.slug),
+        }));
+
+    return [
+      {
+        label: "Phun Xăm",
+        href: "/dich-vu/phun-xam",
+        id: "services-section",
+        subItems: byCategory("phun-xam"),
+      },
+      {
+        label: "Spa",
+        href: "/dich-vu/spa",
+        id: "services-section",
+        subItems: byCategory("spa"),
+      },
+    ];
+  }, [publicServices]);
+
+  const trainingItems = useMemo(() => {
+    const byCategory = (cat: TrainingCategory) =>
+      publicTraining
+        .filter((c) => c.category === cat)
+        .map((c) => ({
+          label: c.title,
+          href: getPublicTrainingPath(c.slug),
+        }));
+
+    return [
+      {
+        label: "Phun Xăm",
+        href: "/dao-tao/phun-xam",
+        id: "training-section",
+        subItems: byCategory("phun-xam"),
+      },
+      {
+        label: "Spa",
+        href: "/dao-tao/spa",
+        id: "training-section",
+        subItems: byCategory("spa"),
+      },
+    ];
+  }, [publicTraining]);
 
   const navLinks = [
     { href: "/", label: t("nav.home"), kind: "home" },
