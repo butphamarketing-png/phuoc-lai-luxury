@@ -35,7 +35,8 @@ export function absoluteUrl(path: string): string {
   return `${base}${normalized}`;
 }
 
-export const DEFAULT_OG_IMAGE = "/studio-interior.png";
+/** Ảnh chia sẻ Zalo/Facebook — logo trên nền tối (og-share.png) */
+export const DEFAULT_OG_IMAGE = "/og-share.png";
 
 export type SeoMeta = {
   title: string;

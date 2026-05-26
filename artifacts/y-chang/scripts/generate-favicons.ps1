@@ -1,5 +1,5 @@
-# Tạo lại favicon chuẩn từ logo (chạy sau khi đổi logo.png)
-$root = Split-Path (Split-Path $PSScriptRoot -Parent) -Parent
+# Tạo lại favicon + ảnh chia sẻ Zalo/Facebook từ logo (chạy sau khi đổi logo.png)
+$root = Split-Path $PSScriptRoot -Parent
 $logo = Join-Path $root "src\assets\logo.png"
 $pub = Join-Path $root "public"
 
@@ -29,4 +29,19 @@ $icon.Save($fs)
 $fs.Close()
 $bmp.Dispose()
 
-Write-Host "Favicon da tao trong public/"
+# OG share 1200x630 — logo giữa, nền #1A1A1A (Zalo/Facebook preview)
+$ogW = 1200
+$ogH = 630
+$og = New-Object System.Drawing.Bitmap $ogW, $ogH
+$ogG = [System.Drawing.Graphics]::FromImage($og)
+$ogG.Clear([System.Drawing.Color]::FromArgb(255, 26, 26, 26))
+$logoImg = [System.Drawing.Image]::FromFile($logo)
+$logoSize = 280
+$logoX = [int](($ogW - $logoSize) / 2)
+$logoY = [int](($ogH - $logoSize) / 2)
+$ogG.InterpolationMode = [System.Drawing.Drawing2D.InterpolationMode]::HighQualityBicubic
+$ogG.DrawImage($logoImg, $logoX, $logoY, $logoSize, $logoSize)
+$og.Save((Join-Path $pub "og-share.png"), [System.Drawing.Imaging.ImageFormat]::Png)
+$ogG.Dispose(); $og.Dispose(); $logoImg.Dispose()
+
+Write-Host "Favicon + og-share.png da tao trong public/"

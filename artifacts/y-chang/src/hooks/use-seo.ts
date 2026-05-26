@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import {
   absoluteUrl,
+  DEFAULT_OG_IMAGE,
   formatTitle,
   getSiteUrl,
   SITE_NAME,
@@ -34,7 +35,7 @@ function upsertLink(rel: string, href: string) {
 function applySeo(meta: SeoMeta) {
   const path = meta.path ?? window.location.pathname;
   const canonical = absoluteUrl(path);
-  const image = absoluteUrl(meta.image ?? "/studio-interior.png");
+  const image = absoluteUrl(meta.image ?? DEFAULT_OG_IMAGE);
   const title = meta.title.includes(SITE_NAME)
     ? meta.title
     : formatTitle(meta.title);
@@ -57,6 +58,8 @@ function applySeo(meta: SeoMeta) {
   upsertMeta('meta[property="og:type"]', { property: "og:type" }, meta.type ?? "website");
   upsertMeta('meta[property="og:url"]', { property: "og:url" }, canonical);
   upsertMeta('meta[property="og:image"]', { property: "og:image" }, image);
+  upsertMeta('meta[property="og:image:width"]', { property: "og:image:width" }, "1200");
+  upsertMeta('meta[property="og:image:height"]', { property: "og:image:height" }, "630");
   upsertMeta('meta[property="og:locale"]', { property: "og:locale" }, "vi_VN");
   upsertMeta('meta[property="og:site_name"]', { property: "og:site_name" }, SITE_NAME);
   upsertMeta('meta[name="twitter:card"]', { name: "twitter:card" }, "summary_large_image");

@@ -1,6 +1,7 @@
 import { CheckCircle2 } from "lucide-react";
 import { motion } from "framer-motion";
 import type { ContentSection } from "@/data/content-details";
+import { normalizeBodyHtml } from "@/lib/html-content";
 
 type DetailBodyProps = {
   intro: string;
@@ -15,10 +16,11 @@ export default function DetailBody({
   sections,
   hideIntro,
 }: DetailBodyProps) {
+  const normalizedHtml = bodyHtml ? normalizeBodyHtml(bodyHtml) : "";
   const hasHtml =
-    bodyHtml &&
-    bodyHtml !== "<br>" &&
-    bodyHtml.replace(/<[^>]+>/g, "").trim().length > 0;
+    normalizedHtml &&
+    normalizedHtml !== "<br>" &&
+    normalizedHtml.replace(/<[^>]+>/g, "").trim().length > 0;
 
   return (
     <div className="prose prose-neutral max-w-none">
@@ -31,7 +33,7 @@ export default function DetailBody({
       {hasHtml ? (
         <div
           className="prose prose-neutral max-w-none text-lg font-light text-black/60 [&_h2]:font-serif [&_h2]:text-3xl [&_h2]:text-[#1A1A1A] [&_h2]:mb-6 [&_h3]:font-serif [&_ul]:space-y-3 [&_img]:rounded-2xl [&_img]:shadow-xl [&_table]:w-full [&_.aspect-video]:my-8 [&_iframe]:rounded-xl"
-          dangerouslySetInnerHTML={{ __html: bodyHtml }}
+          dangerouslySetInnerHTML={{ __html: normalizedHtml }}
         />
       ) : (
         sections.map((section, idx) => (
