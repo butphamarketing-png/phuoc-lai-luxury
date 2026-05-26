@@ -75,48 +75,34 @@ export default function ServiceDetail() {
           data.image,
         )}
       />
-      <section className="relative h-[50vh] md:h-[65vh] w-full overflow-hidden">
-        <motion.img
-          initial={{ scale: 1.1 }}
-          animate={{ scale: 1 }}
-          transition={{ duration: 1.5, ease: "easeOut" }}
-          src={data.image}
-          alt={data.title}
-          className="h-full w-full object-cover grayscale hover:grayscale-0 transition-all duration-1000"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-white via-white/20 to-transparent" />
-        <div className="absolute bottom-12 left-0 w-full px-6">
-          <div className="container mx-auto max-w-4xl">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-            >
-              <Link
-                href="/dich-vu"
-                className="mb-8 inline-flex items-center gap-3 text-[10px] uppercase tracking-[0.3em] text-black/40 hover:text-black transition-all group"
-              >
-                <span className="flex h-8 w-8 items-center justify-center rounded-full border border-black/10 group-hover:bg-black group-hover:text-white transition-all">
-                  <ChevronLeft size={14} />
-                </span>
-                Quay lại dịch vụ
-              </Link>
-              <span className="mb-4 block text-[11px] font-bold uppercase tracking-[0.5em] text-black/30">
-                {data.category}
-              </span>
-              <h1 className="font-serif text-4xl md:text-6xl lg:text-7xl leading-[1.1] max-w-4xl">
-                {data.title}
-              </h1>
-            </motion.div>
-          </div>
-        </div>
-      </section>
+      <section className="container mx-auto max-w-4xl px-6 pt-28 pb-24 md:pt-32 md:pb-32">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="mb-12"
+        >
+          <Link
+            href="/dich-vu"
+            className="mb-8 inline-flex items-center gap-3 text-[10px] uppercase tracking-[0.3em] text-black/40 hover:text-black transition-all group"
+          >
+            <span className="flex h-8 w-8 items-center justify-center rounded-full border border-black/10 group-hover:bg-black group-hover:text-white transition-all">
+              <ChevronLeft size={14} />
+            </span>
+            Quay lại dịch vụ
+          </Link>
+          <span className="mb-4 block text-[11px] font-bold uppercase tracking-[0.5em] text-black/30">
+            {data.category}
+          </span>
+          <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl leading-[1.1]">
+            {data.title}
+          </h1>
+        </motion.div>
 
-      <section className="container mx-auto max-w-4xl px-6 py-24 md:py-32">
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 0.5 }}
+          transition={{ delay: 0.2 }}
           className="mb-12 flex flex-wrap items-center gap-8 text-[10px] uppercase tracking-[0.2em] text-black/40 border-b border-black/5 pb-10"
         >
           <span className="flex items-center gap-3">
