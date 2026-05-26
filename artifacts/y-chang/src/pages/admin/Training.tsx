@@ -52,6 +52,7 @@ import {
   type TrainingStatus,
 } from "@/data/catalog";
 import { generateDetailSeo } from "@/lib/generate-detail-seo";
+import { slugify } from "@/lib/slugify";
 const emptyCourse = (): SiteTrainingCourse => ({
   id: `tr-${Date.now()}`,
   slug: "",
@@ -82,11 +83,14 @@ export default function AdminTraining() {
   const [editing, setEditing] = useState<SiteTrainingCourse | null>(null);
   const [detailDraft, setDetailDraft] = useState<TrainingDetailContent | null>(null);
   const [editTab, setEditTab] = useState("info");
+  /** false = slug tự sinh từ tên; true = người dùng đã chỉnh slug thủ công */
+  const [slugManual, setSlugManual] = useState(false);
 
   const openCourseEditor = (course: SiteTrainingCourse, tab = "info") => {
     setEditing({ ...course });
     setDetailDraft(buildTrainingDetailDraft(course));
     setEditTab(tab);
+    setSlugManual(courses.some((c) => c.id === course.id));
   };
 
   const filtered = useMemo(() => {
@@ -107,6 +111,7 @@ export default function AdminTraining() {
     }
     const courseToSave: SiteTrainingCourse = {
       ...editing,
+      slug: slugify(editing.slug) || slugify(editing.title),
       image: detailDraft.image || editing.image,
       description: detailDraft.intro || editing.description,
     };
@@ -357,17 +362,28 @@ export default function AdminTraining() {
                       value={editing.title}
                       onChange={(e) => {
                         const title = e.target.value;
-                        setEditing({ ...editing, title });
+                        const next: SiteTrainingCourse = { ...editing, title };
+                        if (!slugManual) {
+                          next.slug = slugify(title);
+                        }
+                        setEditing(next);
                         setDetailDraft({ ...detailDraft, title });
                       }}
                     />
                   </div>
                   <div className="space-y-2">
-                    <Label>Slug</Label>
+                    <Label>Slug (URL)</Label>
                     <Input
                       value={editing.slug}
-                      onChange={(e) => setEditing({ ...editing, slug: e.target.value })}
+                      onChange={(e) => {
+                        setSlugManual(true);
+                        setEditing({ ...editing, slug: e.target.value });
+                      }}
+                      placeholder="khoa-soi-amazingbrows-nang-cao"
                     />
+                    <p className="text-[11px] text-black/40">
+                      Tự động từ tên khóa — bạn có thể chỉnh sửa trực tiếp.
+                    </p>
                   </div>
                   <div className="grid grid-cols-2 gap-4">
                     <div className="space-y-2">
