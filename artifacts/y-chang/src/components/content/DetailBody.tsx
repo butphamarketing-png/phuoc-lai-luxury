@@ -32,7 +32,7 @@ export default function DetailBody({
 
       {hasHtml ? (
         <div
-          className="prose prose-neutral max-w-none text-lg font-light text-black/60 [&_h2]:font-serif [&_h2]:text-3xl [&_h2]:text-[#1A1A1A] [&_h2]:mb-6 [&_h3]:font-serif [&_ul]:space-y-3 [&_img]:rounded-2xl [&_img]:shadow-xl [&_table]:w-full [&_.aspect-video]:my-8 [&_iframe]:rounded-xl"
+          className="prose prose-neutral max-w-none text-lg font-light text-black/60 [&_h2]:font-serif [&_h2]:text-3xl [&_h2]:text-[#1A1A1A] [&_h2]:mb-6 [&_h3]:font-serif [&_ul]:space-y-3 [&_img]:rounded-2xl [&_img]:shadow-xl [&_video]:my-8 [&_video]:w-full [&_video]:max-h-[70vh] [&_video]:rounded-2xl [&_video]:bg-black [&_table]:w-full [&_.aspect-video]:my-8 [&_iframe]:rounded-xl"
           dangerouslySetInnerHTML={{ __html: normalizedHtml }}
         />
       ) : (

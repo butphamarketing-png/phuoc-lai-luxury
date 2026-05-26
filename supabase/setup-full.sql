@@ -335,8 +335,16 @@ values (
   'site-media',
   'site-media',
   true,
-  5242880,
-  array['image/jpeg', 'image/png', 'image/webp', 'image/gif']
+  52428800,
+  array[
+    'image/jpeg',
+    'image/png',
+    'image/webp',
+    'image/gif',
+    'video/mp4',
+    'video/webm',
+    'video/quicktime'
+  ]
 )
 on conflict (id) do update set
   public = excluded.public,

@@ -13,6 +13,7 @@ import {
   RemoveFormatting,
   Code,
   Youtube,
+  Video,
   Table,
   AlignLeft,
   AlignCenter,
@@ -22,7 +23,13 @@ import {
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
-import { uploadSiteImage, validateImageFile, canUploadImages } from "@/lib/media-upload";
+import {
+  uploadSiteImage,
+  uploadSiteVideo,
+  validateImageFile,
+  validateVideoFile,
+  canUploadMedia,
+} from "@/lib/media-upload";
 import { useToast } from "@/hooks/use-toast";
 
 type RichTextEditorProps = {
@@ -88,6 +95,7 @@ export default function RichTextEditor({
   const { toast } = useToast();
   const editorRef = useRef<HTMLDivElement>(null);
   const fileRef = useRef<HTMLInputElement>(null);
+  const videoRef = useRef<HTMLInputElement>(null);
   const lastHtml = useRef(value);
   const [sourceMode, setSourceMode] = useState(false);
   const [sourceHtml, setSourceHtml] = useState(value);
@@ -135,12 +143,28 @@ export default function RichTextEditor({
   };
 
   const insertImage = () => {
-    if (canUploadImages()) {
+    if (canUploadMedia()) {
       fileRef.current?.click();
       return;
     }
     const url = window.prompt("Đường dẫn ảnh:", "/");
     if (url) insertImageUrl(url);
+  };
+
+  const insertVideoUrl = (url: string) => {
+    const safe = url.replace(/"/g, "&quot;");
+    insertHtml(
+      `<div class="my-8 max-w-full overflow-hidden rounded-2xl bg-black"><video src="${safe}" controls playsinline preload="metadata" style="width:100%;max-height:70vh;display:block;border-radius:12px;"></video></div><p><br></p>`,
+    );
+  };
+
+  const insertVideo = () => {
+    if (canUploadMedia()) {
+      videoRef.current?.click();
+      return;
+    }
+    const url = window.prompt("Đường dẫn video (MP4):", "/");
+    if (url) insertVideoUrl(url);
   };
 
   const handleImageFile = async (file: File) => {
@@ -158,6 +182,28 @@ export default function RichTextEditor({
       toast({
         variant: "destructive",
         title: "Lỗi tải ảnh",
+        description: e instanceof Error ? e.message : undefined,
+      });
+    } finally {
+      setUploading(false);
+    }
+  };
+
+  const handleVideoFile = async (file: File) => {
+    const err = validateVideoFile(file);
+    if (err) {
+      toast({ variant: "destructive", title: err });
+      return;
+    }
+    setUploading(true);
+    try {
+      const { url } = await uploadSiteVideo(file, uploadFolder);
+      insertVideoUrl(url);
+      toast({ title: "Đã chèn video" });
+    } catch (e) {
+      toast({
+        variant: "destructive",
+        title: "Lỗi tải video",
         description: e instanceof Error ? e.message : undefined,
       });
     } finally {
@@ -255,6 +301,12 @@ export default function RichTextEditor({
         >
           <ImageIcon size={15} />
         </ToolbarButton>
+        <ToolbarButton
+          onClick={insertVideo}
+          title={uploading ? "Đang tải…" : "Tải video MP4/MOV (tối đa 50MB)"}
+        >
+          <Video size={15} />
+        </ToolbarButton>
         <ToolbarButton onClick={insertYoutube} title="Chèn YouTube">
           <Youtube size={15} />
         </ToolbarButton>
@@ -285,6 +337,17 @@ export default function RichTextEditor({
           e.target.value = "";
         }}
       />
+      <input
+        ref={videoRef}
+        type="file"
+        accept="video/mp4,video/webm,video/quicktime,.mp4,.mov,.webm"
+        className="hidden"
+        onChange={(e) => {
+          const f = e.target.files?.[0];
+          if (f) void handleVideoFile(f);
+          e.target.value = "";
+        }}
+      />
 
       {sourceMode ? (
         <Textarea
@@ -308,7 +371,7 @@ export default function RichTextEditor({
             ref={editorRef}
             contentEditable
             suppressContentEditableWarning
-            className="prose prose-neutral max-w-none min-h-[320px] px-4 py-4 text-base leading-relaxed outline-none focus:ring-0 [&_img]:max-w-full [&_img]:rounded-lg [&_table]:w-full [&_iframe]:max-w-full"
+            className="prose prose-neutral max-w-none min-h-[320px] px-4 py-4 text-base leading-relaxed outline-none focus:ring-0 [&_img]:max-w-full [&_img]:rounded-lg [&_video]:max-w-full [&_video]:rounded-lg [&_table]:w-full [&_iframe]:max-w-full"
             onInput={syncFromDom}
             onBlur={syncFromDom}
           />
