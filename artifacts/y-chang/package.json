@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite --config vite.config.ts --host 0.0.0.0",
     "prebuild": "node scripts/generate-sitemap.mjs",
+    "sitemap": "node scripts/generate-sitemap.mjs",
     "build": "BASE_PATH=/ PORT=3000 vite build --config vite.config.ts",
     "serve": "vite preview --config vite.config.ts --host 0.0.0.0",
     "typecheck": "tsc -p tsconfig.json --noEmit"

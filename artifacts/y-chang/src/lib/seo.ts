@@ -55,9 +55,9 @@ export function formatTitle(pageTitle: string): string {
 
 const STATIC_ROUTES: Record<string, SeoMeta> = {
   "/": {
-    title: formatTitle(`${SITE_NAME} — ${SITE_TAGLINE}`),
+    title: formatTitle("Phun xăm Vũng Tàu — Phuoc Lai Luxury"),
     description:
-      "Phuoc Lai Luxury Vũng Tàu: phun xăm mày môi mí AMAZINGBROWS, SANDBROWS, SEXYLIPS, spa chăm sóc da và đào tạo nghề chuyên nghiệp. Đặt lịch 0909 203 108.",
+      "Phun xăm thẩm mỹ Vũng Tàu: mày, môi, mí AMAZINGBROWS, SANDBROWS, SEXYLIPS, spa & đào tạo nghề tại Phuoc Lai Luxury. Hotline 0909 203 108.",
     path: "/",
     image: DEFAULT_OG_IMAGE,
   },
@@ -172,10 +172,9 @@ export function getAdminSeo(): SeoMeta {
   };
 }
 
-/** URL công khai cho sitemap (trang tĩnh; bài dịch vụ/đào tạo thêm khi build từ Supabase hoặc sau deploy) */
+/** Trang tĩnh (bài CMS thêm qua scripts/generate-sitemap.mjs hoặc /api/sitemap.xml) */
 export function getSitemapPaths(): string[] {
-  const staticPaths = Object.keys(STATIC_ROUTES);
-  return staticPaths;
+  return Object.keys(STATIC_ROUTES);
 }
 
 export function getPublicContentPaths(
