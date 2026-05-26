@@ -1,28 +1,43 @@
 # Supabase — Phuoc Lai Luxury CMS
 
-## Cài đặt nhanh
+## Cài đặt nhanh (khuyến nghị)
 
 1. Tạo project tại [supabase.com](https://supabase.com)
-2. Mở **SQL Editor** → dán toàn bộ nội dung file **`setup.sql`** → **Run**
-3. Chạy tiếp **`cms-extensions.sql`** (đánh giá, khách hàng liên hệ, cài đặt)
+2. Mở **SQL Editor** → **New query**
+3. Dán **toàn bộ** file **`setup-full.sql`** → **Run** (một lần duy nhất)
 4. **Authentication** → **Users** → **Add user** (email + mật khẩu admin)
 5. **Settings** → **API** → copy vào Vercel:
    - `VITE_SUPABASE_URL`
    - `VITE_SUPABASE_ANON_KEY`
    - `VITE_SITE_URL` = `https://phunxamvungtau.com`
 6. **Redeploy** website trên Vercel
-7. Vào **https://phunxamvungtau.com/adminbp** → đăng nhập → quản lý Dịch vụ, Đào tạo, Đánh giá, Khách hàng, Cài đặt
+7. Đăng nhập **https://phunxamvungtau.com/adminbp** → thêm Dịch vụ, Đào tạo, Đánh giá
 
 ## Các file SQL
 
 | File | Mục đích |
 |------|----------|
-| **`setup.sql`** | Chạy **một lần** — đủ bảng, RLS, storage, index |
-| **`cms-extensions.sql`** | Đánh giá, form khách hàng, cài đặt website |
-| `schema.sql` | Chỉ bảng + RLS (legacy, dùng `setup.sql` thay thế) |
-| `storage.sql` | Chỉ bucket ảnh (đã gộp trong `setup.sql`) |
+| **`setup-full.sql`** | **Chạy file này** — đầy đủ A→Z (bảng, RLS, storage, cài đặt mặc định) |
+| `setup.sql` | Bản cũ (chỉ dịch vụ + đào tạo + storage) — dùng nếu đã chạy từ trước |
+| `cms-extensions.sql` | Bổ sung đánh giá/khách/cài đặt — chỉ cần nếu đã chạy `setup.sql` cũ, chưa có bảng mới |
+| `clear-content.sql` | Xóa hết dịch vụ & khóa học (giữ cấu trúc bảng) |
 
-## Cấu trúc `detail_json` (nội dung bài viết)
+## Bảng dữ liệu
+
+| Bảng | Admin | Website |
+|------|-------|---------|
+| `site_services` | Dịch vụ | `/dich-vu` |
+| `site_training_courses` | Đào tạo | `/dao-tao` |
+| `site_reviews` | Đánh giá | `/feedback` |
+| `site_customers` | Khách hàng | Form Liên hệ + Booking |
+| `site_settings` | Cài đặt | Footer, Liên hệ, About… |
+
+## Storage
+
+- Bucket: `site-media` (public, tối đa 5MB/ảnh)
+- Admin upload qua trình soạn thảo / form ảnh
+
+## Cấu trúc `detail_json` (nội dung bài viết dịch vụ/đào tạo)
 
 ```json
 {
@@ -40,19 +55,16 @@
     "keywords": "từ khóa 1, từ khóa 2",
     "description": "Mô tả Google"
   },
-  "sections": [
-    {
-      "heading": "Tiêu đề mục",
-      "content": "Đoạn văn",
-      "list": ["Ý 1", "Ý 2"],
-      "image": "/anh.png"
-    }
-  ]
+  "sections": []
 }
 ```
 
-## Upload ảnh
+## Kiểm tra nhanh (SQL Editor)
 
-- Bucket: `site-media` (public)
-- Chỉ user **đã đăng nhập** admin mới upload được
-- Giới hạn: 5MB, JPG/PNG/WebP/GIF
+```sql
+select 'services' as t, count(*) from public.site_services
+union all select 'training', count(*) from public.site_training_courses
+union all select 'reviews', count(*) from public.site_reviews
+union all select 'customers', count(*) from public.site_customers
+union all select 'settings', count(*) from public.site_settings;
+```

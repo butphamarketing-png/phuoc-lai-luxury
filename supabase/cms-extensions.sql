@@ -1,5 +1,6 @@
 -- Đánh giá, khách hàng (liên hệ), cài đặt website
--- Chạy sau setup.sql trong Supabase SQL Editor
+-- ⚠️ ĐÃ GỘP VÀO setup-full.sql — project mới chỉ cần chạy setup-full.sql
+-- Chỉ chạy file này nếu bạn đã chạy setup.sql (bản cũ) TRƯỚC khi có cms-extensions
 
 -- -----------------------------------------------------------------------------
 -- Đánh giá / Feedback
