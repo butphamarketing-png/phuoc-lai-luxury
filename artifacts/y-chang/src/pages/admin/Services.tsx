@@ -52,6 +52,7 @@ import {
   type ServiceCategory,
   type ServiceStatus,
 } from "@/data/catalog";
+import { slugify } from "@/lib/slugify";
 const emptyService = (): SiteService => ({
   id: `svc-${Date.now()}`,
   slug: "",
@@ -75,11 +76,14 @@ export default function AdminServices() {
   const [editing, setEditing] = useState<SiteService | null>(null);
   const [detailDraft, setDetailDraft] = useState<ServiceDetailContent | null>(null);
   const [editTab, setEditTab] = useState("info");
+  /** false = slug tự sinh từ tên; true = người dùng đã chỉnh slug thủ công */
+  const [slugManual, setSlugManual] = useState(false);
 
   const openServiceEditor = (service: SiteService, tab = "info") => {
     setEditing({ ...service });
     setDetailDraft(buildServiceDetailDraft(service));
     setEditTab(tab);
+    setSlugManual(services.some((s) => s.id === service.id));
   };
 
   const filtered = useMemo(() => {
@@ -114,6 +118,7 @@ export default function AdminServices() {
 
     const serviceToSave: SiteService = {
       ...editing,
+      slug: slugify(editing.slug) || slugify(editing.title),
       image: detailDraft.image || editing.image,
     };
     const detailToSave: ServiceDetailContent = {
@@ -420,7 +425,11 @@ export default function AdminServices() {
                       value={editing.title}
                       onChange={(e) => {
                         const title = e.target.value;
-                        setEditing({ ...editing, title });
+                        const next: SiteService = { ...editing, title };
+                        if (!slugManual) {
+                          next.slug = slugify(title);
+                        }
+                        setEditing(next);
                         setDetailDraft({ ...detailDraft, title });
                       }}
                     />
@@ -429,9 +438,15 @@ export default function AdminServices() {
                     <Label>Slug (URL)</Label>
                     <Input
                       value={editing.slug}
-                      onChange={(e) => setEditing({ ...editing, slug: e.target.value })}
+                      onChange={(e) => {
+                        setSlugManual(true);
+                        setEditing({ ...editing, slug: e.target.value });
+                      }}
                       placeholder="amazing-brows-fiber"
                     />
+                    <p className="text-[11px] text-black/40">
+                      Tự động từ tên dịch vụ — bạn có thể chỉnh sửa trực tiếp.
+                    </p>
                   </div>
                   <div className="grid grid-cols-2 gap-4">
                     <div className="space-y-2">
