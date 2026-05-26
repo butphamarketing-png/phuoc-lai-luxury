@@ -21,6 +21,7 @@ import type {
   TrainingDetailContent,
 } from "@/data/content-details";
 import { getSiteUrl } from "@/lib/seo";
+import { generateDetailSeo } from "@/lib/generate-detail-seo";
 
 type BaseDetail = {
   title: string;
@@ -86,14 +87,13 @@ export default function ArticleContentEditor<T extends BaseDetail>({
       : null;
 
   const generateSeo = () => {
-    const meta = draft.metaDescription || draft.intro;
     setDraft({
       ...draft,
-      seo: {
-        title: (draft.seo?.title || draft.title).slice(0, 70),
-        description: (draft.seo?.description || meta).slice(0, 160),
-        keywords: draft.seo?.keywords || draft.title,
-      },
+      seo: generateDetailSeo({
+        title: draft.title,
+        metaDescription: draft.metaDescription,
+        intro: draft.intro,
+      }),
     });
   };
 

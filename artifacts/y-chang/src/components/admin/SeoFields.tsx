@@ -51,7 +51,7 @@ export default function SeoFields({ value, onChange, onGenerate }: SeoFieldsProp
           onClick={onGenerate}
         >
           <Sparkles size={14} className="mr-2" />
-          Tạo SEO từ tiêu đề & mô tả
+          Tự tạo SEO
         </Button>
       )}
       <div className="space-y-2">
@@ -68,7 +68,7 @@ export default function SeoFields({ value, onChange, onGenerate }: SeoFieldsProp
       <div className="space-y-2">
         <div className="flex items-center justify-between">
           <Label>SEO Keywords</Label>
-          <CharCount current={keywords.length} max={160} />
+          <CharCount current={keywords.length} max={200} />
         </div>
         <Textarea
           rows={3}

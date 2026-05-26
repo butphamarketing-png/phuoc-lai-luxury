@@ -51,6 +51,7 @@ import {
   type TrainingCategory,
   type TrainingStatus,
 } from "@/data/catalog";
+import { generateDetailSeo } from "@/lib/generate-detail-seo";
 const emptyCourse = (): SiteTrainingCourse => ({
   id: `tr-${Date.now()}`,
   slug: "",
@@ -469,20 +470,18 @@ export default function AdminTraining() {
                     value={detailDraft.seo ?? {}}
                     onChange={(seo) => setDetailDraft({ ...detailDraft, seo })}
                     onGenerate={() => {
-                      const meta = detailDraft.metaDescription || detailDraft.intro;
-                      setDetailDraft({
-                        ...detailDraft,
-                        seo: {
-                          title: (detailDraft.seo?.title || detailDraft.title).slice(
-                            0,
-                            70,
-                          ),
-                          description: (detailDraft.seo?.description || meta).slice(
-                            0,
-                            160,
-                          ),
-                          keywords: detailDraft.seo?.keywords || editing.title,
-                        },
+                      if (!editing) return;
+                      const seo = generateDetailSeo({
+                        title: editing.title || detailDraft.title,
+                        categoryLabel:
+                          editing.category === "spa" ? "Spa" : "Phun Xăm",
+                        metaDescription: detailDraft.metaDescription,
+                        intro: detailDraft.intro,
+                      });
+                      setDetailDraft({ ...detailDraft, seo });
+                      toast({
+                        title: "Đã tạo SEO",
+                        description: "Kiểm tra lại 3 ô bên dưới trước khi lưu.",
                       });
                     }}
                   />
