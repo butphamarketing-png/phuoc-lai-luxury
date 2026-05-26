@@ -9,12 +9,20 @@ import {
   MessageSquare,
   Clock,
   ArrowUpRight,
+  HardDrive,
 } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useAdminServices, useAdminTraining } from "@/hooks/use-site-content";
 import { useAdminCustomers } from "@/hooks/use-site-customers";
 import { useAdminReviews } from "@/hooks/use-site-reviews";
+import { useStorageUsage } from "@/hooks/use-storage-usage";
+import {
+  SITE_STORAGE_LIMIT_GB,
+  formatStorageRemaining,
+  formatStorageUsed,
+  storageUsagePercent,
+} from "@/lib/storage-usage";
 import {
   ADMIN_SERVICES,
   ADMIN_TRAINING,
@@ -41,6 +49,11 @@ export default function AdminDashboard() {
   const { data: courses = [] } = useAdminTraining();
   const { data: customers = [] } = useAdminCustomers();
   const { data: reviews = [] } = useAdminReviews();
+  const {
+    data: storageUsage,
+    isLoading: storageLoading,
+    isError: storageError,
+  } = useStorageUsage();
 
   const publishedServices = services.filter((s) => s.status === "published").length;
   const openCourses = courses.filter((c) => c.status !== "hidden").length;
@@ -71,6 +84,31 @@ export default function AdminDashboard() {
       value: String(publishedReviews),
       icon: Eye,
       change: `${reviews.length} tổng`,
+    },
+    {
+      label: "Dung lượng lưu trữ",
+      value: storageLoading
+        ? "…"
+        : storageError || !storageUsage
+          ? "—"
+          : formatStorageUsed(storageUsage.usedBytes),
+      icon: HardDrive,
+      change: storageLoading
+        ? "đang tính"
+        : storageError || !storageUsage
+          ? `gói ${SITE_STORAGE_LIMIT_GB} GB`
+          : formatStorageRemaining(
+              storageUsage.usedBytes,
+              storageUsage.limitBytes,
+            ),
+      storagePercent:
+        storageUsage && !storageError
+          ? storageUsagePercent(storageUsage.usedBytes, storageUsage.limitBytes)
+          : undefined,
+      storageSub:
+        storageUsage && !storageError
+          ? `${storageUsage.fileCount} tệp · gói ${SITE_STORAGE_LIMIT_GB} GB`
+          : `Gói ${SITE_STORAGE_LIMIT_GB} GB (ảnh & video CMS)`,
     },
   ];
 
@@ -125,7 +163,7 @@ export default function AdminDashboard() {
           </div>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
           {stats.map((stat, idx) => (
             <motion.div
               key={stat.label}
@@ -133,7 +171,7 @@ export default function AdminDashboard() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: idx * 0.1 }}
             >
-              <Card className="rounded-3xl border-black/[0.03] shadow-sm hover:shadow-xl transition-all">
+              <Card className="rounded-3xl border-black/[0.03] shadow-sm hover:shadow-xl transition-all h-full">
                 <CardContent className="p-8">
                   <div className="flex justify-between items-start mb-6">
                     <div className="p-3 rounded-2xl bg-[#FAFAFA] text-black">
@@ -144,9 +182,28 @@ export default function AdminDashboard() {
                     </span>
                   </div>
                   <h3 className="text-2xl font-serif font-bold mb-1">{stat.value}</h3>
+                  {"storagePercent" in stat && stat.storagePercent != null && (
+                    <div className="mb-3">
+                      <div className="h-1.5 w-full rounded-full bg-black/[0.06] overflow-hidden">
+                        <div
+                          className={`h-full rounded-full transition-all ${
+                            stat.storagePercent >= 90
+                              ? "bg-amber-500"
+                              : "bg-[#1A1A1A]"
+                          }`}
+                          style={{ width: `${stat.storagePercent}%` }}
+                        />
+                      </div>
+                    </div>
+                  )}
                   <p className="text-[10px] uppercase tracking-[0.2em] text-black/40 font-bold">
                     {stat.label}
                   </p>
+                  {"storageSub" in stat && stat.storageSub && (
+                    <p className="text-[9px] text-black/30 mt-2 leading-relaxed">
+                      {stat.storageSub}
+                    </p>
+                  )}
                 </CardContent>
               </Card>
             </motion.div>
