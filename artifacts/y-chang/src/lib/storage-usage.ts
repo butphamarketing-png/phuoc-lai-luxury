@@ -30,45 +30,92 @@ export function formatStorageUsed(bytes: number): string {
   return formatStorageSize(bytes);
 }
 
-export function formatStorageRemaining(usedBytes: number, limitBytes: number): string {
+export function formatStorageFree(usedBytes: number, limitBytes: number): string {
   const left = Math.max(0, limitBytes - usedBytes);
-  if (left >= 1024 ** 3) return `còn ${(left / 1024 ** 3).toFixed(1)} GB`;
-  if (left >= 1024 ** 2) return `còn ${Math.round(left / 1024 ** 2)} MB`;
-  return `còn ${formatStorageSize(left)}`;
+  return formatStorageSize(left);
+}
+
+export function formatStorageSummary(usedBytes: number, limitBytes: number): string {
+  return `${formatStorageUsed(usedBytes)} đã dùng · Còn trống ${formatStorageFree(usedBytes, limitBytes)} (gói ${SITE_STORAGE_LIMIT_GB} GB)`;
 }
 
 export function storageUsagePercent(usedBytes: number, limitBytes: number): number {
   if (limitBytes <= 0) return 0;
-  return Math.min(100, Math.round((usedBytes / limitBytes) * 100));
+  return Math.min(100, (usedBytes / limitBytes) * 100);
+}
+
+/** % tối thiểu để thanh vẫn thấy khi dung lượng rất nhỏ */
+export function storageBarWidthPercent(usedBytes: number, limitBytes: number): number {
+  const raw = storageUsagePercent(usedBytes, limitBytes);
+  if (usedBytes <= 0) return 0;
+  return Math.max(raw, 0.8);
+}
+
+export function storageBarColorClass(percent: number): string {
+  if (percent >= 90) return "bg-red-500";
+  if (percent >= 75) return "bg-amber-500";
+  return "bg-blue-500";
+}
+
+type ListedItem = {
+  name: string;
+  id: string | null;
+  metadata?: Record<string, unknown> | null;
+};
+
+function isFolder(item: ListedItem): boolean {
+  return item.id == null;
+}
+
+function readMetaSize(item: ListedItem): number {
+  const meta = item.metadata as { size?: number } | null | undefined;
+  if (typeof meta?.size === "number" && meta.size > 0) return meta.size;
+  return 0;
+}
+
+async function listPage(prefix: string, offset: number) {
+  const supabase = getSupabaseClient();
+  return supabase.storage.from(BUCKET).list(prefix, {
+    limit: 1000,
+    offset,
+    sortBy: { column: "name", order: "asc" },
+  });
+}
+
+async function resolveFileSize(path: string, item: ListedItem): Promise<number> {
+  const metaSize = readMetaSize(item);
+  if (metaSize > 0) return metaSize;
+
+  const supabase = getSupabaseClient();
+  const { data, error } = await supabase.storage.from(BUCKET).download(path);
+  if (error || !data) return metaSize;
+  return data.size;
 }
 
 async function sumFolder(prefix: string): Promise<{ bytes: number; files: number }> {
-  const supabase = getSupabaseClient();
-  const { data, error } = await supabase.storage.from(BUCKET).list(prefix, {
-    limit: 1000,
-    sortBy: { column: "name", order: "asc" },
-  });
-
-  if (error) throw error;
-  if (!data?.length) return { bytes: 0, files: 0 };
-
   let bytes = 0;
   let files = 0;
+  let offset = 0;
 
-  for (const item of data) {
-    const path = prefix ? `${prefix}/${item.name}` : item.name;
-    if (item.id == null) {
-      const nested = await sumFolder(path);
-      bytes += nested.bytes;
-      files += nested.files;
-    } else {
-      const size =
-        (item.metadata as { size?: number } | undefined)?.size ??
-        (item as { size?: number }).size ??
-        0;
-      bytes += size;
-      files += 1;
+  while (true) {
+    const { data, error } = await listPage(prefix, offset);
+    if (error) throw error;
+    if (!data?.length) break;
+
+    for (const item of data as ListedItem[]) {
+      const path = prefix ? `${prefix}/${item.name}` : item.name;
+      if (isFolder(item)) {
+        const nested = await sumFolder(path);
+        bytes += nested.bytes;
+        files += nested.files;
+      } else {
+        bytes += await resolveFileSize(path, item);
+        files += 1;
+      }
     }
+
+    if (data.length < 1000) break;
+    offset += 1000;
   }
 
   return { bytes, files };
