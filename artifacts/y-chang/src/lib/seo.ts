@@ -70,16 +70,16 @@ const STATIC_ROUTES: Record<string, SeoMeta> = {
   "/dich-vu": {
     title: formatTitle("Dịch vụ phun xăm & spa"),
     description:
-      "Danh sách dịch vụ phun xăm thẩm mỹ và chăm sóc da tại Phuoc Lai Luxury Vũng Tàu — tư vấn và đặt lịch miễn phí.",
+      "Chọn dịch vụ phun xăm thẩm mỹ hoặc spa & chăm sóc da tại Phuoc Lai Luxury Vũng Tàu — tư vấn và đặt lịch miễn phí.",
     path: "/dich-vu",
-    image: "/service-brows.png",
+    image: "/pop-up-1.jpg",
   },
   "/dich-vu/phun-xam": {
     title: formatTitle("Dịch vụ phun xăm thẩm mỹ"),
     description:
-      "Điêu khắc sợi AMAZINGBROWS, phun mày SANDBROWS, phun môi SEXYLIPS, phun mí phượng hoàng tại Vũng Tàu.",
+      "Dịch vụ phun xăm thẩm mỹ chuyên nghiệp tại Phuoc Lai Luxury Vũng Tàu — tư vấn và đặt lịch miễn phí.",
     path: "/dich-vu/phun-xam",
-    image: "/service-brows.png",
+    image: "/pop-up-1.jpg",
   },
   "/dich-vu/spa": {
     title: formatTitle("Dịch vụ spa & chăm sóc da"),
