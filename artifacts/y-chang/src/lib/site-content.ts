@@ -142,12 +142,32 @@ function trainingToRow(course: SiteTrainingCourse): TrainingRow {
   };
 }
 
+function fallbackServiceDetail(service: SiteService): ServiceDetailContent {
+  return {
+    title: service.title,
+    category: service.categoryLabel,
+    image: service.image,
+    date: "—",
+    author: service.author,
+    readTime: "5 phút đọc",
+    intro: service.title,
+    metaDescription: undefined,
+    bodyHtml: undefined,
+    seo: {},
+    sections: [],
+  };
+}
+
 export async function loadServiceDetail(
   slug: string,
 ): Promise<ServiceDetailContent | null> {
-  const services = await loadServices();
-  const item = services.find((s) => s.slug === slug);
-  return item?.detail ?? null;
+  const normalized = slug.trim().toLowerCase();
+  const services = await loadPublishedServices();
+  const item = services.find(
+    (s) => s.slug === slug || s.slug.toLowerCase() === normalized,
+  );
+  if (!item) return null;
+  return item.detail ?? fallbackServiceDetail(item);
 }
 
 export async function loadTrainingDetail(
