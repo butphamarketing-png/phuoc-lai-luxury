@@ -16,7 +16,7 @@ insert into public.site_services (
   sort_order
 ) values (
   'svc-amazing-brows-fiber',
-  'amazing-brows-fiber',
+  'dieu-khac-soi-amazingbrows',
   'Điêu Khắc Sợi AMAZINGBROWS',
   'phun-xam',
   'Phun Xăm',
@@ -58,4 +58,4 @@ on conflict (slug) do update set
   updated_at = now();
 
 -- Kiểm tra:
--- select slug, title, status from public.site_services where slug = 'amazing-brows-fiber';
+-- select slug, title, status from public.site_services where slug = 'dieu-khac-soi-amazingbrows';
