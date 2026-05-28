@@ -39,7 +39,7 @@ export default function Preloader() {
               <img
                 src={logoImg}
                 alt="Phuoc Lai Logo"
-                className="h-14 md:h-20 w-auto object-contain invert"
+                className="h-14 md:h-20 w-auto object-contain mix-blend-screen opacity-90"
               />
             </motion.div>
 
