@@ -237,11 +237,23 @@
 }
 
   .logo-badge {
-    @apply relative flex items-center justify-center rounded-full bg-gold luxury-shadow overflow-hidden logo-shine;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9999px;
+    background-color: #7a4e22;
+    overflow: hidden;
+    box-shadow:
+      0 20px 40px -15px rgba(0, 0, 0, 0.1),
+      0 0 15px rgba(212, 175, 55, 0.05);
   }
 
   .logo-badge-img {
-    @apply w-auto object-contain mix-blend-screen opacity-90;
+    width: auto;
+    object-fit: contain;
+    mix-blend-mode: screen;
+    opacity: 0.9;
   }
   .section-padding {
     @apply py-24 md:py-40;

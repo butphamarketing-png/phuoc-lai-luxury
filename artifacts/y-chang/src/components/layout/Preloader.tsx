@@ -34,7 +34,7 @@ export default function Preloader() {
                 opacity: 1,
                 transition: { duration: 1, ease: "easeOut" }
               }}
-              className="logo-badge mb-6 h-24 w-24 md:h-32 md:w-32"
+              className="logo-badge logo-shine mb-6 h-24 w-24 md:h-32 md:w-32"
             >
               <img
                 src={logoImg}

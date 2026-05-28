@@ -24,7 +24,7 @@ export default function Footer() {
         >
           <div>
             <Link href="/" className="inline-flex items-center gap-4 mb-8 group" data-testid="link-footer-home">
-              <div className="logo-badge h-14 w-14 md:h-16 md:w-16 transition-transform duration-500 group-hover:scale-105">
+              <div className="logo-badge logo-shine h-14 w-14 md:h-16 md:w-16 transition-transform duration-500 group-hover:scale-105">
                 <img
                   src={logoImg}
                   alt="LP Logo"

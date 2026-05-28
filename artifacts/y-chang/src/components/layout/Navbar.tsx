@@ -157,7 +157,7 @@ export default function Navbar() {
             >
               <div className="relative flex items-center gap-2 md:gap-4 overflow-hidden">
                 <div
-                  className={`logo-badge h-10 w-10 md:h-14 md:w-14 transition-all duration-500 ${isOverlay ? "bg-gold/85 backdrop-blur-sm border border-white/25" : ""}`}
+                  className={`logo-badge logo-shine h-10 w-10 md:h-14 md:w-14 transition-all duration-500 ${isOverlay ? "bg-gold/85 backdrop-blur-sm border border-white/25" : ""}`}
                 >
                   <img
                     src={logoImg}
