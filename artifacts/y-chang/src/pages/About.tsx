@@ -18,6 +18,7 @@ export default function About() {
   const { data: settings = DEFAULT_SITE_SETTINGS } = useSiteSettings();
   const [currentSlide, setCurrentSlide] = useState(0);
   const slides = ["/pop-up-1.jpg", "/pop-up-2.jpg", "/pop-up-3.jpg"];
+  const testimonialYoutubeId = "bKPeI7HgUKc";
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -105,6 +106,43 @@ export default function About() {
           >
             {c.subtitle}
           </motion.p>
+        </div>
+      </section>
+
+      {/* Testimonial video */}
+      <section className="px-8 md:px-20 py-16 md:py-20 bg-white">
+        <div className="max-w-5xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.8 }}
+            className="rounded-3xl overflow-hidden border border-black/[0.06] shadow-sm bg-black"
+          >
+            <div
+              className="aspect-video w-full"
+              style={{ position: "relative", paddingBottom: "56.25%", height: 0 }}
+            >
+              <iframe
+                src={`https://www.youtube.com/embed/${testimonialYoutubeId}?rel=0&modestbranding=1`}
+                title={language === "vn" ? "Cảm nhận khách hàng" : "Client testimonial"}
+                style={{
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
+                  width: "100%",
+                  height: "100%",
+                  border: 0,
+                }}
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
+                loading="lazy"
+              />
+            </div>
+          </motion.div>
+          <p className="mt-4 text-[10px] uppercase tracking-[0.25em] text-black/40 font-bold text-center">
+            {language === "vn" ? "Cảm nhận khách hàng" : "Client testimonial"}
+          </p>
         </div>
       </section>
 
