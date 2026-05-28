@@ -23,7 +23,7 @@ export default function Preloader() {
             opacity: 0,
             transition: { duration: 0.8, ease: [0.43, 0.13, 0.23, 0.96] }
           }}
-          className="fixed inset-0 z-[9999] flex items-center justify-center bg-white"
+          className="fixed inset-0 z-[9999] flex items-center justify-center bg-background"
         >
           <div className="relative flex flex-col items-center">
             {/* Logo Container with Shine Effect */}
@@ -34,7 +34,7 @@ export default function Preloader() {
                 opacity: 1,
                 transition: { duration: 1, ease: "easeOut" }
               }}
-              className="relative mb-6 h-24 w-24 md:h-32 md:w-32 flex items-center justify-center rounded-full bg-black luxury-shadow overflow-hidden logo-shine"
+              className="relative mb-6 h-24 w-24 md:h-32 md:w-32 flex items-center justify-center rounded-full bg-gold luxury-shadow overflow-hidden logo-shine"
             >
               <img
                 src={logoImg}
@@ -52,7 +52,7 @@ export default function Preloader() {
               }}
               className="text-center"
             >
-              <h2 className="text-xl md:text-3xl font-serif tracking-[0.4em] uppercase text-black mb-3 overflow-hidden">
+              <h2 className="text-xl md:text-3xl font-serif tracking-[0.4em] uppercase text-foreground mb-3 overflow-hidden">
                 {"Phuoc Lai".split("").map((char, index) => (
                   <motion.span
                     key={index}
@@ -74,13 +74,13 @@ export default function Preloader() {
                   initial={{ scaleX: 0 }}
                   animate={{ scaleX: 1 }}
                   transition={{ delay: 1.2, duration: 1 }}
-                  className="h-px w-12 bg-black/20 origin-left" 
+                  className="h-px w-12 bg-gold/40 origin-left" 
                 />
                 <motion.span 
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ delay: 1.5, duration: 0.8 }}
-                  className="text-[10px] md:text-xs font-light tracking-[0.8em] uppercase text-black/40"
+                  className="text-[10px] md:text-xs font-light tracking-[0.8em] uppercase text-foreground/40"
                 >
                   Luxury
                 </motion.span>
@@ -88,13 +88,13 @@ export default function Preloader() {
                   initial={{ scaleX: 0 }}
                   animate={{ scaleX: 1 }}
                   transition={{ delay: 1.2, duration: 1 }}
-                  className="h-px w-12 bg-black/20 origin-right" 
+                  className="h-px w-12 bg-gold/40 origin-right" 
                 />
               </div>
             </motion.div>
 
             {/* Progress Bar (Subtle) */}
-            <div className="absolute -bottom-12 left-1/2 -translate-x-1/2 w-32 h-[1px] bg-black/5 overflow-hidden">
+            <div className="absolute -bottom-12 left-1/2 -translate-x-1/2 w-32 h-[1px] bg-foreground/10 overflow-hidden">
               <motion.div
                 initial={{ x: "-100%" }}
                 animate={{ 
@@ -105,7 +105,7 @@ export default function Preloader() {
                     ease: "linear" 
                   }
                 }}
-                className="w-full h-full bg-black/20"
+                className="w-full h-full bg-gold/50"
               />
             </div>
           </div>

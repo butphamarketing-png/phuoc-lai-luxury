@@ -89,45 +89,45 @@
 
   /* Light Warm Beige Theme (brighter) */
   /* Main background: #DCCFC5 (darker beige) */
-  /* Warmer beige (more brown-gold) */
-  --background: 32 28% 82%;
+  /* Warmer + brighter beige (brown-gold entry tone) */
+  --background: 36 36% 86%;
   /* Text: deep cocoa */
   --foreground: 18 26% 12%;
 
   /* Borders / separators */
-  --border: 32 18% 74%;
+  --border: 36 20% 78%;
 
   /* Cards on top of beige */
-  --card: 34 30% 98%;
+  --card: 36 35% 98%;
   --card-foreground: 18 26% 12%;
-  --card-border: 32 18% 78%;
+  --card-border: 36 20% 82%;
 
-  --popover: 34 30% 98%;
+  --popover: 36 35% 98%;
   --popover-foreground: 18 26% 12%;
-  --popover-border: 32 18% 78%;
+  --popover-border: 36 20% 82%;
 
   /* Primary: caramel cocoa */
   --primary: 22 32% 14%;
   --primary-foreground: 0 0% 100%;
   --primary-border: 22 26% 18%;
 
-  --secondary: 32 22% 90%;
+  --secondary: 36 28% 92%;
   --secondary-foreground: 18 26% 12%;
-  --secondary-border: 32 18% 78%;
+  --secondary-border: 36 20% 82%;
 
-  --muted: 32 22% 92%;
+  --muted: 36 28% 94%;
   --muted-foreground: 18 10% 35%;
-  --muted-border: 32 18% 80%;
+  --muted-border: 36 20% 84%;
 
   /* Accent: richer champagne gold */
-  --accent: 38 35% 90%;
+  --accent: 40 45% 90%;
   --accent-foreground: 22 32% 14%;
-  --accent-border: 38 28% 82%;
+  --accent-border: 40 35% 84%;
 
   --destructive: 0 60% 50%;
   --destructive-foreground: 0 0% 100%;
 
-  --input: 32 12% 68%;
+  --input: 36 14% 70%;
   --ring: 22 32% 14%;
   
   --chart-1: 0 0% 20%;
@@ -162,34 +162,34 @@
   --elevate-2: rgba(0,0,0, .09);
 
   /* Keep dark class visually aligned with light theme (project is light-only) */
-  --background: 32 28% 82%;
+  --background: 36 36% 86%;
   --foreground: 18 26% 12%;
-  --border: 32 18% 74%;
+  --border: 36 20% 78%;
   
-  --card: 34 30% 98%;
+  --card: 36 35% 98%;
   --card-foreground: 18 26% 12%;
-  --card-border: 32 18% 78%;
+  --card-border: 36 20% 82%;
 
-  --popover: 34 30% 98%;
+  --popover: 36 35% 98%;
   --popover-foreground: 18 26% 12%;
-  --popover-border: 32 18% 78%;
+  --popover-border: 36 20% 82%;
 
   --primary: 22 32% 14%;
   --primary-foreground: 0 0% 100%;
 
-  --secondary: 32 22% 90%;
+  --secondary: 36 28% 92%;
   --secondary-foreground: 18 26% 12%;
 
-  --muted: 32 22% 92%;
+  --muted: 36 28% 94%;
   --muted-foreground: 18 10% 35%;
 
-  --accent: 38 35% 90%;
+  --accent: 40 45% 90%;
   --accent-foreground: 22 32% 14%;
 
   --destructive: 0 60% 50%;
   --destructive-foreground: 0 0% 100%;
 
-  --input: 32 12% 68%;
+  --input: 36 14% 70%;
   --ring: 22 32% 14%;
   
   --chart-1: 0 0% 20%;

@@ -116,12 +116,21 @@ export default function Home() {
           if (hero) hero.style.transform = `translate(${x}px, ${y}px)`;
         }}
       >
-        <div id="hero-masters-container" className="relative w-full flex flex-row h-[45vh] sm:h-[60vh] md:h-screen transition-transform duration-500 ease-out">
+        <div
+          id="hero-masters-container"
+          className="relative w-full flex flex-row h-[45vh] sm:h-[60vh] md:h-screen transition-transform duration-500 ease-out"
+        >
           {masters.map((master, idx) => (
             <motion.div
               key={idx}
-              className="relative flex-1 h-full overflow-hidden group"
+              className="relative flex-1 h-full overflow-hidden group ring-1 ring-white/10"
             >
+              {idx > 0 && (
+                <div className="pointer-events-none absolute inset-y-0 left-0 w-10 bg-gradient-to-r from-black/35 via-black/10 to-transparent opacity-70 z-10" />
+              )}
+              {idx < masters.length - 1 && (
+                <div className="pointer-events-none absolute inset-y-0 right-0 w-10 bg-gradient-to-l from-black/35 via-black/10 to-transparent opacity-70 z-10" />
+              )}
               <motion.img
                 src={master.img}
                 animate={{ 
@@ -160,7 +169,7 @@ export default function Home() {
         </div>
 
         {/* Brand signature overlay */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none z-10 w-full px-6">
+        <div className="absolute top-[58%] md:top-[56%] left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none z-10 w-full px-6">
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
