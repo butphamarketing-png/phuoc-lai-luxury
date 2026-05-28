@@ -6,22 +6,17 @@ import { ChevronLeft, ChevronRight, Diamond, Leaf, Shield, User, ShieldCheck, Pl
 import BookingSection from "@/components/sections/BookingSection";
 import SocialSection from "@/components/sections/SocialSection";
 import { usePublicTraining } from "@/hooks/use-site-content";
+import { POPUP_MASTERS, POPUP_SLIDES } from "@/lib/popup-images";
 
 const btnPrimary =
   "rounded-full bg-primary text-primary-foreground hover:bg-primary/90 px-10 py-6 text-[11px] uppercase tracking-[0.25em] border border-primary/10";
 const btnOutline =
   "rounded-full border-white/20 text-white hover:bg-white hover:text-black px-10 py-6 text-[11px] uppercase tracking-[0.25em]";
 
-const POPUP_VERSION = "20260528";
-
 export default function Home() {
   const [activeMasterIndex, setActiveMasterIndex] = useState(0);
   const testimonialYoutubeId = "bKPeI7HgUKc";
-  const masters = [
-    { img: `/pop-up-2.jpg?v=${POPUP_VERSION}`, name: "Master Nhung Lai" },
-    { img: `/pop-up-1.jpg?v=${POPUP_VERSION}`, name: "Master Phuoc Lai" },
-    { img: `/pop-up-2.jpg?v=${POPUP_VERSION}`, name: "Master Cam Lai" },
-  ];
+  const masters = [...POPUP_MASTERS];
 
   const trainingFallbackImage = (slug: string): string => {
     const s = slug.toLowerCase();
@@ -32,11 +27,7 @@ export default function Home() {
   };
 
   const [currentAboutSlide, setCurrentAboutSlide] = useState(0);
-  const aboutSlides = [
-    `/pop-up-1.jpg?v=${POPUP_VERSION}`,
-    `/pop-up-2.jpg?v=${POPUP_VERSION}`,
-    `/pop-up-1.jpg?v=${POPUP_VERSION}`,
-  ];
+  const aboutSlides = [...POPUP_SLIDES];
 
   useEffect(() => {
     const timer = setInterval(() => {

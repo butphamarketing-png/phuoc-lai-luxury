@@ -156,11 +156,13 @@ export default function Navbar() {
               data-testid="link-logo"
             >
               <div className="relative flex items-center gap-2 md:gap-4 overflow-hidden">
-                <div className={`relative flex h-10 w-10 md:h-14 md:w-14 items-center justify-center rounded-full transition-all duration-500 logo-shine overflow-hidden ${isOverlay ? "bg-white/10 backdrop-blur-md border border-white/20" : "bg-primary luxury-shadow"}`}>
+                <div
+                  className={`logo-badge h-10 w-10 md:h-14 md:w-14 transition-all duration-500 ${isOverlay ? "bg-gold/85 backdrop-blur-sm border border-white/25" : ""}`}
+                >
                   <img
                     src={logoImg}
                     alt="LP Logo"
-                    className="h-6 md:h-10 w-auto object-contain transition-all duration-500 invert"
+                    className="logo-badge-img h-6 md:h-10 transition-all duration-500"
                   />
                 </div>
                 <div className="flex flex-col leading-none">

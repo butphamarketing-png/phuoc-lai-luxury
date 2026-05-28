@@ -1,17 +1,11 @@
-const POPUP_VERSION = "20260528";
-
-const HUB_IMAGES = [
-  { src: `/pop-up-2.jpg?v=${POPUP_VERSION}`, alt: "Promotion Left" },
-  { src: `/pop-up-1.jpg?v=${POPUP_VERSION}`, alt: "Promotion Center" },
-  { src: `/pop-up-2.jpg?v=${POPUP_VERSION}`, alt: "Promotion Right" },
-] as const;
+import { POPUP_HUB_IMAGES } from "@/lib/popup-images";
 
 export default function ServiceCategoryHero() {
   return (
     <div className="flex w-full flex-row bg-black">
-      {HUB_IMAGES.map((image, index) => (
+      {POPUP_HUB_IMAGES.map((image, index) => (
         <div
-          key={image.src}
+          key={`${image.src}-${index}`}
           className="relative w-1/3 aspect-[3/4] overflow-hidden md:aspect-[4/5]"
         >
           <img

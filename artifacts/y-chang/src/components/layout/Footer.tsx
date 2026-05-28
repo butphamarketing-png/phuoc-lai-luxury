@@ -24,12 +24,12 @@ export default function Footer() {
         >
           <div>
             <Link href="/" className="inline-flex items-center gap-4 mb-8 group" data-testid="link-footer-home">
-              <div className="relative logo-shine overflow-hidden rounded-full p-1 bg-white/5">
+              <div className="logo-badge h-14 w-14 md:h-16 md:w-16 transition-transform duration-500 group-hover:scale-105">
                 <img
-                   src={logoImg}
-                   alt="LP Logo"
-                   className="h-14 md:h-16 w-auto object-contain transition-transform duration-500 group-hover:scale-105 invert"
-                 />
+                  src={logoImg}
+                  alt="LP Logo"
+                  className="logo-badge-img h-9 md:h-11"
+                />
               </div>
               <div className="flex flex-col leading-none">
                 <span className="text-sm md:text-base font-serif tracking-[0.25em] uppercase whitespace-nowrap text-white">

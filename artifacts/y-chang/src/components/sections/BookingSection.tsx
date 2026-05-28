@@ -31,11 +31,11 @@ export default function BookingSection() {
             className="relative z-10 h-full p-6 md:p-10"
           >
             <div className="absolute top-5 right-5 md:top-8 md:right-8 flex items-center gap-3 rounded-full bg-background/40 backdrop-blur-md border border-border/40 px-3 py-2">
-              <div className="relative logo-shine overflow-hidden rounded-full p-1.5">
+              <div className="logo-badge h-12 w-12 md:h-14 md:w-14">
                 <img
                   src={logoImg}
                   alt="LP Logo"
-                  className="w-10 md:w-12 lg:w-14 max-w-full opacity-80 invert"
+                  className="logo-badge-img h-7 md:h-9"
                   data-testid="img-booking-logo"
                 />
               </div>

@@ -34,12 +34,12 @@ export default function Preloader() {
                 opacity: 1,
                 transition: { duration: 1, ease: "easeOut" }
               }}
-              className="relative mb-6 h-24 w-24 md:h-32 md:w-32 flex items-center justify-center rounded-full bg-gold luxury-shadow overflow-hidden logo-shine"
+              className="logo-badge mb-6 h-24 w-24 md:h-32 md:w-32"
             >
               <img
                 src={logoImg}
                 alt="Phuoc Lai Logo"
-                className="h-14 md:h-20 w-auto object-contain mix-blend-screen opacity-90"
+                className="logo-badge-img h-14 md:h-20"
               />
             </motion.div>
 

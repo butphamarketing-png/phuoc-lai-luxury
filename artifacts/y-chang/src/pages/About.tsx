@@ -2,6 +2,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useLanguage } from "@/hooks/use-language";
 import { useSiteSettings } from "@/hooks/use-site-settings";
 import { DEFAULT_SITE_SETTINGS } from "@/lib/site-settings";
+import { POPUP_SLIDES } from "@/lib/popup-images";
 import { useState, useEffect, useMemo } from "react";
 
 const fadeUp = {
@@ -13,17 +14,11 @@ const fadeUp = {
   })
 };
 
-const POPUP_VERSION = "20260528";
-
 export default function About() {
   const { language } = useLanguage();
   const { data: settings = DEFAULT_SITE_SETTINGS } = useSiteSettings();
   const [currentSlide, setCurrentSlide] = useState(0);
-  const slides = [
-    `/pop-up-1.jpg?v=${POPUP_VERSION}`,
-    `/pop-up-2.jpg?v=${POPUP_VERSION}`,
-    `/pop-up-1.jpg?v=${POPUP_VERSION}`,
-  ];
+  const slides = [...POPUP_SLIDES];
   const testimonialYoutubeId = "bKPeI7HgUKc";
 
   useEffect(() => {

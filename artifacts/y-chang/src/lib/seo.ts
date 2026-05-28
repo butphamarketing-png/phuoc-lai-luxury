@@ -1,4 +1,5 @@
 import { getPublicServicePath, getPublicTrainingPath } from "@/data/catalog";
+import { POPUP_IMAGES } from "@/lib/popup-images";
 
 export const SITE_NAME = "Phuoc Lai Luxury";
 export const SITE_TAGLINE = "Phun xăm thẩm mỹ & đào tạo nghề Vũng Tàu";
@@ -53,8 +54,6 @@ export function formatTitle(pageTitle: string): string {
   return `${pageTitle} | ${SITE_NAME}`;
 }
 
-const POPUP_VERSION = "20260528";
-
 const STATIC_ROUTES: Record<string, SeoMeta> = {
   "/": {
     title: formatTitle("Phun xăm Vũng Tàu — Phuoc Lai Luxury"),
@@ -75,14 +74,14 @@ const STATIC_ROUTES: Record<string, SeoMeta> = {
     description:
       "Chọn dịch vụ phun xăm thẩm mỹ hoặc spa & chăm sóc da tại Phuoc Lai Luxury Vũng Tàu — tư vấn và đặt lịch miễn phí.",
     path: "/dich-vu",
-    image: `/pop-up-1.jpg?v=${POPUP_VERSION}`,
+    image: POPUP_IMAGES.one,
   },
   "/dich-vu/phun-xam": {
     title: formatTitle("Dịch vụ phun xăm thẩm mỹ"),
     description:
       "Dịch vụ phun xăm thẩm mỹ chuyên nghiệp tại Phuoc Lai Luxury Vũng Tàu — tư vấn và đặt lịch miễn phí.",
     path: "/dich-vu/phun-xam",
-    image: `/pop-up-1.jpg?v=${POPUP_VERSION}`,
+    image: POPUP_IMAGES.one,
   },
   "/dich-vu/spa": {
     title: formatTitle("Dịch vụ spa & chăm sóc da"),

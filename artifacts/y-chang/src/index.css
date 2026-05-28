@@ -235,6 +235,14 @@
 .border-gold {
   border-color: #7A4E22;
 }
+
+  .logo-badge {
+    @apply relative flex items-center justify-center rounded-full bg-gold luxury-shadow overflow-hidden logo-shine;
+  }
+
+  .logo-badge-img {
+    @apply w-auto object-contain mix-blend-screen opacity-90;
+  }
   .section-padding {
     @apply py-24 md:py-40;
   }
