@@ -221,19 +221,19 @@
   }
 
   .gold-gradient {
-  background: linear-gradient(135deg, #B08B57 0%, #D8C3A6 50%, #9A743E 100%);
+  background: linear-gradient(135deg, #A67A3B 0%, #D8C3A6 50%, #8A652F 100%);
 }
 
 .text-gold {
-  color: #B08B57;
+  color: #A67A3B;
 }
 
 .bg-gold {
-  background-color: #B08B57;
+  background-color: #A67A3B;
 }
 
 .border-gold {
-  border-color: #B08B57;
+  border-color: #A67A3B;
 }
   .section-padding {
     @apply py-24 md:py-40;

@@ -19,6 +19,8 @@ const serviceOptions = [
   { value: "other", label: "Khác" },
 ];
 
+const CONTACT_EMAIL = "Phuocduocvt13@gmail.com";
+
 export default function Contact() {
   const { toast } = useToast();
   const { data: settings = DEFAULT_SITE_SETTINGS } = useSiteSettings();
@@ -209,7 +211,12 @@ export default function Contact() {
                     </div>
                     <div>
                       <h4 className="font-medium text-white mb-1">Email</h4>
-                      <p className="text-white/60 font-light text-sm">{settings.email}</p>
+                      <a
+                        href={`mailto:${CONTACT_EMAIL}`}
+                        className="text-white/60 font-light text-sm hover:text-white"
+                      >
+                        {CONTACT_EMAIL}
+                      </a>
                     </div>
                   </div>
 
