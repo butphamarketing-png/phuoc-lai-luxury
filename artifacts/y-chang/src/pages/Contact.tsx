@@ -9,6 +9,7 @@ import { useToast } from "@/hooks/use-toast";
 import { useSiteSettings } from "@/hooks/use-site-settings";
 import { useCustomerMutations } from "@/hooks/use-site-customers";
 import { DEFAULT_SITE_SETTINGS } from "@/lib/site-settings";
+import { CONTACT_EMAIL } from "@/lib/contact";
 
 const serviceOptions = [
   { value: "", label: "Chọn dịch vụ..." },
@@ -18,8 +19,6 @@ const serviceOptions = [
   { value: "training", label: "Khóa học đào tạo" },
   { value: "other", label: "Khác" },
 ];
-
-const CONTACT_EMAIL = "Phuocduocvt13@gmail.com";
 
 export default function Contact() {
   const { toast } = useToast();

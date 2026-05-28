@@ -5,8 +5,7 @@ import { useSiteSettings } from "@/hooks/use-site-settings";
 import { DEFAULT_SITE_SETTINGS } from "@/lib/site-settings";
 import { motion } from "framer-motion";
 import logoImg from "@/assets/logo.png";
-
-const CONTACT_EMAIL = "Phuocduocvt13@gmail.com";
+import { CONTACT_EMAIL } from "@/lib/contact";
 
 export default function Footer() {
   const { t } = useLanguage();

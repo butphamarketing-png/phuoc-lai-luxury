@@ -95,14 +95,42 @@ export default function AdminTraining() {
 
   const filtered = useMemo(() => {
     const q = search.trim().toLowerCase();
-    if (!q) return courses;
-    return courses.filter(
-      (c) =>
-        c.title.toLowerCase().includes(q) ||
-        c.slug.toLowerCase().includes(q) ||
-        c.level.toLowerCase().includes(q),
-    );
+    const list = q
+      ? courses.filter(
+          (c) =>
+            c.title.toLowerCase().includes(q) ||
+            c.slug.toLowerCase().includes(q) ||
+            c.level.toLowerCase().includes(q),
+        )
+      : courses;
+    return [...list].sort((a, b) => a.sortOrder - b.sortOrder);
   }, [courses, search]);
+
+  const handleSortOrderChange = async (course: SiteTrainingCourse, raw: string) => {
+    const parsed = Number.parseInt(raw, 10);
+    if (!Number.isFinite(parsed) || parsed < 1) {
+      toast({
+        variant: "destructive",
+        title: "STT không hợp lệ",
+        description: "Vui lòng nhập số nguyên dương (1, 2, 3...).",
+      });
+      return;
+    }
+
+    try {
+      await saveCourse.mutateAsync({ ...course, sortOrder: parsed });
+      toast({
+        title: "Đã cập nhật STT",
+        description: `${course.title} — thứ tự ${parsed}`,
+      });
+    } catch {
+      toast({
+        variant: "destructive",
+        title: "Không lưu được STT",
+        description: "Thử lại sau vài giây.",
+      });
+    }
+  };
 
   const handleSave = async () => {
     if (!editing?.title.trim() || !editing.slug.trim() || !detailDraft) {
@@ -217,6 +245,9 @@ export default function AdminTraining() {
             <Table>
               <TableHeader className="bg-[#FAFAFA]">
                 <TableRow>
+                  <TableHead className="w-[88px] text-[10px] uppercase font-bold text-black/40">
+                    STT
+                  </TableHead>
                   <TableHead className="text-[10px] uppercase font-bold text-black/40">
                     Khóa học
                   </TableHead>
@@ -240,6 +271,21 @@ export default function AdminTraining() {
               <TableBody>
                 {filtered.map((course) => (
                   <TableRow key={course.id}>
+                    <TableCell>
+                      <Input
+                        key={`${course.id}-${course.sortOrder}`}
+                        type="number"
+                        min={1}
+                        step={1}
+                        defaultValue={course.sortOrder}
+                        onBlur={(e) => {
+                          if (e.target.value === String(course.sortOrder)) return;
+                          void handleSortOrderChange(course, e.target.value);
+                        }}
+                        className="h-9 w-20 rounded-lg border-black/10 text-center text-sm font-bold"
+                        title="Số thứ tự hiển thị trên website"
+                      />
+                    </TableCell>
                     <TableCell>
                       <p className="font-bold text-sm">{course.title}</p>
                       <p className="text-[10px] text-black/35">/dao-tao/{course.slug}</p>
@@ -383,6 +429,24 @@ export default function AdminTraining() {
                     />
                     <p className="text-[11px] text-black/40">
                       Tự động từ tên khóa — bạn có thể chỉnh sửa trực tiếp.
+                    </p>
+                  </div>
+                  <div className="space-y-2 max-w-[200px]">
+                    <Label>STT hiển thị</Label>
+                    <Input
+                      type="number"
+                      min={1}
+                      step={1}
+                      value={editing.sortOrder}
+                      onChange={(e) =>
+                        setEditing({
+                          ...editing,
+                          sortOrder: Number.parseInt(e.target.value, 10) || 1,
+                        })
+                      }
+                    />
+                    <p className="text-[11px] text-black/40">
+                      Số nhỏ hiển thị trước trên website (1, 2, 3...).
                     </p>
                   </div>
                   <div className="grid grid-cols-2 gap-4">

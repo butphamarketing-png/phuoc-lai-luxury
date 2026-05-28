@@ -92,5 +92,5 @@ set
     )
   ),
   updated_at = now()
-where slug in ('phun-may-sandbrows', 'sandbrows');
+where slug = 'phun-may-sandbrows';
 

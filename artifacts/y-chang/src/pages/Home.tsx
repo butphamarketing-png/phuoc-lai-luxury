@@ -430,7 +430,7 @@ export default function Home() {
               </h2>
             </motion.div>
             <Button asChild variant="outline" className="rounded-full border-gold/40 text-foreground hover:bg-gold hover:text-white px-10 py-6 text-[10px] uppercase tracking-[0.2em]">
-              <Link href="/feedback">Xem tất cả đánh giá</Link>
+              <Link href="/feedback">Xem video cảm nhận</Link>
             </Button>
           </div>
 

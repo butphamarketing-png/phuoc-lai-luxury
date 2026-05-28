@@ -71,11 +71,11 @@ export default function AdminLogin() {
           <div className="bg-[#1A1A1A] p-10 text-center relative overflow-hidden">
             <motion.div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full -mr-16 -mt-16" />
             <div className="relative z-10">
-              <div className="w-20 h-20 rounded-2xl overflow-hidden mx-auto mb-6 ring-2 ring-white/15 bg-black">
+              <div className="logo-badge logo-shine w-20 h-20 mx-auto mb-6">
                 <img
                   src={logoImg}
                   alt="Phuoc Lai Luxury"
-                  className="w-full h-full object-cover"
+                  className="logo-badge-img h-12"
                 />
               </div>
               <h1 className="text-2xl font-serif text-white tracking-widest uppercase">Phuoc Lai</h1>

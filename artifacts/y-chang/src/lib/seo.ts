@@ -1,4 +1,5 @@
 import { getPublicServicePath, getPublicTrainingPath } from "@/data/catalog";
+import { CONTACT_EMAIL } from "@/lib/contact";
 import { POPUP_IMAGES } from "@/lib/popup-images";
 
 export const SITE_NAME = "Phuoc Lai Luxury";
@@ -9,7 +10,7 @@ export const BUSINESS = {
   legalName: "Phuoc Lai Luxury",
   phone: "+84909203108",
   phoneDisplay: "0909 203 108",
-  email: "hello@phuoclai.com",
+  email: CONTACT_EMAIL,
   streetAddress: "42a Bà Triệu, Phường 1",
   addressLocality: "Vũng Tàu",
   addressRegion: "Bà Rịa - Vũng Tàu",
@@ -119,9 +120,9 @@ const STATIC_ROUTES: Record<string, SeoMeta> = {
     image: DEFAULT_OG_IMAGE,
   },
   "/feedback": {
-    title: formatTitle("Phản hồi khách hàng"),
+    title: formatTitle("Video cảm nhận khách hàng"),
     description:
-      "Chia sẻ trải nghiệm dịch vụ và khóa học tại Phuoc Lai Luxury — chúng tôi luôn lắng nghe để hoàn thiện.",
+      "Xem video cảm nhận thực tế từ khách hàng Phuoc Lai Luxury — phun xăm, spa và đào tạo tại Vũng Tàu.",
     path: "/feedback",
     image: DEFAULT_OG_IMAGE,
   },

@@ -4,8 +4,8 @@
 -- Thứ tự mong muốn:
 -- 1) Điêu Khắc Sợi AMAZINGBROWS
 -- 2) Phun Môi SEXYLIPS
--- 3) Lông mày nam (tạm dùng slug phun-may-sandbrows nếu đang dùng cho nam)
--- 4) SANDBROWS
+-- 3) AMAZINGBROWS for men (slug phun-may-sandbrows)
+-- 4) Phun Mày SANDBROWS (slug sandbrows)
 -- 5) Phun Mí
 --
 -- Lưu ý: Nếu bạn tạo riêng bài "lông mày nam" với slug khác, gửi mình slug để update đúng.
@@ -16,7 +16,7 @@ set
     when 'dieu-khac-soi-amazingbrows' then 10
     when 'phun-moi-sexylips' then 20
     when 'phun-may-sandbrows' then 30
-    when 'sandbrows' then 30
+    when 'sandbrows' then 40
     when 'phun-mi-phuong-hoang' then 50
     else sort_order
   end,

@@ -86,11 +86,11 @@ export default function AdminLayout({ children, title }: AdminLayoutProps) {
       <aside className="hidden lg:flex w-72 bg-[#1A1A1A] text-white flex-col fixed inset-y-0 z-50">
         <div className="p-8 border-b border-white/5">
           <Link href={ADMIN_DASHBOARD} className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl overflow-hidden bg-black flex-shrink-0 ring-1 ring-white/10">
+            <div className="logo-badge logo-shine h-10 w-10 flex-shrink-0">
               <img
                 src={logoImg}
                 alt="Phuoc Lai Luxury"
-                className="w-full h-full object-cover"
+                className="logo-badge-img h-6"
               />
             </div>
             <div>
@@ -237,11 +237,11 @@ export default function AdminLayout({ children, title }: AdminLayoutProps) {
             >
               <div className="p-8 flex items-center justify-between border-b border-white/5">
                 <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-lg overflow-hidden bg-black flex-shrink-0 ring-1 ring-white/10">
+                  <div className="logo-badge logo-shine h-8 w-8 flex-shrink-0">
                     <img
                       src={logoImg}
                       alt="Phuoc Lai Luxury"
-                      className="w-full h-full object-cover"
+                      className="logo-badge-img h-5"
                     />
                   </div>
                   <h2 className="text-xs font-serif font-bold tracking-widest uppercase text-white">
