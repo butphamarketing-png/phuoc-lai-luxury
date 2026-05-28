@@ -18,6 +18,7 @@ export default function Feedback() {
   const { language } = useLanguage();
   const { data: testimonials = [], isLoading } = usePublicReviews();
   const { data: settings = DEFAULT_SITE_SETTINGS } = useSiteSettings();
+  const testimonialYoutubeId = "bKPeI7HgUKc";
 
   const heading = language === "vn" ? "Lời Chứng Thực" : "Client Testimonials";
   const subheading =
@@ -66,6 +67,39 @@ export default function Feedback() {
             ))}
             <span className="text-foreground/50 text-xs ml-1">{reviewCount}</span>
           </div>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.35 }}
+          className="mt-12 max-w-4xl"
+        >
+          <div className="rounded-3xl overflow-hidden border border-black/[0.06] shadow-sm bg-black">
+            <div
+              className="aspect-video w-full"
+              style={{ position: "relative", paddingBottom: "56.25%", height: 0 }}
+            >
+              <iframe
+                src={`https://www.youtube.com/embed/${testimonialYoutubeId}?rel=0&modestbranding=1`}
+                title={language === "vn" ? "Video cảm nhận khách hàng" : "Client testimonial video"}
+                style={{
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
+                  width: "100%",
+                  height: "100%",
+                  border: 0,
+                }}
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
+                loading="lazy"
+              />
+            </div>
+          </div>
+          <p className="mt-4 text-[10px] uppercase tracking-[0.25em] text-black/40 font-bold">
+            {language === "vn" ? "Video cảm nhận khách hàng" : "Client testimonial video"}
+          </p>
         </motion.div>
       </section>
 
