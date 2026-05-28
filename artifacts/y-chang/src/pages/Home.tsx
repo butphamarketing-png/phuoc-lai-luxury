@@ -169,7 +169,7 @@ export default function Home() {
         </div>
 
         {/* Brand signature overlay */}
-        <div className="absolute top-[62%] md:top-[60%] left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none z-10 w-full px-6">
+        <div className="absolute top-[66%] md:top-[64%] left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none z-10 w-full px-6">
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
