@@ -15,6 +15,8 @@ set
     '{bodyHtml}',
     to_jsonb(
       trim(coalesce(detail_json->>'bodyHtml', '')) ||
+      '<h2>Video thực tế</h2>' ||
+      '<div class="my-8 max-w-full overflow-hidden rounded-2xl bg-black"><video src="/video-phunxam.mp4" controls playsinline preload="metadata" style="width:100%;max-height:70vh;display:block;border-radius:12px;"></video></div><p><br></p>' ||
       '<h2>Kết quả thực tế AMAZINGBROWS</h2>' ||
       '<p><img src="/amazingbrows/1779891799209_239505211476377159_239505211476377159_c2ccdf600e9e39f028758255c7e53d0c.jpg" alt="Điêu khắc sợi AMAZINGBROWS Phuoc Lai" /></p>' ||
       '<p><img src="/amazingbrows/1779891799181_239505211476377159_239505211476377159_bf185b26a2b860d779ec3318e78bed97.jpg" alt="AMAZINGBROWS sợi mày siêu thực" /></p>' ||
@@ -31,6 +33,7 @@ where slug = 'dieu-khac-soi-amazingbrows'
     detail_json is null
     or detail_json->>'bodyHtml' is null
     or detail_json->>'bodyHtml' not like '%/amazingbrows/%'
+    or detail_json->>'bodyHtml' not like '%/video-phunxam.mp4%'
   );
 
 -- Kiểm tra (phải có 1 dòng):
