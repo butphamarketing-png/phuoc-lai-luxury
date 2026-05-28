@@ -99,26 +99,27 @@ export default function AdminDashboard() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="relative rounded-[2.5rem] bg-[#1A1A1A] p-12 text-white overflow-hidden luxury-shadow"
+          className="relative rounded-[2.5rem] bg-background p-12 text-foreground overflow-hidden luxury-shadow border border-border/60"
         >
-          <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full -mr-32 -mt-32 blur-3xl" />
+          <div className="absolute top-0 right-0 w-64 h-64 bg-gold/10 rounded-full -mr-32 -mt-32 blur-3xl" />
+          <div className="absolute bottom-0 left-0 w-72 h-72 bg-primary/10 rounded-full -ml-40 -mb-40 blur-3xl" />
           <div className="relative z-10 max-w-2xl">
             <h2 className="text-3xl md:text-4xl font-serif mb-4">
               Chào mừng trở lại, Master Phuoc Lai!
             </h2>
-            <p className="text-white/50 text-sm font-light leading-relaxed mb-8 uppercase tracking-[0.1em]">
+            <p className="text-foreground/60 text-sm font-light leading-relaxed mb-8 uppercase tracking-[0.1em]">
               {newCustomers > 0
                 ? `Có ${newCustomers} yêu cầu khách mới cần xử lý.`
                 : "Chỉnh dịch vụ & khóa học — thay đổi hiển thị ngay trên website."}
             </p>
             <div className="flex flex-wrap gap-4">
               <Link href={ADMIN_SERVICES}>
-                <a className="bg-white text-black px-8 py-3 rounded-full text-[10px] font-bold uppercase tracking-[0.2em] hover:bg-white/90 transition-all inline-block">
+                <a className="bg-primary text-primary-foreground px-8 py-3 rounded-full text-[10px] font-bold uppercase tracking-[0.2em] hover:bg-primary/90 transition-all inline-block">
                   Quản lý dịch vụ
                 </a>
               </Link>
               <Link href={ADMIN_CUSTOMERS}>
-                <a className="bg-white/10 text-white border border-white/10 px-8 py-3 rounded-full text-[10px] font-bold uppercase tracking-[0.2em] hover:bg-white/20 transition-all inline-block">
+                <a className="bg-card/50 text-foreground border border-border/60 px-8 py-3 rounded-full text-[10px] font-bold uppercase tracking-[0.2em] hover:bg-card transition-all inline-block">
                   Xem khách hàng
                 </a>
               </Link>
