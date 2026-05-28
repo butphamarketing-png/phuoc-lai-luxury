@@ -14,6 +14,7 @@ const btnOutline =
 
 export default function Home() {
   const [activeMasterIndex, setActiveMasterIndex] = useState(0);
+  const testimonialYoutubeId = "bKPeI7HgUKc";
   const masters = [
     { img: "/pop-up-3.jpg", name: "Master Nhung Lai" },
     { img: "/pop-up-1.jpg", name: "Master Phuoc Lai" },
@@ -417,34 +418,38 @@ export default function Home() {
             </Button>
           </div>
 
-          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4 items-stretch">
-            {feedbackItems.map((item, idx) => (
-              <motion.article
-                key={item.name}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: idx * 0.1 }}
-                className="rounded-3xl border border-white/5 bg-white/[0.03] p-10 flex flex-col h-full backdrop-blur-md hover:bg-white/[0.06] transition-all duration-500 luxury-shadow"
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="max-w-4xl mx-auto"
+          >
+            <div className="rounded-3xl overflow-hidden border border-white/10 bg-black luxury-shadow">
+              <div
+                className="aspect-video w-full"
+                style={{ position: "relative", paddingBottom: "56.25%", height: 0 }}
               >
-                <div className="mb-8 flex items-center gap-5">
-                  <div className="h-14 w-14 rounded-full bg-gold/10 flex items-center justify-center text-[10px] text-gold border border-gold/20 font-bold">
-                    PL
-                  </div>
-                  <div>
-                    <h4 className="text-sm font-bold tracking-widest">{item.name}</h4>
-                    <p className="text-[10px] text-white/30 uppercase tracking-widest">{item.course}</p>
-                  </div>
-                </div>
-                <div className="mb-6 flex gap-1 text-gold">
-                  {[1, 2, 3, 4, 5].map((star) => (
-                    <Star key={star} size={12} className="fill-current" />
-                  ))}
-                </div>
-                <p className="font-serif text-lg italic leading-relaxed text-white/70 flex-grow">&ldquo;{item.quote}&rdquo;</p>
-              </motion.article>
-            ))}
-          </div>
+                <iframe
+                  src={`https://www.youtube.com/embed/${testimonialYoutubeId}?rel=0&modestbranding=1`}
+                  title="Video cảm nhận khách hàng"
+                  style={{
+                    position: "absolute",
+                    top: 0,
+                    left: 0,
+                    width: "100%",
+                    height: "100%",
+                    border: 0,
+                  }}
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
+                  loading="lazy"
+                />
+              </div>
+            </div>
+            <p className="mt-6 text-center text-[10px] uppercase tracking-[0.35em] text-white/40 font-bold">
+              Video cảm nhận khách hàng
+            </p>
+          </motion.div>
         </div>
       </section>
 
