@@ -8,7 +8,7 @@ import SocialSection from "@/components/sections/SocialSection";
 import { usePublicTraining } from "@/hooks/use-site-content";
 
 const btnPrimary =
-  "rounded-full bg-[#2B1A13] text-white hover:bg-[#3A241A] px-10 py-6 text-[11px] uppercase tracking-[0.25em] border-none";
+  "rounded-full bg-[#E7DED6] text-[#1A1A1A] hover:bg-[#DCCFC5] px-10 py-6 text-[11px] uppercase tracking-[0.25em] border border-black/10";
 const btnOutline =
   "rounded-full border-white/20 text-white hover:bg-white hover:text-black px-10 py-6 text-[11px] uppercase tracking-[0.25em]";
 
@@ -101,7 +101,7 @@ export default function Home() {
     >
       {/* Hero — Masters Section */}
       <section
-        className="relative w-full overflow-hidden bg-[#2B1A13] pt-24 md:pt-0"
+        className="relative w-full overflow-hidden bg-[#E7DED6] pt-24 md:pt-0"
         data-testid="section-hero"
         onMouseMove={(e) => {
           const { clientX, clientY } = e;
@@ -244,7 +244,7 @@ export default function Home() {
       </section>
 
       {/* Dịch vụ + giá trị (nền đen liên tục) */}
-      <section id="services-section" className="bg-[#2B1A13] text-white overflow-hidden" data-testid="section-services">
+      <section id="services-section" className="bg-[#E7DED6] text-[#1A1A1A] overflow-hidden" data-testid="section-services">
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
@@ -406,7 +406,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="bg-[#2B1A13] py-24 md:py-32 text-white" data-testid="section-home-feedback">
+      <section className="bg-[#E7DED6] py-24 md:py-32 text-[#1A1A1A]" data-testid="section-home-feedback">
         <div className="container mx-auto max-w-7xl px-6">
           <div className="mb-20 flex flex-col md:flex-row items-end justify-between gap-10">
             <motion.div
@@ -421,7 +421,7 @@ export default function Home() {
                 <span className="italic font-light text-white/40">là động lực phát triển</span>
               </h2>
             </motion.div>
-            <Button asChild variant="outline" className="rounded-full border-gold/20 text-gold hover:bg-gold hover:text-white px-10 py-6 text-[10px] uppercase tracking-[0.2em]">
+            <Button asChild variant="outline" className="rounded-full border-gold/40 text-[#1A1A1A] hover:bg-gold hover:text-white px-10 py-6 text-[10px] uppercase tracking-[0.2em]">
               <Link href="/feedback">Xem tất cả đánh giá</Link>
             </Button>
           </div>
@@ -432,7 +432,7 @@ export default function Home() {
             viewport={{ once: true }}
             className="max-w-4xl mx-auto"
           >
-            <div className="rounded-3xl overflow-hidden border border-white/10 bg-black luxury-shadow">
+            <div className="rounded-3xl overflow-hidden border border-black/10 bg-black luxury-shadow">
               <div
                 className="aspect-video w-full"
                 style={{ position: "relative", paddingBottom: "56.25%", height: 0 }}
@@ -454,7 +454,7 @@ export default function Home() {
                 />
               </div>
             </div>
-            <p className="mt-6 text-center text-[10px] uppercase tracking-[0.35em] text-white/40 font-bold">
+            <p className="mt-6 text-center text-[10px] uppercase tracking-[0.35em] text-black/50 font-bold">
               Video cảm nhận khách hàng
             </p>
           </motion.div>

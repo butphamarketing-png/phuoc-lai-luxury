@@ -75,8 +75,8 @@ export default function About() {
   return (
     <div className="bg-background text-foreground min-h-screen">
       {/* Hero Banner */}
-      <section className="relative min-h-[70vh] flex flex-col justify-end pb-16 px-8 md:px-20 overflow-hidden bg-[#2B1A13] pt-32">
-        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-[#2B1A13]" />
+      <section className="relative min-h-[70vh] flex flex-col justify-end pb-16 px-8 md:px-20 overflow-hidden bg-[#E7DED6] pt-32">
+        <div className="absolute inset-0 bg-gradient-to-b from-black/25 via-black/10 to-[#E7DED6]" />
         <div
           className="absolute inset-0 bg-cover bg-center opacity-40 mix-blend-overlay grayscale"
           style={{ backgroundImage: "url('/studio-interior.png')" }}
@@ -86,7 +86,7 @@ export default function About() {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="block uppercase tracking-[0.4em] text-[10px] text-white/60 mb-4"
+            className="block uppercase tracking-[0.4em] text-[10px] text-black/50 mb-4"
           >
             {c.eyebrow}
           </motion.span>
@@ -94,7 +94,7 @@ export default function About() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, delay: 0.1 }}
-            className="font-serif text-5xl md:text-7xl font-medium tracking-tight leading-tight text-white"
+            className="font-serif text-5xl md:text-7xl font-medium tracking-tight leading-tight text-[#1A1A1A]"
           >
             {c.title}
           </motion.h1>
@@ -102,7 +102,7 @@ export default function About() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.25 }}
-            className="mt-4 text-white/70 font-light text-sm md:text-base tracking-wide max-w-xl"
+            className="mt-4 text-black/60 font-light text-sm md:text-base tracking-wide max-w-xl"
           >
             {c.subtitle}
           </motion.p>
@@ -238,7 +238,7 @@ export default function About() {
       </section>
 
       {/* Studio info */}
-      <section className="bg-[#2B1A13] text-white border-t border-black/10 px-8 md:px-20 py-20">
+      <section className="bg-[#E7DED6] text-[#1A1A1A] border-t border-black/10 px-8 md:px-20 py-20">
         <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-16 items-center">
           <motion.div
             initial="hidden"
@@ -248,25 +248,25 @@ export default function About() {
             custom={0}
           >
             <h2 className="font-serif text-3xl md:text-4xl font-medium mb-6 tracking-tight">{c.studioTitle}</h2>
-            <p className="text-white/70 font-light leading-relaxed text-sm mb-10">{c.studioDesc}</p>
+            <p className="text-black/60 font-light leading-relaxed text-sm mb-10">{c.studioDesc}</p>
             <dl className="space-y-4 text-sm">
               <div className="flex gap-4">
-                <dt className="text-white/40 uppercase tracking-[0.2em] text-xs w-20 flex-shrink-0 pt-0.5">
+                <dt className="text-black/40 uppercase tracking-[0.2em] text-xs w-20 flex-shrink-0 pt-0.5">
                   {language === "vn" ? "Địa chỉ" : "Address"}
                 </dt>
-                <dd className="text-white/90 font-light">{c.address}</dd>
+                <dd className="text-black/80 font-light">{c.address}</dd>
               </div>
               <div className="flex gap-4">
-                <dt className="text-white/40 uppercase tracking-[0.2em] text-xs w-20 flex-shrink-0 pt-0.5">
+                <dt className="text-black/40 uppercase tracking-[0.2em] text-xs w-20 flex-shrink-0 pt-0.5">
                   {language === "vn" ? "Giờ mở" : "Hours"}
                 </dt>
-                <dd className="text-white/90 font-light">{c.hours}</dd>
+                <dd className="text-black/80 font-light">{c.hours}</dd>
               </div>
               <div className="flex gap-4">
-                <dt className="text-white/40 uppercase tracking-[0.2em] text-xs w-20 flex-shrink-0 pt-0.5">
+                <dt className="text-black/40 uppercase tracking-[0.2em] text-xs w-20 flex-shrink-0 pt-0.5">
                   Hotline
                 </dt>
-                <dd className="text-white/90 font-light">{c.hotline}</dd>
+                <dd className="text-black/80 font-light">{c.hotline}</dd>
               </div>
             </dl>
           </motion.div>
@@ -275,7 +275,7 @@ export default function About() {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 1 }}
-            className="aspect-video bg-black/50 overflow-hidden rounded-2xl border border-white/10"
+            className="aspect-video bg-black/10 overflow-hidden rounded-2xl border border-black/10"
           >
             <img
               src="/studio-interior.png"
