@@ -75,8 +75,8 @@ export default function About() {
   return (
     <div className="bg-background text-foreground min-h-screen">
       {/* Hero Banner */}
-      <section className="relative min-h-[70vh] flex flex-col justify-end pb-16 px-8 md:px-20 overflow-hidden bg-[#DCCFC5] pt-32">
-        <div className="absolute inset-0 bg-gradient-to-b from-black/25 via-black/10 to-[#DCCFC5]" />
+      <section className="relative min-h-[70vh] flex flex-col justify-end pb-16 px-8 md:px-20 overflow-hidden bg-background pt-32">
+        <div className="absolute inset-0 bg-gradient-to-b from-foreground/25 via-foreground/10 to-background" />
         <div className="relative z-10 max-w-4xl">
           <motion.span
             initial={{ opacity: 0, y: 10 }}
@@ -90,7 +90,7 @@ export default function About() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, delay: 0.1 }}
-            className="font-serif text-5xl md:text-7xl font-medium tracking-tight leading-tight text-[#1A1A1A]"
+            className="font-serif text-5xl md:text-7xl font-medium tracking-tight leading-tight text-foreground"
           >
             {c.title}
           </motion.h1>
@@ -234,7 +234,7 @@ export default function About() {
       </section>
 
       {/* Studio info */}
-      <section className="bg-[#DCCFC5] text-[#1A1A1A] border-t border-black/10 px-8 md:px-20 py-20">
+      <section className="bg-background text-foreground border-t border-border/60 px-8 md:px-20 py-20">
         <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-16 items-center">
           <motion.div
             initial="hidden"
@@ -274,8 +274,8 @@ export default function About() {
             className="aspect-video bg-black/10 overflow-hidden rounded-2xl border border-black/10"
           >
             <img
-              src="/studio-interior.png"
-              alt="Studio Interior"
+              src="/khong-gian.jpg"
+              alt="Không gian studio"
               className="w-full h-full object-cover opacity-80"
             />
           </motion.div>

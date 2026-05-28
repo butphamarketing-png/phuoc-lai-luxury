@@ -79,7 +79,7 @@ export default function Contact() {
           <span className="text-xs uppercase tracking-[0.3em] font-medium text-foreground/40 mb-4 block">
             BOOKING
           </span>
-          <h1 className="font-serif text-5xl md:text-6xl text-[#1A1A1A] tracking-tight mb-6">
+          <h1 className="font-serif text-5xl md:text-6xl text-foreground tracking-tight mb-6">
             Đặt Lịch Hẹn
           </h1>
           <p className="text-foreground/70 font-light text-lg">
@@ -93,8 +93,8 @@ export default function Contact() {
         <div className="flex flex-col lg:flex-row gap-16">
           <div className="lg:w-3/5">
             <FadeIn direction="right">
-              <div className="bg-card rounded-3xl p-8 md:p-12 shadow-sm border border-black/5">
-                <h2 className="text-3xl font-serif tracking-tight mb-8 text-[#1A1A1A]">
+              <div className="bg-card rounded-3xl p-8 md:p-12 shadow-sm border border-border/60">
+                <h2 className="text-3xl font-serif tracking-tight mb-8 text-foreground">
                   Gửi Yêu Cầu
                 </h2>
                 <form className="space-y-6" onSubmit={handleSubmit}>
@@ -104,7 +104,7 @@ export default function Contact() {
                         Họ và tên *
                       </label>
                       <Input
-                        className="rounded-xl border-black/10 bg-transparent h-12 focus-visible:ring-[#1A1A1A]"
+                        className="rounded-xl border-border/80 bg-transparent h-12 focus-visible:ring-primary"
                         placeholder="Nguyễn Văn A"
                         required
                         value={form.name}
@@ -116,7 +116,7 @@ export default function Contact() {
                         Số điện thoại *
                       </label>
                       <Input
-                        className="rounded-xl border-black/10 bg-transparent h-12 focus-visible:ring-[#1A1A1A]"
+                        className="rounded-xl border-border/80 bg-transparent h-12 focus-visible:ring-primary"
                         type="tel"
                         placeholder="0909..."
                         required
@@ -131,7 +131,7 @@ export default function Contact() {
                       Dịch vụ quan tâm
                     </label>
                     <select
-                      className="flex h-12 w-full rounded-xl border border-black/10 bg-transparent px-3 py-2 text-base focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1A1A1A]"
+                      className="flex h-12 w-full rounded-xl border border-border/80 bg-transparent px-3 py-2 text-base focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
                       value={form.service}
                       onChange={(e) => setForm({ ...form, service: e.target.value })}
                     >
@@ -148,7 +148,7 @@ export default function Contact() {
                       Ghi chú thêm
                     </label>
                     <Textarea
-                      className="rounded-xl border-black/10 bg-transparent min-h-[150px] focus-visible:ring-[#1A1A1A]"
+                      className="rounded-xl border-border/80 bg-transparent min-h-[150px] focus-visible:ring-primary"
                       placeholder="Ngày giờ bạn mong muốn, hoặc các thắc mắc khác..."
                       value={form.note}
                       onChange={(e) => setForm({ ...form, note: e.target.value })}
@@ -159,7 +159,7 @@ export default function Contact() {
                     type="submit"
                     size="lg"
                     disabled={submitLead.isPending}
-                    className="rounded-full bg-[#1A1A1A] text-white hover:bg-black px-10 py-6 text-sm uppercase tracking-[0.2em] w-full transition-all"
+                    className="rounded-full bg-primary text-primary-foreground hover:bg-primary/90 px-10 py-6 text-sm uppercase tracking-[0.2em] w-full transition-all"
                   >
                     {submitLead.isPending ? "Đang gửi..." : "Gửi Thông Tin"}
                   </Button>
@@ -170,7 +170,7 @@ export default function Contact() {
 
           <div className="lg:w-2/5">
             <FadeIn direction="left" delay={0.2} className="h-full">
-              <div className="bg-[#1A1A1A] rounded-3xl p-10 shadow-sm text-white h-full">
+              <div className="bg-primary rounded-3xl p-10 shadow-sm text-primary-foreground h-full">
                 <h2 className="text-3xl font-serif tracking-tight mb-10 text-white">
                   Thông Tin Liên Hệ
                 </h2>

@@ -125,13 +125,13 @@ export default function Navbar() {
           ? "text-white"
           : "text-white/70 hover:text-white"
         : active
-          ? "text-black"
-          : "text-black/60 hover:text-black"
+          ? "text-foreground"
+          : "text-foreground/60 hover:text-foreground"
     }`;
 
   const underlineClass = (active: boolean) =>
     `absolute -bottom-0.5 left-0 w-full h-px transform origin-left transition-transform duration-300 ${
-      isOverlay ? "bg-white" : "bg-black"
+      isOverlay ? "bg-white" : "bg-foreground"
     } ${active ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"}`;
 
   return (
@@ -140,7 +140,7 @@ export default function Navbar() {
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         isOverlay
           ? "bg-transparent border-transparent py-6"
-          : "bg-[#FFFFFF]/90 backdrop-blur-xl border-b border-black/[0.03] py-2 shadow-[0_10px_40px_rgba(0,0,0,0.02)]"
+          : "bg-background/90 backdrop-blur-xl border-b border-border/60 py-2 shadow-[0_10px_40px_rgba(0,0,0,0.02)]"
       }`}
     >
       <div className="w-full px-4 md:px-8 lg:px-12 flex items-center h-16 md:h-20 relative max-w-screen-2xl mx-auto">
@@ -156,7 +156,7 @@ export default function Navbar() {
               data-testid="link-logo"
             >
               <div className="relative flex items-center gap-2 md:gap-4 overflow-hidden">
-                <div className={`relative flex h-10 w-10 md:h-14 md:w-14 items-center justify-center rounded-full transition-all duration-500 logo-shine overflow-hidden ${isOverlay ? "bg-white/10 backdrop-blur-md border border-white/20" : "bg-black luxury-shadow"}`}>
+                <div className={`relative flex h-10 w-10 md:h-14 md:w-14 items-center justify-center rounded-full transition-all duration-500 logo-shine overflow-hidden ${isOverlay ? "bg-white/10 backdrop-blur-md border border-white/20" : "bg-primary luxury-shadow"}`}>
                   <img
                     src={logoImg}
                     alt="LP Logo"
@@ -165,12 +165,12 @@ export default function Navbar() {
                 </div>
                 <div className="flex flex-col leading-none">
                   <span 
-                    className={`text-[11px] md:text-[15px] font-serif tracking-[0.2em] font-bold uppercase whitespace-nowrap notranslate transition-colors duration-500 ${isOverlay ? 'text-white' : 'text-black'}`}
+                    className={`text-[11px] md:text-[15px] font-serif tracking-[0.2em] font-bold uppercase whitespace-nowrap notranslate transition-colors duration-500 ${isOverlay ? 'text-white' : 'text-foreground'}`}
                   >
                     Phuoc Lai
                   </span>
                   <span 
-                    className={`text-[7px] md:text-[9px] font-light tracking-[0.45em] uppercase whitespace-nowrap mt-1 notranslate transition-colors duration-500 ${isOverlay ? 'text-white/70' : 'text-black/40'}`}
+                    className={`text-[7px] md:text-[9px] font-light tracking-[0.45em] uppercase whitespace-nowrap mt-1 notranslate transition-colors duration-500 ${isOverlay ? 'text-white/70' : 'text-foreground/40'}`}
                   >
                     Luxury
                   </span>
@@ -192,7 +192,7 @@ export default function Navbar() {
                   }}
                   data-testid={`nav-link-${link.href.replace("/", "") || "home"}`}
                   className={`flex items-center gap-1.5 py-8 text-[10px] font-bold uppercase tracking-[0.25em] transition-all duration-500 hover:opacity-100 ${
-                    isOverlay ? "text-white/70 hover:text-white" : "text-black/60 hover:text-black"
+                    isOverlay ? "text-white/70 hover:text-white" : "text-foreground/60 hover:text-foreground"
                   }`}
                 >
                   {link.label}
@@ -201,19 +201,19 @@ export default function Navbar() {
                 
                 {link.dropdown && (
                   <div className="pointer-events-none absolute left-1/2 top-full z-50 w-[440px] -translate-x-1/2 translate-y-4 opacity-0 transition-all duration-500 group-hover:pointer-events-auto group-hover:translate-y-0 group-hover:opacity-100">
-                    <div className="mt-4 overflow-hidden rounded-2xl border border-black/5 bg-white p-8 shadow-[0_30px_60px_rgba(0,0,0,0.12)] backdrop-blur-xl ring-1 ring-black/5">
+                    <div className="mt-4 overflow-hidden rounded-2xl border border-border/60 bg-card p-8 shadow-[0_30px_60px_rgba(0,0,0,0.12)] backdrop-blur-xl ring-1 ring-border/60">
                       <div className="grid grid-cols-2 gap-10">
                         {link.dropdown.map((item) => (
                           <div key={item.href} className="space-y-5">
                           <Link
                             href={item.href}
                             onClick={() => handleNavLinkClick(item.href, item.id)}
-                            className="group/item flex items-center justify-between border-b border-black/[0.06] pb-3"
+                            className="group/item flex items-center justify-between border-b border-border/60 pb-3"
                           >
-                            <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-black">
+                            <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-foreground">
                               {item.label}
                             </span>
-                            <Plus size={12} className="text-black/20 group-hover/item:text-black transition-colors" />
+                            <Plus size={12} className="text-foreground/20 group-hover/item:text-foreground transition-colors" />
                           </Link>
                             {item.subItems && (
                             <div className="flex flex-col gap-3">
@@ -222,7 +222,7 @@ export default function Navbar() {
                                   key={sub.href}
                                   href={sub.href}
                                   onClick={() => setIsOpen(false)}
-                                  className="text-[10px] font-light uppercase tracking-[0.1em] text-black/40 hover:text-black transition-colors cursor-pointer leading-relaxed"
+                                  className="text-[10px] font-light uppercase tracking-[0.1em] text-foreground/40 hover:text-foreground transition-colors cursor-pointer leading-relaxed"
                                 >
                                   {sub.label}
                                 </Link>
@@ -246,7 +246,7 @@ export default function Navbar() {
                 className={`px-8 py-3.5 rounded-full text-[10px] uppercase tracking-[0.25em] font-bold transition-all duration-500 shadow-md ${
                   isOverlay 
                     ? "bg-white text-black hover:bg-white/90" 
-                    : "bg-black text-white hover:bg-black/80"
+                    : "bg-primary text-primary-foreground hover:bg-primary/90"
                 }`}
               >
                 {t("nav.booking")}
@@ -257,7 +257,7 @@ export default function Navbar() {
               onClick={() => setIsOpen(!isOpen)}
               data-testid="mobile-menu-toggle"
               className={`flex h-10 w-10 items-center justify-center rounded-full transition-colors lg:hidden ml-6 z-50 ${
-                isOverlay && !isOpen ? "bg-white/10 text-white backdrop-blur-md" : "bg-black/5 text-black"
+                isOverlay && !isOpen ? "bg-white/10 text-white backdrop-blur-md" : "bg-foreground/5 text-foreground"
               }`}
             >
               {isOpen ? <X size={20} /> : <Menu size={20} />}
@@ -272,26 +272,26 @@ export default function Navbar() {
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-              className="md:hidden bg-[#FFFFFF] border-t border-black/10 px-6 py-10 flex flex-col gap-8 overflow-hidden"
+              className="md:hidden bg-background border-t border-border/60 px-6 py-10 flex flex-col gap-8 overflow-hidden"
             >
               {navLinks.map((link) => (
                 <div key={link.href} className="space-y-4">
                   <Link
                     href={link.href}
                     className={`text-lg font-serif font-bold uppercase tracking-widest ${
-                      location === link.href ? "text-black" : "text-black/60"
+                      location === link.href ? "text-foreground" : "text-foreground/60"
                     }`}
                   >
                     {link.label}
                   </Link>
                   {link.dropdown && (
-                    <div className="mt-4 flex flex-col gap-6 pl-4 border-l border-black/5">
+                    <div className="mt-4 flex flex-col gap-6 pl-4 border-l border-border/60">
                       {link.dropdown.map((item) => (
                         <div key={item.href} className="space-y-3">
                           <Link
                             href={item.href}
                             onClick={() => handleNavLinkClick(item.href, item.id)}
-                            className="block text-[11px] uppercase tracking-[0.15em] font-medium text-black"
+                            className="block text-[11px] uppercase tracking-[0.15em] font-medium text-foreground"
                           >
                             {item.label}
                           </Link>
@@ -302,7 +302,7 @@ export default function Navbar() {
                                   key={sub.href}
                                   href={sub.href}
                                   onClick={() => setIsOpen(false)}
-                                  className="text-[10px] uppercase tracking-[0.1em] text-black/40 font-light"
+                                  className="text-[10px] uppercase tracking-[0.1em] text-foreground/40 font-light"
                                 >
                                   {sub.label}
                                 </Link>
@@ -315,13 +315,13 @@ export default function Navbar() {
                   )}
                 </div>
               ))}
-              <div className="flex items-center pt-2 border-t border-black/10">
+              <div className="flex items-center pt-2 border-t border-border/60">
                 <button
                   onClick={() => {
                     setIsOpen(false);
                     setIsBookingOpen(true);
                   }}
-                  className="w-full bg-[#1A1A1A] text-white px-6 py-4 rounded-full text-xs uppercase tracking-[0.2em] font-bold luxury-shadow"
+                  className="w-full bg-primary text-primary-foreground px-6 py-4 rounded-full text-xs uppercase tracking-[0.2em] font-bold luxury-shadow hover:bg-primary/90"
                 >
                   {t("nav.booking")}
                 </button>

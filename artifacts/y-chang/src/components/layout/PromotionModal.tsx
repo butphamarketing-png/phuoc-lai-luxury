@@ -35,29 +35,29 @@ export default function PromotionModal() {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.9, y: 20 }}
             transition={{ type: "spring", duration: 0.7, bounce: 0.3 }}
-            className="relative w-[95%] md:w-full max-w-4xl bg-white rounded-3xl overflow-hidden shadow-2xl max-h-[95vh] flex flex-col"
+            className="relative w-[95%] md:w-full max-w-4xl bg-background rounded-3xl overflow-hidden shadow-2xl max-h-[95vh] flex flex-col"
           >
             <button
               onClick={closeModal}
-              className="absolute top-4 right-4 z-[10001] p-2 rounded-full bg-black/40 hover:bg-black/60 backdrop-blur-md transition-colors"
+              className="absolute top-4 right-4 z-[10001] p-2 rounded-full bg-primary/40 hover:bg-primary/60 backdrop-blur-md transition-colors"
             >
               <X size={18} className="text-white" />
             </button>
 
             <ServiceCategoryHero />
 
-            <div className="p-6 md:p-10 flex flex-col items-center text-center bg-white">
-              <span className="text-[9px] md:text-[10px] uppercase tracking-[0.4em] text-black/40 mb-2 md:mb-3 font-bold">
+            <div className="p-6 md:p-10 flex flex-col items-center text-center bg-background">
+              <span className="text-[9px] md:text-[10px] uppercase tracking-[0.4em] text-foreground/40 mb-2 md:mb-3 font-bold">
                 PERMANENT MAKEUP AND SPA
               </span>
-              <h3 className="font-serif text-xl md:text-3xl mb-6 md:mb-8 text-[#1A1A1A] leading-tight">
+              <h3 className="font-serif text-xl md:text-3xl mb-6 md:mb-8 text-foreground leading-tight">
                 Dịch vụ bạn <span className="italic">quan tâm</span>
               </h3>
 
               <div className="flex flex-col sm:flex-row gap-4 w-full max-w-xl">
                 <Button
                   asChild
-                  className="flex-1 rounded-full bg-[#1A1A1A] text-white hover:bg-black py-6 md:py-8 text-[10px] md:text-[11px] uppercase tracking-[0.2em] luxury-shadow group"
+                  className="flex-1 rounded-full bg-primary text-primary-foreground hover:bg-primary/90 py-6 md:py-8 text-[10px] md:text-[11px] uppercase tracking-[0.2em] luxury-shadow group"
                 >
                   <Link href="/dich-vu/phun-xam" onClick={closeModal}>
                     PERMANENT MAKEUP{" "}
@@ -68,7 +68,7 @@ export default function PromotionModal() {
                 </Button>
                 <Button
                   asChild
-                  className="flex-1 rounded-full bg-[#1A1A1A] text-white hover:bg-black py-6 md:py-8 text-[10px] md:text-[11px] uppercase tracking-[0.2em] luxury-shadow group"
+                  className="flex-1 rounded-full bg-primary text-primary-foreground hover:bg-primary/90 py-6 md:py-8 text-[10px] md:text-[11px] uppercase tracking-[0.2em] luxury-shadow group"
                 >
                   <Link href="/dich-vu/spa" onClick={closeModal}>
                     SPA{" "}

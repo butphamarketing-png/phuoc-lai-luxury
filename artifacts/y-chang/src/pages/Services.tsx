@@ -19,11 +19,11 @@ function ServiceGrid({
   return (
     <>
       {isLoading && (
-        <p className="text-center text-black/40 text-sm py-20">Đang tải dịch vụ...</p>
+        <p className="text-center text-foreground/40 text-sm py-20">Đang tải dịch vụ...</p>
       )}
 
       {!isLoading && list.length === 0 && (
-        <p className="text-center text-black/40 text-sm py-20">{emptyMessage}</p>
+        <p className="text-center text-foreground/40 text-sm py-20">{emptyMessage}</p>
       )}
 
       <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-3 max-w-6xl mx-auto">
@@ -34,7 +34,7 @@ function ServiceGrid({
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-80px" }}
             transition={{ delay: index * 0.04 }}
-            className="group flex flex-col overflow-hidden rounded-2xl border border-black/5 bg-white text-black shadow-sm hover:shadow-xl transition-all duration-500 h-full"
+            className="group flex flex-col overflow-hidden rounded-2xl border border-border/60 bg-card text-card-foreground shadow-sm hover:shadow-xl transition-all duration-500 h-full"
           >
             <div className="relative aspect-[4/5] w-full overflow-hidden bg-black shrink-0">
               <img
@@ -67,12 +67,12 @@ function ServiceGrid({
               </h2>
               <Link
                 href={`/dich-vu/${service.slug}`}
-                className="mt-auto flex items-center justify-between border-t border-black/5 pt-6 cursor-pointer group/btn"
+                className="mt-auto flex items-center justify-between border-t border-border/60 pt-6 cursor-pointer group/btn"
               >
-                <span className="text-[10px] uppercase tracking-[0.2em] text-black/40 group-hover/btn:text-black font-bold transition-colors whitespace-nowrap">
+                <span className="text-[10px] uppercase tracking-[0.2em] text-foreground/45 group-hover/btn:text-foreground font-bold transition-colors whitespace-nowrap">
                   Xem bài viết chi tiết
                 </span>
-                <span className="flex h-10 w-10 items-center justify-center rounded-full border border-black/10 group-hover/btn:bg-black group-hover/btn:text-white transition-all duration-500 shadow-sm">
+                <span className="flex h-10 w-10 items-center justify-center rounded-full border border-border/60 group-hover/btn:bg-primary group-hover/btn:text-primary-foreground transition-all duration-500 shadow-sm">
                   <Plus size={16} />
                 </span>
               </Link>
@@ -100,17 +100,17 @@ export default function Services() {
     const categoryLabel = category === "phun-xam" ? "Phun Xăm" : "Spa";
 
     return (
-      <div className="bg-white pt-28 pb-24 text-[#1A1A1A]">
+      <div className="bg-background pt-28 pb-24 text-foreground">
         <section className="container mx-auto max-w-7xl px-6">
           <div className="max-w-6xl mx-auto mb-10 flex flex-wrap items-center justify-between gap-4">
             <Link
               href="/dich-vu"
-              className="inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.2em] text-black/45 hover:text-black transition-colors"
+              className="inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.2em] text-foreground/45 hover:text-foreground transition-colors"
             >
               <ChevronLeft size={14} />
               Tất cả dịch vụ
             </Link>
-            <span className="text-[10px] uppercase tracking-[0.4em] text-black/35 font-bold">
+            <span className="text-[10px] uppercase tracking-[0.4em] text-foreground/35 font-bold">
               {categoryLabel}
             </span>
           </div>
@@ -126,12 +126,12 @@ export default function Services() {
   }
 
   return (
-    <div className="bg-[#FFFFFF] pt-28 pb-24 text-[#1A1A1A]">
+    <div className="bg-background pt-28 pb-24 text-foreground">
       <section className="px-6 text-center">
         <motion.span
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          className="mb-5 block text-[10px] font-medium uppercase tracking-[0.4em] text-black/45"
+          className="mb-5 block text-[10px] font-medium uppercase tracking-[0.4em] text-foreground/45"
         >
           DỊCH VỤ
         </motion.span>
@@ -143,7 +143,7 @@ export default function Services() {
         >
           Dịch vụ làm đẹp được thiết kế riêng
         </motion.h1>
-        <p className="mx-auto mt-6 max-w-2xl text-sm font-light leading-relaxed text-black/60 md:text-base">
+        <p className="mx-auto mt-6 max-w-2xl text-sm font-light leading-relaxed text-foreground/60 md:text-base">
           Các dịch vụ tại Phuoc Lai được xây dựng theo từng nhu cầu cụ thể, giúp bạn tỏa sáng với vẻ đẹp tự nhiên nhất.
         </p>
       </section>

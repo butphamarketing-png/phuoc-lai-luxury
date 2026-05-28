@@ -25,14 +25,14 @@ export default function DetailBody({
   return (
     <div className="prose prose-neutral max-w-none">
       {!hideIntro && (
-        <p className="text-xl md:text-2xl font-light leading-relaxed text-black/70 italic mb-16 border-l-4 border-black/5 pl-8 py-2 not-prose">
+        <p className="text-xl md:text-2xl font-light leading-relaxed text-foreground/70 italic mb-16 border-l-4 border-border/60 pl-8 py-2 not-prose">
           &ldquo;{intro}&rdquo;
         </p>
       )}
 
       {hasHtml ? (
         <div
-          className="prose prose-neutral max-w-none text-lg font-light text-black/60 [&_h2]:font-serif [&_h2]:text-3xl [&_h2]:text-[#1A1A1A] [&_h2]:mb-6 [&_h3]:font-serif [&_ul]:space-y-3 [&_img]:rounded-2xl [&_img]:shadow-xl [&_video]:my-8 [&_video]:w-full [&_video]:max-h-[70vh] [&_video]:rounded-2xl [&_video]:bg-black [&_table]:w-full [&_.aspect-video]:my-8 [&_iframe]:rounded-xl"
+          className="prose prose-neutral max-w-none text-lg font-light text-foreground/60 [&_h2]:font-serif [&_h2]:text-3xl [&_h2]:text-foreground [&_h2]:mb-6 [&_h3]:font-serif [&_ul]:space-y-3 [&_img]:rounded-2xl [&_img]:shadow-xl [&_video]:my-8 [&_video]:w-full [&_video]:max-h-[70vh] [&_video]:rounded-2xl [&_video]:bg-primary [&_table]:w-full [&_.aspect-video]:my-8 [&_iframe]:rounded-xl"
           dangerouslySetInnerHTML={{ __html: normalizedHtml }}
         />
       ) : (
@@ -45,11 +45,11 @@ export default function DetailBody({
             transition={{ delay: idx * 0.1 }}
             className="mb-16 not-prose"
           >
-            <h2 className="font-serif text-3xl md:text-4xl mb-8 text-[#1A1A1A]">
+            <h2 className="font-serif text-3xl md:text-4xl mb-8 text-foreground">
               {section.heading}
             </h2>
             {section.content && (
-              <p className="text-lg font-light leading-relaxed text-black/60 mb-8">
+              <p className="text-lg font-light leading-relaxed text-foreground/60 mb-8">
                 {section.content}
               </p>
             )}
@@ -58,11 +58,11 @@ export default function DetailBody({
                 {section.list.map((item, i) => (
                   <li
                     key={i}
-                    className="flex items-start gap-4 text-base font-light text-black/70"
+                    className="flex items-start gap-4 text-base font-light text-foreground/70"
                   >
                     <CheckCircle2
                       size={18}
-                      className="text-black/20 shrink-0 mt-1"
+                      className="text-foreground/20 shrink-0 mt-1"
                     />
                     <span>{item}</span>
                   </li>

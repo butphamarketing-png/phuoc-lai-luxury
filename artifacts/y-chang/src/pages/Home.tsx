@@ -8,7 +8,7 @@ import SocialSection from "@/components/sections/SocialSection";
 import { usePublicTraining } from "@/hooks/use-site-content";
 
 const btnPrimary =
-  "rounded-full bg-[#DCCFC5] text-[#1A1A1A] hover:bg-[#D0BFAE] px-10 py-6 text-[11px] uppercase tracking-[0.25em] border border-black/10";
+  "rounded-full bg-primary text-primary-foreground hover:bg-primary/90 px-10 py-6 text-[11px] uppercase tracking-[0.25em] border border-primary/10";
 const btnOutline =
   "rounded-full border-white/20 text-white hover:bg-white hover:text-black px-10 py-6 text-[11px] uppercase tracking-[0.25em]";
 
@@ -60,8 +60,13 @@ export default function Home() {
   const [activeTab, setActiveTab] = useState<"phun-xam" | "spa">("phun-xam");
 
   const serviceCategories = [
-    { id: "phun-xam", title: "Phun Xăm Thẩm Mỹ", img: "/service-brows.png", slug: "phun-xam" },
-    { id: "spa", title: "Spa", img: "/studio-interior.png", slug: "spa" },
+    {
+      id: "phun-xam",
+      title: "Phun Xăm Thẩm Mỹ",
+      img: "/khong-gian.jpg",
+      slug: "phun-xam",
+    },
+    { id: "spa", title: "Spa", img: "/spa.webp", slug: "spa" },
   ];
 
   const trainingCourses = useMemo(
@@ -96,12 +101,12 @@ export default function Home() {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.4 }}
-      className="w-full bg-[#FFFFFF] text-[#1A1A1A]"
+      className="w-full bg-background text-foreground"
       data-testid="page-home"
     >
       {/* Hero — Masters Section */}
       <section
-        className="relative w-full overflow-hidden bg-[#DCCFC5] pt-24 md:pt-0"
+        className="relative w-full overflow-hidden bg-background pt-24 md:pt-0"
         data-testid="section-hero"
         onMouseMove={(e) => {
           const { clientX, clientY } = e;
@@ -177,7 +182,7 @@ export default function Home() {
       </section>
 
       {/* Giới thiệu */}
-      <section className="py-24 md:py-32 px-6 container mx-auto bg-[#FFFFFF]" data-testid="section-about">
+      <section className="py-24 md:py-32 px-6 container mx-auto bg-background" data-testid="section-about">
         <div className="flex flex-col md:flex-row gap-10 lg:gap-32 items-center max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, x: -50 }}
@@ -188,15 +193,15 @@ export default function Home() {
           >
             <span className="text-[10px] uppercase tracking-[0.5em] text-gold mb-4 md:mb-6 block font-bold">ABOUT PHUOC LAI</span>
             <h2
-              className="text-4xl md:text-6xl lg:text-7xl font-serif font-bold mb-6 md:mb-10 leading-[1.2] md:leading-[1.1] text-[#1A1A1A]"
+              className="text-4xl md:text-6xl lg:text-7xl font-serif font-bold mb-6 md:mb-10 leading-[1.2] md:leading-[1.1] text-foreground"
               data-testid="text-about-title"
             >
               Nâng tầm thần thái
               <br />
-              <span className="italic font-light text-black/40">từ từng sợi mày</span>
+              <span className="italic font-light text-foreground/40">từ từng sợi mày</span>
             </h2>
             <p
-              className="text-[#1A1A1A]/70 font-light text-sm md:text-lg leading-relaxed mb-8 md:mb-12 max-w-lg mx-auto md:mx-0 border-l-0 md:border-l-2 border-gold/20 md:pl-8"
+              className="text-foreground/70 font-light text-sm md:text-lg leading-relaxed mb-8 md:mb-12 max-w-lg mx-auto md:mx-0 border-l-0 md:border-l-2 border-gold/20 md:pl-8"
               data-testid="text-about-desc"
             >
               Chúng tôi tin rằng mỗi đôi mày đều mang một vẻ đẹp riêng. Với kỹ thuật chuyên sâu và sự tinh tế trong từng đường nét, Amazing Brows cam kết mang đến cho bạn sự tự tin và thần thái tự nhiên nhất.
@@ -232,7 +237,7 @@ export default function Home() {
                   key={idx}
                   onClick={() => setCurrentAboutSlide(idx)}
                   className={`h-12 w-12 rounded-full border border-white/20 backdrop-blur-md transition-all flex items-center justify-center text-xs font-bold ${
-                    currentAboutSlide === idx ? "bg-gold text-white border-gold" : "bg-black/40 text-white hover:bg-black/60"
+                    currentAboutSlide === idx ? "bg-gold text-white border-gold" : "bg-primary/40 text-white hover:bg-primary/60"
                   }`}
                 >
                   0{idx + 1}
@@ -244,7 +249,7 @@ export default function Home() {
       </section>
 
       {/* Dịch vụ + giá trị (nền đen liên tục) */}
-      <section id="services-section" className="bg-[#DCCFC5] text-[#1A1A1A] overflow-hidden" data-testid="section-services">
+      <section id="services-section" className="bg-background text-foreground overflow-hidden" data-testid="section-services">
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
@@ -252,7 +257,7 @@ export default function Home() {
           className="section-padding container mx-auto px-6 max-w-7xl relative"
         >
           {/* Subtle background text */}
-          <div className="absolute top-0 right-0 text-[15vw] font-serif italic text-white/[0.02] pointer-events-none select-none -translate-y-1/4 translate-x-1/4 whitespace-nowrap">
+          <div className="absolute top-0 right-0 text-[15vw] font-serif italic text-foreground/[0.03] pointer-events-none select-none -translate-y-1/4 translate-x-1/4 whitespace-nowrap">
             Signature Services
           </div>
 
@@ -264,11 +269,11 @@ export default function Home() {
               DỊCH VỤ CỦA CHÚNG TÔI
             </span>
             <h2
-              className="text-4xl md:text-6xl lg:text-7xl font-serif tracking-wide text-white leading-tight mb-8"
+              className="text-4xl md:text-6xl lg:text-7xl font-serif tracking-wide text-foreground leading-tight mb-8"
               data-testid="text-services-title"
             >
               Đẹp tự nhiên <br className="md:hidden" />
-              <span className="italic font-light text-white/40">– Chuẩn từng chi tiết</span>
+              <span className="italic font-light text-foreground/40">– Chuẩn từng chi tiết</span>
             </h2>
             <div className="w-24 h-1 bg-gold/50 rounded-full" />
           </div>
@@ -316,7 +321,7 @@ export default function Home() {
         </motion.div>
       </section>
 
-      <section id="training-section" className="bg-[#FFFFFF] section-padding py-24 md:py-32" data-testid="section-home-training">
+      <section id="training-section" className="bg-background section-padding py-24 md:py-32" data-testid="section-home-training">
         <div className="container mx-auto max-w-7xl px-6">
           <div className="mb-24 flex flex-col gap-10 md:flex-row md:items-end md:justify-between">
             <motion.div 
@@ -329,9 +334,9 @@ export default function Home() {
               <h2 className="font-serif text-4xl leading-[1.1] md:text-6xl mb-8">
                 Học thật – Làm thật
                 <br />
-                <span className="italic font-light text-black/30">Thành công thật</span>
+                <span className="italic font-light text-foreground/30">Thành công thật</span>
               </h2>
-              <p className="max-w-xl text-base md:text-lg font-light leading-relaxed text-black/60 border-l-2 border-gold/20 pl-8">
+              <p className="max-w-xl text-base md:text-lg font-light leading-relaxed text-foreground/60 border-l-2 border-gold/20 pl-8">
                 Chương trình đào tạo chuyên sâu, bài bản từ cơ bản đến nâng cao, cam kết tay nghề vững và lộ trình thực chiến rõ ràng.
               </p>
             </motion.div>
@@ -340,14 +345,14 @@ export default function Home() {
               initial={{ opacity: 0, x: 30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              className="flex p-2 bg-black/5 rounded-full self-start md:self-end luxury-shadow"
+              className="flex p-2 bg-foreground/5 rounded-full self-start md:self-end luxury-shadow"
             >
               <button
                 onClick={() => setActiveTab("phun-xam")}
                 className={`px-10 py-4 rounded-full text-[11px] uppercase tracking-[0.25em] font-bold transition-all duration-500 ${
                   activeTab === "phun-xam" 
-                    ? "bg-[#1A1A1A] text-white shadow-xl scale-105" 
-                    : "text-black/40 hover:text-black/60"
+                    ? "bg-primary text-primary-foreground shadow-xl scale-105" 
+                    : "text-foreground/40 hover:text-foreground/60"
                 }`}
               >
                 Phun Xăm
@@ -356,8 +361,8 @@ export default function Home() {
                 onClick={() => setActiveTab("spa")}
                 className={`px-10 py-4 rounded-full text-[11px] uppercase tracking-[0.25em] font-bold transition-all duration-500 ${
                   activeTab === "spa" 
-                    ? "bg-[#1A1A1A] text-white shadow-xl scale-105" 
-                    : "text-black/40 hover:text-black/60"
+                    ? "bg-primary text-primary-foreground shadow-xl scale-105" 
+                    : "text-foreground/40 hover:text-foreground/60"
                 }`}
               >
                 Spa
@@ -373,7 +378,7 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: idx * 0.15, duration: 0.8 }}
-                className="group flex flex-col bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-700 border border-black/[0.03]"
+                className="group flex flex-col bg-card text-card-foreground rounded-3xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-700 border border-border/40"
               >
                 <div className="aspect-[4/3] overflow-hidden relative">
                   <img src={course.img} alt={course.title} className="h-full w-full object-cover transition duration-1000 group-hover:scale-110" />
@@ -381,12 +386,12 @@ export default function Home() {
                 <div className="p-10 flex flex-col flex-grow">
                   <span className="mb-4 block text-[9px] uppercase tracking-[0.3em] text-gold font-black">{course.level}</span>
                   <h3 className="mb-4 font-serif text-2xl leading-tight group-hover:text-gold transition-colors duration-500">{course.title}</h3>
-                  <p className="mb-8 text-sm font-light leading-relaxed text-black/50 flex-grow">{course.desc}</p>
+                  <p className="mb-8 text-sm font-light leading-relaxed text-foreground/55 flex-grow">{course.desc}</p>
                   <Link
                     href={`/dao-tao/${course.slug}`}
-                    className="flex items-center justify-between border-t border-black/[0.06] pt-8 group/btn"
+                    className="flex items-center justify-between border-t border-border/40 pt-8 group/btn"
                   >
-                    <span className="text-[10px] uppercase tracking-[0.25em] text-black/40 group-hover/btn:text-gold font-bold transition-colors">
+                    <span className="text-[10px] uppercase tracking-[0.25em] text-foreground/45 group-hover/btn:text-gold font-bold transition-colors">
                       XEM CHI TIẾT
                     </span>
                     <span className="flex h-12 w-12 items-center justify-center rounded-full border border-black/10 group-hover/btn:bg-gold group-hover/btn:text-white group-hover/btn:border-gold transition-all duration-500 luxury-shadow">
@@ -406,7 +411,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="bg-[#DCCFC5] py-24 md:py-32 text-[#1A1A1A]" data-testid="section-home-feedback">
+      <section className="bg-background py-24 md:py-32 text-foreground" data-testid="section-home-feedback">
         <div className="container mx-auto max-w-7xl px-6">
           <div className="mb-20 flex flex-col md:flex-row items-end justify-between gap-10">
             <motion.div
@@ -418,10 +423,10 @@ export default function Home() {
               <h2 className="font-serif text-4xl leading-tight md:text-6xl">
                 Những lời yêu thương
                 <br />
-                <span className="italic font-light text-white/40">là động lực phát triển</span>
+                <span className="italic font-light text-foreground/40">là động lực phát triển</span>
               </h2>
             </motion.div>
-            <Button asChild variant="outline" className="rounded-full border-gold/40 text-[#1A1A1A] hover:bg-gold hover:text-white px-10 py-6 text-[10px] uppercase tracking-[0.2em]">
+            <Button asChild variant="outline" className="rounded-full border-gold/40 text-foreground hover:bg-gold hover:text-white px-10 py-6 text-[10px] uppercase tracking-[0.2em]">
               <Link href="/feedback">Xem tất cả đánh giá</Link>
             </Button>
           </div>
@@ -432,7 +437,7 @@ export default function Home() {
             viewport={{ once: true }}
             className="max-w-4xl mx-auto"
           >
-            <div className="rounded-3xl overflow-hidden border border-black/10 bg-black luxury-shadow">
+            <div className="rounded-3xl overflow-hidden border border-border/60 bg-primary luxury-shadow">
               <div
                 className="aspect-video w-full"
                 style={{ position: "relative", paddingBottom: "56.25%", height: 0 }}
@@ -454,14 +459,14 @@ export default function Home() {
                 />
               </div>
             </div>
-            <p className="mt-6 text-center text-[10px] uppercase tracking-[0.35em] text-black/50 font-bold">
+            <p className="mt-6 text-center text-[10px] uppercase tracking-[0.35em] text-foreground/50 font-bold">
               Video cảm nhận khách hàng
             </p>
           </motion.div>
         </div>
       </section>
 
-      <section className="bg-[#FFFFFF] py-24 md:py-32" data-testid="section-home-why">
+      <section className="bg-background py-24 md:py-32" data-testid="section-home-why">
         <div className="container mx-auto max-w-7xl px-6">
           <motion.div 
             initial={{ opacity: 0, y: 30 }}
@@ -473,7 +478,7 @@ export default function Home() {
             <h2 className="font-serif text-4xl leading-tight md:text-6xl">
               Vì sao chọn
               <br />
-              <span className="italic font-light text-black/40">Phuoc Lai Luxury?</span>
+              <span className="italic font-light text-foreground/40">Phuoc Lai Luxury?</span>
             </h2>
           </motion.div>
           
@@ -485,13 +490,13 @@ export default function Home() {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: idx * 0.1 }}
-                className="rounded-3xl border border-black/[0.03] bg-white shadow-sm hover:shadow-2xl transition-all duration-700 p-10 text-center group"
+                className="rounded-3xl border border-border/60 bg-card text-card-foreground shadow-sm hover:shadow-2xl transition-all duration-700 p-10 text-center group"
               >
-                <div className="h-16 w-14 mx-auto mb-8 flex items-center justify-center text-black/80 group-hover:text-gold transition-colors">
+                <div className="h-16 w-14 mx-auto mb-8 flex items-center justify-center text-foreground/80 group-hover:text-gold transition-colors">
                   <item.icon size={48} strokeWidth={1} />
                 </div>
                 <h4 className="mb-4 text-[11px] font-black uppercase tracking-[0.2em]">{item.title}</h4>
-                <p className="text-sm font-light leading-relaxed text-black/50">{item.desc}</p>
+                <p className="text-sm font-light leading-relaxed text-foreground/55">{item.desc}</p>
               </motion.div>
             ))}
           </div>

@@ -4,7 +4,7 @@ import logoImg from "@/assets/logo.png";
 
 export default function BookingSection() {
   return (
-    <section className="bg-[#FFFFFF] border-t border-black/5" data-testid="section-booking">
+    <section className="bg-background border-t border-border/60" data-testid="section-booking">
       <motion.div
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
@@ -15,11 +15,11 @@ export default function BookingSection() {
           initial={{ opacity: 0, x: -20 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
-          className="relative overflow-hidden bg-[#1A1A1A] min-h-[300px] lg:min-h-0"
+          className="relative overflow-hidden bg-primary min-h-[300px] lg:min-h-0"
           data-testid="container-booking-image"
         >
           <img
-            src="/studio.png"
+            src="/khong-gian.jpg"
             alt="Phuoc Lai studio"
             className="absolute inset-0 w-full h-full object-cover opacity-70"
           />
@@ -53,24 +53,24 @@ export default function BookingSection() {
           initial={{ opacity: 0, x: 20 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
-          className="p-8 md:p-14 lg:p-20 flex flex-col justify-center bg-[#FFFFFF]"
+          className="p-8 md:p-14 lg:p-20 flex flex-col justify-center bg-background"
           data-testid="container-booking-form"
         >
-          <div className="max-w-xl mx-auto w-full rounded-2xl bg-white p-6 md:p-8 shadow-lg ring-1 ring-black/5">
+          <div className="max-w-xl mx-auto w-full rounded-2xl bg-card text-card-foreground p-6 md:p-8 shadow-lg ring-1 ring-border/60">
             <h2
-              className="text-3xl md:text-4xl font-serif text-[#1A1A1A] mb-2"
+              className="text-3xl md:text-4xl font-serif text-foreground mb-2"
               data-testid="text-booking-title"
             >
               ĐẶT LỊCH TƯ VẤN
             </h2>
             <p
-              className="text-lg italic font-serif text-[#1A1A1A]/70 mb-6"
+              className="text-lg italic font-serif text-foreground/70 mb-6"
               data-testid="text-booking-subtitle"
             >
               Đẹp tự nhiên – Tự tin tỏa sáng
             </p>
             <p
-              className="text-sm text-[#1A1A1A]/60 font-light mb-10"
+              className="text-sm text-foreground/60 font-light mb-10"
               data-testid="text-booking-desc"
             >
               Vui lòng để lại thông tin, chuyên viên của chúng tôi sẽ liên hệ để tư vấn dáng mày phù hợp nhất cho bạn.
@@ -84,23 +84,23 @@ export default function BookingSection() {
                 className="grid grid-cols-1 sm:grid-cols-2 gap-6"
               >
                 <motion.div className="space-y-2">
-                  <label className="text-[10px] uppercase tracking-widest text-black/50">
+                  <label className="text-[10px] uppercase tracking-widest text-foreground/50">
                     Họ và tên
                   </label>
                   <input
                     type="text"
-                    className="w-full bg-white/45 border border-black/10 rounded-xl px-4 py-3 focus:outline-none focus:border-black transition-colors text-sm"
+                    className="w-full bg-background/40 border border-border/80 rounded-xl px-4 py-3 focus:outline-none focus:border-primary transition-colors text-sm"
                     placeholder="Nhập họ tên"
                     data-testid="input-booking-name"
                   />
                 </motion.div>
                 <motion.div className="space-y-2">
-                  <label className="text-[10px] uppercase tracking-widest text-black/50">
+                  <label className="text-[10px] uppercase tracking-widest text-foreground/50">
                     Số điện thoại
                   </label>
                   <input
                     type="tel"
-                    className="w-full bg-white/45 border border-black/10 rounded-xl px-4 py-3 focus:outline-none focus:border-black transition-colors text-sm"
+                    className="w-full bg-background/40 border border-border/80 rounded-xl px-4 py-3 focus:outline-none focus:border-primary transition-colors text-sm"
                     placeholder="Nhập SĐT"
                     data-testid="input-booking-phone"
                   />
@@ -115,11 +115,11 @@ export default function BookingSection() {
                 className="grid grid-cols-1 sm:grid-cols-2 gap-6"
               >
                 <motion.div className="space-y-2">
-                  <label className="text-[10px] uppercase tracking-widest text-black/50">
+                  <label className="text-[10px] uppercase tracking-widest text-foreground/50">
                     Dịch vụ quan tâm
                   </label>
                   <select
-                    className="w-full bg-white/45 border border-black/10 rounded-xl px-4 py-3 focus:outline-none focus:border-black transition-colors text-sm"
+                    className="w-full bg-background/40 border border-border/80 rounded-xl px-4 py-3 focus:outline-none focus:border-primary transition-colors text-sm"
                     data-testid="select-booking-service"
                   >
                     <option value="">Chọn dịch vụ</option>
@@ -129,12 +129,12 @@ export default function BookingSection() {
                   </select>
                 </motion.div>
                 <motion.div className="space-y-2">
-                  <label className="text-[10px] uppercase tracking-widest text-black/50">
+                  <label className="text-[10px] uppercase tracking-widest text-foreground/50">
                     Ngày muốn làm
                   </label>
                   <input
                     type="date"
-                    className="w-full bg-white/45 border border-black/10 rounded-xl px-4 py-3 focus:outline-none focus:border-black transition-colors text-sm"
+                    className="w-full bg-background/40 border border-border/80 rounded-xl px-4 py-3 focus:outline-none focus:border-primary transition-colors text-sm"
                     data-testid="input-booking-date"
                   />
                 </motion.div>
@@ -148,21 +148,21 @@ export default function BookingSection() {
                 className="grid grid-cols-1 sm:grid-cols-2 gap-6"
               >
                 <motion.div className="space-y-2">
-                  <label className="text-[10px] uppercase tracking-widest text-black/50">
+                  <label className="text-[10px] uppercase tracking-widest text-foreground/50">
                     Giờ mong muốn
                   </label>
                   <input
                     type="time"
-                    className="w-full bg-white/45 border border-black/10 rounded-xl px-4 py-3 focus:outline-none focus:border-black transition-colors text-sm"
+                    className="w-full bg-background/40 border border-border/80 rounded-xl px-4 py-3 focus:outline-none focus:border-primary transition-colors text-sm"
                     data-testid="input-booking-time"
                   />
                 </motion.div>
                 <motion.div className="space-y-2">
-                  <label className="text-[10px] uppercase tracking-widest text-black/50">
+                  <label className="text-[10px] uppercase tracking-widest text-foreground/50">
                     Ghi chú
                   </label>
                   <textarea
-                    className="w-full bg-white/45 border border-black/10 rounded-xl px-4 py-3 focus:outline-none focus:border-black transition-colors text-sm resize-none"
+                    className="w-full bg-background/40 border border-border/80 rounded-xl px-4 py-3 focus:outline-none focus:border-primary transition-colors text-sm resize-none"
                     rows={1}
                     placeholder="Nhu cầu đặc biệt..."
                     data-testid="textarea-booking-note"
@@ -178,7 +178,7 @@ export default function BookingSection() {
               >
                 <Button
                   type="submit"
-                  className="w-full rounded-full bg-[#1A1A1A] text-white hover:bg-black py-6 text-[11px] uppercase tracking-[0.2em] mt-4"
+                  className="w-full rounded-full bg-primary text-primary-foreground hover:bg-primary/90 py-6 text-[11px] uppercase tracking-[0.2em] mt-4"
                   data-testid="btn-booking-submit"
                 >
                   ĐẶT LỊCH NGAY &rarr;

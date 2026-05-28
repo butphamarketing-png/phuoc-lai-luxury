@@ -26,7 +26,7 @@ export default function FloatingContact() {
         icon: <Phone size={20} />,
         label: "Gọi hotline",
         href: `tel:${settings.phone.replace(/\s/g, "")}`,
-        color: "bg-[#1A1A1A]",
+        color: "bg-primary",
       },
     ],
     [settings.zalo, settings.phone],
@@ -51,7 +51,7 @@ export default function FloatingContact() {
                 transition={{ delay: idx * 0.1 }}
                 className="flex items-center gap-3 group"
               >
-                <span className="bg-white/90 backdrop-blur-md px-4 py-2 rounded-full text-[10px] uppercase tracking-widest font-bold shadow-xl border border-black/5 opacity-0 group-hover:opacity-100 transition-opacity">
+                <span className="bg-card/90 backdrop-blur-md px-4 py-2 rounded-full text-[10px] uppercase tracking-widest font-bold shadow-xl border border-border/60 opacity-0 group-hover:opacity-100 transition-opacity">
                   {item.label}
                 </span>
                 <div

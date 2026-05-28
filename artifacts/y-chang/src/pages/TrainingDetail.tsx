@@ -42,8 +42,8 @@ export default function TrainingDetail() {
 
   if (isLoading) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-white pt-20">
-        <p className="text-black/40 text-sm uppercase tracking-widest">
+      <div className="flex min-h-screen items-center justify-center bg-background pt-20">
+        <p className="text-foreground/40 text-sm uppercase tracking-widest">
           Đang tải...
         </p>
       </div>
@@ -52,13 +52,13 @@ export default function TrainingDetail() {
 
   if (!data) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-white pt-20">
+      <div className="flex min-h-screen items-center justify-center bg-background pt-20">
         <div className="text-center">
           <h1 className="font-serif text-3xl mb-4">Không tìm thấy khóa học</h1>
-          <p className="text-black/50 mb-8">
+          <p className="text-foreground/50 mb-8">
             Chương trình đào tạo này không tồn tại hoặc đã được cập nhật mới.
           </p>
-          <Button asChild className="rounded-full bg-black text-white px-8">
+          <Button asChild className="rounded-full bg-primary text-primary-foreground px-8 hover:bg-primary/90">
             <Link href="/dao-tao">Quay lại danh sách</Link>
           </Button>
         </div>
@@ -67,7 +67,7 @@ export default function TrainingDetail() {
   }
 
   return (
-    <div className="bg-white text-[#1A1A1A]">
+    <div className="bg-background text-foreground">
       <JsonLd
         id="training-detail"
         data={buildCourseJsonLd(
@@ -86,14 +86,14 @@ export default function TrainingDetail() {
         >
           <Link
             href="/dao-tao"
-            className="mb-8 inline-flex items-center gap-3 text-[10px] uppercase tracking-[0.3em] text-black/40 hover:text-black transition-all group"
+            className="mb-8 inline-flex items-center gap-3 text-[10px] uppercase tracking-[0.3em] text-foreground/40 hover:text-foreground transition-all group"
           >
-            <span className="flex h-8 w-8 items-center justify-center rounded-full border border-black/10 group-hover:bg-black group-hover:text-white transition-all">
+            <span className="flex h-8 w-8 items-center justify-center rounded-full border border-border/60 group-hover:bg-primary group-hover:text-primary-foreground transition-all">
               <ChevronLeft size={14} />
             </span>
             Quay lại đào tạo
           </Link>
-          <span className="mb-4 block text-[11px] font-bold uppercase tracking-[0.5em] text-black/30">
+          <span className="mb-4 block text-[11px] font-bold uppercase tracking-[0.5em] text-foreground/30">
             {data.level}
           </span>
           <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl leading-[1.1]">
@@ -105,16 +105,16 @@ export default function TrainingDetail() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.2 }}
-          className="mb-12 flex flex-wrap items-center gap-8 text-[10px] uppercase tracking-[0.2em] text-black/40 border-b border-black/5 pb-10"
+          className="mb-12 flex flex-wrap items-center gap-8 text-[10px] uppercase tracking-[0.2em] text-foreground/40 border-b border-border/60 pb-10"
         >
           <span className="flex items-center gap-3">
-            <Calendar size={14} className="text-black/20" /> {data.date}
+            <Calendar size={14} className="text-foreground/20" /> {data.date}
           </span>
           <span className="flex items-center gap-3">
-            <User size={14} className="text-black/20" /> {data.instructor}
+            <User size={14} className="text-foreground/20" /> {data.instructor}
           </span>
           <span className="flex items-center gap-3">
-            <Clock size={14} className="text-black/20" /> {data.duration}
+            <Clock size={14} className="text-foreground/20" /> {data.duration}
           </span>
         </motion.div>
 

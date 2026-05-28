@@ -10,7 +10,7 @@ const socials = [
 
 export default function SocialSection() {
   return (
-    <section className="py-20 md:py-24 bg-[#FFFFFF]" data-testid="section-social">
+    <section className="py-20 md:py-24 bg-background" data-testid="section-social">
       <div className="container mx-auto px-6 max-w-7xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -19,13 +19,13 @@ export default function SocialSection() {
           className="text-center mb-12 md:mb-16"
         >
           <span
-            className="text-[10px] uppercase tracking-[0.4em] font-medium text-black/50 mb-4 block"
+            className="text-[10px] uppercase tracking-[0.4em] font-medium text-foreground/50 mb-4 block"
             data-testid="text-social-eyebrow"
           >
             THEO DÕI &amp; LIÊN HỆ
           </span>
           <h2
-            className="text-3xl md:text-4xl font-serif text-[#1A1A1A]"
+            className="text-3xl md:text-4xl font-serif text-foreground"
             data-testid="text-social-title"
           >
             Kết nối với chúng tôi
@@ -48,18 +48,18 @@ export default function SocialSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: idx * 0.08 }}
-              className="group flex flex-col items-center rounded-2xl border border-black/5 bg-white p-8 text-center shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md"
+              className="group flex flex-col items-center rounded-2xl border border-border/60 bg-card p-8 text-center shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md"
               data-testid={`card-social-${idx}`}
             >
               <social.icon
                 size={28}
-                className="mb-6 text-[#1A1A1A]/60 group-hover:text-black transition-colors"
+                className="mb-6 text-foreground/60 group-hover:text-foreground transition-colors"
               />
-              <h4 className="text-xs font-bold uppercase tracking-widest mb-2 text-[#1A1A1A]">
+              <h4 className="text-xs font-bold uppercase tracking-widest mb-2 text-foreground">
                 {social.name}
               </h4>
-              <p className="text-sm text-[#1A1A1A]/60 font-light mb-6">{social.handle}</p>
-              <span className="text-[10px] uppercase tracking-[0.2em] text-[#1A1A1A] font-medium pb-1 border-b border-black/20 group-hover:border-black transition-colors">
+              <p className="text-sm text-foreground/60 font-light mb-6">{social.handle}</p>
+              <span className="text-[10px] uppercase tracking-[0.2em] text-foreground font-medium pb-1 border-b border-border/80 group-hover:border-foreground/40 transition-colors">
                 {social.cta} &rarr;
               </span>
             </motion.a>

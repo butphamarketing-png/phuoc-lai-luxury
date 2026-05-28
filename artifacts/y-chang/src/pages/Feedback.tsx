@@ -49,7 +49,7 @@ export default function Feedback() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, delay: 0.1 }}
-          className="font-serif text-5xl md:text-7xl font-medium tracking-tight leading-tight max-w-3xl text-[#1A1A1A]"
+          className="font-serif text-5xl md:text-7xl font-medium tracking-tight leading-tight max-w-3xl text-foreground"
         >
           {heading}
         </motion.h1>
@@ -63,7 +63,7 @@ export default function Feedback() {
           <span className="w-px h-4 bg-foreground/20" />
           <div className="flex items-center gap-1.5">
             {[...Array(5)].map((_, i) => (
-              <Star key={i} size={12} className="fill-[#1A1A1A] text-[#1A1A1A]" />
+              <Star key={i} size={12} className="fill-foreground text-foreground" />
             ))}
             <span className="text-foreground/50 text-xs ml-1">{reviewCount}</span>
           </div>
@@ -75,7 +75,7 @@ export default function Feedback() {
           transition={{ duration: 0.8, delay: 0.35 }}
           className="mt-12 max-w-4xl"
         >
-          <div className="rounded-3xl overflow-hidden border border-black/[0.06] shadow-sm bg-black">
+          <div className="rounded-3xl overflow-hidden border border-border/60 shadow-sm bg-primary">
             <div
               className="aspect-video w-full"
               style={{ position: "relative", paddingBottom: "56.25%", height: 0 }}
@@ -97,7 +97,7 @@ export default function Feedback() {
               />
             </div>
           </div>
-          <p className="mt-4 text-[10px] uppercase tracking-[0.25em] text-black/40 font-bold">
+          <p className="mt-4 text-[10px] uppercase tracking-[0.25em] text-foreground/40 font-bold">
             {language === "vn" ? "Video cảm nhận khách hàng" : "Client testimonial video"}
           </p>
         </motion.div>
@@ -105,9 +105,9 @@ export default function Feedback() {
 
       <section className="px-8 md:px-20 pb-28">
         {isLoading ? (
-          <p className="text-center text-black/40 py-20">Đang tải đánh giá...</p>
+          <p className="text-center text-foreground/40 py-20">Đang tải đánh giá...</p>
         ) : testimonials.length === 0 ? (
-          <p className="text-center text-black/40 py-20 max-w-md mx-auto">
+          <p className="text-center text-foreground/40 py-20 max-w-md mx-auto">
             Chưa có đánh giá công khai. Vui lòng quay lại sau.
           </p>
         ) : (
@@ -121,14 +121,14 @@ export default function Feedback() {
                 viewport={{ once: true, margin: "-50px" }}
                 variants={fadeUp}
                 data-testid={`testimonial-card-${i}`}
-                className="flex flex-col h-full bg-card rounded-2xl border border-black/5 p-6 shadow-sm group hover:shadow-md transition-all duration-500"
+                className="flex flex-col h-full bg-card rounded-2xl border border-border/60 p-6 shadow-sm group hover:shadow-md transition-all duration-500"
               >
                 <div className="flex gap-0.5 mb-4">
                   {[...Array(item.rating)].map((_, s) => (
                     <Star
                       key={s}
                       size={10}
-                      className="fill-[#1A1A1A]/80 text-[#1A1A1A]/80"
+                      className="fill-foreground/80 text-foreground/80"
                     />
                   ))}
                 </div>
@@ -159,14 +159,14 @@ export default function Feedback() {
         )}
       </section>
 
-      <section className="border-t border-black/10 bg-[#FFFFFF] px-8 md:px-20 py-16">
+      <section className="border-t border-border/60 bg-background px-8 md:px-20 py-16">
         <div className="max-w-2xl mx-auto text-center">
           <motion.p
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="font-serif text-2xl md:text-3xl font-medium tracking-tight mb-6 text-[#1A1A1A]"
+            className="font-serif text-2xl md:text-3xl font-medium tracking-tight mb-6 text-foreground"
           >
             {language === "vn"
               ? "Sẵn sàng tạo nên câu chuyện của riêng bạn?"
@@ -179,7 +179,7 @@ export default function Feedback() {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
             data-testid="link-hotline-cta"
-            className="inline-block border border-black/20 text-[#1A1A1A] rounded-full text-xs tracking-[0.2em] uppercase px-10 py-4 hover:bg-[#1A1A1A] hover:text-white transition-all duration-500"
+            className="inline-block border border-border/80 text-foreground rounded-full text-xs tracking-[0.2em] uppercase px-10 py-4 hover:bg-primary hover:text-primary-foreground transition-all duration-500"
           >
             {language === "vn" ? "Đặt Lịch Ngay" : "Book Now"}
           </motion.a>

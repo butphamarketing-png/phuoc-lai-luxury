@@ -5,7 +5,7 @@ import ServiceCategoryHero from "@/components/services/ServiceCategoryHero";
 
 export default function ServicesCategoryHub() {
   return (
-    <div className="bg-white text-[#1A1A1A]">
+    <div className="bg-background text-foreground">
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -18,7 +18,7 @@ export default function ServicesCategoryHub() {
         <motion.span
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-[9px] md:text-[10px] uppercase tracking-[0.4em] text-black/40 mb-2 md:mb-3 font-bold"
+          className="text-[9px] md:text-[10px] uppercase tracking-[0.4em] text-foreground/40 mb-2 md:mb-3 font-bold"
         >
           PERMANENT MAKEUP AND SPA
         </motion.span>
@@ -26,7 +26,7 @@ export default function ServicesCategoryHub() {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.08 }}
-          className="font-serif text-2xl md:text-4xl leading-tight text-[#1A1A1A] mb-8 md:mb-10"
+          className="font-serif text-2xl md:text-4xl leading-tight text-foreground mb-8 md:mb-10"
         >
           Dịch vụ bạn <span className="italic">quan tâm</span>
         </motion.h1>
@@ -39,7 +39,7 @@ export default function ServicesCategoryHub() {
         >
           <Button
             asChild
-            className="flex-1 rounded-full bg-[#1A1A1A] text-white hover:bg-black py-6 md:py-8 text-[10px] md:text-[11px] uppercase tracking-[0.2em] luxury-shadow group"
+            className="flex-1 rounded-full bg-primary text-primary-foreground hover:bg-primary/90 py-6 md:py-8 text-[10px] md:text-[11px] uppercase tracking-[0.2em] luxury-shadow group"
           >
             <Link href="/dich-vu/phun-xam">
               PERMANENT MAKEUP{" "}
@@ -50,7 +50,7 @@ export default function ServicesCategoryHub() {
           </Button>
           <Button
             asChild
-            className="flex-1 rounded-full bg-[#1A1A1A] text-white hover:bg-black py-6 md:py-8 text-[10px] md:text-[11px] uppercase tracking-[0.2em] luxury-shadow group"
+            className="flex-1 rounded-full bg-primary text-primary-foreground hover:bg-primary/90 py-6 md:py-8 text-[10px] md:text-[11px] uppercase tracking-[0.2em] luxury-shadow group"
           >
             <Link href="/dich-vu/spa">
               SPA{" "}
