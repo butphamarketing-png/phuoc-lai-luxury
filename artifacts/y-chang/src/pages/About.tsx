@@ -78,7 +78,7 @@ export default function About() {
       <section className="relative min-h-[70vh] flex flex-col justify-end pb-16 px-8 md:px-20 overflow-hidden bg-[#E7DED6] pt-32">
         <div className="absolute inset-0 bg-gradient-to-b from-black/25 via-black/10 to-[#E7DED6]" />
         <div
-          className="absolute inset-0 bg-cover bg-center opacity-40 mix-blend-overlay grayscale"
+          className="absolute inset-0 bg-cover bg-center opacity-40 mix-blend-overlay"
           style={{ backgroundImage: "url('/studio-interior.png')" }}
         />
         <div className="relative z-10 max-w-4xl">

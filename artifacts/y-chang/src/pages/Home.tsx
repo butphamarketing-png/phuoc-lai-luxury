@@ -292,7 +292,7 @@ export default function Home() {
                     <img
                       src={cat.img}
                       alt={cat.title}
-                      className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105 grayscale group-hover:grayscale-0"
+                      className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent group-hover:from-black/70 transition-all duration-500" />
                     <div className="absolute inset-0 flex flex-col items-center justify-end pb-12">
@@ -376,7 +376,7 @@ export default function Home() {
                 className="group flex flex-col bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-700 border border-black/[0.03]"
               >
                 <div className="aspect-[4/3] overflow-hidden relative">
-                  <img src={course.img} alt={course.title} className="h-full w-full object-cover grayscale transition duration-1000 group-hover:scale-110 group-hover:grayscale-0" />
+                  <img src={course.img} alt={course.title} className="h-full w-full object-cover transition duration-1000 group-hover:scale-110" />
                 </div>
                 <div className="p-10 flex flex-col flex-grow">
                   <span className="mb-4 block text-[9px] uppercase tracking-[0.3em] text-gold font-black">{course.level}</span>

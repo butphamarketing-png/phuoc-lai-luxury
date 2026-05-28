@@ -74,7 +74,7 @@ export default function DetailBody({
                 <img
                   src={section.image}
                   alt={section.heading}
-                  className="w-full grayscale hover:grayscale-0 transition-all duration-1000"
+                  className="w-full transition-all duration-1000"
                 />
               </div>
             )}

@@ -71,7 +71,7 @@ export default function Training() {
                   <img
                     src={course.image}
                     alt={course.title}
-                    className="w-full h-full object-cover grayscale transition-all duration-700 group-hover:scale-105 group-hover:grayscale-0"
+                    className="w-full h-full object-cover transition-all duration-700 group-hover:scale-105"
                   />
                   <div className="absolute inset-x-0 bottom-0 translate-y-full bg-black/80 p-5 backdrop-blur-md transition-transform duration-500 group-hover:translate-y-0 z-20">
                     <p className="mb-3 text-[10px] uppercase tracking-[0.24em] text-white/45 font-bold">Nội dung khóa</p>

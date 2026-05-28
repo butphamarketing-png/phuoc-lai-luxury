@@ -21,7 +21,7 @@ export default function BookingSection() {
           <img
             src="/studio.png"
             alt="Phuoc Lai studio"
-            className="absolute inset-0 w-full h-full object-cover grayscale opacity-70"
+            className="absolute inset-0 w-full h-full object-cover opacity-70"
           />
           <motion.div
             initial={{ opacity: 0, y: 20 }}

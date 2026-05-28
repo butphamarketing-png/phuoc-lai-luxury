@@ -179,7 +179,7 @@ export default function Footer() {
                   whileHover={{ scale: 1.05 }}
                   className="aspect-square overflow-hidden rounded-sm bg-white/5"
                 >
-                  <img src={src} alt="" className="w-full h-full object-cover grayscale opacity-80 hover:opacity-100 transition-opacity" />
+                  <img src={src} alt="" className="w-full h-full object-cover opacity-80 hover:opacity-100 transition-opacity" />
                 </motion.div>
               ))}
             </motion.div>

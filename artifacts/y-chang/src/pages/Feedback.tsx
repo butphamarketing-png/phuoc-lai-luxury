@@ -140,7 +140,7 @@ export default function Feedback() {
                     <img
                       src={item.imageUrl}
                       alt={item.authorName}
-                      className="w-full h-full object-cover object-top grayscale opacity-80"
+                      className="w-full h-full object-cover object-top opacity-80"
                     />
                   </div>
                   <div>
