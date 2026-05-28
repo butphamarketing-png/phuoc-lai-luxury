@@ -8,7 +8,7 @@ import SocialSection from "@/components/sections/SocialSection";
 import { usePublicTraining } from "@/hooks/use-site-content";
 
 const btnPrimary =
-  "rounded-full bg-[#1A1A1A] text-white hover:bg-black px-10 py-6 text-[11px] uppercase tracking-[0.25em] border-none";
+  "rounded-full bg-[#2B1A13] text-white hover:bg-[#3A241A] px-10 py-6 text-[11px] uppercase tracking-[0.25em] border-none";
 const btnOutline =
   "rounded-full border-white/20 text-white hover:bg-white hover:text-black px-10 py-6 text-[11px] uppercase tracking-[0.25em]";
 
@@ -101,7 +101,7 @@ export default function Home() {
     >
       {/* Hero — Masters Section */}
       <section
-        className="relative w-full overflow-hidden bg-black md:bg-[#1A1A1A] pt-24 md:pt-0"
+        className="relative w-full overflow-hidden bg-[#2B1A13] pt-24 md:pt-0"
         data-testid="section-hero"
         onMouseMove={(e) => {
           const { clientX, clientY } = e;
@@ -244,7 +244,7 @@ export default function Home() {
       </section>
 
       {/* Dịch vụ + giá trị (nền đen liên tục) */}
-      <section id="services-section" className="bg-[#1A1A1A] text-white overflow-hidden" data-testid="section-services">
+      <section id="services-section" className="bg-[#2B1A13] text-white overflow-hidden" data-testid="section-services">
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
@@ -406,7 +406,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="bg-[#1A1A1A] py-24 md:py-32 text-white" data-testid="section-home-feedback">
+      <section className="bg-[#2B1A13] py-24 md:py-32 text-white" data-testid="section-home-feedback">
         <div className="container mx-auto max-w-7xl px-6">
           <div className="mb-20 flex flex-col md:flex-row items-end justify-between gap-10">
             <motion.div
