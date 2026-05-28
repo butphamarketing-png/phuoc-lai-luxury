@@ -6,14 +6,7 @@ import { DEFAULT_SITE_SETTINGS } from "@/lib/site-settings";
 import { motion } from "framer-motion";
 import logoImg from "@/assets/logo.png";
 
-const galleryImages = [
-  "/service-brows.png",
-  "/service-ombre.png",
-  "/training-1.png",
-  "/studio-interior.png",
-  "/hero-portrait.png",
-  "/training-2.png",
-];
+const CONTACT_EMAIL = "Phuocduocvt13@gmail.com";
 
 export default function Footer() {
   const { t } = useLanguage();
@@ -159,30 +152,13 @@ export default function Footer() {
               <li className="flex items-center gap-3">
                 <Mail size={16} className="shrink-0 text-white/50" />
                 <a
-                  href={`mailto:${settings.email}`}
+                  href={`mailto:${CONTACT_EMAIL}`}
                   className="hover:text-white transition-colors"
                 >
-                  {settings.email}
+                  {CONTACT_EMAIL}
                 </a>
               </li>
             </ul>
-            <motion.div
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              className="grid grid-cols-3 gap-1.5 max-w-[180px]"
-              data-testid="footer-gallery"
-            >
-              {galleryImages.map((src, i) => (
-                <motion.div
-                  key={i}
-                  whileHover={{ scale: 1.05 }}
-                  className="aspect-square overflow-hidden rounded-sm bg-white/5"
-                >
-                  <img src={src} alt="" className="w-full h-full object-cover opacity-80 hover:opacity-100 transition-opacity" />
-                </motion.div>
-              ))}
-            </motion.div>
           </motion.div>
         </motion.div>
 
