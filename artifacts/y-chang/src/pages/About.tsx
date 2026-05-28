@@ -3,6 +3,7 @@ import { useLanguage } from "@/hooks/use-language";
 import { useSiteSettings } from "@/hooks/use-site-settings";
 import { DEFAULT_SITE_SETTINGS } from "@/lib/site-settings";
 import { POPUP_SLIDES } from "@/lib/popup-images";
+import { testimonialEmbedUrl } from "@/lib/testimonial-video";
 import { useState, useEffect, useMemo } from "react";
 
 const fadeUp = {
@@ -19,8 +20,6 @@ export default function About() {
   const { data: settings = DEFAULT_SITE_SETTINGS } = useSiteSettings();
   const [currentSlide, setCurrentSlide] = useState(0);
   const slides = [...POPUP_SLIDES];
-  const testimonialYoutubeId = "bKPeI7HgUKc";
-
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length);
@@ -121,7 +120,7 @@ export default function About() {
               style={{ position: "relative", paddingBottom: "56.25%", height: 0 }}
             >
               <iframe
-                src={`https://www.youtube-nocookie.com/embed/${testimonialYoutubeId}?rel=0&modestbranding=1&playsinline=1&iv_load_policy=3&showinfo=0`}
+                src={testimonialEmbedUrl()}
                 title={language === "vn" ? "Cảm nhận khách hàng" : "Client testimonial"}
                 style={{
                   position: "absolute",

@@ -4,6 +4,7 @@ import { Star } from "lucide-react";
 import { usePublicReviews } from "@/hooks/use-site-reviews";
 import { useSiteSettings } from "@/hooks/use-site-settings";
 import { DEFAULT_SITE_SETTINGS } from "@/lib/site-settings";
+import { testimonialEmbedUrl } from "@/lib/testimonial-video";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -18,8 +19,6 @@ export default function Feedback() {
   const { language } = useLanguage();
   const { data: testimonials = [], isLoading } = usePublicReviews();
   const { data: settings = DEFAULT_SITE_SETTINGS } = useSiteSettings();
-  const testimonialYoutubeId = "bKPeI7HgUKc";
-
   const heading = language === "vn" ? "Lời Chứng Thực" : "Client Testimonials";
   const subheading =
     language === "vn"
@@ -81,7 +80,7 @@ export default function Feedback() {
               style={{ position: "relative", paddingBottom: "56.25%", height: 0 }}
             >
               <iframe
-                src={`https://www.youtube-nocookie.com/embed/${testimonialYoutubeId}?rel=0&modestbranding=1&playsinline=1&iv_load_policy=3&showinfo=0`}
+                src={testimonialEmbedUrl()}
                 title={language === "vn" ? "Video cảm nhận khách hàng" : "Client testimonial video"}
                 style={{
                   position: "absolute",

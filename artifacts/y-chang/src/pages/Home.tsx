@@ -7,6 +7,7 @@ import BookingSection from "@/components/sections/BookingSection";
 import SocialSection from "@/components/sections/SocialSection";
 import { usePublicTraining } from "@/hooks/use-site-content";
 import { POPUP_MASTERS, POPUP_SLIDES } from "@/lib/popup-images";
+import { testimonialEmbedUrl } from "@/lib/testimonial-video";
 
 const btnPrimary =
   "rounded-full bg-primary text-primary-foreground hover:bg-primary/90 px-10 py-6 text-[11px] uppercase tracking-[0.25em] border border-primary/10";
@@ -15,7 +16,6 @@ const btnOutline =
 
 export default function Home() {
   const [activeMasterIndex, setActiveMasterIndex] = useState(0);
-  const testimonialYoutubeId = "bKPeI7HgUKc";
   const masters = [...POPUP_MASTERS];
 
   const trainingFallbackImage = (slug: string): string => {
@@ -446,7 +446,7 @@ export default function Home() {
                 style={{ position: "relative", paddingBottom: "56.25%", height: 0 }}
               >
                 <iframe
-                  src={`https://www.youtube-nocookie.com/embed/${testimonialYoutubeId}?rel=0&modestbranding=1&playsinline=1&iv_load_policy=3&showinfo=0`}
+                  src={testimonialEmbedUrl()}
                   title="Video cảm nhận khách hàng"
                   style={{
                     position: "absolute",
