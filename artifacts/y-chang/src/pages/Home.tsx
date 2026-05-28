@@ -66,7 +66,7 @@ export default function Home() {
       img: "/amazingbrows/Permanent Makeup.jpg",
       slug: "phun-xam",
     },
-    { id: "spa", title: "Spa", img: "/spa.webp", slug: "spa" },
+    { id: "spa", title: "Spa", img: "/spa123.png", slug: "spa" },
   ];
 
   const trainingCourses = useMemo(

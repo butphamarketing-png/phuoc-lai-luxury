@@ -89,46 +89,46 @@
 
   /* Light Warm Beige Theme (brighter) */
   /* Main background: #DCCFC5 (darker beige) */
-  /* Warmer + brighter beige (brown-gold entry tone) */
-  --background: 36 36% 86%;
+  /* White background */
+  --background: 0 0% 100%;
   /* Text: deep cocoa */
   --foreground: 18 26% 12%;
 
   /* Borders / separators */
-  --border: 36 20% 78%;
+  --border: 24 10% 88%;
 
-  /* Cards on top of beige */
-  --card: 36 35% 98%;
+  /* Cards on white */
+  --card: 0 0% 100%;
   --card-foreground: 18 26% 12%;
-  --card-border: 36 20% 82%;
+  --card-border: 24 10% 90%;
 
-  --popover: 36 35% 98%;
+  --popover: 0 0% 100%;
   --popover-foreground: 18 26% 12%;
-  --popover-border: 36 20% 82%;
+  --popover-border: 24 10% 90%;
 
-  /* Primary: caramel cocoa */
-  --primary: 22 32% 14%;
+  /* Primary: wood brown */
+  --primary: 22 34% 18%;
   --primary-foreground: 0 0% 100%;
-  --primary-border: 22 26% 18%;
+  --primary-border: 22 30% 22%;
 
-  --secondary: 36 28% 92%;
+  --secondary: 24 18% 95%;
   --secondary-foreground: 18 26% 12%;
-  --secondary-border: 36 20% 82%;
+  --secondary-border: 24 10% 90%;
 
-  --muted: 36 28% 94%;
+  --muted: 24 18% 96%;
   --muted-foreground: 18 10% 35%;
-  --muted-border: 36 20% 84%;
+  --muted-border: 24 10% 92%;
 
-  /* Accent: richer champagne gold */
-  --accent: 40 45% 90%;
-  --accent-foreground: 22 32% 14%;
-  --accent-border: 40 35% 84%;
+  /* Accent: warm wood highlight */
+  --accent: 24 18% 94%;
+  --accent-foreground: 22 34% 18%;
+  --accent-border: 24 10% 90%;
 
   --destructive: 0 60% 50%;
   --destructive-foreground: 0 0% 100%;
 
-  --input: 36 14% 70%;
-  --ring: 22 32% 14%;
+  --input: 24 10% 76%;
+  --ring: 22 34% 18%;
   
   --chart-1: 0 0% 20%;
   --chart-2: 0 0% 40%;
@@ -162,35 +162,35 @@
   --elevate-2: rgba(0,0,0, .09);
 
   /* Keep dark class visually aligned with light theme (project is light-only) */
-  --background: 36 36% 86%;
+  --background: 0 0% 100%;
   --foreground: 18 26% 12%;
-  --border: 36 20% 78%;
+  --border: 24 10% 88%;
   
-  --card: 36 35% 98%;
+  --card: 0 0% 100%;
   --card-foreground: 18 26% 12%;
-  --card-border: 36 20% 82%;
+  --card-border: 24 10% 90%;
 
-  --popover: 36 35% 98%;
+  --popover: 0 0% 100%;
   --popover-foreground: 18 26% 12%;
-  --popover-border: 36 20% 82%;
+  --popover-border: 24 10% 90%;
 
-  --primary: 22 32% 14%;
+  --primary: 22 34% 18%;
   --primary-foreground: 0 0% 100%;
 
-  --secondary: 36 28% 92%;
+  --secondary: 24 18% 95%;
   --secondary-foreground: 18 26% 12%;
 
-  --muted: 36 28% 94%;
+  --muted: 24 18% 96%;
   --muted-foreground: 18 10% 35%;
 
-  --accent: 40 45% 90%;
-  --accent-foreground: 22 32% 14%;
+  --accent: 24 18% 94%;
+  --accent-foreground: 22 34% 18%;
 
   --destructive: 0 60% 50%;
   --destructive-foreground: 0 0% 100%;
 
-  --input: 36 14% 70%;
-  --ring: 22 32% 14%;
+  --input: 24 10% 76%;
+  --ring: 22 34% 18%;
   
   --chart-1: 0 0% 20%;
   --chart-2: 0 0% 40%;
@@ -225,15 +225,15 @@
 }
 
 .text-gold {
-  color: #A67A3B;
+  color: #7A4E22;
 }
 
 .bg-gold {
-  background-color: #A67A3B;
+  background-color: #7A4E22;
 }
 
 .border-gold {
-  border-color: #A67A3B;
+  border-color: #7A4E22;
 }
   .section-padding {
     @apply py-24 md:py-40;

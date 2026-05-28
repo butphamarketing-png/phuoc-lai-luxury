@@ -2,7 +2,7 @@
 -- Chạy trong Supabase → SQL Editor
 --
 -- Tác vụ:
--- - Nếu trong bodyHtml có 2 ảnh giống nhau liên tiếp (ảnh 9197), giữ 1 và xoá ảnh lặp
+-- - Nếu trong bodyHtml có ảnh 9197 bị lặp, giữ 1 và xoá phần lặp (dù thẻ img có khác chút)
 
 update public.site_services
 set
@@ -12,8 +12,8 @@ set
     to_jsonb(
       regexp_replace(
         coalesce(detail_json->>'bodyHtml', ''),
-        '(<p><img src=\"/amazingbrows/1779891799197_239505211476377159_239505211476377159_143cb24e758ed1e59f7c88d6da88bf1f\\.jpg\"[^>]*></p>)\\s*\\1',
-        '\\1',
+        '(<p>\\s*<img[^>]*src=\"/amazingbrows/1779891799197_239505211476377159_239505211476377159_143cb24e758ed1e59f7c88d6da88bf1f\\.jpg\"[^>]*>\\s*</p>)([\\s\\S]*?)<p>\\s*<img[^>]*src=\"/amazingbrows/1779891799197_239505211476377159_239505211476377159_143cb24e758ed1e59f7c88d6da88bf1f\\.jpg\"[^>]*>\\s*</p>',
+        '\\1\\2',
         'g'
       )
     )
