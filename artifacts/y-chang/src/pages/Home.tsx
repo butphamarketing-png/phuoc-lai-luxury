@@ -62,8 +62,8 @@ export default function Home() {
   const serviceCategories = [
     {
       id: "phun-xam",
-      title: "Phun Xăm Thẩm Mỹ",
-      img: "/khong-gian.jpg",
+      title: "Permanent Makeup",
+      img: "/amazingbrows/Permanent Makeup.jpg",
       slug: "phun-xam",
     },
     { id: "spa", title: "Spa", img: "/spa.webp", slug: "spa" },
@@ -141,9 +141,6 @@ export default function Home() {
                   }}
                   transition={{ duration: 0.8 }}
                 >
-                  <p className="text-gold text-[9px] sm:text-[10px] md:text-sm uppercase tracking-[0.3em] font-bold mb-1 md:mb-2">
-                    Expert Master
-                  </p>
                   <h2 className="text-white text-[10px] sm:text-[12px] md:text-2xl font-serif tracking-widest whitespace-nowrap">
                     {master.name}
                   </h2>
@@ -173,7 +170,7 @@ export default function Home() {
             <h1 className="font-serif text-white text-lg sm:text-2xl md:text-4xl uppercase tracking-[0.35em] md:tracking-[0.5em] font-light drop-shadow-2xl max-w-4xl mx-auto leading-snug">
               Phuoc Lai Luxury
               <span className="block text-[10px] sm:text-xs md:text-sm tracking-[0.4em] text-gold/90 mt-3 md:mt-4 font-sans normal-case">
-                Phun xăm thẩm mỹ &amp; đào tạo nghề Vũng Tàu
+                Permanent Makeup &amp; Spa &amp; Academy
               </span>
             </h1>
             <div className="w-24 h-px bg-gold/30 mx-auto mt-4" />
@@ -302,7 +299,7 @@ export default function Home() {
                     <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent group-hover:from-black/70 transition-all duration-500" />
                     <div className="absolute inset-0 flex flex-col items-center justify-end pb-12">
             <span className="text-gold text-[9px] uppercase tracking-[0.4em] mb-4 opacity-0 group-hover:opacity-60 transition-opacity duration-500 font-bold">Discover More</span>
-            <h3 className="font-serif text-3xl md:text-5xl text-white tracking-widest uppercase mb-4">
+            <h3 className="font-serif text-2xl sm:text-3xl md:text-4xl text-white tracking-[0.22em] uppercase mb-4 text-center px-4">
               {cat.title}
             </h3>
             <div className="w-12 h-[1px] bg-gold/40 group-hover:w-32 transition-all duration-700" />

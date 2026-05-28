@@ -28,23 +28,25 @@ export default function BookingSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="relative z-10 flex flex-col items-center justify-center lg:justify-end h-full p-8 md:p-16 gap-3"
+            className="relative z-10 h-full p-6 md:p-10"
           >
-            <div className="relative logo-shine overflow-hidden rounded-full p-2">
-              <img
-                 src={logoImg}
-                 alt="LP Logo"
-                 className="w-24 md:w-32 lg:w-40 max-w-full opacity-80 invert"
-                 data-testid="img-booking-logo"
-               />
-            </div>
-            <div className="flex flex-col items-center leading-none mb-4">
-              <span className="text-base md:text-lg lg:text-xl font-serif tracking-[0.3em] uppercase text-white/90 text-center">
-                Phuoc Lai
-              </span>
-              <span className="text-[9px] md:text-[10px] lg:text-xs font-light tracking-[0.6em] uppercase text-white/50 text-center mt-2">
-                Luxury
-              </span>
+            <div className="absolute top-5 right-5 md:top-8 md:right-8 flex items-center gap-3 rounded-full bg-background/40 backdrop-blur-md border border-border/40 px-3 py-2">
+              <div className="relative logo-shine overflow-hidden rounded-full p-1.5">
+                <img
+                  src={logoImg}
+                  alt="LP Logo"
+                  className="w-10 md:w-12 lg:w-14 max-w-full opacity-80 invert"
+                  data-testid="img-booking-logo"
+                />
+              </div>
+              <div className="hidden sm:flex flex-col leading-none pr-1">
+                <span className="text-[11px] md:text-xs font-serif tracking-[0.28em] uppercase text-primary-foreground/90">
+                  Phuoc Lai
+                </span>
+                <span className="text-[8px] md:text-[9px] font-light tracking-[0.55em] uppercase text-primary-foreground/60 mt-1">
+                  Luxury
+                </span>
+              </div>
             </div>
           </motion.div>
         </motion.div>
