@@ -21,6 +21,14 @@ export default function Home() {
     { img: "/pop-up-2.jpg", name: "Master Cam Lai" },
   ];
 
+  const trainingFallbackImage = (slug: string): string => {
+    const s = slug.toLowerCase();
+    if (s.includes("amazingbrows")) return "/training-1.png";
+    if (s.includes("moi") || s.includes("sexylips")) return "/training-2.png";
+    if (s.includes("tong-hop") || s.includes("master")) return "/training-3.png";
+    return "/training-4.png";
+  };
+
   const [currentAboutSlide, setCurrentAboutSlide] = useState(0);
   const aboutSlides = ["/pop-up-1.jpg", "/pop-up-2.jpg", "/pop-up-3.jpg"];
 
@@ -59,14 +67,14 @@ export default function Home() {
   const trainingCourses = useMemo(
     () => ({
       "phun-xam": publicTrainingPhunXam.slice(0, 4).map((c) => ({
-        img: c.image,
+        img: c.image || trainingFallbackImage(c.slug),
         level: c.level.toUpperCase(),
         slug: c.slug,
         title: c.title.toUpperCase(),
         desc: c.description,
       })),
       spa: publicTrainingSpa.slice(0, 4).map((c) => ({
-        img: c.image,
+        img: c.image || trainingFallbackImage(c.slug),
         level: c.level.toUpperCase(),
         slug: c.slug,
         title: c.title.toUpperCase(),
