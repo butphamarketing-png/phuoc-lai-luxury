@@ -1,7 +1,9 @@
+const POPUP_VERSION = "20260528";
+
 const HUB_IMAGES = [
-  { src: "/pop-up-3.jpg", alt: "Promotion Left" },
-  { src: "/pop-up-1.jpg", alt: "Promotion Center" },
-  { src: "/pop-up-2.jpg", alt: "Promotion Right" },
+  { src: `/pop-up-2.jpg?v=${POPUP_VERSION}`, alt: "Promotion Left" },
+  { src: `/pop-up-1.jpg?v=${POPUP_VERSION}`, alt: "Promotion Center" },
+  { src: `/pop-up-2.jpg?v=${POPUP_VERSION}`, alt: "Promotion Right" },
 ] as const;
 
 export default function ServiceCategoryHero() {

@@ -89,14 +89,42 @@ export default function AdminServices() {
 
   const filtered = useMemo(() => {
     const q = search.trim().toLowerCase();
-    if (!q) return services;
-    return services.filter(
-      (s) =>
-        s.title.toLowerCase().includes(q) ||
-        s.slug.toLowerCase().includes(q) ||
-        s.categoryLabel.toLowerCase().includes(q),
-    );
+    const list = q
+      ? services.filter(
+          (s) =>
+            s.title.toLowerCase().includes(q) ||
+            s.slug.toLowerCase().includes(q) ||
+            s.categoryLabel.toLowerCase().includes(q),
+        )
+      : services;
+    return [...list].sort((a, b) => a.sortOrder - b.sortOrder);
   }, [services, search]);
+
+  const handleSortOrderChange = async (service: SiteService, raw: string) => {
+    const parsed = Number.parseInt(raw, 10);
+    if (!Number.isFinite(parsed) || parsed < 1) {
+      toast({
+        variant: "destructive",
+        title: "STT không hợp lệ",
+        description: "Vui lòng nhập số nguyên dương (1, 2, 3...).",
+      });
+      return;
+    }
+
+    try {
+      await saveService.mutateAsync({ ...service, sortOrder: parsed });
+      toast({
+        title: "Đã cập nhật STT",
+        description: `${service.title} — thứ tự ${parsed}`,
+      });
+    } catch {
+      toast({
+        variant: "destructive",
+        title: "Không lưu được STT",
+        description: "Thử lại sau vài giây.",
+      });
+    }
+  };
 
   const stats = useMemo(
     () => ({
@@ -256,6 +284,9 @@ export default function AdminServices() {
             <Table>
               <TableHeader className="bg-[#FAFAFA]">
                 <TableRow className="border-black/[0.03]">
+                  <TableHead className="w-[88px] text-[10px] uppercase tracking-widest font-bold text-black/40">
+                    STT
+                  </TableHead>
                   <TableHead className="text-[10px] uppercase tracking-widest font-bold text-black/40">
                     Dịch vụ
                   </TableHead>
@@ -276,6 +307,21 @@ export default function AdminServices() {
               <TableBody>
                 {filtered.map((service) => (
                   <TableRow key={service.id} className="border-black/[0.03]">
+                    <TableCell>
+                      <Input
+                        key={`${service.id}-${service.sortOrder}`}
+                        type="number"
+                        min={1}
+                        step={1}
+                        defaultValue={service.sortOrder}
+                        onBlur={(e) => {
+                          if (e.target.value === String(service.sortOrder)) return;
+                          void handleSortOrderChange(service, e.target.value);
+                        }}
+                        className="h-9 w-20 rounded-lg border-black/10 text-center text-sm font-bold"
+                        title="Số thứ tự hiển thị trên website"
+                      />
+                    </TableCell>
                     <TableCell>
                       <div className="flex items-center gap-4">
                         <img
@@ -447,6 +493,24 @@ export default function AdminServices() {
                     />
                     <p className="text-[11px] text-black/40">
                       Tự động từ tên dịch vụ — bạn có thể chỉnh sửa trực tiếp.
+                    </p>
+                  </div>
+                  <div className="space-y-2 max-w-[200px]">
+                    <Label>STT hiển thị</Label>
+                    <Input
+                      type="number"
+                      min={1}
+                      step={1}
+                      value={editing.sortOrder}
+                      onChange={(e) =>
+                        setEditing({
+                          ...editing,
+                          sortOrder: Number.parseInt(e.target.value, 10) || 1,
+                        })
+                      }
+                    />
+                    <p className="text-[11px] text-black/40">
+                      Số nhỏ hiển thị trước trên website (1, 2, 3...).
                     </p>
                   </div>
                   <div className="grid grid-cols-2 gap-4">

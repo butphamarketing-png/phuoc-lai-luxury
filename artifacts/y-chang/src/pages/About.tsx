@@ -13,11 +13,17 @@ const fadeUp = {
   })
 };
 
+const POPUP_VERSION = "20260528";
+
 export default function About() {
   const { language } = useLanguage();
   const { data: settings = DEFAULT_SITE_SETTINGS } = useSiteSettings();
   const [currentSlide, setCurrentSlide] = useState(0);
-  const slides = ["/pop-up-1.jpg", "/pop-up-2.jpg", "/pop-up-3.jpg"];
+  const slides = [
+    `/pop-up-1.jpg?v=${POPUP_VERSION}`,
+    `/pop-up-2.jpg?v=${POPUP_VERSION}`,
+    `/pop-up-1.jpg?v=${POPUP_VERSION}`,
+  ];
   const testimonialYoutubeId = "bKPeI7HgUKc";
 
   useEffect(() => {
@@ -120,7 +126,7 @@ export default function About() {
               style={{ position: "relative", paddingBottom: "56.25%", height: 0 }}
             >
               <iframe
-                src={`https://www.youtube.com/embed/${testimonialYoutubeId}?rel=0&modestbranding=1`}
+                src={`https://www.youtube-nocookie.com/embed/${testimonialYoutubeId}?rel=0&modestbranding=1&playsinline=1&iv_load_policy=3&showinfo=0`}
                 title={language === "vn" ? "Cảm nhận khách hàng" : "Client testimonial"}
                 style={{
                   position: "absolute",

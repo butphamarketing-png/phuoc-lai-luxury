@@ -81,7 +81,7 @@ export default function Feedback() {
               style={{ position: "relative", paddingBottom: "56.25%", height: 0 }}
             >
               <iframe
-                src={`https://www.youtube.com/embed/${testimonialYoutubeId}?rel=0&modestbranding=1`}
+                src={`https://www.youtube-nocookie.com/embed/${testimonialYoutubeId}?rel=0&modestbranding=1&playsinline=1&iv_load_policy=3&showinfo=0`}
                 title={language === "vn" ? "Video cảm nhận khách hàng" : "Client testimonial video"}
                 style={{
                   position: "absolute",

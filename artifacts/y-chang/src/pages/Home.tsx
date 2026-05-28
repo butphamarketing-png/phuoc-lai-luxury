@@ -12,13 +12,15 @@ const btnPrimary =
 const btnOutline =
   "rounded-full border-white/20 text-white hover:bg-white hover:text-black px-10 py-6 text-[11px] uppercase tracking-[0.25em]";
 
+const POPUP_VERSION = "20260528";
+
 export default function Home() {
   const [activeMasterIndex, setActiveMasterIndex] = useState(0);
   const testimonialYoutubeId = "bKPeI7HgUKc";
   const masters = [
-    { img: "/pop-up-3.jpg", name: "Master Nhung Lai" },
-    { img: "/pop-up-1.jpg", name: "Master Phuoc Lai" },
-    { img: "/pop-up-2.jpg", name: "Master Cam Lai" },
+    { img: `/pop-up-2.jpg?v=${POPUP_VERSION}`, name: "Master Nhung Lai" },
+    { img: `/pop-up-1.jpg?v=${POPUP_VERSION}`, name: "Master Phuoc Lai" },
+    { img: `/pop-up-2.jpg?v=${POPUP_VERSION}`, name: "Master Cam Lai" },
   ];
 
   const trainingFallbackImage = (slug: string): string => {
@@ -30,7 +32,11 @@ export default function Home() {
   };
 
   const [currentAboutSlide, setCurrentAboutSlide] = useState(0);
-  const aboutSlides = ["/pop-up-1.jpg", "/pop-up-2.jpg", "/pop-up-3.jpg"];
+  const aboutSlides = [
+    `/pop-up-1.jpg?v=${POPUP_VERSION}`,
+    `/pop-up-2.jpg?v=${POPUP_VERSION}`,
+    `/pop-up-1.jpg?v=${POPUP_VERSION}`,
+  ];
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -449,7 +455,7 @@ export default function Home() {
                 style={{ position: "relative", paddingBottom: "56.25%", height: 0 }}
               >
                 <iframe
-                  src={`https://www.youtube.com/embed/${testimonialYoutubeId}?rel=0&modestbranding=1`}
+                  src={`https://www.youtube-nocookie.com/embed/${testimonialYoutubeId}?rel=0&modestbranding=1&playsinline=1&iv_load_policy=3&showinfo=0`}
                   title="Video cảm nhận khách hàng"
                   style={{
                     position: "absolute",
