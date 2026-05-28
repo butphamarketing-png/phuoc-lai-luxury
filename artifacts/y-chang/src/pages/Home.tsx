@@ -182,7 +182,7 @@ export default function Home() {
       </section>
 
       {/* Giới thiệu */}
-      <section className="py-24 md:py-32 px-6 container mx-auto bg-background" data-testid="section-about">
+      <section className="py-24 md:py-32 px-6 container mx-auto bg-card" data-testid="section-about">
         <div className="flex flex-col md:flex-row gap-10 lg:gap-32 items-center max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, x: -50 }}
@@ -321,7 +321,7 @@ export default function Home() {
         </motion.div>
       </section>
 
-      <section id="training-section" className="bg-background section-padding py-24 md:py-32" data-testid="section-home-training">
+      <section id="training-section" className="bg-card section-padding py-24 md:py-32" data-testid="section-home-training">
         <div className="container mx-auto max-w-7xl px-6">
           <div className="mb-24 flex flex-col gap-10 md:flex-row md:items-end md:justify-between">
             <motion.div 
@@ -466,7 +466,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="bg-background py-24 md:py-32" data-testid="section-home-why">
+      <section className="bg-card py-24 md:py-32" data-testid="section-home-why">
         <div className="container mx-auto max-w-7xl px-6">
           <motion.div 
             initial={{ opacity: 0, y: 30 }}

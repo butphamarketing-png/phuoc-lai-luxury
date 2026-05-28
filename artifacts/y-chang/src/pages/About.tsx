@@ -82,7 +82,7 @@ export default function About() {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="block uppercase tracking-[0.4em] text-[10px] text-black/50 mb-4"
+            className="block uppercase tracking-[0.4em] text-[10px] text-foreground/50 mb-4"
           >
             {c.eyebrow}
           </motion.span>
@@ -98,7 +98,7 @@ export default function About() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.25 }}
-            className="mt-4 text-black/60 font-light text-sm md:text-base tracking-wide max-w-xl"
+            className="mt-4 text-foreground/60 font-light text-sm md:text-base tracking-wide max-w-xl"
           >
             {c.subtitle}
           </motion.p>
@@ -106,14 +106,14 @@ export default function About() {
       </section>
 
       {/* Testimonial video */}
-      <section className="px-8 md:px-20 py-16 md:py-20 bg-white">
+      <section className="px-8 md:px-20 py-16 md:py-20 bg-card">
         <div className="max-w-5xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-80px" }}
             transition={{ duration: 0.8 }}
-            className="rounded-3xl overflow-hidden border border-black/[0.06] shadow-sm bg-black"
+            className="rounded-3xl overflow-hidden border border-border/60 shadow-sm bg-primary"
           >
             <div
               className="aspect-video w-full"
@@ -136,7 +136,7 @@ export default function About() {
               />
             </div>
           </motion.div>
-          <p className="mt-4 text-[10px] uppercase tracking-[0.25em] text-black/40 font-bold text-center">
+          <p className="mt-4 text-[10px] uppercase tracking-[0.25em] text-foreground/40 font-bold text-center">
             {language === "vn" ? "Cảm nhận khách hàng" : "Client testimonial"}
           </p>
         </div>
@@ -203,7 +203,7 @@ export default function About() {
       <div className="border-t border-border mx-8 md:mx-20" />
 
       {/* Values */}
-      <section className="px-8 md:px-20 py-24">
+      <section className="px-8 md:px-20 py-24 bg-card">
         <motion.h2
           initial="hidden"
           whileInView="visible"
@@ -244,25 +244,25 @@ export default function About() {
             custom={0}
           >
             <h2 className="font-serif text-3xl md:text-4xl font-medium mb-6 tracking-tight">{c.studioTitle}</h2>
-            <p className="text-black/60 font-light leading-relaxed text-sm mb-10">{c.studioDesc}</p>
+            <p className="text-foreground/60 font-light leading-relaxed text-sm mb-10">{c.studioDesc}</p>
             <dl className="space-y-4 text-sm">
               <div className="flex gap-4">
-                <dt className="text-black/40 uppercase tracking-[0.2em] text-xs w-20 flex-shrink-0 pt-0.5">
+                <dt className="text-foreground/40 uppercase tracking-[0.2em] text-xs w-20 flex-shrink-0 pt-0.5">
                   {language === "vn" ? "Địa chỉ" : "Address"}
                 </dt>
-                <dd className="text-black/80 font-light">{c.address}</dd>
+                <dd className="text-foreground/80 font-light">{c.address}</dd>
               </div>
               <div className="flex gap-4">
-                <dt className="text-black/40 uppercase tracking-[0.2em] text-xs w-20 flex-shrink-0 pt-0.5">
+                <dt className="text-foreground/40 uppercase tracking-[0.2em] text-xs w-20 flex-shrink-0 pt-0.5">
                   {language === "vn" ? "Giờ mở" : "Hours"}
                 </dt>
-                <dd className="text-black/80 font-light">{c.hours}</dd>
+                <dd className="text-foreground/80 font-light">{c.hours}</dd>
               </div>
               <div className="flex gap-4">
-                <dt className="text-black/40 uppercase tracking-[0.2em] text-xs w-20 flex-shrink-0 pt-0.5">
+                <dt className="text-foreground/40 uppercase tracking-[0.2em] text-xs w-20 flex-shrink-0 pt-0.5">
                   Hotline
                 </dt>
-                <dd className="text-black/80 font-light">{c.hotline}</dd>
+                <dd className="text-foreground/80 font-light">{c.hotline}</dd>
               </div>
             </dl>
           </motion.div>
@@ -271,7 +271,7 @@ export default function About() {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 1 }}
-            className="aspect-video bg-black/10 overflow-hidden rounded-2xl border border-black/10"
+            className="aspect-video bg-foreground/10 overflow-hidden rounded-2xl border border-border/60"
           >
             <img
               src="/khong-gian.jpg"

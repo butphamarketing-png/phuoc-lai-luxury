@@ -103,7 +103,7 @@ export default function Feedback() {
         </motion.div>
       </section>
 
-      <section className="px-8 md:px-20 pb-28">
+      <section className="px-8 md:px-20 pb-28 bg-card border-t border-border/60">
         {isLoading ? (
           <p className="text-center text-foreground/40 py-20">Đang tải đánh giá...</p>
         ) : testimonials.length === 0 ? (
