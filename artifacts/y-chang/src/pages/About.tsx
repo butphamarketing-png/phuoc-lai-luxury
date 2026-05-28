@@ -75,8 +75,8 @@ export default function About() {
   return (
     <div className="bg-background text-foreground min-h-screen">
       {/* Hero Banner */}
-      <section className="relative min-h-[70vh] flex flex-col justify-end pb-16 px-8 md:px-20 overflow-hidden bg-[#E7DED6] pt-32">
-        <div className="absolute inset-0 bg-gradient-to-b from-black/25 via-black/10 to-[#E7DED6]" />
+      <section className="relative min-h-[70vh] flex flex-col justify-end pb-16 px-8 md:px-20 overflow-hidden bg-[#DCCFC5] pt-32">
+        <div className="absolute inset-0 bg-gradient-to-b from-black/25 via-black/10 to-[#DCCFC5]" />
         <div
           className="absolute inset-0 bg-cover bg-center opacity-40 mix-blend-overlay"
           style={{ backgroundImage: "url('/studio-interior.png')" }}
@@ -238,7 +238,7 @@ export default function About() {
       </section>
 
       {/* Studio info */}
-      <section className="bg-[#E7DED6] text-[#1A1A1A] border-t border-black/10 px-8 md:px-20 py-20">
+      <section className="bg-[#DCCFC5] text-[#1A1A1A] border-t border-black/10 px-8 md:px-20 py-20">
         <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-16 items-center">
           <motion.div
             initial="hidden"

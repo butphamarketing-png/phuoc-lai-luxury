@@ -88,8 +88,8 @@
   --elevate-2: rgba(0,0,0, .08);
 
   /* Light Warm Beige Theme (brighter) */
-  /* Main background: #E7DED6 */
-  --background: 30 25% 87%;
+  /* Main background: #DCCFC5 (darker beige) */
+  --background: 26 25% 82%;
   --foreground: 0 0% 10%; /* #1A1A1A */
 
   /* Borders / separators */
