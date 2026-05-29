@@ -4,10 +4,10 @@
 -- Mục tiêu:
 -- - Đổi title/nhãn danh mục hiển thị
 -- - Viết lại toàn bộ nội dung chi tiết (detail_json)
--- - Giữ nguyên slug để không mất traffic/SEO: phun-may-sandbrows
+-- - Slug chính thức: amazingbrows-for-men (redirect phun-may-sandbrows nếu cần)
 --
 -- Kiểm tra sau khi chạy:
--- select slug, title, category_label, image_url from public.site_services where slug in ('phun-may-sandbrows','sandbrows');
+-- select slug, title, category_label, image_url from public.site_services where slug in ('amazingbrows-for-men','sandbrows');
 
 update public.site_services
 set
@@ -24,13 +24,13 @@ set
   image_url = case
     when coalesce(image_url, '') = ''
       or image_url like '/service-%'
-    then '/phun-may-sandbrows/1779893218518_239505211476377159_239505211476377159_094d13aecf15af4996e63b5c6c48fa59.jpg'
+    then '/amazingbrows-for-men/1779893218518_239505211476377159_239505211476377159_094d13aecf15af4996e63b5c6c48fa59.jpg'
     else image_url
   end,
   detail_json = jsonb_build_object(
     'title', 'AMAZINGBROWS for men',
     'category', 'Permanent Makeup',
-    'image', coalesce(nullif(image_url, ''), '/phun-may-sandbrows/1779893218518_239505211476377159_239505211476377159_094d13aecf15af4996e63b5c6c48fa59.jpg'),
+    'image', coalesce(nullif(image_url, ''), '/amazingbrows-for-men/1779893218518_239505211476377159_239505211476377159_094d13aecf15af4996e63b5c6c48fa59.jpg'),
     'date', '—',
     'author', 'Phuoc Lai',
     'readTime', '6 phút đọc',
@@ -83,14 +83,14 @@ set
       '</div>',
 
       '<h2>Kết quả thực tế AMAZINGBROWS for men</h2>',
-      '<p><img src=\"/phun-may-sandbrows/1779893218518_239505211476377159_239505211476377159_094d13aecf15af4996e63b5c6c48fa59.jpg\" alt=\"AMAZINGBROWS for men kết quả\" /></p>',
-      '<p><img src=\"/phun-may-sandbrows/1779893218482_239505211476377159_239505211476377159_098ddbcbf5fff04d4d1b6505e9f1b4a0.jpg\" alt=\"AMAZINGBROWS for men trước và sau\" /></p>',
-      '<p><img src=\"/phun-may-sandbrows/1779893218504_239505211476377159_239505211476377159_117ec637b877219272c735463120da06.jpg\" alt=\"Dáng mày nam tính tự nhiên\" /></p>',
+      '<p><img src=\"/amazingbrows-for-men/1779893218518_239505211476377159_239505211476377159_094d13aecf15af4996e63b5c6c48fa59.jpg\" alt=\"AMAZINGBROWS for men kết quả\" /></p>',
+      '<p><img src=\"/amazingbrows-for-men/1779893218482_239505211476377159_239505211476377159_098ddbcbf5fff04d4d1b6505e9f1b4a0.jpg\" alt=\"AMAZINGBROWS for men trước và sau\" /></p>',
+      '<p><img src=\"/amazingbrows-for-men/1779893218504_239505211476377159_239505211476377159_117ec637b877219272c735463120da06.jpg\" alt=\"Dáng mày nam tính tự nhiên\" /></p>',
 
       '<h2>Đặt lịch tư vấn</h2>',
       '<p>Nếu bạn muốn dáng mày gọn gàng, nam tính và tự nhiên, hãy để lại thông tin ở mục <strong>Đặt lịch</strong> hoặc liên hệ hotline để được tư vấn nhanh.</p>'
     )
   ),
   updated_at = now()
-where slug = 'phun-may-sandbrows';
+where slug in ('amazingbrows-for-men', 'phun-may-sandbrows');
 

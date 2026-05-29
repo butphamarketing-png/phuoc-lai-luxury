@@ -1,4 +1,11 @@
 {
+  "redirects": [
+    {
+      "source": "/dich-vu/phun-may-sandbrows",
+      "destination": "/dich-vu/amazingbrows-for-men",
+      "permanent": true
+    }
+  ],
   "rewrites": [
     { "source": "/sitemap.xml", "destination": "/api/sitemap.xml" },
     { "source": "/((?!api/).*)", "destination": "/index.html" }

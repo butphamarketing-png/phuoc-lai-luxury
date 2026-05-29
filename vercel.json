@@ -3,6 +3,13 @@
   "buildCommand": "pnpm --filter @workspace/y-chang run build",
   "outputDirectory": "artifacts/y-chang/dist/public",
   "framework": "vite",
+  "redirects": [
+    {
+      "source": "/dich-vu/phun-may-sandbrows",
+      "destination": "/dich-vu/amazingbrows-for-men",
+      "permanent": true
+    }
+  ],
   "rewrites": [
     { "source": "/(.*)", "destination": "/index.html" }
   ]
