@@ -4,6 +4,16 @@
       "source": "/dich-vu/phun-may-sandbrows",
       "destination": "/dich-vu/amazingbrows-for-men",
       "permanent": true
+    },
+    {
+      "source": "/dich-vu/phun-xam",
+      "destination": "/dich-vu#phun-xam",
+      "permanent": false
+    },
+    {
+      "source": "/dich-vu/spa",
+      "destination": "/dich-vu#spa",
+      "permanent": false
     }
   ],
   "rewrites": [

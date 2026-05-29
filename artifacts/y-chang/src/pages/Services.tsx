@@ -1,9 +1,10 @@
 import { motion } from "framer-motion";
 import { Link } from "wouter";
-import { ChevronLeft, Plus } from "lucide-react";
+import { Plus } from "lucide-react";
+import { useEffect } from "react";
 import { useLocation } from "wouter";
 import { usePublicServices } from "@/hooks/use-site-content";
-import type { ServiceCategory, SiteService } from "@/data/catalog";
+import type { SiteService } from "@/data/catalog";
 
 const CATEGORY_META = {
   "phun-xam": {
@@ -14,7 +15,6 @@ const CATEGORY_META = {
     description:
       "Điêu khắc sợi, phun môi, phun mày và các kỹ thuật permanent makeup chuẩn Châu Âu.",
     banner: "/amazingbrows/Permanent Makeup.jpg",
-    viewAllHref: "/dich-vu/phun-xam",
   },
   spa: {
     id: "spa",
@@ -24,9 +24,24 @@ const CATEGORY_META = {
     description:
       "Chăm sóc da chuyên sâu, trị mụn, triệt lông và liệu trình phục hồi da tại Vũng Tàu.",
     banner: "/spa123.png",
-    viewAllHref: "/dich-vu/spa",
   },
 } as const;
+
+function scrollToServiceSection(sectionId: string) {
+  const el = document.getElementById(sectionId);
+  if (!el) return;
+  const offset = 96;
+  const top = el.getBoundingClientRect().top + window.scrollY - offset;
+  window.scrollTo({ top, behavior: "smooth" });
+}
+
+function resolveFocusSection(path: string): string | null {
+  const hash = window.location.hash.replace("#", "");
+  if (hash === "phun-xam" || hash === "spa") return hash;
+  if (path.includes("/phun-xam")) return "phun-xam";
+  if (path === "/dich-vu/spa" || path.endsWith("/spa")) return "spa";
+  return null;
+}
 
 function ServiceGrid({
   services,
@@ -37,20 +52,18 @@ function ServiceGrid({
   isLoading: boolean;
   emptyMessage: string;
 }) {
-  const list = services;
-
   return (
     <>
       {isLoading && (
         <p className="text-center text-foreground/40 text-sm py-20">Đang tải dịch vụ...</p>
       )}
 
-      {!isLoading && list.length === 0 && (
+      {!isLoading && services.length === 0 && (
         <p className="text-center text-foreground/40 text-sm py-20">{emptyMessage}</p>
       )}
 
       <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-3 max-w-6xl mx-auto">
-        {list.map((service, index) => (
+        {services.map((service, index) => (
           <motion.article
             key={service.id}
             initial={{ opacity: 0, y: 24 }}
@@ -117,26 +130,17 @@ function ServiceCategorySection({
   isLoading: boolean;
 }) {
   return (
-    <section id={meta.id} className="scroll-mt-32">
-      <div className="mb-10 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
-        <div className="max-w-2xl">
-          <span className="mb-3 block text-[10px] font-bold uppercase tracking-[0.4em] text-gold">
-            {meta.eyebrow}
-          </span>
-          <h2 className="font-serif text-3xl leading-tight text-foreground md:text-5xl">
-            {meta.title}
-          </h2>
-          <p className="mt-4 text-sm font-light leading-relaxed text-foreground/60 md:text-base">
-            {meta.description}
-          </p>
-        </div>
-        <Link
-          href={meta.viewAllHref}
-          className="inline-flex shrink-0 items-center gap-2 text-[10px] font-bold uppercase tracking-[0.2em] text-foreground/45 transition-colors hover:text-foreground"
-        >
-          Xem riêng {meta.label}
-          <span aria-hidden>→</span>
-        </Link>
+    <section id={meta.id} className="scroll-mt-28">
+      <div className="mb-10 max-w-2xl">
+        <span className="mb-3 block text-[10px] font-bold uppercase tracking-[0.4em] text-gold">
+          {meta.eyebrow}
+        </span>
+        <h2 className="font-serif text-3xl leading-tight text-foreground md:text-5xl">
+          {meta.title}
+        </h2>
+        <p className="mt-4 text-sm font-light leading-relaxed text-foreground/60 md:text-base">
+          {meta.description}
+        </p>
       </div>
 
       <div className="relative mb-12 aspect-[21/9] overflow-hidden rounded-2xl border border-border/60 bg-black shadow-lg">
@@ -159,66 +163,27 @@ function ServiceCategorySection({
 
 export default function Services() {
   const [location] = useLocation();
-  const category: ServiceCategory | null = location.includes("/phun-xam")
-    ? "phun-xam"
-    : location.includes("/spa")
-      ? "spa"
-      : null;
-
   const { data: phunXamServices = [], isLoading: loadingPhunXam } =
     usePublicServices("phun-xam");
   const { data: spaServices = [], isLoading: loadingSpa } =
     usePublicServices("spa");
-  const { data: filteredServices = [], isLoading } = usePublicServices(
-    category ?? undefined,
-  );
 
-  if (category) {
-    const meta = CATEGORY_META[category];
+  useEffect(() => {
+    const focus = resolveFocusSection(location);
+    if (!focus) return;
 
-    return (
-      <div className="bg-background pt-28 pb-24 text-foreground">
-        <section className="container mx-auto max-w-7xl px-6">
-          <div className="mx-auto mb-10 flex max-w-6xl flex-wrap items-center justify-between gap-4">
-            <Link
-              href="/dich-vu"
-              className="inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.2em] text-foreground/45 transition-colors hover:text-foreground"
-            >
-              <ChevronLeft size={14} />
-              Tất cả dịch vụ
-            </Link>
-            <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-gold">
-              {meta.eyebrow}
-            </span>
-          </div>
+    const timer = window.setTimeout(() => scrollToServiceSection(focus), 200);
+    return () => window.clearTimeout(timer);
+  }, [location]);
 
-          <div className="mx-auto mb-12 max-w-4xl text-center">
-            <h1 className="font-serif text-4xl leading-tight text-foreground md:text-5xl">
-              {meta.title}
-            </h1>
-            <p className="mx-auto mt-4 max-w-2xl text-sm font-light leading-relaxed text-foreground/60 md:text-base">
-              {meta.description}
-            </p>
-          </div>
-
-          <div className="relative mx-auto mb-14 aspect-[21/9] max-w-6xl overflow-hidden rounded-2xl border border-border/60 bg-black shadow-lg">
-            <img
-              src={meta.banner}
-              alt={meta.title}
-              className="h-full w-full object-cover opacity-90"
-            />
-            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
-          </div>
-
-          <ServiceGrid
-            services={filteredServices}
-            isLoading={isLoading}
-            emptyMessage="Chưa có dịch vụ trong danh mục này. Vui lòng quay lại sau hoặc liên hệ hotline để được tư vấn."
-          />
-        </section>
-      </div>
-    );
-  }
+  useEffect(() => {
+    const onHashChange = () => {
+      const focus = resolveFocusSection(location);
+      if (focus) scrollToServiceSection(focus);
+    };
+    window.addEventListener("hashchange", onHashChange);
+    return () => window.removeEventListener("hashchange", onHashChange);
+  }, [location]);
 
   return (
     <div className="bg-background pt-28 pb-24 text-foreground">
@@ -241,6 +206,29 @@ export default function Services() {
         <p className="mx-auto mt-6 max-w-2xl text-sm font-light leading-relaxed text-foreground/60 md:text-base">
           Các dịch vụ tại Phuoc Lai được xây dựng theo từng nhu cầu cụ thể, giúp bạn tỏa sáng với vẻ đẹp tự nhiên nhất.
         </p>
+
+        <div className="mx-auto mt-10 flex max-w-md flex-col gap-3 sm:flex-row sm:justify-center">
+          <a
+            href="#phun-xam"
+            onClick={(e) => {
+              e.preventDefault();
+              scrollToServiceSection("phun-xam");
+            }}
+            className="rounded-full border border-border/60 px-8 py-3 text-[10px] font-bold uppercase tracking-[0.2em] text-foreground/70 transition-colors hover:border-foreground hover:text-foreground"
+          >
+            Phun xăm
+          </a>
+          <a
+            href="#spa"
+            onClick={(e) => {
+              e.preventDefault();
+              scrollToServiceSection("spa");
+            }}
+            className="rounded-full border border-border/60 px-8 py-3 text-[10px] font-bold uppercase tracking-[0.2em] text-foreground/70 transition-colors hover:border-foreground hover:text-foreground"
+          >
+            Spa
+          </a>
+        </div>
       </section>
 
       <section className="container mx-auto mt-20 max-w-7xl space-y-28 px-6 md:space-y-36">

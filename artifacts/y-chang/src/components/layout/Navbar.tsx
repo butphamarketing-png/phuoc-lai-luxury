@@ -49,10 +49,20 @@ export default function Navbar() {
     }
   };
 
-  const handleNavLinkClick = (href: string, id?: string) => {
+  const handleNavLinkClick = (href: string, sectionId?: string) => {
     setIsOpen(false);
-    if (id && location === "/") {
-      scrollToSection(id);
+    if (!sectionId) return;
+    if (location === "/") {
+      scrollToSection(sectionId);
+      return;
+    }
+    if (location.startsWith("/dich-vu")) {
+      const offset = 96;
+      const el = document.getElementById(sectionId);
+      if (el) {
+        const top = el.getBoundingClientRect().top + window.pageYOffset - offset;
+        window.scrollTo({ top, behavior: "smooth" });
+      }
     }
   };
 
@@ -71,14 +81,14 @@ export default function Navbar() {
     return [
       {
         label: "Phun Xăm",
-        href: "/dich-vu/phun-xam",
-        id: "services-section",
+        href: "/dich-vu#phun-xam",
+        id: "phun-xam",
         subItems: byCategory("phun-xam"),
       },
       {
         label: "Spa",
-        href: "/dich-vu/spa",
-        id: "services-section",
+        href: "/dich-vu#spa",
+        id: "spa",
         subItems: byCategory("spa"),
       },
     ];
