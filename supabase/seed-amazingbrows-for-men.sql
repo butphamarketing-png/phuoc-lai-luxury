@@ -77,11 +77,6 @@ set
       '<li>Tránh sản phẩm có acid/retinol vùng mày trong giai đoạn đầu</li>',
       '</ul>',
 
-      '<h2>Video thực tế</h2>',
-      '<div class="my-8 max-w-full overflow-hidden rounded-2xl bg-black">',
-      '<video src="/video-phunxam.mp4" controls playsinline preload="metadata" style="width:100%;max-height:70vh;display:block;border-radius:12px;"></video>',
-      '</div>',
-
       '<h2>Kết quả thực tế điêu khắc lông mày nam</h2>',
       '<p><img src="/amazingbrows-for-men/1779893218518_239505211476377159_239505211476377159_094d13aecf15af4996e63b5c6c48fa59.jpg" alt="Điêu khắc lông mày nam For Men kết quả" /></p>',
       '<p><img src="/amazingbrows-for-men/1779893218482_239505211476377159_239505211476377159_098ddbcbf5fff04d4d1b6505e9f1b4a0.jpg" alt="Điêu khắc lông mày nam trước và sau" /></p>',
