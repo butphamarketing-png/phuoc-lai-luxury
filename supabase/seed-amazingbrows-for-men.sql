@@ -78,14 +78,14 @@ set
       '</ul>',
 
       '<h2>Video thực tế</h2>',
-      '<div class=\"my-8 max-w-full overflow-hidden rounded-2xl bg-black\">',
-      '<video src=\"/video-phunxam.mp4\" controls playsinline preload=\"metadata\" style=\"width:100%;max-height:70vh;display:block;border-radius:12px;\"></video>',
+      '<div class="my-8 max-w-full overflow-hidden rounded-2xl bg-black">',
+      '<video src="/video-phunxam.mp4" controls playsinline preload="metadata" style="width:100%;max-height:70vh;display:block;border-radius:12px;"></video>',
       '</div>',
 
       '<h2>Kết quả thực tế AMAZINGBROWS for men</h2>',
-      '<p><img src=\"/amazingbrows-for-men/1779893218518_239505211476377159_239505211476377159_094d13aecf15af4996e63b5c6c48fa59.jpg\" alt=\"AMAZINGBROWS for men kết quả\" /></p>',
-      '<p><img src=\"/amazingbrows-for-men/1779893218482_239505211476377159_239505211476377159_098ddbcbf5fff04d4d1b6505e9f1b4a0.jpg\" alt=\"AMAZINGBROWS for men trước và sau\" /></p>',
-      '<p><img src=\"/amazingbrows-for-men/1779893218504_239505211476377159_239505211476377159_117ec637b877219272c735463120da06.jpg\" alt=\"Dáng mày nam tính tự nhiên\" /></p>',
+      '<p><img src="/amazingbrows-for-men/1779893218518_239505211476377159_239505211476377159_094d13aecf15af4996e63b5c6c48fa59.jpg" alt="AMAZINGBROWS for men kết quả" /></p>',
+      '<p><img src="/amazingbrows-for-men/1779893218482_239505211476377159_239505211476377159_098ddbcbf5fff04d4d1b6505e9f1b4a0.jpg" alt="AMAZINGBROWS for men trước và sau" /></p>',
+      '<p><img src="/amazingbrows-for-men/1779893218504_239505211476377159_239505211476377159_117ec637b877219272c735463120da06.jpg" alt="Dáng mày nam tính tự nhiên" /></p>',
 
       '<h2>Đặt lịch tư vấn</h2>',
       '<p>Nếu bạn muốn dáng mày gọn gàng, nam tính và tự nhiên, hãy để lại thông tin ở mục <strong>Đặt lịch</strong> hoặc liên hệ hotline để được tư vấn nhanh.</p>'
