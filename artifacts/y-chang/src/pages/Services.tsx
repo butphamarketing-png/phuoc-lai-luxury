@@ -14,7 +14,6 @@ const CATEGORY_META = {
     title: "Phun xăm thẩm mỹ",
     description:
       "Điêu khắc sợi, phun môi, phun mày và các kỹ thuật permanent makeup chuẩn Châu Âu.",
-    banner: "/amazingbrows/Permanent Makeup.jpg",
   },
   spa: {
     id: "spa",
@@ -23,7 +22,6 @@ const CATEGORY_META = {
     title: "Spa & chăm sóc da",
     description:
       "Chăm sóc da chuyên sâu, trị mụn, triệt lông và liệu trình phục hồi da tại Vũng Tàu.",
-    banner: "/spa123.png",
   },
 } as const;
 
@@ -141,15 +139,6 @@ function ServiceCategorySection({
         <p className="mt-4 text-sm font-light leading-relaxed text-foreground/60 md:text-base">
           {meta.description}
         </p>
-      </div>
-
-      <div className="relative mb-12 aspect-[21/9] overflow-hidden rounded-2xl border border-border/60 bg-black shadow-lg">
-        <img
-          src={meta.banner}
-          alt={meta.title}
-          className="h-full w-full object-cover opacity-90"
-        />
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
       </div>
 
       <ServiceGrid
