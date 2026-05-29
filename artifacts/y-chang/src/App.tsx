@@ -24,6 +24,7 @@ import Footer from "@/components/layout/Footer";
 import Preloader from "@/components/layout/Preloader";
 import PromotionModal from "@/components/layout/PromotionModal";
 import FloatingContact from "@/components/layout/FloatingContact";
+import ServiceVideosFab from "@/components/layout/ServiceVideosFab";
 import SiteSeo from "@/components/seo/SiteSeo";
 import AdminLegacyRedirect from "@/components/admin/AdminLegacyRedirect";
 import { isAdminPath, isLegacyAdminPath } from "@/lib/admin-paths";
@@ -44,6 +45,7 @@ function Router() {
         <>
           <Preloader />
           <PromotionModal />
+          <ServiceVideosFab />
           <FloatingContact />
           <Navbar />
         </>
