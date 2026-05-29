@@ -1,4 +1,4 @@
--- AMAZINGBROWS for men (đổi từ Phun Mày SANDBROWS)
+-- Điêu Khắc Lông Mày Nam For Men (slug: amazingbrows-for-men)
 -- Chạy trong Supabase → SQL Editor
 --
 -- Mục tiêu:
@@ -11,7 +11,7 @@
 
 update public.site_services
 set
-  title = 'AMAZINGBROWS for men',
+  title = 'Điêu Khắc Lông Mày Nam For Men',
   category = 'phun-xam',
   category_label = 'Permanent Makeup',
   bullets = jsonb_build_array(
@@ -28,22 +28,22 @@ set
     else image_url
   end,
   detail_json = jsonb_build_object(
-    'title', 'AMAZINGBROWS for men',
+    'title', 'Điêu Khắc Lông Mày Nam For Men',
     'category', 'Permanent Makeup',
     'image', coalesce(nullif(image_url, ''), '/amazingbrows-for-men/1779893218518_239505211476377159_239505211476377159_094d13aecf15af4996e63b5c6c48fa59.jpg'),
     'date', '—',
     'author', 'Phuoc Lai',
     'readTime', '6 phút đọc',
-    'intro', 'AMAZINGBROWS for men là kỹ thuật tạo sợi mày tự nhiên dành cho nam — giữ nét nam tính, gọn gàng và hài hòa khuôn mặt.',
-    'metaDescription', 'AMAZINGBROWS for men: tạo sợi mày tự nhiên cho nam, chỉnh dáng mày thưa/nhạt/lệch, lên màu ổn định, giữ nét nam tính. Tư vấn & đặt lịch tại Phuoc Lai Luxury (Vũng Tàu).',
+    'intro', 'Điêu khắc lông mày nam For Men là kỹ thuật tạo sợi mày tự nhiên dành cho nam — giữ nét nam tính, gọn gàng và hài hòa khuôn mặt.',
+    'metaDescription', 'Điêu khắc lông mày nam For Men: tạo sợi mày tự nhiên cho nam, chỉnh dáng mày thưa/nhạt/lệch, lên màu ổn định. Tư vấn & đặt lịch tại Phuoc Lai Luxury (Vũng Tàu).',
     'seo', jsonb_build_object(
-      'title', 'AMAZINGBROWS for men | Phuoc Lai Luxury',
+      'title', 'Điêu Khắc Lông Mày Nam For Men | Phuoc Lai Luxury',
       'description', 'Kỹ thuật tạo sợi mày tự nhiên cho nam: dáng mày nam tính, gọn gàng, lên màu ổn định, phù hợp mày thưa/nhạt/lệch. Tư vấn & đặt lịch tại Vũng Tàu.',
       'keywords', 'amazingbrows for men, chân mày nam, phun mày nam, điêu khắc sợi nam, phun xăm vũng tàu'
     ),
     'sections', jsonb_build_array(),
     'bodyHtml', concat(
-      '<h2>AMAZINGBROWS for men là gì?</h2>',
+      '<h2>Điêu khắc lông mày nam For Men là gì?</h2>',
       '<p>Đây là kỹ thuật tạo sợi mày theo hướng <strong>nam tính – tự nhiên – gọn gàng</strong>. Mục tiêu không phải làm “đẹp kiểu trang điểm”, mà là giúp chân mày cân đối hơn, nhìn khỏe hơn và đúng thần thái của nam giới.</p>',
 
       '<h2>Phù hợp với ai?</h2>',
@@ -82,9 +82,9 @@ set
       '<video src="/video-phunxam.mp4" controls playsinline preload="metadata" style="width:100%;max-height:70vh;display:block;border-radius:12px;"></video>',
       '</div>',
 
-      '<h2>Kết quả thực tế AMAZINGBROWS for men</h2>',
-      '<p><img src="/amazingbrows-for-men/1779893218518_239505211476377159_239505211476377159_094d13aecf15af4996e63b5c6c48fa59.jpg" alt="AMAZINGBROWS for men kết quả" /></p>',
-      '<p><img src="/amazingbrows-for-men/1779893218482_239505211476377159_239505211476377159_098ddbcbf5fff04d4d1b6505e9f1b4a0.jpg" alt="AMAZINGBROWS for men trước và sau" /></p>',
+      '<h2>Kết quả thực tế điêu khắc lông mày nam</h2>',
+      '<p><img src="/amazingbrows-for-men/1779893218518_239505211476377159_239505211476377159_094d13aecf15af4996e63b5c6c48fa59.jpg" alt="Điêu khắc lông mày nam For Men kết quả" /></p>',
+      '<p><img src="/amazingbrows-for-men/1779893218482_239505211476377159_239505211476377159_098ddbcbf5fff04d4d1b6505e9f1b4a0.jpg" alt="Điêu khắc lông mày nam trước và sau" /></p>',
       '<p><img src="/amazingbrows-for-men/1779893218504_239505211476377159_239505211476377159_117ec637b877219272c735463120da06.jpg" alt="Dáng mày nam tính tự nhiên" /></p>',
 
       '<h2>Đặt lịch tư vấn</h2>',

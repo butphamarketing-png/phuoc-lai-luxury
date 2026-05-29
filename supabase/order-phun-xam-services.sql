@@ -4,7 +4,7 @@
 -- Thứ tự mong muốn:
 -- 1) Điêu Khắc Sợi AMAZINGBROWS
 -- 2) Phun Môi SEXYLIPS
--- 3) AMAZINGBROWS for men (slug amazingbrows-for-men)
+-- 3) Điêu Khắc Lông Mày Nam For Men (slug amazingbrows-for-men)
 -- 4) Phun Mày SANDBROWS (slug sandbrows)
 -- 5) Phun Mí
 --
