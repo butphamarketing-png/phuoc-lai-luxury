@@ -16,6 +16,25 @@ function removeDuplicateResultSections(html: string): string {
   return html.slice(0, secondStart) + html.slice(cutEnd);
 }
 
+/** Bỏ ảnh đầu tiên ngay sau tiêu đề Kết quả thực tế (thường là tấm close-up lớn). */
+function removeFirstResultGalleryImage(html: string): string {
+  let out = html;
+  const pattern =
+    /(<h2>\s*Kết quả thực tế[^<]*<\/h2>)\s*(?:<p>\s*)?<img[^>]*>\s*(?:<\/p>\s*)?/i;
+  while (pattern.test(out)) {
+    out = out.replace(pattern, "$1");
+  }
+  return out;
+}
+
+/** Bỏ ảnh glamour lớn (móng bạc) còn sót trong bodyHtml AMAZINGBROWS. */
+function removeKnownGlamourImages(html: string): string {
+  return html.replace(
+    /(?:<p>\s*)?<img[^>]*(1779891799209|1779891799181|1779891799197|Permanent%20Makeup)[^>]*>\s*(?:<\/p>\s*)?/gi,
+    "",
+  );
+}
+
 /** Giữ ảnh đầu tiên cho mỗi src, xóa thẻ img trùng. */
 function dedupeImagesBySrc(html: string): string {
   const seen = new Set<string>();
@@ -42,6 +61,8 @@ export function normalizeBodyHtml(html: string): string {
     trimmed = el.value;
   }
   trimmed = removeDuplicateResultSections(trimmed);
+  trimmed = removeFirstResultGalleryImage(trimmed);
+  trimmed = removeKnownGlamourImages(trimmed);
   trimmed = dedupeImagesBySrc(trimmed);
   return trimmed;
 }
