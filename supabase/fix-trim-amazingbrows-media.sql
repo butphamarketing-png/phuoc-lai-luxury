@@ -20,6 +20,25 @@ set
   updated_at = now()
 where slug = 'dieu-khac-soi-amazingbrows';
 
+-- 1b) Bỏ ảnh lớn đầu tiên còn lại trong mục Kết quả thực tế (9181)
+update public.site_services
+set
+  detail_json = jsonb_set(
+    coalesce(detail_json, '{}'::jsonb),
+    '{bodyHtml}',
+    to_jsonb(
+      regexp_replace(
+        replace(coalesce(detail_json->>'bodyHtml', ''), E'\\"', '"'),
+        '(<p>\s*)?<img[^>]*1779891799181[^>]*>\s*(</p>\s*)?',
+        '',
+        'i'
+      )
+    ),
+    true
+  ),
+  updated_at = now()
+where slug = 'dieu-khac-soi-amazingbrows';
+
 -- 2) Điêu Khắc Lông Mày For Men: bỏ block Video thực tế
 update public.site_services
 set
