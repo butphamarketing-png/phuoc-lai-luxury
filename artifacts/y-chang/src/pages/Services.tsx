@@ -5,6 +5,29 @@ import { useLocation } from "wouter";
 import { usePublicServices } from "@/hooks/use-site-content";
 import type { ServiceCategory, SiteService } from "@/data/catalog";
 
+const CATEGORY_META = {
+  "phun-xam": {
+    id: "phun-xam",
+    label: "Phun Xăm",
+    eyebrow: "PERMANENT MAKEUP",
+    title: "Phun xăm thẩm mỹ",
+    description:
+      "Điêu khắc sợi, phun môi, phun mày và các kỹ thuật permanent makeup chuẩn Châu Âu.",
+    banner: "/amazingbrows/Permanent Makeup.jpg",
+    viewAllHref: "/dich-vu/phun-xam",
+  },
+  spa: {
+    id: "spa",
+    label: "Spa",
+    eyebrow: "SPA & SKINCARE",
+    title: "Spa & chăm sóc da",
+    description:
+      "Chăm sóc da chuyên sâu, trị mụn, triệt lông và liệu trình phục hồi da tại Vũng Tàu.",
+    banner: "/spa123.png",
+    viewAllHref: "/dich-vu/spa",
+  },
+} as const;
+
 function ServiceGrid({
   services,
   isLoading,
@@ -84,6 +107,56 @@ function ServiceGrid({
   );
 }
 
+function ServiceCategorySection({
+  meta,
+  services,
+  isLoading,
+}: {
+  meta: (typeof CATEGORY_META)[keyof typeof CATEGORY_META];
+  services: SiteService[];
+  isLoading: boolean;
+}) {
+  return (
+    <section id={meta.id} className="scroll-mt-32">
+      <div className="mb-10 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+        <div className="max-w-2xl">
+          <span className="mb-3 block text-[10px] font-bold uppercase tracking-[0.4em] text-gold">
+            {meta.eyebrow}
+          </span>
+          <h2 className="font-serif text-3xl leading-tight text-foreground md:text-5xl">
+            {meta.title}
+          </h2>
+          <p className="mt-4 text-sm font-light leading-relaxed text-foreground/60 md:text-base">
+            {meta.description}
+          </p>
+        </div>
+        <Link
+          href={meta.viewAllHref}
+          className="inline-flex shrink-0 items-center gap-2 text-[10px] font-bold uppercase tracking-[0.2em] text-foreground/45 transition-colors hover:text-foreground"
+        >
+          Xem riêng {meta.label}
+          <span aria-hidden>→</span>
+        </Link>
+      </div>
+
+      <div className="relative mb-12 aspect-[21/9] overflow-hidden rounded-2xl border border-border/60 bg-black shadow-lg">
+        <img
+          src={meta.banner}
+          alt={meta.title}
+          className="h-full w-full object-cover opacity-90"
+        />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
+      </div>
+
+      <ServiceGrid
+        services={services}
+        isLoading={isLoading}
+        emptyMessage={`Chưa có dịch vụ ${meta.label.toLowerCase()}. Vui lòng quay lại sau hoặc liên hệ hotline.`}
+      />
+    </section>
+  );
+}
+
 export default function Services() {
   const [location] = useLocation();
   const category: ServiceCategory | null = location.includes("/phun-xam")
@@ -92,27 +165,49 @@ export default function Services() {
       ? "spa"
       : null;
 
+  const { data: phunXamServices = [], isLoading: loadingPhunXam } =
+    usePublicServices("phun-xam");
+  const { data: spaServices = [], isLoading: loadingSpa } =
+    usePublicServices("spa");
   const { data: filteredServices = [], isLoading } = usePublicServices(
     category ?? undefined,
   );
 
   if (category) {
-    const categoryLabel = category === "phun-xam" ? "Phun Xăm" : "Spa";
+    const meta = CATEGORY_META[category];
 
     return (
       <div className="bg-background pt-28 pb-24 text-foreground">
         <section className="container mx-auto max-w-7xl px-6">
-          <div className="max-w-6xl mx-auto mb-10 flex flex-wrap items-center justify-between gap-4">
+          <div className="mx-auto mb-10 flex max-w-6xl flex-wrap items-center justify-between gap-4">
             <Link
               href="/dich-vu"
-              className="inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.2em] text-foreground/45 hover:text-foreground transition-colors"
+              className="inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.2em] text-foreground/45 transition-colors hover:text-foreground"
             >
               <ChevronLeft size={14} />
               Tất cả dịch vụ
             </Link>
-            <span className="text-[10px] uppercase tracking-[0.4em] text-foreground/35 font-bold">
-              {categoryLabel}
+            <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-gold">
+              {meta.eyebrow}
             </span>
+          </div>
+
+          <div className="mx-auto mb-12 max-w-4xl text-center">
+            <h1 className="font-serif text-4xl leading-tight text-foreground md:text-5xl">
+              {meta.title}
+            </h1>
+            <p className="mx-auto mt-4 max-w-2xl text-sm font-light leading-relaxed text-foreground/60 md:text-base">
+              {meta.description}
+            </p>
+          </div>
+
+          <div className="relative mx-auto mb-14 aspect-[21/9] max-w-6xl overflow-hidden rounded-2xl border border-border/60 bg-black shadow-lg">
+            <img
+              src={meta.banner}
+              alt={meta.title}
+              className="h-full w-full object-cover opacity-90"
+            />
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
           </div>
 
           <ServiceGrid
@@ -148,11 +243,17 @@ export default function Services() {
         </p>
       </section>
 
-      <section className="container mx-auto mt-20 max-w-7xl px-6">
-        <ServiceGrid
-          services={filteredServices}
-          isLoading={isLoading}
-          emptyMessage="Chưa có dịch vụ nào. Vui lòng quay lại sau hoặc liên hệ hotline để được tư vấn."
+      <section className="container mx-auto mt-20 max-w-7xl space-y-28 px-6 md:space-y-36">
+        <ServiceCategorySection
+          meta={CATEGORY_META["phun-xam"]}
+          services={phunXamServices}
+          isLoading={loadingPhunXam}
+        />
+        <div className="h-px w-full bg-border/60" aria-hidden />
+        <ServiceCategorySection
+          meta={CATEGORY_META.spa}
+          services={spaServices}
+          isLoading={loadingSpa}
         />
       </section>
     </div>
