@@ -14,7 +14,7 @@ import { useServiceDetail } from "@/hooks/use-site-content";
 import { useSeo } from "@/hooks/use-seo";
 import JsonLd from "@/components/seo/JsonLd";
 import DetailBody from "@/components/content/DetailBody";
-import { buildServiceJsonLd, formatTitle } from "@/lib/seo";
+import { buildServiceJsonLd, buildArticleJsonLd, buildBreadcrumbJsonLd, formatTitle } from "@/lib/seo";
 
 export default function ServiceDetail() {
   const [, params] = useRoute("/dich-vu/:slug");
@@ -68,12 +68,27 @@ export default function ServiceDetail() {
     <div className="bg-background text-foreground">
       <JsonLd
         id="service-detail"
-        data={buildServiceJsonLd(
-          data.title,
-          data.intro,
-          `/dich-vu/${slug}`,
-          data.image,
-        )}
+        data={[
+          buildServiceJsonLd(
+            data.title,
+            data.intro,
+            `/dich-vu/${slug}`,
+            data.image,
+          ),
+          buildArticleJsonLd({
+            headline: data.title,
+            description: (data.seo?.description || data.metaDescription || data.intro).slice(0, 160),
+            path: `/dich-vu/${slug}`,
+            image: data.image,
+            datePublished: data.date,
+            author: data.author,
+          }),
+          buildBreadcrumbJsonLd([
+            { name: "Trang chủ", path: "/" },
+            { name: "Dịch vụ", path: "/dich-vu" },
+            { name: data.title, path: `/dich-vu/${slug}` },
+          ]),
+        ]}
       />
       <section className="container mx-auto max-w-4xl px-6 pt-28 pb-24 md:pt-32 md:pb-32">
         <motion.div

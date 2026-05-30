@@ -9,6 +9,7 @@ const btnPrimary =
 import { useLocation } from "wouter";
 import { usePublicTraining } from "@/hooks/use-site-content";
 import type { TrainingCategory } from "@/data/catalog";
+import { TrainingListingJsonLd } from "@/components/seo/ListingJsonLd";
 
 export default function Training() {
   const [location] = useLocation();
@@ -21,6 +22,7 @@ export default function Training() {
   const { data: filteredCourses = [], isLoading } = usePublicTraining(
     category ?? undefined,
   );
+  const { data: allCourses = [] } = usePublicTraining();
 
   const displayTitle = category === "phun-xam" 
     ? "Khóa Học Phun Xăm Thẩm Mỹ" 
@@ -36,6 +38,7 @@ export default function Training() {
       className="w-full bg-background text-foreground pt-32 pb-24"
       data-testid="page-training"
     >
+      <TrainingListingJsonLd courses={category ? filteredCourses : allCourses} />
       {/* Khóa học */}
       <section className="bg-background" data-testid="section-courses">
         <div className="container mx-auto px-6 max-w-7xl">

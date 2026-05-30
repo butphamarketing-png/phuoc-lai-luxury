@@ -5,11 +5,7 @@ export const STATIC_PATHS = [
   "/",
   "/ve-chung-toi",
   "/dich-vu",
-  "/dich-vu/phun-xam",
-  "/dich-vu/spa",
   "/dao-tao",
-  "/dao-tao/phun-xam",
-  "/dao-tao/spa",
   "/lien-he",
   "/feedback",
 ];

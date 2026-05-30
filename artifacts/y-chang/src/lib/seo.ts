@@ -60,6 +60,8 @@ const STATIC_ROUTES: Record<string, SeoMeta> = {
     title: formatTitle("Phun xăm Vũng Tàu — Phuoc Lai Luxury"),
     description:
       "Phun xăm thẩm mỹ Vũng Tàu: mày, môi, mí AMAZINGBROWS, SANDBROWS, SEXYLIPS, spa & đào tạo nghề tại Phuoc Lai Luxury. Hotline 0909 203 108.",
+    keywords:
+      "phun xăm vũng tàu, phun mày vũng tàu, phun môi vũng tàu, spa vũng tàu, phuoc lai luxury, amazingbrows, sandbrows, sexylips",
     path: "/",
     image: DEFAULT_OG_IMAGE,
   },
@@ -74,48 +76,26 @@ const STATIC_ROUTES: Record<string, SeoMeta> = {
     title: formatTitle("Dịch vụ phun xăm & spa"),
     description:
       "Chọn dịch vụ phun xăm thẩm mỹ hoặc spa & chăm sóc da tại Phuoc Lai Luxury Vũng Tàu — tư vấn và đặt lịch miễn phí.",
+    keywords:
+      "dịch vụ phun xăm vũng tàu, spa vũng tàu, chăm sóc da vũng tàu, phuoc lai luxury",
     path: "/dich-vu",
     image: POPUP_IMAGES.one,
-  },
-  "/dich-vu/phun-xam": {
-    title: formatTitle("Dịch vụ phun xăm thẩm mỹ"),
-    description:
-      "Dịch vụ phun xăm thẩm mỹ chuyên nghiệp tại Phuoc Lai Luxury Vũng Tàu — tư vấn và đặt lịch miễn phí.",
-    path: "/dich-vu/phun-xam",
-    image: POPUP_IMAGES.one,
-  },
-  "/dich-vu/spa": {
-    title: formatTitle("Dịch vụ spa & chăm sóc da"),
-    description:
-      "Liệu trình spa, chăm sóc da chuyên sâu, trị mụn và trẻ hóa da tại Phuoc Lai Luxury Vũng Tàu.",
-    path: "/dich-vu/spa",
-    image: "/studio-interior.png",
   },
   "/dao-tao": {
     title: formatTitle("Đào tạo phun xăm & spa"),
     description:
       "Khóa học phun xăm và spa tại Phuoc Lai Academy — học thật, thực hành thật, hỗ trợ sau khóa cho học viên.",
+    keywords:
+      "đào tạo phun xăm vũng tàu, học phun mày vũng tàu, khóa spa vũng tàu, phuoc lai academy",
     path: "/dao-tao",
     image: "/training-1.png",
-  },
-  "/dao-tao/phun-xam": {
-    title: formatTitle("Khóa học phun xăm"),
-    description:
-      "Đào tạo phun xăm chuyên sâu: sợi AMAZINGBROWS, môi SEXYLIPS, khóa tổng hợp Master tại Vũng Tàu.",
-    path: "/dao-tao/phun-xam",
-    image: "/training-1.png",
-  },
-  "/dao-tao/spa": {
-    title: formatTitle("Khóa học spa"),
-    description:
-      "Khóa spa basic, advanced, expert và trị liệu da — chương trình bài bản tại Phuoc Lai Luxury Academy.",
-    path: "/dao-tao/spa",
-    image: "/training-2.png",
   },
   "/lien-he": {
     title: formatTitle("Liên hệ & đặt lịch"),
     description:
       "Đặt lịch phun xăm hoặc tư vấn khóa học tại 42a Bà Triệu, Vũng Tàu. Hotline 0909 203 108.",
+    keywords:
+      "đặt lịch phun xăm vũng tàu, liên hệ phuoc lai luxury, booking spa vũng tàu",
     path: "/lien-he",
     image: DEFAULT_OG_IMAGE,
   },
@@ -130,7 +110,7 @@ const STATIC_ROUTES: Record<string, SeoMeta> = {
     title: formatTitle("Đặt lịch hẹn"),
     description:
       "Đặt lịch phun xăm, spa hoặc tư vấn khóa học nhanh chóng tại Phuoc Lai Luxury Vũng Tàu.",
-    path: "/booking",
+    path: "/lien-he",
     image: DEFAULT_OG_IMAGE,
   },
 };
@@ -289,4 +269,141 @@ export function buildCourseJsonLd(
     provider: { "@id": `${getSiteUrl()}/#organization` },
     inLanguage: "vi",
   };
+}
+
+/** FAQ trang chủ — dùng cho schema + section hiển thị */
+export const HOME_FAQ = [
+  {
+    question: "Phun xăm tại Phuoc Lai Luxury Vũng Tàu có an toàn không?",
+    answer:
+      "Phuoc Lai Luxury sử dụng mực organic chuẩn Châu Âu, quy trình vô trùng và Master giàu kinh nghiệm. Mỗi khách được tư vấn dáng phù hợp trước khi thực hiện.",
+  },
+  {
+    question: "Điêu khắc sợi AMAZINGBROWS và SANDBROWS khác nhau thế nào?",
+    answer:
+      "AMAZINGBROWS là kỹ thuật điêu khắc sợi siêu thực từng sợi. SANDBROWS (powder/ombre brows) tạo hiệu ứng phấn mịn, phù hợp khách thích dáng mày soft hoặc makeup look.",
+  },
+  {
+    question: "Phun môi SEXYLIPS bao lâu thì lành và giữ màu được bao lâu?",
+    answer:
+      "Môi thường lành trong 5–7 ngày, màu ổn định sau khoảng 4 tuần. Thời gian giữ màu phụ thuộc cơ địa, thường từ 1–3 năm nếu chăm sóc đúng hướng dẫn.",
+  },
+  {
+    question: "Địa chỉ studio Phuoc Lai Luxury ở đâu?",
+    answer:
+      "Studio tại 42a Bà Triệu, Phường 1, TP. Vũng Tàu. Mở cửa 9:00–19:00 hàng ngày. Hotline đặt lịch: 0909 203 108.",
+  },
+  {
+    question: "Có khóa đào tạo phun xăm và spa tại Vũng Tàu không?",
+    answer:
+      "Phuoc Lai Academy có các khóa phun xăm (mày, môi, mí) và spa — học thực hành trên model thật, hỗ trợ sau khóa cho học viên.",
+  },
+] as const;
+
+export type BreadcrumbItem = { name: string; path: string };
+
+export function buildBreadcrumbJsonLd(items: BreadcrumbItem[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: items.map((item, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: item.name,
+      item: absoluteUrl(item.path),
+    })),
+  };
+}
+
+export function buildItemListJsonLd(params: {
+  name: string;
+  description?: string;
+  items: { name: string; path: string }[];
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: params.name,
+    description: params.description,
+    numberOfItems: params.items.length,
+    itemListElement: params.items.map((item, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: item.name,
+      url: absoluteUrl(item.path),
+    })),
+  };
+}
+
+export function buildFAQPageJsonLd(
+  faqs: readonly { question: string; answer: string }[],
+) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: faq.answer,
+      },
+    })),
+  };
+}
+
+export function buildArticleJsonLd(params: {
+  headline: string;
+  description: string;
+  path: string;
+  image?: string;
+  datePublished?: string;
+  author?: string;
+}) {
+  const siteUrl = getSiteUrl();
+  return {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: params.headline,
+    description: params.description,
+    url: absoluteUrl(params.path),
+    image: params.image ? absoluteUrl(params.image) : absoluteUrl(DEFAULT_OG_IMAGE),
+    datePublished: params.datePublished,
+    author: {
+      "@type": "Person",
+      name: params.author || BUSINESS.name,
+    },
+    publisher: { "@id": `${siteUrl}/#organization` },
+    inLanguage: "vi-VN",
+  };
+}
+
+export function getStaticBreadcrumbs(pathname: string): BreadcrumbItem[] | null {
+  const crumbs: BreadcrumbItem[] = [{ name: "Trang chủ", path: "/" }];
+  if (pathname === "/") return null;
+
+  const map: Record<string, BreadcrumbItem[]> = {
+    "/ve-chung-toi": [...crumbs, { name: "Về chúng tôi", path: "/ve-chung-toi" }],
+    "/dich-vu": [...crumbs, { name: "Dịch vụ", path: "/dich-vu" }],
+    "/dao-tao": [...crumbs, { name: "Đào tạo", path: "/dao-tao" }],
+    "/lien-he": [...crumbs, { name: "Liên hệ", path: "/lien-he" }],
+    "/feedback": [...crumbs, { name: "Feedback", path: "/feedback" }],
+  };
+
+  if (map[pathname]) return map[pathname];
+  if (pathname.startsWith("/dich-vu/")) {
+    return [
+      ...crumbs,
+      { name: "Dịch vụ", path: "/dich-vu" },
+      { name: "Chi tiết dịch vụ", path: pathname },
+    ];
+  }
+  if (pathname.startsWith("/dao-tao/")) {
+    return [
+      ...crumbs,
+      { name: "Đào tạo", path: "/dao-tao" },
+      { name: "Chi tiết khóa học", path: pathname },
+    ];
+  }
+  return null;
 }

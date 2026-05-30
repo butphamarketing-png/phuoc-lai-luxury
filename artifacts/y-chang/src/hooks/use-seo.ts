@@ -70,6 +70,13 @@ function applySeo(meta: SeoMeta) {
     meta.description,
   );
   upsertMeta('meta[name="twitter:image"]', { name: "twitter:image" }, image);
+  upsertMeta('meta[name="twitter:url"]', { name: "twitter:url" }, canonical);
+  upsertMeta(
+    'meta[property="og:image:alt"]',
+    { property: "og:image:alt" },
+    `${SITE_NAME} — ${meta.title.replace(/\s*\|\s*Phuoc Lai Luxury.*/i, "")}`,
+  );
+  upsertMeta('meta[name="author"]', { name: "author" }, SITE_NAME);
 
   upsertLink("canonical", canonical);
 }

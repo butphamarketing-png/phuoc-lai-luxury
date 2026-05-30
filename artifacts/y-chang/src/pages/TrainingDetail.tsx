@@ -16,7 +16,7 @@ import { useTrainingDetail } from "@/hooks/use-site-content";
 import { useSeo } from "@/hooks/use-seo";
 import JsonLd from "@/components/seo/JsonLd";
 import DetailBody from "@/components/content/DetailBody";
-import { buildCourseJsonLd, formatTitle } from "@/lib/seo";
+import { buildCourseJsonLd, buildArticleJsonLd, buildBreadcrumbJsonLd, formatTitle } from "@/lib/seo";
 
 export default function TrainingDetail() {
   const [, params] = useRoute("/dao-tao/:slug");
@@ -70,12 +70,27 @@ export default function TrainingDetail() {
     <div className="bg-background text-foreground">
       <JsonLd
         id="training-detail"
-        data={buildCourseJsonLd(
-          data.title,
-          data.intro,
-          `/dao-tao/${slug}`,
-          data.image,
-        )}
+        data={[
+          buildCourseJsonLd(
+            data.title,
+            data.intro,
+            `/dao-tao/${slug}`,
+            data.image,
+          ),
+          buildArticleJsonLd({
+            headline: data.title,
+            description: (data.seo?.description || data.metaDescription || data.intro).slice(0, 160),
+            path: `/dao-tao/${slug}`,
+            image: data.image,
+            datePublished: data.date,
+            author: data.instructor,
+          }),
+          buildBreadcrumbJsonLd([
+            { name: "Trang chủ", path: "/" },
+            { name: "Đào tạo", path: "/dao-tao" },
+            { name: data.title, path: `/dao-tao/${slug}` },
+          ]),
+        ]}
       />
       <section className="container mx-auto max-w-4xl px-6 pt-28 pb-24 md:pt-32 md:pb-32">
         <motion.div

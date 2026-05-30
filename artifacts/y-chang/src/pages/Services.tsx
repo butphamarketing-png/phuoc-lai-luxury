@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import { useLocation } from "wouter";
 import { usePublicServices } from "@/hooks/use-site-content";
 import type { SiteService } from "@/data/catalog";
+import { ServicesListingJsonLd } from "@/components/seo/ListingJsonLd";
 
 const CATEGORY_META = {
   "phun-xam": {
@@ -156,6 +157,7 @@ export default function Services() {
     usePublicServices("phun-xam");
   const { data: spaServices = [], isLoading: loadingSpa } =
     usePublicServices("spa");
+  const allServices = [...phunXamServices, ...spaServices];
 
   useEffect(() => {
     const focus = resolveFocusSection(location);
@@ -176,6 +178,7 @@ export default function Services() {
 
   return (
     <div className="bg-background pt-28 pb-24 text-foreground">
+      <ServicesListingJsonLd services={allServices} />
       <section className="px-6 text-center">
         <motion.span
           initial={{ opacity: 0, y: 10 }}

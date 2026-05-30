@@ -2,5 +2,6 @@ User-agent: *
 Allow: /
 Disallow: /adminbp/
 Disallow: /admin/
+Disallow: /api/
 
 Sitemap: https://phunxamvungtau.com/sitemap.xml
