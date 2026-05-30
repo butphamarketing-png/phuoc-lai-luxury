@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { FadeIn } from "@/components/ui/fade-in";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -7,22 +7,16 @@ import { MapPin, Phone, Mail, Clock } from "lucide-react";
 import { SiFacebook, SiInstagram, SiMessenger, SiZalo } from "react-icons/si";
 import { useToast } from "@/hooks/use-toast";
 import { useSiteSettings } from "@/hooks/use-site-settings";
+import { usePublicServices, usePublicTraining } from "@/hooks/use-site-content";
 import { useCustomerMutations } from "@/hooks/use-site-customers";
 import { DEFAULT_SITE_SETTINGS } from "@/lib/site-settings";
 import { CONTACT_EMAIL } from "@/lib/contact";
 
-const serviceOptions = [
-  { value: "", label: "Chọn dịch vụ..." },
-  { value: "brows", label: "Điêu khắc chân mày" },
-  { value: "lips", label: "Phun môi vi chạm" },
-  { value: "eyeliner", label: "Phun mí mắt" },
-  { value: "training", label: "Khóa học đào tạo" },
-  { value: "other", label: "Khác" },
-];
-
 export default function Contact() {
   const { toast } = useToast();
   const { data: settings = DEFAULT_SITE_SETTINGS } = useSiteSettings();
+  const { data: services = [] } = usePublicServices();
+  const { data: training = [] } = usePublicTraining();
   const { submitLead } = useCustomerMutations();
   const [form, setForm] = useState({
     name: "",
@@ -30,6 +24,18 @@ export default function Contact() {
     service: "",
     note: "",
   });
+
+  const serviceOptions = useMemo(
+    () => [
+      { value: "", label: "Chọn dịch vụ / khóa học..." },
+      ...services.map((s) => ({ value: `svc:${s.slug}`, label: s.title })),
+      ...training.map((t) => ({
+        value: `tr:${t.slug}`,
+        label: `[Đào tạo] ${t.title}`,
+      })),
+    ],
+    [services, training],
+  );
 
   const socials = [
     { name: "Facebook", icon: SiFacebook, href: settings.facebook },

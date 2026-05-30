@@ -2,7 +2,9 @@ import { Link } from "wouter";
 import { MapPin, Phone, Mail } from "lucide-react";
 import { useLanguage } from "@/hooks/use-language";
 import { useSiteSettings } from "@/hooks/use-site-settings";
+import { usePublicServices, usePublicTraining } from "@/hooks/use-site-content";
 import { DEFAULT_SITE_SETTINGS } from "@/lib/site-settings";
+import { getPublicServicePath, getPublicTrainingPath } from "@/data/catalog";
 import { motion } from "framer-motion";
 import logoImg from "@/assets/logo.png";
 import { CONTACT_EMAIL } from "@/lib/contact";
@@ -10,6 +12,8 @@ import { CONTACT_EMAIL } from "@/lib/contact";
 export default function Footer() {
   const { t } = useLanguage();
   const { data: settings = DEFAULT_SITE_SETTINGS } = useSiteSettings();
+  const { data: services = [] } = usePublicServices();
+  const { data: training = [] } = usePublicTraining();
   const telHref = `tel:${settings.phone.replace(/\s/g, "")}`;
 
   return (
@@ -82,26 +86,24 @@ export default function Footer() {
               {t("footer.services")}
             </h4>
             <ul className="space-y-4 text-sm font-light text-white/60">
-              <li>
-                <Link href="/dich-vu" className="hover:text-white transition-colors" data-testid="link-footer-svc-1">
-                  Điêu Khắc Sợi
-                </Link>
-              </li>
-              <li>
-                <Link href="/dich-vu" className="hover:text-white transition-colors" data-testid="link-footer-svc-2">
-                  Phun Mày Ombre
-                </Link>
-              </li>
-              <li>
-                <Link href="/dich-vu" className="hover:text-white transition-colors" data-testid="link-footer-svc-3">
-                  Combo Brows
-                </Link>
-              </li>
-              <li>
-                <Link href="/dich-vu" className="hover:text-white transition-colors" data-testid="link-footer-svc-4">
-                  Xử Lý Mày Hỏng
-                </Link>
-              </li>
+              {services.length > 0 ? (
+                services.map((svc) => (
+                  <li key={svc.id}>
+                    <Link
+                      href={getPublicServicePath(svc.slug)}
+                      className="hover:text-white transition-colors"
+                    >
+                      {svc.title}
+                    </Link>
+                  </li>
+                ))
+              ) : (
+                <li>
+                  <Link href="/dich-vu" className="hover:text-white transition-colors">
+                    {t("nav.services")}
+                  </Link>
+                </li>
+              )}
             </ul>
           </motion.div>
 
@@ -110,26 +112,24 @@ export default function Footer() {
               Đào tạo
             </h4>
             <ul className="space-y-4 text-sm font-light text-white/60">
-              <li>
-                <Link href="/dao-tao" className="hover:text-white transition-colors">
-                  Brows Master
-                </Link>
-              </li>
-              <li>
-                <Link href="/dao-tao" className="hover:text-white transition-colors">
-                  Brows Expert
-                </Link>
-              </li>
-              <li>
-                <Link href="/dao-tao" className="hover:text-white transition-colors">
-                  Master Advanced
-                </Link>
-              </li>
-              <li>
-                <Link href="/dao-tao" className="hover:text-white transition-colors" data-testid="link-footer-nav-training">
-                  Brows &amp; Beyond
-                </Link>
-              </li>
+              {training.length > 0 ? (
+                training.map((course) => (
+                  <li key={course.id}>
+                    <Link
+                      href={getPublicTrainingPath(course.slug)}
+                      className="hover:text-white transition-colors"
+                    >
+                      {course.title}
+                    </Link>
+                  </li>
+                ))
+              ) : (
+                <li>
+                  <Link href="/dao-tao" className="hover:text-white transition-colors">
+                    Đào tạo
+                  </Link>
+                </li>
+              )}
             </ul>
           </motion.div>
 

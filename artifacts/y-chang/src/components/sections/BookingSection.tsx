@@ -1,8 +1,64 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
+import { useToast } from "@/hooks/use-toast";
+import { usePublicServices } from "@/hooks/use-site-content";
+import { useCustomerMutations } from "@/hooks/use-site-customers";
 import logoImg from "@/assets/logo.png";
 
 export default function BookingSection() {
+  const { toast } = useToast();
+  const { data: services = [] } = usePublicServices();
+  const { submitLead } = useCustomerMutations();
+  const [form, setForm] = useState({
+    name: "",
+    phone: "",
+    service: "",
+    date: "",
+    time: "",
+    note: "",
+  });
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!form.name.trim() || !form.phone.trim()) {
+      toast({
+        variant: "destructive",
+        title: "Thiếu thông tin",
+        description: "Vui lòng nhập họ tên và số điện thoại.",
+      });
+      return;
+    }
+
+    const serviceLabel =
+      services.find((s) => s.slug === form.service)?.title ?? form.service;
+
+    const parts = ["[Form booking]"];
+    if (form.date) parts.push(`Ngày: ${form.date}`);
+    if (form.time) parts.push(`Giờ: ${form.time}`);
+    if (form.note.trim()) parts.push(form.note.trim());
+
+    try {
+      await submitLead.mutateAsync({
+        name: form.name,
+        phone: form.phone,
+        serviceInterest: serviceLabel || "Chưa chọn",
+        note: parts.join(" · "),
+      });
+      toast({
+        title: "Đã gửi yêu cầu",
+        description: "Phuoc Lai sẽ liên hệ bạn trong thời gian sớm nhất.",
+      });
+      setForm({ name: "", phone: "", service: "", date: "", time: "", note: "" });
+    } catch {
+      toast({
+        variant: "destructive",
+        title: "Không gửi được",
+        description: "Vui lòng gọi hotline hoặc thử lại sau.",
+      });
+    }
+  };
+
   return (
     <section className="bg-background border-t border-border/60" data-testid="section-booking">
       <motion.div
@@ -78,7 +134,7 @@ export default function BookingSection() {
               Vui lòng để lại thông tin, chuyên viên của chúng tôi sẽ liên hệ để tư vấn dáng mày phù hợp nhất cho bạn.
             </p>
 
-            <form className="space-y-6" data-testid="form-booking" onSubmit={(e) => e.preventDefault()}>
+            <form className="space-y-6" data-testid="form-booking" onSubmit={handleSubmit}>
               <motion.div
                 initial={{ opacity: 0, y: 10 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -87,24 +143,30 @@ export default function BookingSection() {
               >
                 <motion.div className="space-y-2">
                   <label className="text-[10px] uppercase tracking-widest text-foreground/50">
-                    Họ và tên
+                    Họ và tên *
                   </label>
                   <input
                     type="text"
+                    required
                     className="w-full bg-background/40 border border-border/80 rounded-xl px-4 py-3 focus:outline-none focus:border-primary transition-colors text-sm"
                     placeholder="Nhập họ tên"
                     data-testid="input-booking-name"
+                    value={form.name}
+                    onChange={(e) => setForm({ ...form, name: e.target.value })}
                   />
                 </motion.div>
                 <motion.div className="space-y-2">
                   <label className="text-[10px] uppercase tracking-widest text-foreground/50">
-                    Số điện thoại
+                    Số điện thoại *
                   </label>
                   <input
                     type="tel"
+                    required
                     className="w-full bg-background/40 border border-border/80 rounded-xl px-4 py-3 focus:outline-none focus:border-primary transition-colors text-sm"
                     placeholder="Nhập SĐT"
                     data-testid="input-booking-phone"
+                    value={form.phone}
+                    onChange={(e) => setForm({ ...form, phone: e.target.value })}
                   />
                 </motion.div>
               </motion.div>
@@ -123,11 +185,15 @@ export default function BookingSection() {
                   <select
                     className="w-full bg-background/40 border border-border/80 rounded-xl px-4 py-3 focus:outline-none focus:border-primary transition-colors text-sm"
                     data-testid="select-booking-service"
+                    value={form.service}
+                    onChange={(e) => setForm({ ...form, service: e.target.value })}
                   >
                     <option value="">Chọn dịch vụ</option>
-                    <option value="dks">Điêu Khắc Sợi</option>
-                    <option value="ombre">Phun Mày Ombre</option>
-                    <option value="combo">Combo Brows</option>
+                    {services.map((svc) => (
+                      <option key={svc.id} value={svc.slug}>
+                        {svc.title}
+                      </option>
+                    ))}
                   </select>
                 </motion.div>
                 <motion.div className="space-y-2">
@@ -138,6 +204,8 @@ export default function BookingSection() {
                     type="date"
                     className="w-full bg-background/40 border border-border/80 rounded-xl px-4 py-3 focus:outline-none focus:border-primary transition-colors text-sm"
                     data-testid="input-booking-date"
+                    value={form.date}
+                    onChange={(e) => setForm({ ...form, date: e.target.value })}
                   />
                 </motion.div>
               </motion.div>
@@ -157,6 +225,8 @@ export default function BookingSection() {
                     type="time"
                     className="w-full bg-background/40 border border-border/80 rounded-xl px-4 py-3 focus:outline-none focus:border-primary transition-colors text-sm"
                     data-testid="input-booking-time"
+                    value={form.time}
+                    onChange={(e) => setForm({ ...form, time: e.target.value })}
                   />
                 </motion.div>
                 <motion.div className="space-y-2">
@@ -168,6 +238,8 @@ export default function BookingSection() {
                     rows={1}
                     placeholder="Nhu cầu đặc biệt..."
                     data-testid="textarea-booking-note"
+                    value={form.note}
+                    onChange={(e) => setForm({ ...form, note: e.target.value })}
                   />
                 </motion.div>
               </motion.div>
@@ -180,10 +252,11 @@ export default function BookingSection() {
               >
                 <Button
                   type="submit"
+                  disabled={submitLead.isPending}
                   className="w-full rounded-full bg-primary text-primary-foreground hover:bg-primary/90 py-6 text-[11px] uppercase tracking-[0.2em] mt-4"
                   data-testid="btn-booking-submit"
                 >
-                  ĐẶT LỊCH NGAY &rarr;
+                  {submitLead.isPending ? "Đang gửi..." : "ĐẶT LỊCH NGAY →"}
                 </Button>
               </motion.div>
             </form>

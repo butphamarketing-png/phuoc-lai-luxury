@@ -1,5 +1,26 @@
 import { getSupabaseClient, isSupabaseConfigured } from "@/lib/supabase";
 
+async function notifyLeadByEmail(
+  input: NewCustomerInput,
+  source: string,
+): Promise<void> {
+  try {
+    await fetch("/api/notify-lead", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        name: input.name,
+        phone: input.phone,
+        serviceInterest: input.serviceInterest,
+        note: input.note,
+        source,
+      }),
+    });
+  } catch {
+    /* email là bổ sung; lưu admin vẫn qua Supabase */
+  }
+}
+
 export type CustomerStatus = "new" | "contacted" | "done";
 
 export interface SiteCustomer {
@@ -79,6 +100,10 @@ export async function submitCustomerLead(
     status: "new" as const,
   };
 
+  const source = input.note?.includes("[Form booking]")
+    ? "Trang chủ — Đặt lịch"
+    : "Trang Liên hệ";
+
   if (!isSupabaseConfigured()) {
     customersCache = [
       {
@@ -93,6 +118,7 @@ export async function submitCustomerLead(
       },
       ...(customersCache ?? []),
     ];
+    await notifyLeadByEmail(input, source);
     return;
   }
 
@@ -100,6 +126,8 @@ export async function submitCustomerLead(
     .from("site_customers")
     .insert(row);
   if (error) throw error;
+
+  await notifyLeadByEmail(input, source);
 }
 
 export async function updateCustomerStatus(

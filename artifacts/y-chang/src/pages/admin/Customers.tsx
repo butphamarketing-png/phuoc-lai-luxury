@@ -66,7 +66,7 @@ export default function AdminCustomers() {
       <div className="space-y-8">
         <AdminPageHeader
           title="Yêu cầu từ form Liên hệ"
-          description="Khách gửi từ trang /lien-he. Bấm đổi trạng thái để theo dõi xử lý."
+          description="Khách gửi từ trang Liên hệ và form Đặt lịch trên trang chủ. Email báo về Phuocduocvt13@gmail.com."
         />
 
         <div className="relative max-w-md">
