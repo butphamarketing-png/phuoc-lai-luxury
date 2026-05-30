@@ -271,35 +271,6 @@ export function buildCourseJsonLd(
   };
 }
 
-/** FAQ trang chủ — dùng cho schema + section hiển thị */
-export const HOME_FAQ = [
-  {
-    question: "Phun xăm tại Phuoc Lai Luxury Vũng Tàu có an toàn không?",
-    answer:
-      "Phuoc Lai Luxury sử dụng mực organic chuẩn Châu Âu, quy trình vô trùng và Master giàu kinh nghiệm. Mỗi khách được tư vấn dáng phù hợp trước khi thực hiện.",
-  },
-  {
-    question: "Điêu khắc sợi AMAZINGBROWS và SANDBROWS khác nhau thế nào?",
-    answer:
-      "AMAZINGBROWS là kỹ thuật điêu khắc sợi siêu thực từng sợi. SANDBROWS (powder/ombre brows) tạo hiệu ứng phấn mịn, phù hợp khách thích dáng mày soft hoặc makeup look.",
-  },
-  {
-    question: "Phun môi SEXYLIPS bao lâu thì lành và giữ màu được bao lâu?",
-    answer:
-      "Môi thường lành trong 5–7 ngày, màu ổn định sau khoảng 4 tuần. Thời gian giữ màu phụ thuộc cơ địa, thường từ 1–3 năm nếu chăm sóc đúng hướng dẫn.",
-  },
-  {
-    question: "Địa chỉ studio Phuoc Lai Luxury ở đâu?",
-    answer:
-      "Studio tại 42a Bà Triệu, Phường 1, TP. Vũng Tàu. Mở cửa 9:00–19:00 hàng ngày. Hotline đặt lịch: 0909 203 108.",
-  },
-  {
-    question: "Có khóa đào tạo phun xăm và spa tại Vũng Tàu không?",
-    answer:
-      "Phuoc Lai Academy có các khóa phun xăm (mày, môi, mí) và spa — học thực hành trên model thật, hỗ trợ sau khóa cho học viên.",
-  },
-] as const;
-
 export type BreadcrumbItem = { name: string; path: string };
 
 export function buildBreadcrumbJsonLd(items: BreadcrumbItem[]) {
@@ -331,23 +302,6 @@ export function buildItemListJsonLd(params: {
       position: index + 1,
       name: item.name,
       url: absoluteUrl(item.path),
-    })),
-  };
-}
-
-export function buildFAQPageJsonLd(
-  faqs: readonly { question: string; answer: string }[],
-) {
-  return {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: faqs.map((faq) => ({
-      "@type": "Question",
-      name: faq.question,
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: faq.answer,
-      },
     })),
   };
 }

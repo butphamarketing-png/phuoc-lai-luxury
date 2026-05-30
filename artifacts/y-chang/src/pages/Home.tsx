@@ -3,7 +3,6 @@ import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 import { useState, useEffect, useMemo } from "react";
 import { ChevronLeft, ChevronRight, Diamond, Leaf, Shield, User, ShieldCheck, Plus, Star } from "lucide-react";
-import HomeFaqSection from "@/components/sections/HomeFaqSection";
 import BookingSection from "@/components/sections/BookingSection";
 import SocialSection from "@/components/sections/SocialSection";
 import { usePublicTraining } from "@/hooks/use-site-content";
@@ -507,7 +506,6 @@ export default function Home() {
         </div>
       </section>
 
-      <HomeFaqSection />
       <BookingSection />
       <SocialSection />
     </motion.div>
