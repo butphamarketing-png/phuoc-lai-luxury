@@ -4,11 +4,34 @@ import { motion } from "framer-motion";
 import { useLang } from "@/context/LanguageContext";
 import { Link } from "wouter";
 
+import { usePageMeta } from "@/hooks/usePageMeta";
+import JsonLd from "@/components/JsonLd";
+import { breadcrumbSchema, webPageSchema } from "@/lib/seo-schema";
+
 export default function About() {
   const { t } = useLang();
 
+  usePageMeta({
+    title: "Về chúng tôi | Phuoc Lai Luxury",
+    description: "Câu chuyện Phuoc Lai Luxury — studio phun xăm và spa đẳng cấp tại Vũng Tàu với đội ngũ Master giàu kinh nghiệm.",
+    path: "/ve-chung-toi",
+  });
+
   return (
     <main className="min-h-screen bg-[#fdfdfb] w-full overflow-x-hidden relative">
+      <JsonLd
+        data={[
+          breadcrumbSchema([
+            { name: "Trang chủ", path: "/" },
+            { name: "Về chúng tôi", path: "/ve-chung-toi" },
+          ]),
+          webPageSchema({
+            name: "Về chúng tôi",
+            description: "Câu chuyện Phuoc Lai Luxury tại Vũng Tàu.",
+            path: "/ve-chung-toi",
+          }),
+        ]}
+      />
       <Navbar />
       
       {/* Hero Section */}

@@ -7,6 +7,9 @@ import DetailBody from "@/components/DetailBody";
 import { usePageMeta } from "@/hooks/usePageMeta";
 import { useServiceDetail } from "@/hooks/useSiteData";
 import { resolveMediaUrl } from "@/lib/media";
+import JsonLd from "@/components/JsonLd";
+import { articleSchema, breadcrumbSchema } from "@/lib/seo-schema";
+import { useMemo } from "react";
 
 export default function ServiceDetail() {
   const params = useParams<{ slug: string }>();
@@ -24,6 +27,25 @@ export default function ServiceDetail() {
         }
       : null,
   );
+
+  const jsonLd = useMemo(() => {
+    if (!data) return [];
+    const path = `/dich-vu/${slug}`;
+    return [
+      breadcrumbSchema([
+        { name: "Trang chủ", path: "/" },
+        { name: "Dịch vụ", path: "/dich-vu" },
+        { name: data.title, path },
+      ]),
+      articleSchema({
+        headline: data.title,
+        description: data.seo?.description || data.metaDescription || data.intro,
+        path,
+        image: data.image,
+        author: data.author,
+      }),
+    ];
+  }, [data, slug]);
 
   if (isLoading) {
     return (
@@ -57,6 +79,7 @@ export default function ServiceDetail() {
 
   return (
     <main className="min-h-screen bg-[#fdfdfb] text-[#1a1a1a] w-full overflow-x-hidden">
+      <JsonLd data={jsonLd} />
       <Navbar />
 
       <section className="relative pt-40 pb-20 bg-[#111] text-white">

@@ -7,7 +7,9 @@ import { serviceCategories } from "@/data/content";
 import { usePublishedServices } from "@/hooks/useSiteData";
 import { usePageMeta } from "@/hooks/usePageMeta";
 import BookingModal from "@/components/BookingModal";
-import { useState } from "react";
+import { useState, useMemo } from "react";
+import JsonLd from "@/components/JsonLd";
+import { breadcrumbSchema, webPageSchema } from "@/lib/seo-schema";
 
 export default function Services() {
   const { t } = useLang();
@@ -19,6 +21,21 @@ export default function Services() {
     description: "Dịch vụ phun xăm thẩm mỹ và spa cao cấp tại Vũng Tàu — AmazingBrows, SandBrows, SexyLips và nhiều hơn.",
     path: "/dich-vu",
   });
+
+  const jsonLd = useMemo(
+    () => [
+      breadcrumbSchema([
+        { name: "Trang chủ", path: "/" },
+        { name: "Dịch vụ", path: "/dich-vu" },
+      ]),
+      webPageSchema({
+        name: "Dịch vụ",
+        description: "Dịch vụ phun xăm và spa tại Phuoc Lai Luxury.",
+        path: "/dich-vu",
+      }),
+    ],
+    [],
+  );
 
   const items =
     liveServices.length > 0
@@ -39,6 +56,7 @@ export default function Services() {
 
   return (
     <main className="min-h-screen bg-[#111] text-white w-full overflow-x-hidden">
+      <JsonLd data={jsonLd} />
       <Navbar />
 
       <section className="relative pt-40 pb-20">

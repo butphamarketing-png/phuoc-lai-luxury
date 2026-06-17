@@ -7,9 +7,9 @@
     "tw:build": "tailwindcss -i ./src/index.css -o ./src/generated-tailwind.css",
     "tw:watch": "tailwindcss -i ./src/index.css -o ./src/generated-tailwind.css --watch",
     "predev": "npm run tw:build",
-    "prebuild": "npm run tw:build",
+    "prebuild": "npm run tw:build && node scripts/seo-build.mjs prepare",
     "dev": "concurrently -k -n tailwind,vite -c cyan,green \"npm:tw:watch\" \"vite --config vite.config.ts --host 0.0.0.0\"",
-    "build": "vite build --config vite.config.ts",
+    "build": "vite build --config vite.config.ts && node scripts/seo-build.mjs prerender",
     "serve": "vite preview --config vite.config.ts --host 0.0.0.0",
     "typecheck": "tsc -p tsconfig.json --noEmit"
   },

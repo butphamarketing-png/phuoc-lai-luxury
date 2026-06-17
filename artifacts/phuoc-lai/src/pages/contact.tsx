@@ -11,6 +11,8 @@ import { useSiteSettings, useSubmitLead } from "@/hooks/useSiteData";
 import { usePageMeta } from "@/hooks/usePageMeta";
 import { useToast } from "@/hooks/use-toast";
 import { useState } from "react";
+import JsonLd from "@/components/JsonLd";
+import { LOCAL_BUSINESS, breadcrumbSchema, webPageSchema } from "@/lib/seo-schema";
 
 export default function Contact() {
   const { t } = useLang();
@@ -72,6 +74,20 @@ export default function Contact() {
 
   return (
     <main className="min-h-screen bg-[#fdfdfb] text-[#1a1a1a] w-full overflow-x-hidden relative">
+      <JsonLd
+        data={[
+          LOCAL_BUSINESS,
+          breadcrumbSchema([
+            { name: "Trang chủ", path: "/" },
+            { name: "Liên hệ", path: "/lien-he" },
+          ]),
+          webPageSchema({
+            name: "Liên hệ",
+            description: "Đặt lịch và tư vấn tại Phuoc Lai Luxury.",
+            path: "/lien-he",
+          }),
+        ]}
+      />
       <Navbar />
       
       <section className="relative pt-48 pb-24 overflow-hidden bg-[#111] text-white">

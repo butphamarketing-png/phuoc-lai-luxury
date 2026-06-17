@@ -3,6 +3,9 @@ import Footer from "@/components/sections/Footer";
 import { motion } from "framer-motion";
 import { useLang } from "@/context/LanguageContext";
 import { Star } from "lucide-react";
+import { usePageMeta } from "@/hooks/usePageMeta";
+import JsonLd from "@/components/JsonLd";
+import { breadcrumbSchema, webPageSchema } from "@/lib/seo-schema";
 
 const testimonials = [
   { name: "Thùy Linh", role: "Khách Hàng Phun Mày", quote: "Không thể tin được đôi lông mày của mình lại có thể tự nhiên và sắc sảo đến vậy. Master Phước Lài thực sự là một nghệ sĩ.", avatar: "/avatar-1.png" },
@@ -18,8 +21,27 @@ const testimonials = [
 export default function Feedback() {
   const { t } = useLang();
 
+  usePageMeta({
+    title: "Feedback | Phuoc Lai Luxury",
+    description: "Những lời yêu thương từ khách hàng và học viên Phuoc Lai Luxury Vũng Tàu.",
+    path: "/feedback",
+  });
+
   return (
     <main className="min-h-screen bg-[#111] text-white w-full overflow-x-hidden">
+      <JsonLd
+        data={[
+          breadcrumbSchema([
+            { name: "Trang chủ", path: "/" },
+            { name: "Feedback", path: "/feedback" },
+          ]),
+          webPageSchema({
+            name: "Feedback",
+            description: "Đánh giá từ khách hàng Phuoc Lai Luxury.",
+            path: "/feedback",
+          }),
+        ]}
+      />
       <Navbar />
 
       <section className="relative pt-40 pb-20">

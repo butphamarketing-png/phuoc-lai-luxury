@@ -6,6 +6,9 @@ import { useLang } from "@/context/LanguageContext";
 import { trainingCategories } from "@/data/content";
 import { usePublishedCourses } from "@/hooks/useSiteData";
 import { usePageMeta } from "@/hooks/usePageMeta";
+import { useMemo } from "react";
+import JsonLd from "@/components/JsonLd";
+import { breadcrumbSchema, webPageSchema } from "@/lib/seo-schema";
 
 export default function Training() {
   const { t } = useLang();
@@ -16,6 +19,21 @@ export default function Training() {
     description: "Chương trình đào tạo phun xăm thẩm mỹ chuyên sâu tại Vũng Tàu — học thật, làm thật, thành công thật.",
     path: "/dao-tao",
   });
+
+  const jsonLd = useMemo(
+    () => [
+      breadcrumbSchema([
+        { name: "Trang chủ", path: "/" },
+        { name: "Đào tạo", path: "/dao-tao" },
+      ]),
+      webPageSchema({
+        name: "Đào tạo",
+        description: "Khóa học phun xăm chuyên nghiệp tại Vũng Tàu.",
+        path: "/dao-tao",
+      }),
+    ],
+    [],
+  );
 
   const items =
     liveCourses.length > 0
@@ -36,6 +54,7 @@ export default function Training() {
 
   return (
     <main className="min-h-screen bg-[#0a0a0a] text-white w-full overflow-x-hidden">
+      <JsonLd data={jsonLd} />
       <Navbar />
 
       <section className="relative pt-40 pb-20">
