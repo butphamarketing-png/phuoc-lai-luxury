@@ -6,42 +6,43 @@ export default function HomeIntro() {
   const { t } = useLang();
 
   return (
-    <section className="py-24 md:py-32 bg-[#f5f5f0]">
-      <div className="container mx-auto px-6 max-w-7xl">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-24 items-center">
+    <section className="bg-[#ebebeb] py-[88px] md:py-[100px]">
+      <div className="pl-container">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.8 }}
-            className="flex flex-col items-start"
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="max-w-[520px]"
           >
-            <span className="text-[10px] uppercase tracking-[0.3em] font-semibold text-[#1a1a1a]/60 mb-6 block">
-              {t.home.intro.label}
-            </span>
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif text-[#1a1a1a] leading-[1.1] mb-8 max-w-lg">
-              {t.home.intro.title}
+            <p className="pl-label pl-label-light mb-5">{t.home.intro.label}</p>
+            <h2 className="pl-heading-xl text-[#1a1a1a] mb-6">
+              Nâng tầm thần thái
+              <br />
+              từ từng sợi mày
             </h2>
-            <p className="text-sm md:text-base text-[#1a1a1a]/70 font-light leading-relaxed mb-10 max-w-md">
+            <div className="pl-divider mb-7" />
+            <p className="text-[14px] font-light leading-[1.85] text-[#1a1a1a]/60 mb-10 max-w-[420px]">
               {t.home.intro.desc}
             </p>
             <Link href="/ve-chung-toi">
-              <span className="inline-flex items-center justify-center bg-[#111] text-white px-8 py-4 text-xs font-semibold tracking-widest uppercase hover:bg-black transition-colors rounded-none cursor-pointer">
-                {t.home.intro.btn}
+              <span className="pl-btn-solid cursor-pointer">
+                XEM THÊM <span aria-hidden>→</span>
               </span>
             </Link>
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
+            initial={{ opacity: 0, scale: 0.98 }}
             whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 1 }}
-            className="relative w-full aspect-[4/5] overflow-hidden"
+            viewport={{ once: true }}
+            transition={{ duration: 0.7 }}
+            className="w-full max-w-[560px] lg:ml-auto aspect-square"
           >
             <img
               src="/intro-interior.png"
-              alt="Studio Interior"
+              alt="Phuoc Lai Studio"
               className="w-full h-full object-cover"
             />
           </motion.div>

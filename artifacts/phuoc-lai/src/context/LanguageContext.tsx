@@ -81,6 +81,11 @@ export interface Translations {
     training: string;
     contact: string;
     copyright: string;
+    connect: string;
+    privacy: string;
+    terms: string;
+    links: Array<{ label: string; href: string }>;
+    serviceLinks: Array<{ label: string; href: string }>;
   };
   about: {
     title: string;
@@ -199,7 +204,23 @@ const vi: Translations = {
     services: "DỊCH VỤ",
     training: "ĐÀO TẠO",
     contact: "THÔNG TIN LIÊN HỆ",
+    connect: "KẾT NỐI",
+    privacy: "Chính sách bảo mật",
+    terms: "Điều khoản dịch vụ",
     copyright: "© 2024 PHUOC LAI PERMANENT MAKEUP. All rights reserved.",
+    links: [
+      { label: "Trang Chủ", href: "/" },
+      { label: "Về Chúng Tôi", href: "/ve-chung-toi" },
+      { label: "Dịch Vụ", href: "/dich-vu" },
+      { label: "Đào Tạo", href: "/dao-tao" },
+      { label: "Feedback", href: "/feedback" },
+    ],
+    serviceLinks: [
+      { label: "Điêu Khắc Sợi", href: "/dich-vu" },
+      { label: "Phun Mày Ombre", href: "/dich-vu" },
+      { label: "Combo Brows", href: "/dich-vu" },
+      { label: "Xử Lý Mày Hỏng", href: "/dich-vu" },
+    ],
   },
   about: {
     title: "Về Chúng Tôi",
@@ -318,7 +339,23 @@ const en: Translations = {
     services: "SERVICES",
     training: "TRAINING",
     contact: "CONTACT INFO",
+    connect: "CONNECT",
+    privacy: "Privacy Policy",
+    terms: "Terms of Service",
     copyright: "© 2024 PHUOC LAI PERMANENT MAKEUP. All rights reserved.",
+    links: [
+      { label: "Home", href: "/" },
+      { label: "About Us", href: "/ve-chung-toi" },
+      { label: "Services", href: "/dich-vu" },
+      { label: "Training", href: "/dao-tao" },
+      { label: "Feedback", href: "/feedback" },
+    ],
+    serviceLinks: [
+      { label: "Hair Stroke", href: "/dich-vu" },
+      { label: "Ombre Brows", href: "/dich-vu" },
+      { label: "Combo Brows", href: "/dich-vu" },
+      { label: "Correction", href: "/dich-vu" },
+    ],
   },
   about: {
     title: "About Us",

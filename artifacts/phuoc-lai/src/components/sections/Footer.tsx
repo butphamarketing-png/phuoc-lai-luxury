@@ -1,82 +1,120 @@
-import { Facebook, Instagram, Youtube } from "lucide-react";
+import { Facebook, Instagram } from "lucide-react";
 import { SiTiktok } from "react-icons/si";
+import { Link } from "wouter";
 import { useLang } from "@/context/LanguageContext";
+import { FB_PAGE } from "@/data/content";
+
+const galleryImages = [
+  "/portfolio-brows.png",
+  "/portfolio-eyeliner.png",
+  "/portfolio-lips.png",
+  "/training-1.png",
+  "/training-2.png",
+  "/training-3.png",
+];
 
 export default function Footer() {
   const { t } = useLang();
 
+  const trainingLinks = ["Brows Master", "Brows Expert", "Master Advanced", "Business Brows"];
+
   return (
-    <footer className="bg-[#111] text-white pt-24 pb-8 border-t border-white/10">
-      <div className="container mx-auto px-6 xl:px-24">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 mb-20">
-          
-          {/* Column 1 */}
-          <div className="flex flex-col items-start">
-            <img src="/logo.png" alt="Phuoc Lai Logo" className="h-16 w-16 object-contain mb-8 invert" />
-            <p className="text-[10px] tracking-[0.2em] uppercase text-white/50 leading-loose max-w-[200px]">
-              {t.footer.tagline}
+    <footer className="bg-[#ebebeb] text-[#1a1a1a] pt-16 pb-8 border-t border-black/[0.06]">
+      <div className="pl-container">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 mb-14">
+          <div>
+            <img src="/logo.png" alt="Phuoc Lai" className="h-12 w-12 rounded-full object-cover mb-5" />
+            <p className="text-[11px] font-light leading-[1.85] text-[#1a1a1a]/55 max-w-[200px]">
+              Master PMU — RS Technique — Amazing Brows
             </p>
-          </div>
-
-          {/* Column 2 */}
-          <div>
-            <h4 className="text-xs font-bold tracking-[0.2em] uppercase mb-8">{t.footer.quickLinks}</h4>
-            <ul className="space-y-4">
-              {t.footer.links.map((link) => (
-                <li key={link.href}>
-                  <a href={link.href} className="text-sm font-light text-white/60 hover:text-white transition-colors">
-                    {link.label}
-                  </a>
-                </li>
+            <div className="flex gap-2.5 mt-5">
+              {[Facebook, Instagram, SiTiktok].map((Icon, i) => (
+                <a
+                  key={i}
+                  href={i === 0 ? FB_PAGE : i === 1 ? "https://www.instagram.com/phuoclai.pmu" : "https://tiktok.com/@phuocbeautyacademy_vt"}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-8 h-8 rounded-full border border-[#1a1a1a]/12 flex items-center justify-center text-[#1a1a1a]/50 hover:bg-[#1a1a1a] hover:text-white hover:border-[#1a1a1a] transition-colors"
+                >
+                  <Icon size={13} />
+                </a>
               ))}
-            </ul>
-          </div>
-
-          {/* Column 3 */}
-          <div>
-            <h4 className="text-xs font-bold tracking-[0.2em] uppercase mb-8">{t.footer.services}</h4>
-            <ul className="space-y-4">
-              {t.footer.serviceLinks.map((link) => (
-                <li key={link.label}>
-                  <a href={link.href} className="text-sm font-light text-white/60 hover:text-white transition-colors">
-                    {link.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Column 4 */}
-          <div>
-            <h4 className="text-xs font-bold tracking-[0.2em] uppercase mb-8">{t.footer.contact}</h4>
-            <ul className="space-y-4 text-sm font-light text-white/60 mb-10">
-              <li>0938 123 456</li>
-              <li>info@amazingbrows.vn</li>
-              <li>123 Beauty Street, D1<br />HCMC, Vietnam</li>
-            </ul>
-            
-            <h4 className="text-xs font-bold tracking-[0.2em] uppercase mb-6">{t.footer.connect}</h4>
-            <div className="flex gap-4">
-              <a href="#" className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white/60 hover:text-black hover:bg-white hover:border-white transition-all">
-                <Facebook size={16} strokeWidth={1.5} />
-              </a>
-              <a href="#" className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white/60 hover:text-black hover:bg-white hover:border-white transition-all">
-                <Instagram size={16} strokeWidth={1.5} />
-              </a>
-              <a href="#" className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white/60 hover:text-black hover:bg-white hover:border-white transition-all">
-                <SiTiktok size={16} />
-              </a>
             </div>
           </div>
 
+          <div>
+            <h4 className="pl-label pl-label-light mb-5">{t.footer.quickLinks}</h4>
+            <ul className="space-y-2.5">
+              {t.footer.links.map((link) => (
+                <li key={link.href}>
+                  <Link href={link.href}>
+                    <span className="text-[13px] font-light text-[#1a1a1a]/60 hover:text-[#1a1a1a] cursor-pointer">
+                      {link.label}
+                    </span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <h4 className="pl-label pl-label-light mb-5">{t.footer.services}</h4>
+            <ul className="space-y-2.5">
+              {t.footer.serviceLinks.map((link) => (
+                <li key={link.label}>
+                  <Link href={link.href}>
+                    <span className="text-[13px] font-light text-[#1a1a1a]/60 hover:text-[#1a1a1a] cursor-pointer">
+                      {link.label}
+                    </span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <h4 className="pl-label pl-label-light mb-5">{t.footer.training}</h4>
+            <ul className="space-y-2.5">
+              {trainingLinks.map((label) => (
+                <li key={label}>
+                  <Link href="/dao-tao">
+                    <span className="text-[13px] font-light text-[#1a1a1a]/60 hover:text-[#1a1a1a] cursor-pointer">
+                      {label}
+                    </span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <h4 className="pl-label pl-label-light mb-5">{t.footer.contact}</h4>
+            <ul className="space-y-2 text-[13px] font-light text-[#1a1a1a]/60 mb-6">
+              <li>Vũng Tàu</li>
+              <li>
+                <a href={FB_PAGE} className="hover:text-[#1a1a1a]">
+                  facebook.com/phuoclai.pmu
+                </a>
+              </li>
+              <li>@phuoclai.pmu</li>
+            </ul>
+            <div className="grid grid-cols-3 gap-1">
+              {galleryImages.map((src) => (
+                <div key={src} className="aspect-square overflow-hidden">
+                  <img src={src} alt="" className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500" />
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
 
-        <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-[10px] text-white/40 tracking-[0.1em] uppercase">
-          <p>{t.footer.copyright}</p>
-          <div className="flex gap-8">
-            <a href="#" className="hover:text-white transition-colors">{t.footer.privacy}</a>
-            <a href="#" className="hover:text-white transition-colors">{t.footer.terms}</a>
-          </div>
+        <div className="border-t border-[#1a1a1a]/8 pt-6 text-center">
+          <p
+            className="text-[9px] font-medium tracking-[0.2em] uppercase text-[#1a1a1a]/40"
+            style={{ fontFamily: "var(--app-font-sans)" }}
+          >
+            {t.footer.copyright}
+          </p>
         </div>
       </div>
     </footer>

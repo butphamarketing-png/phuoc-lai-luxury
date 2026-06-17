@@ -1,72 +1,75 @@
 import { motion } from "framer-motion";
 import { useLang } from "@/context/LanguageContext";
 import { Link } from "wouter";
-
-const trainingImages = [
-  "/service-1.png", // reusing some generated images as placeholders for course thumbs if needed
-  "/service-2.png",
-  "/service-3.png",
-  "/service-4.png",
-];
+import { Plus } from "lucide-react";
+import { homeTrainingPreview } from "@/data/content";
 
 export default function HomeTraining() {
   const { t } = useLang();
 
   return (
-    <section className="bg-[#1a1a1a] text-white">
-      {/* Banner */}
-      <div className="grid grid-cols-1 lg:grid-cols-2">
-        <div className="p-12 md:p-24 flex flex-col justify-center bg-[#111111]">
-          <span className="text-[10px] uppercase tracking-[0.3em] font-semibold text-white/50 mb-6 block">
-            {t.home.training.label}
-          </span>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif leading-[1.1] mb-8">
-            {t.home.training.title}
-          </h2>
-          <p className="text-sm md:text-base text-white/60 font-light leading-relaxed mb-10 max-w-md">
+    <section className="bg-[#ebebeb] py-[88px] md:py-[100px]">
+      <div className="pl-container">
+        <div className="text-center mb-14">
+          <p className="pl-label pl-label-light mb-5">{t.home.training.label}</p>
+          <h2 className="pl-heading-lg text-[#1a1a1a] mb-4">{t.home.training.title}</h2>
+          <p className="text-[13px] font-light text-[#1a1a1a]/55 max-w-[560px] mx-auto leading-relaxed">
             {t.home.training.desc}
           </p>
-          <Link href="/dao-tao">
-            <span className="inline-flex self-start items-center justify-center border border-white/20 text-white px-8 py-4 text-[10px] font-semibold tracking-[0.2em] uppercase hover:bg-white hover:text-black transition-colors rounded-none cursor-pointer">
-              {t.home.training.btn}
-            </span>
-          </Link>
         </div>
-        <div className="relative h-[400px] lg:h-auto">
-          <img
-            src="/instructor.png"
-            alt="Instructor"
-            className="w-full h-full object-cover"
-          />
-        </div>
-      </div>
 
-      {/* Courses Grid */}
-      <div className="container mx-auto px-6 max-w-7xl py-24">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {t.home.training.courses.map((course, idx) => (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-12">
+          {homeTrainingPreview.map((course, idx) => (
             <motion.div
-              key={idx}
-              initial={{ opacity: 0, y: 20 }}
+              key={course.title}
+              initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: idx * 0.1, duration: 0.6 }}
-              className="group border border-white/10 p-6 flex flex-col hover:border-white/30 transition-colors"
+              transition={{ delay: idx * 0.06 }}
+              className="group bg-[#1a1a1a] text-white flex flex-col"
             >
-              <div className="w-full aspect-video mb-6 overflow-hidden bg-[#111]">
-                <img src={trainingImages[idx]} alt={course.title} className="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity" />
+              <div className="aspect-[4/3] overflow-hidden">
+                <img
+                  src={course.img}
+                  alt={course.title}
+                  className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
+                />
               </div>
-              <h3 className="text-sm font-semibold tracking-widest uppercase mb-3">
-                {course.title}
-              </h3>
-              <p className="text-xs text-white/50 font-light leading-relaxed mb-8 flex-grow">
-                {course.desc}
-              </p>
-              <div className="inline-block border border-white/20 px-3 py-1.5 text-[9px] tracking-widest uppercase text-white/70 self-start">
-                {course.duration}
+              <div className="p-5 flex flex-col flex-1">
+                <p
+                  className="text-[9px] font-medium tracking-[0.22em] uppercase text-white/40 mb-2"
+                  style={{ fontFamily: "var(--app-font-sans)" }}
+                >
+                  {course.tag}
+                </p>
+                <h3 className="font-serif text-[22px] font-normal tracking-wide mb-2 leading-tight">
+                  {course.title}
+                </h3>
+                <p className="text-[11px] font-light text-white/45 leading-relaxed flex-1 mb-5">
+                  {course.desc}
+                </p>
+                <div className="flex items-center justify-between mt-auto">
+                  <span
+                    className="text-[9px] font-medium tracking-[0.18em] uppercase text-white/55"
+                    style={{ fontFamily: "var(--app-font-sans)" }}
+                  >
+                    {course.duration}
+                  </span>
+                  <div className="w-7 h-7 rounded-full border border-white/20 flex items-center justify-center group-hover:border-white transition-colors">
+                    <Plus size={12} strokeWidth={1.5} />
+                  </div>
+                </div>
               </div>
             </motion.div>
           ))}
+        </div>
+
+        <div className="flex justify-center">
+          <Link href="/dao-tao">
+            <span className="inline-flex items-center gap-2 border border-[#1a1a1a]/25 text-[#1a1a1a] px-9 py-3.5 text-[11px] font-medium tracking-[0.2em] uppercase rounded-full hover:bg-[#1a1a1a] hover:text-white hover:border-[#1a1a1a] transition-colors cursor-pointer">
+              {t.home.training.btn}
+            </span>
+          </Link>
         </div>
       </div>
     </section>

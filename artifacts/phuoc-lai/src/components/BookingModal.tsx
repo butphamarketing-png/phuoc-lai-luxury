@@ -19,6 +19,8 @@ import {
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
+import { usePublishedServices, useSubmitLead } from "@/hooks/useSiteData";
+import { useToast } from "@/hooks/use-toast";
 
 interface BookingModalProps {
   open: boolean;
@@ -28,9 +30,9 @@ interface BookingModalProps {
 const bookingSchema = z.object({
   name: z.string().min(1, "Bắt buộc"),
   phone: z.string().min(1, "Bắt buộc"),
-  date: z.string().min(1, "Bắt buộc"),
-  time: z.string().min(1, "Bắt buộc"),
-  service: z.string().min(1, "Bắt buộc"),
+  date: z.string().optional(),
+  time: z.string().optional(),
+  service: z.string().optional(),
   note: z.string().optional(),
 });
 
@@ -38,7 +40,10 @@ type BookingFormValues = z.infer<typeof bookingSchema>;
 
 export default function BookingModal({ open, onOpenChange }: BookingModalProps) {
   const { t } = useLang();
-  
+  const { toast } = useToast();
+  const { data: services = [] } = usePublishedServices();
+  const submitLead = useSubmitLead();
+
   const form = useForm<BookingFormValues>({
     resolver: zodResolver(bookingSchema),
     defaultValues: {
@@ -51,11 +56,49 @@ export default function BookingModal({ open, onOpenChange }: BookingModalProps) 
     },
   });
 
-  const onSubmit = (data: BookingFormValues) => {
-    console.log(data);
-    onOpenChange(false);
-    form.reset();
+  const onSubmit = async (data: BookingFormValues) => {
+    const serviceTitle =
+      services.find((s) => s.slug === data.service)?.title ??
+      (data.service ? t.nav.servicesDropdown[data.service as keyof typeof t.nav.servicesDropdown] : "") ??
+      "Chưa chọn";
+
+    const noteParts = ["[Form booking]"];
+    if (data.date) noteParts.push(`Ngày: ${data.date}`);
+    if (data.time) noteParts.push(`Giờ: ${data.time}`);
+    if (data.note?.trim()) noteParts.push(data.note.trim());
+
+    try {
+      await submitLead.mutateAsync({
+        name: data.name,
+        phone: data.phone,
+        serviceInterest: serviceTitle,
+        note: noteParts.join(" · "),
+        source: "booking",
+      });
+      toast({
+        title: "Đã gửi yêu cầu",
+        description: "Phuoc Lai sẽ liên hệ bạn trong thời gian sớm nhất.",
+      });
+      onOpenChange(false);
+      form.reset();
+    } catch {
+      toast({
+        variant: "destructive",
+        title: "Không gửi được",
+        description: "Vui lòng thử lại hoặc gọi hotline 0909 203 108.",
+      });
+    }
   };
+
+  const serviceOptions =
+    services.length > 0
+      ? services.map((s) => ({ value: s.slug, label: s.title }))
+      : [
+          { value: "s1", label: t.nav.servicesDropdown.s1 },
+          { value: "s2", label: t.nav.servicesDropdown.s2 },
+          { value: "s3", label: t.nav.servicesDropdown.s3 },
+          { value: "s4", label: t.nav.servicesDropdown.s4 },
+        ];
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
@@ -121,10 +164,11 @@ export default function BookingModal({ open, onOpenChange }: BookingModalProps) 
                 <SelectValue placeholder="Chọn dịch vụ" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="s1">{t.nav.servicesDropdown.s1}</SelectItem>
-                <SelectItem value="s2">{t.nav.servicesDropdown.s2}</SelectItem>
-                <SelectItem value="s3">{t.nav.servicesDropdown.s3}</SelectItem>
-                <SelectItem value="s4">{t.nav.servicesDropdown.s4}</SelectItem>
+                {serviceOptions.map((opt) => (
+                  <SelectItem key={opt.value} value={opt.value}>
+                    {opt.label}
+                  </SelectItem>
+                ))}
               </SelectContent>
             </Select>
           </div>
@@ -141,9 +185,10 @@ export default function BookingModal({ open, onOpenChange }: BookingModalProps) 
 
           <Button
             type="submit"
+            disabled={submitLead.isPending}
             className="w-full rounded-none bg-[#111] text-white hover:bg-black uppercase tracking-widest text-xs h-12 mt-6"
           >
-            {t.home.booking.form.submit}
+            {submitLead.isPending ? "Đang gửi..." : t.home.booking.form.submit}
           </Button>
         </form>
       </DialogContent>

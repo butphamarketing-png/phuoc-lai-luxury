@@ -1,4 +1,3 @@
-import { motion } from "framer-motion";
 import { useLang } from "@/context/LanguageContext";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -14,13 +13,15 @@ import {
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
+import { usePublishedServices, useSubmitLead } from "@/hooks/useSiteData";
+import { useToast } from "@/hooks/use-toast";
 
 const bookingSchema = z.object({
-  name: z.string().min(1, "Bắt buộc"),
-  phone: z.string().min(1, "Bắt buộc"),
-  date: z.string().min(1, "Bắt buộc"),
-  time: z.string().min(1, "Bắt buộc"),
-  service: z.string().min(1, "Bắt buộc"),
+  name: z.string().min(1),
+  phone: z.string().min(1),
+  date: z.string().optional(),
+  time: z.string().optional(),
+  service: z.string().optional(),
   note: z.string().optional(),
 });
 
@@ -28,110 +29,142 @@ type BookingFormValues = z.infer<typeof bookingSchema>;
 
 export default function HomeBooking() {
   const { t } = useLang();
+  const { toast } = useToast();
+  const { data: services = [] } = usePublishedServices();
+  const submitLead = useSubmitLead();
+  const form = useForm<BookingFormValues>({ resolver: zodResolver(bookingSchema) });
 
-  const form = useForm<BookingFormValues>({
-    resolver: zodResolver(bookingSchema),
-  });
+  const onSubmit = async (data: BookingFormValues) => {
+    const serviceTitle =
+      services.find((s) => s.slug === data.service)?.title ??
+      (data.service ? t.nav.servicesDropdown[data.service as keyof typeof t.nav.servicesDropdown] : "") ??
+      "Chưa chọn";
 
-  const onSubmit = (data: BookingFormValues) => {
-    console.log(data);
-    form.reset();
+    const noteParts = ["[Form booking]"];
+    if (data.date) noteParts.push(`Ngày: ${data.date}`);
+    if (data.time) noteParts.push(`Giờ: ${data.time}`);
+    if (data.note?.trim()) noteParts.push(data.note.trim());
+
+    try {
+      await submitLead.mutateAsync({
+        name: data.name,
+        phone: data.phone,
+        serviceInterest: serviceTitle,
+        note: noteParts.join(" · "),
+        source: "booking",
+      });
+      toast({
+        title: "Đã gửi yêu cầu",
+        description: "Phuoc Lai sẽ liên hệ bạn trong thời gian sớm nhất.",
+      });
+      form.reset();
+    } catch {
+      toast({
+        variant: "destructive",
+        title: "Không gửi được",
+        description: "Vui lòng thử lại hoặc gọi hotline 0909 203 108.",
+      });
+    }
   };
 
+  const fieldClass =
+    "rounded-none border-0 border-b border-[#1a1a1a]/15 bg-transparent px-0 h-10 text-[13px] font-light text-[#1a1a1a] shadow-none focus-visible:ring-0 focus-visible:border-[#1a1a1a]";
+
+  const serviceOptions =
+    services.length > 0
+      ? services.map((s) => ({ value: s.slug, label: s.title }))
+      : [
+          { value: "s1", label: t.nav.servicesDropdown.s1 },
+          { value: "s2", label: t.nav.servicesDropdown.s2 },
+          { value: "s3", label: t.nav.servicesDropdown.s3 },
+          { value: "s4", label: t.nav.servicesDropdown.s4 },
+        ];
+
   return (
-    <section className="bg-[#f5f5f0] border-t border-black/5">
-      <div className="grid grid-cols-1 lg:grid-cols-2">
-        <div className="relative hidden lg:block h-[800px]">
-          <img src="/intro-interior.png" alt="Studio" className="w-full h-full object-cover" />
-          <div className="absolute inset-0 bg-black/10 mix-blend-multiply" />
-          <div className="absolute inset-0 flex items-center justify-center">
-            <img src="/logo.png" alt="Logo" className="w-48 h-48 opacity-90 invert" />
-          </div>
+    <section className="bg-[#ebebeb]">
+      <div className="grid grid-cols-1 lg:grid-cols-2 min-h-[640px]">
+        <div className="relative hidden lg:block min-h-[640px]">
+          <img src="/intro-interior.png" alt="Studio" className="absolute inset-0 w-full h-full object-cover" />
         </div>
 
-        <div className="p-12 md:p-24 flex flex-col justify-center">
-          <span className="text-[10px] uppercase tracking-[0.3em] font-semibold text-[#1a1a1a]/50 mb-4 block">
-            {t.home.booking.label}
-          </span>
-          <h2 className="text-3xl md:text-5xl font-serif text-[#1a1a1a] leading-tight mb-2">
-            {t.home.booking.title}
-          </h2>
-          <p className="text-sm text-[#1a1a1a]/60 font-light mb-12">
-            {t.home.booking.desc}
-          </p>
+        <div className="pl-container lg:pl-16 xl:pl-20 py-16 lg:py-20 flex flex-col justify-center">
+          <p className="pl-label pl-label-light mb-4">{t.home.booking.label}</p>
+          <h2 className="pl-heading-lg text-[#1a1a1a] mb-2">{t.home.booking.title}</h2>
+          <p className="text-[13px] font-light text-[#1a1a1a]/55 mb-10">{t.home.booking.desc}</p>
 
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="space-y-2">
-                <Label className="text-xs uppercase tracking-wider text-[#1a1a1a]">{t.home.booking.form.name}</Label>
-                <Input
-                  {...form.register("name")}
-                  className="rounded-none border-b border-t-0 border-l-0 border-r-0 border-black/20 bg-transparent px-0 focus-visible:ring-0 focus-visible:border-black text-[#1a1a1a]"
-                />
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 max-w-[480px]">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              <div>
+                <Label className="text-[10px] uppercase tracking-[0.14em] text-[#1a1a1a]/50 font-medium mb-2 block">
+                  {t.home.booking.form.name}
+                </Label>
+                <Input {...form.register("name")} className={fieldClass} />
               </div>
-              <div className="space-y-2">
-                <Label className="text-xs uppercase tracking-wider text-[#1a1a1a]">{t.home.booking.form.phone}</Label>
-                <Input
-                  {...form.register("phone")}
-                  className="rounded-none border-b border-t-0 border-l-0 border-r-0 border-black/20 bg-transparent px-0 focus-visible:ring-0 focus-visible:border-black text-[#1a1a1a]"
-                />
+              <div>
+                <Label className="text-[10px] uppercase tracking-[0.14em] text-[#1a1a1a]/50 font-medium mb-2 block">
+                  {t.home.booking.form.phone}
+                </Label>
+                <Input {...form.register("phone")} className={fieldClass} />
               </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="space-y-2">
-                <Label className="text-xs uppercase tracking-wider text-[#1a1a1a]">{t.home.booking.form.date}</Label>
-                <Input
-                  type="date"
-                  {...form.register("date")}
-                  className="rounded-none border-b border-t-0 border-l-0 border-r-0 border-black/20 bg-transparent px-0 focus-visible:ring-0 focus-visible:border-black text-[#1a1a1a]"
-                />
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              <div>
+                <Label className="text-[10px] uppercase tracking-[0.14em] text-[#1a1a1a]/50 font-medium mb-2 block">
+                  {t.home.booking.form.date}
+                </Label>
+                <Input type="date" {...form.register("date")} className={fieldClass} />
               </div>
-              <div className="space-y-2">
-                <Label className="text-xs uppercase tracking-wider text-[#1a1a1a]">{t.home.booking.form.time}</Label>
-                <Select onValueChange={(val) => form.setValue("time", val)}>
-                  <SelectTrigger className="rounded-none border-b border-t-0 border-l-0 border-r-0 border-black/20 bg-transparent px-0 focus:ring-0 focus:border-black text-[#1a1a1a]">
+              <div>
+                <Label className="text-[10px] uppercase tracking-[0.14em] text-[#1a1a1a]/50 font-medium mb-2 block">
+                  {t.home.booking.form.time}
+                </Label>
+                <Select onValueChange={(v) => form.setValue("time", v)}>
+                  <SelectTrigger className={fieldClass}>
                     <SelectValue placeholder="..." />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="09:00">09:00</SelectItem>
-                    <SelectItem value="10:00">10:00</SelectItem>
-                    <SelectItem value="14:00">14:00</SelectItem>
-                    <SelectItem value="15:00">15:00</SelectItem>
+                    {["09:00", "10:00", "14:00", "15:00"].map((time) => (
+                      <SelectItem key={time} value={time}>
+                        {time}
+                      </SelectItem>
+                    ))}
                   </SelectContent>
                 </Select>
               </div>
             </div>
 
-            <div className="space-y-2">
-              <Label className="text-xs uppercase tracking-wider text-[#1a1a1a]">{t.home.booking.form.service}</Label>
-              <Select onValueChange={(val) => form.setValue("service", val)}>
-                <SelectTrigger className="rounded-none border-b border-t-0 border-l-0 border-r-0 border-black/20 bg-transparent px-0 focus:ring-0 focus:border-black text-[#1a1a1a]">
+            <div>
+              <Label className="text-[10px] uppercase tracking-[0.14em] text-[#1a1a1a]/50 font-medium mb-2 block">
+                {t.home.booking.form.service}
+              </Label>
+              <Select onValueChange={(v) => form.setValue("service", v)}>
+                <SelectTrigger className={fieldClass}>
                   <SelectValue placeholder="..." />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="s1">{t.nav.servicesDropdown.s1}</SelectItem>
-                  <SelectItem value="s2">{t.nav.servicesDropdown.s2}</SelectItem>
-                  <SelectItem value="s3">{t.nav.servicesDropdown.s3}</SelectItem>
-                  <SelectItem value="s4">{t.nav.servicesDropdown.s4}</SelectItem>
+                  {serviceOptions.map((opt) => (
+                    <SelectItem key={opt.value} value={opt.value}>
+                      {opt.label}
+                    </SelectItem>
+                  ))}
                 </SelectContent>
               </Select>
             </div>
 
-            <div className="space-y-2">
-              <Label className="text-xs uppercase tracking-wider text-[#1a1a1a]">{t.home.booking.form.note}</Label>
-              <Textarea
-                {...form.register("note")}
-                className="rounded-none border-b border-t-0 border-l-0 border-r-0 border-black/20 bg-transparent px-0 focus-visible:ring-0 focus-visible:border-black resize-none text-[#1a1a1a]"
-                rows={2}
-              />
+            <div>
+              <Label className="text-[10px] uppercase tracking-[0.14em] text-[#1a1a1a]/50 font-medium mb-2 block">
+                {t.home.booking.form.note}
+              </Label>
+              <Textarea {...form.register("note")} rows={2} className={`${fieldClass} resize-none min-h-[60px]`} />
             </div>
 
             <Button
               type="submit"
-              className="w-full rounded-none bg-[#111] text-white hover:bg-black uppercase tracking-widest text-xs h-14 mt-8"
+              disabled={submitLead.isPending}
+              className="pl-btn-solid w-full sm:w-auto h-auto border-0 mt-2"
             >
-              {t.home.booking.form.submit}
+              {submitLead.isPending ? "Đang gửi..." : t.home.booking.form.submit}
             </Button>
           </form>
         </div>

@@ -5,28 +5,36 @@ import { useLang } from "@/context/LanguageContext";
 import { Star } from "lucide-react";
 
 const testimonials = [
-  { name: "Thùy Linh", role: "Khách Hàng Phun Mày", quote: "Không thể tin được đôi lông mày của mình lại có thể tự nhiên và sắc sảo đến vậy. Master Phước Lài thực sự là một nghệ sĩ." },
-  { name: "Minh Anh", role: "Khách Hàng Phun Môi", quote: "Môi sau bong màu cực kỳ trong và đẹp. Không sưng, không đau. Dịch vụ chăm sóc ở đây rất chu đáo và chuyên nghiệp." },
-  { name: "Hoàng Yến", role: "Khách Hàng Sửa Mày", quote: "Đã từng làm hỏng mày ở nơi khác, đến đây được sửa lại dáng cực chuẩn, màu lên siêu tự nhiên. Rất hài lòng!" },
-  { name: "Ngọc Bích", role: "Học Viên Brows Master", quote: "Khóa học rất thực tế và chi tiết. Cô giáo tận tình chỉ dạy từng đường kim. Đã tự tin mở tiệm sau khi tốt nghiệp." },
-  { name: "Trang Phạm", role: "Khách Hàng Phun Mày", quote: "Từ lúc làm mày xong ai cũng khen. Dáng mày ôm form mặt, sợi tự nhiên như thật luôn." },
-  { name: "Bảo Thy", role: "Khách Hàng Phun Môi", quote: "Thích nhất khoản không bị sưng. Làm xong đi chơi được luôn. Màu lên cực ưng ý." },
-  { name: "Lan Khuê", role: "Học Viên Nâng Cao", quote: "Học được rất nhiều tips thực chiến mà không trường lớp nào dạy. Cảm ơn cô giáo rất nhiều." },
-  { name: "Hương Giang", role: "Khách Hàng Sửa Mày", quote: "Tưởng chừng như vô vọng với đôi lông mày cũ. Thật may vì đã tìm đến Phuoc Lai Luxury." },
+  { name: "Thùy Linh", role: "Khách Hàng Phun Mày", quote: "Không thể tin được đôi lông mày của mình lại có thể tự nhiên và sắc sảo đến vậy. Master Phước Lài thực sự là một nghệ sĩ.", avatar: "/avatar-1.png" },
+  { name: "Minh Anh", role: "Khách Hàng Phun Môi", quote: "Môi sau bong màu cực kỳ trong và đẹp. Không sưng, không đau. Dịch vụ chăm sóc ở đây rất chu đáo và chuyên nghiệp.", avatar: "/avatar-2.png" },
+  { name: "Hoàng Yến", role: "Khách Hàng Sửa Mày", quote: "Đã từng làm hỏng mày ở nơi khác, đến đây được sửa lại dáng cực chuẩn, màu lên siêu tự nhiên. Rất hài lòng!", avatar: "/avatar-3.png" },
+  { name: "Ngọc Bích", role: "Học Viên Brows Master", quote: "Khóa học rất thực tế và chi tiết. Cô giáo tận tình chỉ dạy từng đường kim. Đã tự tin mở tiệm sau khi tốt nghiệp.", avatar: "/avatar-1.png" },
+  { name: "Trang Phạm", role: "Khách Hàng Phun Mày", quote: "Từ lúc làm mày xong ai cũng khen. Dáng mày ôm form mặt, sợi tự nhiên như thật luôn.", avatar: "/avatar-2.png" },
+  { name: "Bảo Thy", role: "Khách Hàng Phun Môi", quote: "Thích nhất khoản không bị sưng. Làm xong đi chơi được luôn. Màu lên cực ưng ý.", avatar: "/avatar-3.png" },
+  { name: "Lan Khuê", role: "Học Viên Nâng Cao", quote: "Học được rất nhiều tips thực chiến mà không trường lớp nào dạy. Cảm ơn cô giáo rất nhiều.", avatar: "/avatar-1.png" },
+  { name: "Hương Giang", role: "Khách Hàng Sửa Mày", quote: "Tưởng chừng như vô vọng với đôi lông mày cũ. Thật may vì đã tìm đến Phuoc Lai PMU.", avatar: "/avatar-2.png" },
 ];
 
 export default function Feedback() {
   const { t } = useLang();
 
   return (
-    <main className="min-h-screen bg-[#111] text-white w-full overflow-x-hidden relative">
+    <main className="min-h-screen bg-[#111] text-white w-full overflow-x-hidden">
       <Navbar />
-      
-      <section className="pt-40 pb-16">
+
+      <section className="relative pt-40 pb-20">
         <div className="container mx-auto px-6 max-w-7xl text-center">
-          <motion.h1 
-            initial={{ opacity: 0, y: 20 }}
+          <motion.span
+            initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
+            className="text-[10px] uppercase tracking-[0.45em] font-bold text-white/40 mb-5 block"
+          >
+            FEEDBACK HỌC VIÊN
+          </motion.span>
+          <motion.h1
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 }}
             className="text-4xl md:text-6xl font-serif mb-6"
           >
             {t.feedbackPage.title}
@@ -35,42 +43,40 @@ export default function Feedback() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.2 }}
-            className="text-white/60 font-light max-w-2xl mx-auto"
+            className="text-white/50 font-light max-w-2xl mx-auto text-sm italic"
           >
-            Sự hài lòng của bạn là thành công lớn nhất của chúng tôi.
+            Những lời yêu thương là động lực của chúng tôi
           </motion.p>
         </div>
       </section>
 
-      <section className="py-24">
+      <section className="pb-28">
         <div className="container mx-auto px-6 max-w-7xl">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {testimonials.map((item, idx) => (
               <motion.div
-                key={idx}
-                initial={{ opacity: 0, y: 20 }}
+                key={item.name}
+                initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: (idx % 4) * 0.1, duration: 0.5 }}
-                className="bg-[#1a1a1a] p-8 flex flex-col h-full border border-white/5 hover:border-white/20 transition-all"
+                transition={{ delay: (idx % 4) * 0.08 }}
+                className="bg-[#e8e8e8] text-[#1a1a1a] p-7 flex flex-col min-h-[260px] hover:-translate-y-1 hover:shadow-xl transition-all duration-500"
               >
-                <div className="flex gap-1 mb-6 text-yellow-500">
-                  <Star size={14} fill="currentColor" />
-                  <Star size={14} fill="currentColor" />
-                  <Star size={14} fill="currentColor" />
-                  <Star size={14} fill="currentColor" />
-                  <Star size={14} fill="currentColor" />
+                <div className="flex gap-1 mb-5 text-amber-500">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} size={12} fill="currentColor" strokeWidth={0} />
+                  ))}
                 </div>
-                <p className="text-sm font-light text-white/80 leading-relaxed mb-8 flex-grow">
+                <p className="text-[12px] font-light leading-relaxed mb-8 flex-grow text-[#1a1a1a]/75">
                   "{item.quote}"
                 </p>
-                <div className="flex items-center gap-4 mt-auto">
-                  <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-xs font-serif border border-white/20">
-                    {item.name.charAt(0)}
+                <div className="flex items-center gap-3 mt-auto">
+                  <div className="w-11 h-11 rounded-full overflow-hidden border border-black/10 bg-white shrink-0">
+                    <img src={item.avatar} alt={item.name} className="w-full h-full object-cover" />
                   </div>
                   <div>
-                    <h4 className="text-sm font-semibold tracking-wide">{item.name}</h4>
-                    <p className="text-[10px] text-white/50 uppercase tracking-widest mt-1">
+                    <h4 className="text-xs font-bold tracking-wide">{item.name}</h4>
+                    <p className="text-[9px] text-[#1a1a1a]/45 uppercase tracking-widest mt-0.5">
                       {item.role}
                     </p>
                   </div>
