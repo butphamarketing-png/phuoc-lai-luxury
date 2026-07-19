@@ -82,6 +82,7 @@ export interface Translations {
     training: string;
     contact: string;
     copyright: string;
+    designedBy: string;
     connect: string;
     privacy: string;
     terms: string;
@@ -214,6 +215,7 @@ const vi: Translations = {
     privacy: "Chính sách bảo mật",
     terms: "Điều khoản dịch vụ",
     copyright: "© 2024 PHUOC LAI PERMANENT MAKEUP. All rights reserved.",
+    designedBy: "Website được thiết kế và vận hành bởi",
     links: [
       { label: "Trang Chủ", href: "/" },
       { label: "Về Chúng Tôi", href: "/ve-chung-toi" },
@@ -355,6 +357,7 @@ const en: Translations = {
     privacy: "Privacy Policy",
     terms: "Terms of Service",
     copyright: "© 2024 PHUOC LAI PERMANENT MAKEUP. All rights reserved.",
+    designedBy: "Website designed and operated by",
     links: [
       { label: "Home", href: "/" },
       { label: "About Us", href: "/ve-chung-toi" },

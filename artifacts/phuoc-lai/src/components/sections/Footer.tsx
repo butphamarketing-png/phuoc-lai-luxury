@@ -108,12 +108,23 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="border-t border-[#1a1a1a]/8 pt-6 text-center">
+        <div className="border-t border-[#1a1a1a]/8 pt-6 text-center space-y-2">
           <p
             className="text-[9px] font-medium tracking-[0.2em] uppercase text-[#1a1a1a]/40"
             style={{ fontFamily: "var(--app-font-sans)" }}
           >
             {t.footer.copyright}
+          </p>
+          <p className="text-[11px] font-light text-[#1a1a1a]/45">
+            {t.footer.designedBy}{" "}
+            <a
+              href="https://butphamarketing.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[#1a1a1a]/60 hover:text-[#1a1a1a] underline underline-offset-2 transition-colors"
+            >
+              butphamarketing.com
+            </a>
           </p>
         </div>
       </div>
