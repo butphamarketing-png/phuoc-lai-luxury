@@ -59,6 +59,7 @@ export function articleSchema(opts: {
   image?: string;
   datePublished?: string;
   author?: string;
+  keywords?: string;
 }) {
   return {
     "@context": "https://schema.org",
@@ -68,6 +69,7 @@ export function articleSchema(opts: {
     url: `${SITE_URL}${opts.path}`,
     image: opts.image?.startsWith("http") ? opts.image : opts.image ? `https://www.phunxamvungtau.com${opts.image}` : OG_IMAGE,
     datePublished: opts.datePublished && opts.datePublished !== "—" ? opts.datePublished : "2026-01-01",
+    keywords: opts.keywords,
     author: {
       "@type": "Person",
       name: opts.author || "Phuoc Lai",
@@ -76,6 +78,10 @@ export function articleSchema(opts: {
       "@type": "Organization",
       name: "Phuoc Lai Luxury",
       logo: { "@type": "ImageObject", url: OG_IMAGE },
+    },
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": `${SITE_URL}${opts.path}`,
     },
   };
 }
@@ -88,5 +94,20 @@ export function webPageSchema(opts: { name: string; description: string; path: s
     description: opts.description.slice(0, 160),
     url: `${SITE_URL}${opts.path}`,
     isPartOf: { "@id": `${SITE_URL}/#business` },
+  };
+}
+
+export function faqPageSchema(faqs: { q: string; a: string }[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.q,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: faq.a,
+      },
+    })),
   };
 }

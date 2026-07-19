@@ -12,6 +12,8 @@ const ServiceDetail = lazy(() => import("@/pages/service-detail"));
 const Training = lazy(() => import("@/pages/training"));
 const TrainingDetail = lazy(() => import("@/pages/training-detail"));
 const Feedback = lazy(() => import("@/pages/feedback"));
+const News = lazy(() => import("@/pages/news"));
+const NewsDetail = lazy(() => import("@/pages/news-detail"));
 const Contact = lazy(() => import("@/pages/contact"));
 const NotFound = lazy(() => import("@/pages/not-found"));
 
@@ -35,6 +37,8 @@ function Router() {
         <Route path="/dich-vu" component={Services} />
         <Route path="/dao-tao/:slug" component={TrainingDetail} />
         <Route path="/dao-tao" component={Training} />
+        <Route path="/tin-tuc/:slug" component={NewsDetail} />
+        <Route path="/tin-tuc" component={News} />
         <Route path="/feedback" component={Feedback} />
         <Route path="/lien-he" component={Contact} />
         <Route component={NotFound} />

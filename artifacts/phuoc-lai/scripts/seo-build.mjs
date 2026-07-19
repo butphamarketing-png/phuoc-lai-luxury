@@ -62,6 +62,15 @@ const STATIC_PAGES = [
     ],
   },
   {
+    path: "/tin-tuc",
+    title: "Tin tức | Phuoc Lai Luxury",
+    description: "Tin tức phun xăm thẩm mỹ Vũng Tàu — kiến thức AMAZINGBROWS, SANDBROWS, SEXYLIPS và cập nhật từ Phuoc Lai Luxury.",
+    jsonLd: [
+      breadcrumb([{ name: "Trang chủ", path: "/" }, { name: "Tin tức", path: "/tin-tuc" }]),
+      webPage("Tin tức", "Tin tức và kiến thức phun xăm tại Phuoc Lai Luxury Vũng Tàu.", "/tin-tuc"),
+    ],
+  },
+  {
     path: "/feedback",
     title: "Feedback | Phuoc Lai Luxury",
     description: "Những lời yêu thương từ khách hàng và học viên Phuoc Lai Luxury Vũng Tàu.",
@@ -169,6 +178,49 @@ async function fetchSupabase(table, query) {
   return res.json();
 }
 
+async function loadNewsPages() {
+  const pages = [];
+  for (const file of ["news-vi.json", "news-en.json"]) {
+    const path = join(root, "src", "data", file);
+    if (!existsSync(path)) continue;
+    const articles = JSON.parse(readFileSync(path, "utf8"));
+    for (const a of articles) {
+      const route = `/tin-tuc/${a.slug}`;
+      pages.push({
+        path: route,
+        title: a.title.includes("Phuoc Lai") ? a.title : `${a.title} | Phuoc Lai Luxury`,
+        description: a.description,
+        keywords: a.keywords || a.keyword,
+        image: a.image,
+        jsonLd: [
+          breadcrumb([
+            { name: a.lang === "vi" ? "Trang chủ" : "Home", path: "/" },
+            { name: a.lang === "vi" ? "Tin tức" : "News", path: "/tin-tuc" },
+            { name: a.keyword, path: route },
+          ]),
+          article({
+            headline: a.h1 || a.title,
+            description: a.description,
+            path: route,
+            image: a.image,
+            author: a.author,
+          }),
+          {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: (a.faqs || []).map((faq) => ({
+              "@type": "Question",
+              name: faq.q,
+              acceptedAnswer: { "@type": "Answer", text: faq.a },
+            })),
+          },
+        ],
+      });
+    }
+  }
+  return pages;
+}
+
 async function loadDynamicPages() {
   const pages = [];
   const services = await fetchSupabase(
@@ -240,11 +292,18 @@ function buildSitemap(pages) {
   const today = new Date().toISOString().slice(0, 10);
   const urls = pages
     .map((p) => {
-      const priority = p.path === "/" ? "1.0" : p.path.includes("/dich-vu/") || p.path.includes("/dao-tao/") ? "0.8" : "0.7";
+      const priority =
+        p.path === "/"
+          ? "1.0"
+          : p.path.includes("/tin-tuc/")
+            ? "0.75"
+            : p.path.includes("/dich-vu/") || p.path.includes("/dao-tao/")
+              ? "0.8"
+              : "0.7";
       return `  <url>
     <loc>${SITE_URL}${p.path === "/" ? "/" : p.path}</loc>
     <lastmod>${today}</lastmod>
-    <changefreq>${p.path === "/" ? "weekly" : "monthly"}</changefreq>
+    <changefreq>${p.path === "/" || p.path.startsWith("/tin-tuc") ? "weekly" : "monthly"}</changefreq>
     <priority>${priority}</priority>
   </url>`;
     })
@@ -314,7 +373,8 @@ function writePrerenderedHtml(template, page, baseDir) {
 
 async function prepare() {
   const dynamic = await loadDynamicPages();
-  const pages = [...STATIC_PAGES, ...dynamic];
+  const news = await loadNewsPages();
+  const pages = [...STATIC_PAGES, ...dynamic, ...news];
   const sitemap = buildSitemap(pages);
   writeFileSync(join(publicDir, "sitemap.xml"), sitemap, "utf8");
   console.log(`[seo] sitemap.xml → ${pages.length} URLs`);
@@ -327,7 +387,8 @@ async function prerender() {
   }
   const template = readFileSync(join(distDir, "index.html"), "utf8");
   const dynamic = await loadDynamicPages();
-  const pages = [...STATIC_PAGES, ...dynamic];
+  const news = await loadNewsPages();
+  const pages = [...STATIC_PAGES, ...dynamic, ...news];
   for (const page of pages) {
     writePrerenderedHtml(template, page, distDir);
   }

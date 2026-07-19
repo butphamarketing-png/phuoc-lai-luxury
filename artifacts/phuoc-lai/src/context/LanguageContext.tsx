@@ -8,6 +8,7 @@ export interface Translations {
     about: string;
     services: string;
     training: string;
+    news: string;
     feedback: string;
     contact: string;
     bookNow: string;
@@ -100,6 +101,10 @@ export interface Translations {
   feedbackPage: {
     title: string;
   };
+  newsPage: {
+    title: string;
+    subtitle: string;
+  };
   contactPage: {
     title: string;
   };
@@ -111,6 +116,7 @@ const vi: Translations = {
     about: "Về Chúng Tôi",
     services: "Dịch Vụ",
     training: "Đào Tạo",
+    news: "Tin Tức",
     feedback: "Feedback",
     contact: "Liên Hệ",
     bookNow: "BOOKING",
@@ -213,6 +219,7 @@ const vi: Translations = {
       { label: "Về Chúng Tôi", href: "/ve-chung-toi" },
       { label: "Dịch Vụ", href: "/dich-vu" },
       { label: "Đào Tạo", href: "/dao-tao" },
+      { label: "Tin Tức", href: "/tin-tuc" },
       { label: "Feedback", href: "/feedback" },
     ],
     serviceLinks: [
@@ -235,6 +242,10 @@ const vi: Translations = {
   feedbackPage: {
     title: "Feedback",
   },
+  newsPage: {
+    title: "Tin Tức",
+    subtitle: "Kiến thức phun xăm, xu hướng làm đẹp và cập nhật từ Phuoc Lai Luxury",
+  },
   contactPage: {
     title: "Liên Hệ",
   },
@@ -246,6 +257,7 @@ const en: Translations = {
     about: "About Us",
     services: "Services",
     training: "Training",
+    news: "News",
     feedback: "Feedback",
     contact: "Contact",
     bookNow: "BOOKING",
@@ -348,6 +360,7 @@ const en: Translations = {
       { label: "About Us", href: "/ve-chung-toi" },
       { label: "Services", href: "/dich-vu" },
       { label: "Training", href: "/dao-tao" },
+      { label: "News", href: "/tin-tuc" },
       { label: "Feedback", href: "/feedback" },
     ],
     serviceLinks: [
@@ -369,6 +382,10 @@ const en: Translations = {
   },
   feedbackPage: {
     title: "Feedback",
+  },
+  newsPage: {
+    title: "News",
+    subtitle: "PMU insights, beauty trends and updates from Phuoc Lai Luxury",
   },
   contactPage: {
     title: "Contact",

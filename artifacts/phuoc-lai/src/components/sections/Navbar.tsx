@@ -64,6 +64,7 @@ export default function Navbar() {
     { name: t.nav.about, href: "/ve-chung-toi" },
     { name: t.nav.services, href: "/dich-vu", isDropdown: true, type: "services" as const },
     { name: t.nav.training, href: "/dao-tao", isDropdown: true, type: "training" as const },
+    { name: t.nav.news, href: "/tin-tuc" },
     { name: t.nav.feedback, href: "/feedback" },
     { name: t.nav.contact, href: "/lien-he" },
   ];
@@ -126,7 +127,7 @@ export default function Navbar() {
           {/* Menu — giữa */}
           <nav className="hidden lg:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
             <NavigationMenu>
-              <NavigationMenuList className="gap-9">
+              <NavigationMenuList className="gap-7">
                 {navLinks.map((link) => {
                   if (link.isDropdown) {
                     return (
