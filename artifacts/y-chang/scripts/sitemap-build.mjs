@@ -1,5 +1,6 @@
 import fs from "fs";
 import path from "path";
+import { fileURLToPath } from "url";
 
 export const STATIC_PATHS = [
   "/",
@@ -8,7 +9,24 @@ export const STATIC_PATHS = [
   "/dao-tao",
   "/lien-he",
   "/feedback",
+  "/tin-tuc",
 ];
+
+function loadNewsPaths() {
+  const paths = [];
+  const dir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../src/data");
+  for (const file of ["news-vi.json", "news-en.json"]) {
+    const full = path.join(dir, file);
+    if (!fs.existsSync(full)) continue;
+    const articles = JSON.parse(fs.readFileSync(full, "utf8"));
+    for (const a of articles) {
+      if (a.slug) paths.push(`/tin-tuc/${a.slug}`);
+    }
+  }
+  return paths;
+}
+
+const NEWS_PATHS = loadNewsPaths();
 
 export function loadEnvFiles(rootDir) {
   const candidates = [
@@ -98,15 +116,24 @@ export async function fetchDynamicPaths() {
 
 export function buildSitemapXml(siteUrl, pathLastmods) {
   const today = new Date().toISOString().slice(0, 10);
-  const allPaths = new Set([...STATIC_PATHS, ...pathLastmods.keys()]);
+  const allPaths = new Set([...STATIC_PATHS, ...NEWS_PATHS, ...pathLastmods.keys()]);
 
   const urls = [...allPaths]
     .sort()
     .map((p) => {
       const lastmod = pathLastmods.get(p) ?? today;
       const priority =
-        p === "/" ? "1.0" : /^\/(dich-vu|dao-tao)\/[^/]+$/.test(p) ? "0.8" : "0.7";
-      const changefreq = p === "/" ? "weekly" : "monthly";
+        p === "/"
+          ? "1.0"
+          : /^\/tin-tuc\/[^/]+$/.test(p)
+            ? "0.75"
+            : /^\/(dich-vu|dao-tao)\/[^/]+$/.test(p)
+              ? "0.8"
+              : "0.7";
+      const changefreq =
+        p === "/" || p === "/tin-tuc" || p.startsWith("/tin-tuc/")
+          ? "weekly"
+          : "monthly";
       return `  <url>
     <loc>${siteUrl}${p}</loc>
     <lastmod>${lastmod}</lastmod>
@@ -127,6 +154,6 @@ export async function buildFullSitemap() {
   const siteUrl = getSiteUrl();
   const dynamic = await fetchDynamicPaths();
   const xml = buildSitemapXml(siteUrl, dynamic);
-  const count = new Set([...STATIC_PATHS, ...dynamic.keys()]).size;
+  const count = new Set([...STATIC_PATHS, ...NEWS_PATHS, ...dynamic.keys()]).size;
   return { xml, count, siteUrl };
 }

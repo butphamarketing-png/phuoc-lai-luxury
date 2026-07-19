@@ -106,6 +106,15 @@ const STATIC_ROUTES: Record<string, SeoMeta> = {
     path: "/feedback",
     image: DEFAULT_OG_IMAGE,
   },
+  "/tin-tuc": {
+    title: formatTitle("Tin tức"),
+    description:
+      "Tin tức phun xăm thẩm mỹ Vũng Tàu — kiến thức AMAZINGBROWS, SANDBROWS, SEXYLIPS và cập nhật từ Phuoc Lai Luxury.",
+    keywords:
+      "tin tức phun xăm vũng tàu, blog phun mày, phun môi sexylips, phuoc lai luxury",
+    path: "/tin-tuc",
+    image: "/training-1.png",
+  },
   "/booking": {
     title: formatTitle("Đặt lịch hẹn"),
     description:
@@ -342,9 +351,17 @@ export function getStaticBreadcrumbs(pathname: string): BreadcrumbItem[] | null 
     "/dao-tao": [...crumbs, { name: "Đào tạo", path: "/dao-tao" }],
     "/lien-he": [...crumbs, { name: "Liên hệ", path: "/lien-he" }],
     "/feedback": [...crumbs, { name: "Feedback", path: "/feedback" }],
+    "/tin-tuc": [...crumbs, { name: "Tin tức", path: "/tin-tuc" }],
   };
 
   if (map[pathname]) return map[pathname];
+  if (pathname.startsWith("/tin-tuc/")) {
+    return [
+      ...crumbs,
+      { name: "Tin tức", path: "/tin-tuc" },
+      { name: "Chi tiết bài viết", path: pathname },
+    ];
+  }
   if (pathname.startsWith("/dich-vu/")) {
     return [
       ...crumbs,

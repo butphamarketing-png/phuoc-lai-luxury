@@ -9,6 +9,8 @@ import About from "@/pages/About";
 import Services from "@/pages/Services";
 import Training from "@/pages/Training";
 import Feedback from "@/pages/Feedback";
+import News from "@/pages/News";
+import NewsDetail from "@/pages/NewsDetail";
 import Contact from "@/pages/Contact";
 import ServiceDetail from "@/pages/ServiceDetail";
 import TrainingDetail from "@/pages/TrainingDetail";
@@ -122,6 +124,8 @@ function Router() {
             <AdminLegacyRedirect />
           </Route>
 
+          <Route path="/tin-tuc/:slug" component={NewsDetail} />
+          <Route path="/tin-tuc" component={News} />
           <Route path="/feedback" component={Feedback} />
           <Route path="/lien-he" component={Contact} />
           <Route path="/booking" component={Home} />

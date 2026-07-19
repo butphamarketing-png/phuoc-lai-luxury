@@ -124,6 +124,7 @@ export default function Navbar() {
     { href: "/ve-chung-toi", label: t("nav.about") },
     { href: "/dich-vu", label: t("nav.services"), dropdown: serviceItems },
     { href: "/dao-tao", label: t("nav.training"), dropdown: trainingItems },
+    { href: "/tin-tuc", label: t("nav.news") },
     { href: "/feedback", label: t("nav.feedback") },
     { href: "/lien-he", label: t("nav.contact") },
   ];

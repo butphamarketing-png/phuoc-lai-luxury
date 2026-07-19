@@ -69,6 +69,16 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/dao-tao" className="hover:text-white transition-colors" data-testid="link-footer-nav-training">
+                  {t("nav.training")}
+                </Link>
+              </li>
+              <li>
+                <Link href="/tin-tuc" className="hover:text-white transition-colors" data-testid="link-footer-nav-news">
+                  {t("nav.news")}
+                </Link>
+              </li>
+              <li>
                 <Link href="/feedback" className="hover:text-white transition-colors" data-testid="link-footer-nav-feedback">
                   {t("nav.feedback")}
                 </Link>
@@ -161,21 +171,20 @@ export default function Footer() {
           </motion.div>
         </motion.div>
 
-        <div className="border-t border-white/10 pt-8 text-center">
+        <div className="border-t border-white/10 pt-8 text-center space-y-2">
           <p className="text-xs font-light text-white/40 uppercase tracking-widest">
-            &copy; {new Date().getFullYear()} PHUOC LAI LUXURY.{" "}
-            <span className="normal-case tracking-normal">
-              DESIGN BY{" "}
-              <a
-                href="https://butphamarketing.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-white/70 transition-colors underline underline-offset-2"
-              >
-                BUTPHAMARKETING.COM
-              </a>
-              .
-            </span>
+            &copy; {new Date().getFullYear()} PHUOC LAI LUXURY. All rights reserved.
+          </p>
+          <p className="text-xs font-light text-white/45">
+            Website được thiết kế và vận hành bởi{" "}
+            <a
+              href="https://butphamarketing.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-white/70 transition-colors underline underline-offset-2"
+            >
+              butphamarketing.com
+            </a>
           </p>
         </div>
       </div>
